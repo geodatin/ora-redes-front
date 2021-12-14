@@ -18,14 +18,13 @@ export const lightScheme = {
     gray: {
       light: '#DEDEDE',
       main: '#A4A4A4',
-      dark: '#333333',
       medium: '#464646',
+      dark: '#333333',
     },
   },
   stroke: {
     light: '#F0F1F3',
     main: '#DFE1E6',
-    dark: '#0B1016',
   },
   blue: {
     light: '#67D9FC',
@@ -36,6 +35,9 @@ export const lightScheme = {
     light: '#EEFAA3',
     main: '#D3F500',
     dark: '#A1BA09',
+  },
+  background: {
+    main: '#FAFBFD',
   },
 };
 
@@ -47,7 +49,7 @@ export const darkScheme = {
   },
   secondary: {
     light: '#1B2935',
-    main: '#323F4A',
+    main: '#B6C5D1',
     dark: '#E7EDF2',
   },
   neutral: {
@@ -55,14 +57,13 @@ export const darkScheme = {
     gray: {
       light: '#DEDEDE',
       main: '#A4A4A4',
-      dark: '#333333',
       medium: '#464646',
+      dark: '#333333',
     },
   },
   stroke: {
-    light: '#151C24',
-    main: '#151C24',
-    dark: '#0D1620',
+    light: '#0B1016',
+    dark: '#151C24',
   },
   blue: {
     light: '#67D9FC',
@@ -73,5 +74,8 @@ export const darkScheme = {
     light: '#EEFAA3',
     main: '#D3F500',
     dark: '#A1BA09',
+  },
+  background: {
+    main: '#0D1620',
   },
 };
