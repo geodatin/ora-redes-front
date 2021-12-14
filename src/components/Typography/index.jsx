@@ -4,20 +4,15 @@ import React from 'react';
 
 import useStyles from './styles';
 
-export default function CustomTypography({
-  children,
-  variant,
-  style,
-  className,
-}) {
-  CustomTypography.propTypes = {
+export default function Typography({ children, variant, style, className }) {
+  Typography.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
     variant: PropTypes.string,
     style: PropTypes.string,
   };
 
-  CustomTypography.defaultProps = {
+  Typography.defaultProps = {
     children: undefined,
     className: '',
     variant: 'body',
