@@ -28,14 +28,14 @@ export const lightScheme = {
     dark: '#0B1016',
   },
   blue: {
-    light: '#67D9FC',
-    main: '#00B9F1',
-    dark: '#008CB7',
+    light: '  #67D9FC',
+    main: '#  00B9F1',
+    dark: '#  008CB7',
   },
   green: {
-    light: '#EEFAA3',
-    main: '#D3F500',
-    dark: '#A1BA09',
+    light: '  #EEFAA3',
+    main: '#  D3F500',
+    dark: '#  A1BA09',
   },
 };
 

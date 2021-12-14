@@ -1,13 +1,18 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import CustomTypography from '../../components/CustomTypography';
+import TranslationMenu from '../../components/TranslationMenu';
 import useStyles from './styles';
 
 function Dashboard() {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <div className={classes.wrapper}>
+      <TranslationMenu />
+      <CustomTypography variant="h1"> {t('helloWorld')} </CustomTypography>
       <CustomTypography variant="h1"> Heading 1</CustomTypography>
       <CustomTypography variant="h2"> Heading 2</CustomTypography>
       <CustomTypography variant="h3"> Heading 3</CustomTypography>
