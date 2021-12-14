@@ -25,10 +25,11 @@ export default function CustomTypography({
   };
 
   const classes = useStyles();
+  const Tag = variant === 'body' || variant === 'caption' ? 'span' : variant;
 
   return (
-    <span className={classNames(classes[variant], classes[style], className)}>
+    <Tag className={classNames(classes[variant], classes[style], className)}>
       {children}
-    </span>
+    </Tag>
   );
 }

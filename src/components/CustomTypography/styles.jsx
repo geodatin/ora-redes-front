@@ -16,7 +16,7 @@ const useStyles = createUseStyles(() => ({
     fontWeight: 700,
     fontSize: 25,
   },
-  paragraph: {
+  p: {
     fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
     fontWeight: 400,
     fontSize: 20,
