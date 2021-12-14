@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import CustomTypography from '../../components/CustomTypography';
 import TranslationMenu from '../../components/TranslationMenu';
+import Typography from '../../components/Typography';
 import useStyles from './styles';
 
 function Dashboard() {
@@ -12,21 +12,21 @@ function Dashboard() {
   return (
     <div className={classes.wrapper}>
       <TranslationMenu />
-      <CustomTypography variant="h1"> {t('helloWorld')} </CustomTypography>
-      <CustomTypography variant="h1"> Heading 1</CustomTypography>
-      <CustomTypography variant="h2"> Heading 2</CustomTypography>
-      <CustomTypography variant="h3"> Heading 3</CustomTypography>
-      <CustomTypography variant="p">
+      <Typography variant="h1"> {t('helloWorld')} </Typography>
+      <Typography variant="h1"> Heading 1</Typography>
+      <Typography variant="h2"> Heading 2</Typography>
+      <Typography variant="h3"> Heading 3</Typography>
+      <Typography variant="p">
         Consequat duis amet labore adipisicing ipsum consectetur dolore sint
         excepteur elit fugiat. Qui duis nisi nisi esse veniam. Nostrud irure
         magna labore aliqua in enim culpa ad esse est. Reprehenderit cupidatat
         do est reprehenderit quis commodo. Id laboris quis do mollit sit laboris
         do fugiat.
-      </CustomTypography>
+      </Typography>
       <div>
-        <CustomTypography variant="body">Consequat duis amet</CustomTypography>
+        <Typography variant="body">Consequat duis amet</Typography>
       </div>
-      <CustomTypography variant="caption">Consequat duis amet</CustomTypography>
+      <Typography variant="caption">Consequat duis amet</Typography>
     </div>
   );
 }

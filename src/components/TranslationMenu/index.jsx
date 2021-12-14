@@ -5,7 +5,7 @@ import { Button, Menu, MenuItem } from '@mui/material';
 import i18next from 'i18next';
 import React from 'react';
 
-import CustomTypography from '../CustomTypography';
+import Typography from '../Typography';
 import useStyles from './styles';
 
 export default function TranslationMenu() {
@@ -32,7 +32,7 @@ export default function TranslationMenu() {
         onClick={handleClick}
       >
         <TranslateRoundedIcon />
-        <CustomTypography variant="body">Tradução</CustomTypography>
+        <Typography variant="body">Tradução</Typography>
         <KeyboardArrowDownRoundedIcon />
       </Button>
       <Menu
