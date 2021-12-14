@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles(() => ({
-  wrapper: {},
+  wrapper: { height: 500 },
 }));
 
 export default useStyles;
