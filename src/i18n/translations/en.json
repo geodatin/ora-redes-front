@@ -1,1 +1,6 @@
-{ "helloWorld": "Hello world!" }
+{
+  "helloWorld": "Hello world!",
+  "pt": "Portuguese",
+  "es": "Spanish",
+  "en": "English"
+}

@@ -1,13 +1,21 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
-  wrapper: {
-    display: 'flex',
-    flexFlow: 'row nowrap',
-    justifyContent: 'center',
-    alignItems: 'center',
+const useStyles = createUseStyles((theme) => ({
+  wrapper: {},
+  button: {
+    '&.MuiButtonBase-root': {
+      position: 'relative',
+      alignItems: 'center',
+      justifyContent: 'center',
+      display: 'flex',
+      textTransform: 'none',
+      color: theme.secondary.light,
+
+      '&:hover': {
+        backgroundColor: 'transparent',
+      },
+    },
   },
-  button: {},
 }));
 
 export default useStyles;

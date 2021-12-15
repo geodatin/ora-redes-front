@@ -4,6 +4,10 @@ import React from 'react';
 
 import useStyles from './styles';
 
+/**
+ * This component renders a custom Typography for application
+ * @returns Application's Typography
+ */
 export default function Typography({ children, variant, style, className }) {
   Typography.propTypes = {
     children: PropTypes.node,

@@ -1,24 +1,31 @@
-/* eslint-disable no-unused-vars */
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 import { Button, Menu, MenuItem } from '@mui/material';
 import i18next from 'i18next';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from 'react-jss';
 
 import Typography from '../Typography';
 import useStyles from './styles';
 
+/**
+ * This component renders a TranslationMenu
+ * @returns Translation Menu
+ */
 export default function TranslationMenu() {
   const classes = useStyles();
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const { t } = useTranslation();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const handleTranslation = (language) => {
     i18next.changeLanguage(language);
     handleClose();
@@ -31,8 +38,10 @@ export default function TranslationMenu() {
         className={classes.button}
         onClick={handleClick}
       >
-        <TranslateRoundedIcon />
-        <Typography variant="body">Tradução</Typography>
+        <TranslateRoundedIcon style={{ marginRight: 8, fontSize: 25 }} />
+        <Typography variant="body">
+          {t(i18next.language.toLowerCase())}
+        </Typography>
         <KeyboardArrowDownRoundedIcon />
       </Button>
       <Menu
@@ -41,12 +50,21 @@ export default function TranslationMenu() {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          style: { color: theme.secondary.light },
         }}
+        /* PaperProps={{
+          style: {},
+        }} */
       >
-        <MenuItem onClick={() => handleTranslation('pt')}>Português</MenuItem>
-        <MenuItem onClick={() => handleTranslation('en')}>English</MenuItem>
-        <MenuItem onClick={() => handleTranslation('es')}>Español</MenuItem>
+        <MenuItem onClick={() => handleTranslation('pt')}>
+          <Typography variant="body">{t('pt')}</Typography>
+        </MenuItem>
+        <MenuItem onClick={() => handleTranslation('en')}>
+          <Typography variant="body">{t('en')}</Typography>
+        </MenuItem>
+        <MenuItem onClick={() => handleTranslation('es')}>
+          <Typography variant="body">{t('es')}</Typography>
+        </MenuItem>
       </Menu>
     </div>
   );
