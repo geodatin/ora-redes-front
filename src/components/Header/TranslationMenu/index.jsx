@@ -51,13 +51,12 @@ export default function TranslationMenu() {
         onClose={handleClose}
         MenuListProps={{
           style: {
-            backgroundColor: theme.secondary.light,
             color: theme.secondary.dark,
           },
         }}
-        /* PaperProps={{
-          style: {},
-        }} */
+        PaperProps={{
+          style: { backgroundColor: theme.secondary.light },
+        }}
       >
         <MenuItem onClick={() => handleTranslation('pt')}>
           <Typography variant="body">{t('pt')}</Typography>
