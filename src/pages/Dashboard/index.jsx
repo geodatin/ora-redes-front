@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import Header from '../../components/Header';
 import TranslationMenu from '../../components/TranslationMenu';
 import Typography from '../../components/Typography';
 import useStyles from './styles';
@@ -11,6 +12,7 @@ function Dashboard() {
 
   return (
     <div className={classes.wrapper}>
+      <Header />
       <TranslationMenu />
       <Typography variant="h1"> {t('helloWorld')} </Typography>
       <Typography variant="h1"> Heading 1</Typography>

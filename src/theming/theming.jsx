@@ -1,5 +1,8 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import { MuiThemeProvider, useMediaQuery } from '@mui/material/';
+import {
+  ThemeProvider as MuiThemeProvider,
+  useMediaQuery,
+} from '@mui/material/';
 import { createTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import React, { createContext, useState, useEffect, useMemo } from 'react';
@@ -27,7 +30,7 @@ export function ThemeProvider({ children }) {
    * Load last selected theme or the prefered color scheme.
    */
   useEffect(() => {
-    const savedTheme = localStorage.getItem('@rhisa/lastTheme');
+    const savedTheme = localStorage.getItem('@ora/lastTheme');
 
     if (savedTheme) {
       setSelectedTheme(savedTheme === 'light' ? lightScheme : darkScheme);
@@ -42,10 +45,10 @@ export function ThemeProvider({ children }) {
   function switchTheme(themingMode) {
     if (themingMode === 'light' || themingMode === 'dark') {
       setSelectedTheme(themingMode === 'light' ? lightScheme : darkScheme);
-      localStorage.setItem('@rhisa/lastTheme', themingMode);
+      localStorage.setItem('@ora/lastTheme', themingMode);
     } else {
       setSelectedTheme(prefersDarkMode ? darkScheme : lightScheme);
-      localStorage.removeItem('@rhisa/lastTheme');
+      localStorage.removeItem('@ora/lastTheme');
     }
   }
 
@@ -56,7 +59,7 @@ export function ThemeProvider({ children }) {
     () =>
       createTheme({
         typography: {
-          fontFamily: `"Poppins", "Roboto", "Helvetica", "Arial", sans-serif`,
+          fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
           fontWeight: 400,
           fontSize: 16,
           lineHeight: '20.8px',
@@ -64,17 +67,17 @@ export function ThemeProvider({ children }) {
         },
         palette: {
           background: {
-            default: selectedTheme.background0,
+            default: selectedTheme.background.main,
           },
           primary: {
-            main: selectedTheme.primary0,
+            main: selectedTheme.primary.main,
           },
           secondary: {
-            main: selectedTheme.primary0,
+            main: selectedTheme.primary.main,
           },
           text: {
-            primary: selectedTheme.textPrimary,
-            secondary: selectedTheme.textSecondary,
+            primary: selectedTheme.secondary.dark,
+            secondary: selectedTheme.neutral.gray.main,
           },
         },
       }),
