@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import useStyles from './styles';
+import ThemeButton from './ThemeButton';
 import TranslationMenu from './TranslationMenu';
 
 /**
@@ -17,7 +18,14 @@ export default function Header() {
       <div className={classes.logoContainer}>
         <div className={classes.logoDetail} />
       </div>
-      <TranslationMenu />
+      <div className={classes.menuItems}>
+        <div>a</div>
+        <div className={classes.endItems}>
+          <TranslationMenu />
+          <span className={classes.separator} />
+          <ThemeButton />
+        </div>
+      </div>
     </header>
   );
 }

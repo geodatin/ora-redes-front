@@ -15,6 +15,22 @@ const useStyles = createUseStyles((theme) => ({
     width: 5,
     height: '100%',
   },
+  menuItems: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  endItems: {
+    display: 'flex',
+    alignItems: 'center',
+    marginRight: 10,
+  },
+  separator: {
+    backgroundColor: theme.stroke.dark,
+    width: 1,
+    height: 30,
+    margin: '0px 10px',
+  },
 }));
 
 export default useStyles;
