@@ -5,7 +5,7 @@ import { Button, Menu, MenuItem } from '@mui/material';
 import i18next from 'i18next';
 import React from 'react';
 
-import Typography from '../Typography';
+import Typography from '../../Typography';
 import useStyles from './styles';
 
 export default function TranslationMenu() {
