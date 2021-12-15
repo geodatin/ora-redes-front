@@ -35,9 +35,9 @@ export default function ThemeButton() {
         onClick={() => handleSwitchTheme()}
       >
         {selectedTheme === lightScheme ? (
-          <DarkModeRoundedIcon style={{ fontSize: 25 }} />
+          <DarkModeRoundedIcon style={{ fontSize: 20 }} />
         ) : (
-          <LightModeRoundedIcon style={{ fontSize: 25 }} />
+          <LightModeRoundedIcon style={{ fontSize: 20 }} />
         )}
       </IconButton>
     </div>

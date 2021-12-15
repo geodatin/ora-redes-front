@@ -38,11 +38,11 @@ export default function TranslationMenu() {
         className={classes.button}
         onClick={handleClick}
       >
-        <TranslateRoundedIcon style={{ marginRight: 8, fontSize: 25 }} />
+        <TranslateRoundedIcon style={{ marginRight: 8, fontSize: 20 }} />
         <Typography variant="body">
           {t(i18next.language.toLowerCase())}
         </Typography>
-        <KeyboardArrowDownRoundedIcon />
+        <KeyboardArrowDownRoundedIcon style={{ marginLeft: 5, fontSize: 20 }} />
       </Button>
       <Menu
         id="translate-menu"
