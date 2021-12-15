@@ -9,7 +9,7 @@ const useStyles = createUseStyles((theme) => ({
       justifyContent: 'center',
       display: 'flex',
       textTransform: 'none',
-      color: theme.secondary.light,
+      color: theme.secondary.dark,
 
       '&:hover': {
         backgroundColor: 'transparent',

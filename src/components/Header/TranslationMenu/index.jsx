@@ -50,7 +50,10 @@ export default function TranslationMenu() {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          style: { color: theme.secondary.light },
+          style: {
+            backgroundColor: theme.secondary.light,
+            color: theme.secondary.dark,
+          },
         }}
         /* PaperProps={{
           style: {},
