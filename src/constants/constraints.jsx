@@ -14,3 +14,15 @@ export const breakpoints = {
     lg: '@media (max-width: 1280px)',
   },
 };
+
+export const layoutSizes = {
+  header: {
+    height: 50,
+  },
+  notifications: {
+    width: 250,
+  },
+  statistics: {
+    width: 250,
+  },
+};
