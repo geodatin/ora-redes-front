@@ -26,3 +26,7 @@ export const layoutSizes = {
     width: 250,
   },
 };
+
+export const transitions = {
+  bgColor: 'background-color 0.15s ease',
+};

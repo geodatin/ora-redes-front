@@ -85,7 +85,7 @@ export function ThemeProvider({ children }) {
   );
 
   return (
-    <ThemeContext.Provider value={{ switchTheme }}>
+    <ThemeContext.Provider value={{ switchTheme, selectedTheme }}>
       <JssThemeProvider theme={selectedTheme}>
         <MuiThemeProvider theme={muiTheme}>{children}</MuiThemeProvider>
       </JssThemeProvider>

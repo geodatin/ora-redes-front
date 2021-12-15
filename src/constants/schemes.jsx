@@ -24,7 +24,7 @@ export const lightScheme = {
   },
   stroke: {
     light: '#F0F1F3',
-    main: '#DFE1E6',
+    dark: '#DFE1E6',
   },
   blue: {
     light: '#67D9FC',
