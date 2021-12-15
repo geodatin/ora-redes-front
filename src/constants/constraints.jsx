@@ -14,3 +14,7 @@ export const breakpoints = {
     lg: '@media (max-width: 1280px)',
   },
 };
+
+export const transitions = {
+  bgColor: 'background-color 0.15s ease',
+};
