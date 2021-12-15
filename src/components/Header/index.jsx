@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import useStyles from './styles';
+import TranslationMenu from './TranslationMenu';
 
 /**
  * This component renders a Header
@@ -11,5 +12,12 @@ import useStyles from './styles';
 export default function Header() {
   const classes = useStyles();
 
-  return <header className={classes.container}>a</header>;
+  return (
+    <header className={classes.container}>
+      <div className={classes.logoContainer}>
+        <div className={classes.logoDetail} />
+      </div>
+      <TranslationMenu />
+    </header>
+  );
 }

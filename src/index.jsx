@@ -1,3 +1,4 @@
+import { CssBaseline } from '@mui/material';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -10,6 +11,7 @@ import { ThemeProvider } from './theming/theming';
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider>
+      <CssBaseline />
       <Routes />
     </ThemeProvider>
   </React.StrictMode>,

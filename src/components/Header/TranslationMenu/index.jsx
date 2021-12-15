@@ -6,7 +6,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
-import Typography from '../Typography';
+import Typography from '../../Typography';
 import useStyles from './styles';
 
 /**
