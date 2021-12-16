@@ -16,6 +16,8 @@ const useStyles = createUseStyles((theme) => ({
     justifyContent: 'space-between',
     marginRight: 15,
     userSelect: 'none',
+    textDecoration: 'none',
+    color: 'inherit',
   },
   logoDetail: {
     backgroundColor: theme.primary.main,
