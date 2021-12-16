@@ -47,6 +47,8 @@ export default function TranslationMenu() {
       <Menu
         id="translate-menu"
         anchorEl={anchorEl}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={open}
         onClose={handleClose}
         MenuListProps={{
@@ -55,7 +57,7 @@ export default function TranslationMenu() {
           },
         }}
         PaperProps={{
-          style: { backgroundColor: theme.secondary.light },
+          style: { backgroundColor: theme.background.popup },
         }}
       >
         <MenuItem onClick={() => handleTranslation('pt')}>
