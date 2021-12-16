@@ -39,6 +39,11 @@ export const lightScheme = {
   background: {
     main: '#FAFBFD',
   },
+  button: {
+    actived: '#E9EAED',
+    hover: '#E3E4E7',
+    clicked: '#878C92',
+  },
 };
 
 export const darkScheme = {
@@ -77,5 +82,10 @@ export const darkScheme = {
   },
   background: {
     main: '#0D1620',
+  },
+  button: {
+    actived: '#151C24',
+    hover: '#20262E',
+    clicked: '#CDD7DA',
   },
 };

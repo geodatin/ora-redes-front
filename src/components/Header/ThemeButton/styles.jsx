@@ -11,7 +11,14 @@ const useStyles = createUseStyles((theme) => ({
       color: theme.secondary.dark,
 
       '&:hover': {
-        backgroundColor: 'transparent',
+        backgroundColor: theme.button.hover,
+
+        '&:active': {
+          backgroundColor: 'transparent',
+        },
+      },
+      '& .MuiTouchRipple-child, .MuiTouchRipple-childPulsate': {
+        backgroundColor: theme.button.clicked,
       },
     },
   },

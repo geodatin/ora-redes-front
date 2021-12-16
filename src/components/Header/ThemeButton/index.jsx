@@ -30,7 +30,7 @@ export default function ThemeButton() {
   return (
     <div className={classes.wrapper}>
       <IconButton
-        id="translate-button"
+        id="theme-button"
         className={classes.button}
         onClick={() => handleSwitchTheme()}
       >

@@ -11,7 +11,11 @@ const useStyles = createUseStyles((theme) => ({
     transition: transitions.bgColor,
   },
   logoContainer: {
-    backgroundColor: theme.primary.main,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: 60,
+    marginRight: 15,
   },
   logoDetail: {
     backgroundColor: theme.primary.main,
@@ -22,6 +26,9 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',
+  },
+  initialItems: {
+    display: 'flex',
   },
   endItems: {
     display: 'flex',
