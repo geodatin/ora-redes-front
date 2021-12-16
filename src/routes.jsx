@@ -23,7 +23,7 @@ function Routes() {
         <Route exact path="/" element={<PageOne />} />
         <Route exact path="/page2" element={<PageOne />} />
         <Route exact path="/page3" element={<PageOne />} />
-        <Route path="*" render={() => <Navigate to="/" />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </BaseRoutes>
     </BrowserRouter>
   );
