@@ -27,7 +27,7 @@ export default function Header({ items }) {
     <header className={classes.container}>
       <Link className={classes.logoContainer} to="/">
         <div className={classes.logoDetail} />
-        <Typography variant="caption">REDES</Typography>
+        <Typography variant="caption">TYPE</Typography>
       </Link>
       <div className={classes.menuItems}>
         <div className={classes.initialItems}>
