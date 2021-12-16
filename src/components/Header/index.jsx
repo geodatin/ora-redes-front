@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Typography from '../Typography';
 import HeaderButton from './HeaderButton';
@@ -24,10 +25,10 @@ export default function Header({ items }) {
 
   return (
     <header className={classes.container}>
-      <div className={classes.logoContainer}>
+      <Link className={classes.logoContainer} to="/">
         <div className={classes.logoDetail} />
         <Typography variant="caption">REDES</Typography>
-      </div>
+      </Link>
       <div className={classes.menuItems}>
         <div className={classes.initialItems}>
           {items &&
