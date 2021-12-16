@@ -1,18 +1,20 @@
 import React from 'react';
 import {
-  BrowserRouter,
-  Navigate,
   Routes as BaseRoutes,
   Route,
+  BrowserRouter,
+  Navigate,
 } from 'react-router-dom';
 
-import Dashboard from './pages/Dashboard';
+import Header from './components/Header';
+import PageOne from './pages/PageOne';
 
 function Routes() {
   return (
     <BrowserRouter>
+      <Header />
       <BaseRoutes>
-        <Route exact path="/" element={<Dashboard />} />
+        <Route exact path="/" element={<PageOne />} />
         <Route path="*" render={() => <Navigate to="/" />} />
       </BaseRoutes>
     </BrowserRouter>

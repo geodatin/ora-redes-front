@@ -27,7 +27,7 @@ export const layout = {
       width: 250,
     },
   },
-  mapContainer: {
+  mainContainer: {
     sizes: {
       width: () =>
         `calc(100% - ${

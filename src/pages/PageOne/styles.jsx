@@ -5,10 +5,6 @@ import { layout } from '../../constants/constraints';
 
 const useStyles = createUseStyles(() => ({
   wrapper: {
-    width: '100%',
-    height: `100%`,
-  },
-  mainRow: {
     display: 'flex',
     flexFlow: 'row nowrap',
     width: '100%',
@@ -18,8 +14,8 @@ const useStyles = createUseStyles(() => ({
     width: layout.leftColumn.sizes.width,
     backgroundColor: 'gray',
   },
-  mapContainer: {
-    width: layout.mapContainer.sizes.width,
+  mainContainer: {
+    width: layout.mainContainer.sizes.width,
     backgroundColor: 'green',
   },
   rightColumn: {
