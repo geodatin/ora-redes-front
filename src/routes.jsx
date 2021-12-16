@@ -12,9 +12,17 @@ import PageOne from './pages/PageOne';
 function Routes() {
   return (
     <BrowserRouter>
-      <Header />
+      <Header
+        items={[
+          { title: 'Page one', to: '/' },
+          { title: 'Page two', to: '/page2' },
+          { title: 'Page three', to: '/page3' },
+        ]}
+      />
       <BaseRoutes>
         <Route exact path="/" element={<PageOne />} />
+        <Route exact path="/page2" element={<PageOne />} />
+        <Route exact path="/page3" element={<PageOne />} />
         <Route path="*" render={() => <Navigate to="/" />} />
       </BaseRoutes>
     </BrowserRouter>

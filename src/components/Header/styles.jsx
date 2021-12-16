@@ -14,13 +14,14 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: 60,
     marginRight: 15,
+    userSelect: 'none',
   },
   logoDetail: {
     backgroundColor: theme.primary.main,
     width: 5,
     height: '100%',
+    marginRight: 15,
   },
   menuItems: {
     display: 'flex',

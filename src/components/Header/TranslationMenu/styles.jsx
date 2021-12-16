@@ -1,7 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles((theme) => ({
-  wrapper: {},
   button: {
     '&.MuiButtonBase-root': {
       position: 'relative',

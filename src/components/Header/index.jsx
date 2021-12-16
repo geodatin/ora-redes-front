@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
+import Typography from '../Typography';
 import HeaderButton from './HeaderButton';
 import useStyles from './styles';
 import ThemeButton from './ThemeButton';
@@ -9,22 +11,29 @@ import TranslationMenu from './TranslationMenu';
  * This component renders a Header
  * @returns Application's header
  */
-export default function Header() {
+export default function Header({ items }) {
+  Header.defaultProps = {
+    items: [],
+  };
+
+  Header.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.shape()),
+  };
+
   const classes = useStyles();
 
   return (
     <header className={classes.container}>
       <div className={classes.logoContainer}>
         <div className={classes.logoDetail} />
-        <div>ORA</div>
+        <Typography variant="caption">REDES</Typography>
       </div>
       <div className={classes.menuItems}>
         <div className={classes.initialItems}>
-          <HeaderButton actived title="Monitoramento" />
-          <HeaderButton title="Arquivos" />
-          <HeaderButton title="Boletins" />
-          <HeaderButton title="Sobre" />
-          <HeaderButton title="API" />
+          {items &&
+            items.map((item) => (
+              <HeaderButton title={item.title} to={item.to} />
+            ))}
         </div>
         <div className={classes.endItems}>
           <TranslationMenu />
