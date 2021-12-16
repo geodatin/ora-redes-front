@@ -33,7 +33,7 @@ export default function Header({ items }) {
         <div className={classes.initialItems}>
           {items &&
             items.map((item) => (
-              <HeaderButton title={item.title} to={item.to} />
+              <HeaderButton key={item.to} title={item.title} to={item.to} />
             ))}
         </div>
         <div className={classes.endItems}>

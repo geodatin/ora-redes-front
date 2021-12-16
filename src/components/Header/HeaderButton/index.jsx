@@ -11,7 +11,7 @@ import useStyles from './styles';
  */
 export default function HeaderButton({ to, title }) {
   HeaderButton.propTypes = {
-    to: PropTypes.func.isRequired,
+    to: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
   };
 
