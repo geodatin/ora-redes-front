@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import Header from '../../components/Header';
 import Typography from '../../components/Typography';
+import { layout } from '../../constants/constraints';
 import useStyles from './styles';
 
 function Dashboard() {
@@ -14,9 +15,15 @@ function Dashboard() {
     <div className={classes.wrapper}>
       <Header />
       <div className={classes.mainRow}>
-        <div className={classes.notifications}>Notifications</div>
-        <div className={classes.map}>Map</div>
-        <div className={classes.statistics}>Statistics</div>
+        {layout.leftColumn.enabled && (
+          <div className={classes.leftColumn}>Left column</div>
+        )}
+
+        <div className={classes.mapContainer}>Map container</div>
+
+        {layout.rightColumn.enabled && (
+          <div className={classes.rightColumn}>Right column</div>
+        )}
       </div>
     </div>
   );

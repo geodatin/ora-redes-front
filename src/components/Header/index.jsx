@@ -19,7 +19,7 @@ export default function Header() {
         <div className={classes.logoDetail} />
       </div>
       <div className={classes.menuItems}>
-        <div>a</div>
+        <div />
         <div className={classes.endItems}>
           <TranslationMenu />
           <span className={classes.separator} />

@@ -1,11 +1,11 @@
 import { createUseStyles } from 'react-jss';
 
-import { layoutSizes, transitions } from '../../constants/constraints';
+import { layout, transitions } from '../../constants/constraints';
 
 const useStyles = createUseStyles((theme) => ({
   container: {
     display: 'flex',
-    height: layoutSizes.header.height,
+    height: layout.header.sizes.height,
     width: '100%',
     backgroundColor: theme.stroke.light,
     transition: transitions.bgColor,
