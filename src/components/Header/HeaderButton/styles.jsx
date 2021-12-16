@@ -1,6 +1,9 @@
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles((theme) => ({
+  link: {
+    textDecoration: 'none',
+  },
   button: {
     '&.MuiButtonBase-root': {
       position: 'relative',

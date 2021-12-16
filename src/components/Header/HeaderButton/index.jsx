@@ -1,6 +1,7 @@
-import { Button, Link } from '@mui/material';
+import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import useStyles from './styles';
 
@@ -18,7 +19,7 @@ export default function HeaderButton({ to, actived, title }) {
   const classes = useStyles();
 
   return (
-    <Link to={to}>
+    <Link to={to} className={classes.link}>
       <Button
         id="header-button-title"
         className={actived ? classes.activedButton : classes.button}
