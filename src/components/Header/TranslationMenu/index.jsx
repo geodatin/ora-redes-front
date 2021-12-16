@@ -32,7 +32,7 @@ export default function TranslationMenu() {
   };
 
   return (
-    <div className={classes.wrapper}>
+    <>
       <Button
         id="translate-button"
         className={classes.button}
@@ -68,6 +68,6 @@ export default function TranslationMenu() {
           <Typography variant="body">{t('es')}</Typography>
         </MenuItem>
       </Menu>
-    </div>
+    </>
   );
 }

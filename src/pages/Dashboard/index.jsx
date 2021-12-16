@@ -13,7 +13,13 @@ function Dashboard() {
 
   return (
     <div className={classes.wrapper}>
-      <Header />
+      <Header
+        items={[
+          { title: 'Page', to: '/page' },
+          { title: 'Page 2', to: '/page2' },
+          { title: 'Page 3', to: '/page3' },
+        ]}
+      />
       <div className={classes.mainRow}>
         {layout.leftColumn.enabled && (
           <div className={classes.leftColumn}>Left column</div>
