@@ -22,22 +22,11 @@ export const layout = {
     },
   },
   leftColumn: {
-    enabled: true,
     sizes: {
       width: 250,
     },
   },
-  mainContainer: {
-    sizes: {
-      width: () =>
-        `calc(100% - ${
-          (layout.leftColumn.enabled ? layout.leftColumn.sizes.width : 0) +
-          (layout.rightColumn.enabled ? layout.rightColumn.sizes.width : 0)
-        }px)`,
-    },
-  },
   rightColumn: {
-    enabled: true,
     sizes: {
       width: 250,
     },

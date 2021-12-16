@@ -1,23 +1,30 @@
 import React from 'react';
 
-import { layout } from '../../constants/constraints';
+import Layout from '../../components/Layout';
 import useStyles from './styles';
 
+/**
+ * This component renders a page
+ * @returns page one
+ */
 function PageOne() {
   const classes = useStyles();
 
   return (
-    <div className={classes.wrapper}>
-      {layout.leftColumn.enabled && (
-        <div className={classes.leftColumn}>Left column</div>
-      )}
-
-      <div className={classes.mainContainer}>Main container</div>
-
-      {layout.rightColumn.enabled && (
-        <div className={classes.rightColumn}>Right column</div>
-      )}
-    </div>
+    <Layout
+      leftColumn={{
+        className: classes.notifications,
+        children: <div>Notifications</div>,
+      }}
+      mainContainer={{
+        className: classes.map,
+        children: <div>Map</div>,
+      }}
+      rightColumn={{
+        className: classes.statistics,
+        children: <div>Statistics</div>,
+      }}
+    />
   );
 }
 
