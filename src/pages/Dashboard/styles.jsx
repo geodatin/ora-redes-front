@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { createUseStyles } from 'react-jss';
 
-import { layoutSizes } from '../../constants/constraints';
+import { layout } from '../../constants/constraints';
 
 const useStyles = createUseStyles(() => ({
   wrapper: {
@@ -9,32 +9,21 @@ const useStyles = createUseStyles(() => ({
     height: `100%`,
   },
   mainRow: {
-    position: 'relative',
+    display: 'flex',
+    flexFlow: 'row nowrap',
     width: '100%',
-    height: `calc(100% - ${layoutSizes.header.height}px)`,
+    height: `calc(100% - ${layout.header.sizes.height}px)`,
   },
-  notifications: {
-    position: 'absolute',
-    left: 0,
-    bottom: 0,
-    top: 0,
-    width: layoutSizes.notifications.width,
+  leftColumn: {
+    width: layout.leftColumn.sizes.width,
     backgroundColor: 'gray',
   },
-  map: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: layoutSizes.notifications.width,
-    right: layoutSizes.statistics.width,
+  mapContainer: {
+    width: layout.mapContainer.sizes.width,
     backgroundColor: 'green',
   },
-  statistics: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    top: 0,
-    width: layoutSizes.statistics.width,
+  rightColumn: {
+    width: layout.rightColumn.sizes.width,
     backgroundColor: 'red',
   },
 }));

@@ -15,15 +15,32 @@ export const breakpoints = {
   },
 };
 
-export const layoutSizes = {
+export const layout = {
   header: {
-    height: 50,
+    sizes: {
+      height: 50,
+    },
   },
-  notifications: {
-    width: 250,
+  leftColumn: {
+    enabled: true,
+    sizes: {
+      width: 250,
+    },
   },
-  statistics: {
-    width: 250,
+  mapContainer: {
+    sizes: {
+      width: () =>
+        `calc(100% - ${
+          (layout.leftColumn.enabled ? layout.leftColumn.sizes.width : 0) +
+          (layout.rightColumn.enabled ? layout.rightColumn.sizes.width : 0)
+        }px)`,
+    },
+  },
+  rightColumn: {
+    enabled: true,
+    sizes: {
+      width: 250,
+    },
   },
 };
 
