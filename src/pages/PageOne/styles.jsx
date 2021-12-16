@@ -6,7 +6,11 @@ const useStyles = createUseStyles(() => ({
     borderRight: '2px solid black',
     backgroundColor: 'green',
   },
-  map: {
+  mapBar: {
+    borderBottom: '2px solid black',
+    backgroundColor: 'black',
+  },
+  mapWrapper: {
     backgroundColor: 'transparent',
   },
   statistics: {

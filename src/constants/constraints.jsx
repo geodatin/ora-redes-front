@@ -26,6 +26,16 @@ export const layout = {
       width: 250,
     },
   },
+  upRow: {
+    sizes: {
+      height: 50,
+    },
+  },
+  downRow: {
+    sizes: {
+      height: 40,
+    },
+  },
   rightColumn: {
     sizes: {
       width: 250,

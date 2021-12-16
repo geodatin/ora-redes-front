@@ -8,14 +8,14 @@ import useStyles from './styles';
  * This component renders a common horizontal layout for application
  * @returns common Layout
  */
-export default function Layout({ leftColumn, mainContainer, rightColumn }) {
-  Layout.propTypes = {
+export default function HLayout({ leftColumn, mainContainer, rightColumn }) {
+  HLayout.propTypes = {
     leftColumn: PropTypes.shape(),
     mainContainer: PropTypes.shape().isRequired,
     rightColumn: PropTypes.shape(),
   };
 
-  Layout.defaultProps = {
+  HLayout.defaultProps = {
     leftColumn: undefined,
     rightColumn: undefined,
   };
