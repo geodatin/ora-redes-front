@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import OraLogo from '../../assets/images/ora-logo.svg';
 import Typography from '../Typography';
 import HeaderButton from './HeaderButton';
 import useStyles from './styles';
@@ -13,28 +14,22 @@ import TranslationMenu from './TranslationMenu';
  * @returns Application's header
  */
 export default function Header({ items }) {
-  Header.defaultProps = {
-    items: [],
-  };
-
-  Header.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.shape()),
-  };
-
   const classes = useStyles();
 
   return (
     <header className={classes.container}>
       <Link className={classes.logoContainer} to="/">
         <div className={classes.logoDetail} />
-        <Typography variant="caption">TYPE</Typography>
+        <div className={classes.logoWrapper}>
+          <img alt="ORA" src={OraLogo} className={classes.logo} />
+          <Typography className={classes.caption}>PROJECT</Typography>
+        </div>
       </Link>
       <div className={classes.menuItems}>
         <div className={classes.initialItems}>
-          {items &&
-            items.map((item) => (
-              <HeaderButton key={item.to} title={item.title} to={item.to} />
-            ))}
+          {items.map((item) => (
+            <HeaderButton key={item.to} title={item.title} to={item.to} />
+          ))}
         </div>
         <div className={classes.endItems}>
           <TranslationMenu />
@@ -45,3 +40,11 @@ export default function Header({ items }) {
     </header>
   );
 }
+
+Header.defaultProps = {
+  items: [],
+};
+
+Header.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape()),
+};

@@ -1,6 +1,7 @@
 {
   "helloWorld": "Olá mundo!",
-  "pt": "Português",
-  "es": "Espanhol",
-  "en": "Inglês"
+  "general": {
+    "projectName": "Project",
+    "language": "Português"
+  }
 }

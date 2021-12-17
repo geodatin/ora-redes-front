@@ -45,6 +45,22 @@ const useStyles = createUseStyles((theme) => ({
     margin: '0px 10px',
     transition: transitions.bgColor,
   },
+  logo: {
+    height: 30,
+    userSelect: 'none',
+  },
+  logoWrapper: {
+    position: 'relative',
+    display: 'flex',
+  },
+  caption: {
+    position: 'absolute',
+    right: 0,
+    bottom: -3,
+    fontWeight: 700,
+    fontSize: 9,
+    color: theme.primary.main,
+  },
 }));
 
 export default useStyles;

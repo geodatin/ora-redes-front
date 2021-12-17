@@ -9,20 +9,6 @@ import useStyles from './styles';
  * @returns Application's Typography
  */
 export default function Typography({ children, variant, style, className }) {
-  Typography.propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-    variant: PropTypes.string,
-    style: PropTypes.string,
-  };
-
-  Typography.defaultProps = {
-    children: undefined,
-    className: '',
-    variant: 'body',
-    style: undefined,
-  };
-
   const classes = useStyles();
   const Tag = variant === 'body' || variant === 'caption' ? 'span' : variant;
 
@@ -32,3 +18,17 @@ export default function Typography({ children, variant, style, className }) {
     </Tag>
   );
 }
+
+Typography.defaultProps = {
+  children: undefined,
+  className: '',
+  variant: 'body',
+  style: undefined,
+};
+
+Typography.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  variant: PropTypes.string,
+  style: PropTypes.string,
+};

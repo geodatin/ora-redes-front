@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 import { Button, Menu, MenuItem } from '@mui/material';
@@ -19,13 +20,16 @@ export default function TranslationMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { t } = useTranslation();
+  const availableLanguages = i18next.options.resources;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const handleTranslation = (language) => {
     i18next.changeLanguage(language);
     handleClose();
@@ -39,9 +43,7 @@ export default function TranslationMenu() {
         onClick={handleClick}
       >
         <TranslateRoundedIcon style={{ marginRight: 8, fontSize: 20 }} />
-        <Typography variant="body">
-          {t(i18next.language.toLowerCase())}
-        </Typography>
+        <Typography variant="body">{t('general.language')}</Typography>
         <KeyboardArrowDownRoundedIcon style={{ marginLeft: 5, fontSize: 20 }} />
       </Button>
       <Menu
@@ -60,15 +62,13 @@ export default function TranslationMenu() {
           style: { backgroundColor: theme.background.popup },
         }}
       >
-        <MenuItem onClick={() => handleTranslation('pt')}>
-          <Typography variant="body">{t('pt')}</Typography>
-        </MenuItem>
-        <MenuItem onClick={() => handleTranslation('en')}>
-          <Typography variant="body">{t('en')}</Typography>
-        </MenuItem>
-        <MenuItem onClick={() => handleTranslation('es')}>
-          <Typography variant="body">{t('es')}</Typography>
-        </MenuItem>
+        {Object.keys(availableLanguages).map((language) => (
+          <MenuItem key={language} onClick={() => handleTranslation(language)}>
+            <Typography variant="body">
+              {availableLanguages[language].translation.general.language}
+            </Typography>
+          </MenuItem>
+        ))}
       </Menu>
     </>
   );
