@@ -14,11 +14,22 @@ function PageOne() {
   return (
     <HLayout
       leftColumn={{
-        className: classes.notifications,
-        children: <div>Notifications</div>,
+        className: classes.leftWrapper,
+        children: (
+          <VLayout
+            upRow={{
+              className: classes.filters,
+              children: <div>Filters</div>,
+            }}
+            mainContainer={{
+              className: classes.notifications,
+              children: <div>Notifications</div>,
+            }}
+          />
+        ),
       }}
       mainContainer={{
-        className: classes.mapWrapper,
+        className: classes.mainWrapper,
         children: (
           <VLayout
             upRow={{
