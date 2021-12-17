@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Layout from '../../components/Layout';
+import HLayout from '../../components/Layout/Horizontal';
+import VLayout from '../../components/Layout/Vertical';
 import useStyles from './styles';
 
 /**
@@ -11,14 +12,25 @@ function PageOne() {
   const classes = useStyles();
 
   return (
-    <Layout
+    <HLayout
       leftColumn={{
         className: classes.notifications,
         children: <div>Notifications</div>,
       }}
       mainContainer={{
-        className: classes.map,
-        children: <div>Map</div>,
+        className: classes.mapWrapper,
+        children: (
+          <VLayout
+            upRow={{
+              className: classes.mapBar,
+              children: <div>MapBar</div>,
+            }}
+            mainContainer={{
+              className: classes.map,
+              children: <div>Map</div>,
+            }}
+          />
+        ),
       }}
       rightColumn={{
         className: classes.statistics,
