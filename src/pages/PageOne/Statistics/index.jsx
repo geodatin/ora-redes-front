@@ -15,31 +15,32 @@ export default function Statistics() {
   const optionsHorizontalBar = {
     indexAxis: 'y',
     plugins: {
-      legend: {
+      datalabels: {
         display: true,
-        position: 'bottom',
+        anchor: 'end',
+        align: 'end',
+      },
+      legend: {
+        display: false,
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          display: false,
+        },
       },
     },
   };
 
   const optionsVerticalBar = {
     indexAxis: 'x',
-    plugins: {
-      legend: {
-        display: true,
-        position: 'bottom',
-      },
-    },
+    plugins: {},
   };
 
   const optionsLine = {
     indexAxis: 'x',
-    plugins: {
-      legend: {
-        display: true,
-        position: 'bottom',
-      },
-    },
+    plugins: {},
   };
 
   const labels = [
@@ -59,6 +60,8 @@ export default function Statistics() {
         data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
         backgroundColor: theme.primary.main,
         borderColor: theme.primary.main,
+        borderRadius: 5,
+        barThickness: 15,
       },
     ],
   };
@@ -69,7 +72,11 @@ export default function Statistics() {
         <Line options={optionsLine} data={data} />
       </ChartContainer>
       <ChartContainer title="Gráfico de barras horizontais">
-        <Bar options={optionsHorizontalBar} data={data} />
+        <Bar
+          style={{ marginTop: -10 }}
+          options={optionsHorizontalBar}
+          data={data}
+        />
       </ChartContainer>
       <ChartContainer title="Gráfico de barras verticais">
         <Bar options={optionsVerticalBar} data={data} />
