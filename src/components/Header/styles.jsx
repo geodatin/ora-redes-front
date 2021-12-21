@@ -23,7 +23,7 @@ const useStyles = createUseStyles((theme) => ({
     backgroundColor: theme.primary.main,
     width: 5,
     height: '100%',
-    marginRight: 15,
+    marginRight: 10,
   },
   menuItems: {
     display: 'flex',
@@ -48,6 +48,10 @@ const useStyles = createUseStyles((theme) => ({
   logo: {
     height: 30,
     userSelect: 'none',
+
+    '&>path': {
+      fill: theme.secondary.dark,
+    },
   },
   logoWrapper: {
     position: 'relative',
@@ -55,7 +59,7 @@ const useStyles = createUseStyles((theme) => ({
   },
   caption: {
     position: 'absolute',
-    right: 0,
+    right: 10,
     bottom: -3,
     fontWeight: 700,
     fontSize: 9,

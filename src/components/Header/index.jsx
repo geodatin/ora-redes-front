@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import OraLogo from '../../assets/images/ora-logo.svg';
+import { ReactComponent as OraLogo } from '../../assets/images/ora-logo.svg';
 import Typography from '../Typography';
 import HeaderButton from './HeaderButton';
 import useStyles from './styles';
@@ -21,7 +21,7 @@ export default function Header({ items }) {
       <Link className={classes.logoContainer} to="/">
         <div className={classes.logoDetail} />
         <div className={classes.logoWrapper}>
-          <img alt="ORA" src={OraLogo} className={classes.logo} />
+          <OraLogo alt="ORA" className={classes.logo} />
           <Typography className={classes.caption}>PROJECT</Typography>
         </div>
       </Link>
