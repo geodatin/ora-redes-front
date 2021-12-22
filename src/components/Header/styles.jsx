@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-import { layout, transitions } from '../../constants/constraints';
+import { breakpoints, layout, transitions } from '../../constants/constraints';
 
 const useStyles = createUseStyles((theme) => ({
   container: {
@@ -33,6 +33,13 @@ const useStyles = createUseStyles((theme) => ({
   initialItems: {
     display: 'flex',
   },
+  buttonWrapper: {
+    display: 'flex',
+
+    [breakpoints.max.md]: {
+      display: 'none',
+    },
+  },
   endItems: {
     display: 'flex',
     alignItems: 'center',
@@ -49,7 +56,7 @@ const useStyles = createUseStyles((theme) => ({
     height: 30,
     userSelect: 'none',
 
-    '&>path': {
+    '& > path': {
       fill: theme.secondary.dark,
     },
   },
@@ -64,6 +71,12 @@ const useStyles = createUseStyles((theme) => ({
     fontWeight: 700,
     fontSize: 9,
     color: theme.primary.main,
+    textTransform: 'uppercase',
+  },
+  menuButton: {
+    [breakpoints.min.md]: {
+      display: 'none',
+    },
   },
 }));
 

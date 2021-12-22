@@ -32,7 +32,7 @@ export default function HeaderButton({ to, title }) {
   return (
     <Link to={to} className={classes.link}>
       <Button
-        id="header-button-title"
+        id={title}
         className={actived ? classes.activedButton : classes.button}
       >
         {title}
