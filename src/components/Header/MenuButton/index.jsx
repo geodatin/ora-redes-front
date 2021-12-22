@@ -100,7 +100,7 @@ export default function MenuButton({ items }) {
               )
             }
             onClick={() => handleSwitchTheme()}
-            text="Change theme"
+            text={t('header.changeTheme')}
           />
           <DrawerButton
             id="translate-button-drawer"

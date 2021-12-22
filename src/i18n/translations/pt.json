@@ -3,5 +3,8 @@
   "general": {
     "projectName": "Project",
     "language": "Português"
+  },
+  "header": {
+    "changeTheme": "Alternar Tema"
   }
 }
