@@ -68,17 +68,26 @@ export default function Statistics() {
 
   return (
     <ul>
-      <ChartContainer title="Gráfico de linhas ">
+      <ChartContainer
+        title="Gráfico de linhas"
+        info="Este é um gráfico de linhas"
+      >
         <Line options={optionsLine} data={data} />
       </ChartContainer>
-      <ChartContainer title="Gráfico de barras horizontais">
+      <ChartContainer
+        title="Gráfico de barras horizontais"
+        info="Este é um gráfico de barras horizontais"
+      >
         <Bar
           style={{ marginTop: -10 }}
           options={optionsHorizontalBar}
           data={data}
         />
       </ChartContainer>
-      <ChartContainer title="Gráfico de barras verticais">
+      <ChartContainer
+        title="Gráfico de barras verticais"
+        info="Este é um gráfico de barras verticais"
+      >
         <Bar options={optionsVerticalBar} data={data} />
       </ChartContainer>
     </ul>

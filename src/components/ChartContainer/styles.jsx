@@ -8,6 +8,11 @@ const useStyles = createUseStyles(() => ({
     padding: 10,
     marginBottom: 10,
   },
+  header: {
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    alignItems: 'center',
+  },
   chartWrapper: {
     width: '100%',
     height: '300px',
