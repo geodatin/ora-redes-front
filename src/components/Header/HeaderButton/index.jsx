@@ -10,11 +10,6 @@ import useStyles from './styles';
  * @returns Header Button
  */
 export default function HeaderButton({ to, title }) {
-  HeaderButton.propTypes = {
-    to: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  };
-
   const classes = useStyles();
   const { pathname } = useLocation();
 
@@ -40,3 +35,8 @@ export default function HeaderButton({ to, title }) {
     </Link>
   );
 }
+
+HeaderButton.propTypes = {
+  to: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};

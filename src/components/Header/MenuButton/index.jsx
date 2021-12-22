@@ -5,6 +5,7 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 import { Drawer, IconButton, Menu, MenuItem } from '@mui/material';
 import i18next from 'i18next';
+import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -20,7 +21,7 @@ import useStyles from './styles';
  * This functional component renders the menu button and its options.
  * @returns A button that opens the platform menu.
  */
-function MenuButton() {
+export default function MenuButton({ items }) {
   const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -85,6 +86,11 @@ function MenuButton() {
           </IconButton>
         </div>
         <div className={classes.items}>
+          <div className={classes.buttonWrapper}>
+            {items.map((item) => (
+              <DrawerButton key={item.to} text={item.title} to={item.to} />
+            ))}
+          </div>
           <DrawerButton
             startIcon={
               selectedTheme === lightScheme ? (
@@ -132,4 +138,10 @@ function MenuButton() {
   );
 }
 
-export default MenuButton;
+MenuButton.defaultProps = {
+  items: [],
+};
+
+MenuButton.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape()),
+};

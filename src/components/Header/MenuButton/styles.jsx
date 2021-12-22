@@ -82,11 +82,11 @@ const useStyles = createUseStyles((theme) => ({
       marginRight: 0,
     },
   },
-  translationTopContainer: {
-    padding: '12px 16px',
-    borderBottom: `1px solid red`,
+  buttonWrapper: {
     display: 'flex',
-    alignItems: 'center',
+    flexDirection: 'column',
+    borderBottom: `1px solid ${theme.stroke.dark}`,
+    width: '100%',
   },
 }));
 

@@ -45,7 +45,7 @@ export default function Header({ items }) {
             <ThemeButton />
           </div>
           <div className={classes.menuButton}>
-            <MenuButton />
+            <MenuButton items={items} />
           </div>
         </div>
       </div>
