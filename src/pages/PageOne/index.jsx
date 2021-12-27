@@ -2,6 +2,7 @@ import React from 'react';
 
 import HLayout from '../../components/Layout/Horizontal';
 import VLayout from '../../components/Layout/Vertical';
+import MapWrapper from '../../components/MapWrapper';
 import useStyles from './styles';
 
 /**
@@ -38,7 +39,7 @@ function PageOne() {
             }}
             mainContainer={{
               className: classes.map,
-              children: <div>Map</div>,
+              children: <MapWrapper />,
             }}
           />
         ),

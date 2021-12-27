@@ -12,7 +12,7 @@ import { useTheme } from 'react-jss';
 
 import { ReactComponent as OraLogo } from '../../../assets/images/ora-logo.svg';
 import { lightScheme } from '../../../constants/schemes';
-import ThemeContext from '../../../theming/theming';
+import ThemeContext from '../../../contexts/theming';
 import Typography from '../../Typography';
 import DrawerButton from './DrawerButton';
 import useStyles from './styles';
