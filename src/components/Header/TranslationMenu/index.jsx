@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 import { Button, Menu, MenuItem } from '@mui/material';

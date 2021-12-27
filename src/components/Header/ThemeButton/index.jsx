@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 import React, { useContext } from 'react';
 
 import { lightScheme } from '../../../constants/schemes';
-import ThemeContext from '../../../theming/theming';
+import ThemeContext from '../../../contexts/theming';
 import useStyles from './styles';
 
 /**

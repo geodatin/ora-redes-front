@@ -2,6 +2,7 @@ import React from 'react';
 
 import HLayout from '../../components/Layout/Horizontal';
 import VLayout from '../../components/Layout/Vertical';
+import MapWrapper from '../../components/MapWrapper';
 import Statistics from './Statistics';
 import useStyles from './styles';
 
@@ -38,8 +39,8 @@ function PageOne() {
               children: <div>Bread bar</div>,
             }}
             mainContainer={{
-              className: classes.mapWrapper,
-              children: <div>Map</div>,
+              className: classes.map,
+              children: <MapWrapper />,
             }}
           />
         ),
