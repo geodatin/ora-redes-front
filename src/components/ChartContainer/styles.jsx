@@ -12,6 +12,12 @@ const useStyles = createUseStyles(() => ({
     display: 'flex',
     flexFlow: 'row nowrap',
     alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  headerTitle: {
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    alignItems: 'center',
   },
   chartWrapper: {
     width: '100%',
