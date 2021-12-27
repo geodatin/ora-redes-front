@@ -1,29 +1,23 @@
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles(() => ({
-  leftWrapper: {
-    minWidth: 300,
+  filtersNotificationsWrapper: {
+    minWidth: 280,
     borderRight: '2px solid black',
   },
-  filters: {
+  filtersWrapper: {
     borderBottom: '2px solid black',
-    backgroundColor: 'blue',
     height: 400,
   },
-  notifications: {
-    backgroundColor: 'green',
-  },
-  mainWrapper: {
+  notificationsWrapper: {},
+  breadBarWrapper: {
     borderBottom: '2px solid black',
-    backgroundColor: 'black',
   },
-  mapWrapper: {
-    backgroundColor: 'transparent',
-  },
-  statistics: {
-    minWidth: 300,
+  mapWrapper: {},
+  statisticsWrapper: {
+    overflow: 'auto',
+    minWidth: 400,
     borderLeft: '2px solid black',
-    backgroundColor: 'red',
   },
 }));
 

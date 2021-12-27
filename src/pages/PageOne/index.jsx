@@ -2,6 +2,7 @@ import React from 'react';
 
 import HLayout from '../../components/Layout/Horizontal';
 import VLayout from '../../components/Layout/Vertical';
+import Statistics from './Statistics';
 import useStyles from './styles';
 
 /**
@@ -14,38 +15,38 @@ function PageOne() {
   return (
     <HLayout
       leftColumn={{
-        className: classes.leftWrapper,
+        className: classes.filtersNotificationsWrapper,
         children: (
           <VLayout
             upRow={{
-              className: classes.filters,
+              className: classes.filtersWrapper,
               children: <div>Filters</div>,
             }}
             mainContainer={{
-              className: classes.notifications,
+              className: classes.notificationsWrapper,
               children: <div>Notifications</div>,
             }}
           />
         ),
       }}
       mainContainer={{
-        className: classes.mainWrapper,
+        className: classes.breadMapWrapper,
         children: (
           <VLayout
             upRow={{
-              className: classes.mapBar,
-              children: <div>MapBar</div>,
+              className: classes.breadBarWrapper,
+              children: <div>Bread bar</div>,
             }}
             mainContainer={{
-              className: classes.map,
+              className: classes.mapWrapper,
               children: <div>Map</div>,
             }}
           />
         ),
       }}
       rightColumn={{
-        className: classes.statistics,
-        children: <div>Statistics</div>,
+        className: classes.statisticsWrapper,
+        children: <Statistics />,
       }}
     />
   );
