@@ -10,7 +10,7 @@ const useStyles = createUseStyles((theme) => ({
     width: 35,
     top: 10,
     left: 10,
-    zIndex: 8000,
+    zIndex: 997,
     borderRadius: 5,
     border: `1px solid ${theme.stroke.dark}`,
     cursor: 'pointer',

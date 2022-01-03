@@ -1,8 +1,14 @@
+import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
+import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
+import MapRoundedIcon from '@mui/icons-material/MapRounded';
+import { useMediaQuery } from '@mui/material';
 import React from 'react';
 
 import HLayout from '../../components/Layout/Horizontal';
+import MobileLayout from '../../components/Layout/Mobile';
 import VLayout from '../../components/Layout/Vertical';
 import MapWrapper from '../../components/MapWrapper';
+import { breakpoints } from '../../constants/constraints';
 import Statistics from './Statistics';
 import useStyles from './styles';
 
@@ -12,24 +18,36 @@ import useStyles from './styles';
  */
 function PageOne() {
   const classes = useStyles();
+  const isMobile = useMediaQuery(breakpoints.max.smd);
 
-  return (
-    <HLayout
-      leftColumn={{
-        className: classes.filtersNotificationsWrapper,
-        children: (
-          <VLayout
-            upRow={{
-              className: classes.filtersWrapper,
-              children: <div>Filters</div>,
-            }}
-            mainContainer={{
-              className: classes.notificationsWrapper,
-              children: <div>Notifications</div>,
-            }}
-          />
-        ),
+  return isMobile ? (
+    <MobileLayout
+      mainContainer={{
+        label: 'Map',
+        icon: <MapRoundedIcon />,
+        children: <MapWrapper />,
       }}
+      bottomNavBar={[
+        {
+          label: 'Statistics',
+          icon: <AutoGraphRoundedIcon />,
+          navContainer: {
+            className: classes.statisticsMobileWrapper,
+            children: <Statistics />,
+          },
+        },
+        {
+          label: 'Filters',
+          icon: <ManageSearchRoundedIcon />,
+          navContainer: {
+            className: classes.statisticsMobileWrapper,
+            children: <Statistics />,
+          },
+        },
+      ]}
+    />
+  ) : (
+    <HLayout
       mainContainer={{
         className: classes.breadMapWrapper,
         children: (
@@ -41,6 +59,21 @@ function PageOne() {
             mainContainer={{
               className: classes.map,
               children: <MapWrapper />,
+            }}
+          />
+        ),
+      }}
+      leftColumn={{
+        className: classes.filtersNotificationsWrapper,
+        children: (
+          <VLayout
+            upRow={{
+              className: classes.filtersWrapper,
+              children: <div>Filters</div>,
+            }}
+            mainContainer={{
+              className: classes.notificationsWrapper,
+              children: <div>Notifications</div>,
             }}
           />
         ),

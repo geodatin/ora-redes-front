@@ -19,6 +19,9 @@ const useStyles = createUseStyles(() => ({
     minWidth: 400,
     borderLeft: '2px solid black',
   },
+  statisticsMobileWrapper: {
+    overflow: 'auto',
+  },
 }));
 
 export default useStyles;
