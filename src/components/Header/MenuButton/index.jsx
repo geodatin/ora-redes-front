@@ -68,7 +68,6 @@ export default function MenuButton({ items }) {
         anchor="right"
         open={openDrawer}
         classes={{ root: classes.list }}
-        onOpen={() => setOpenDrawer(true)}
         onClose={() => setOpenDrawer(false)}
       >
         <div className={classes.topContainer}>

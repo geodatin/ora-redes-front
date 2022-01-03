@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Breadcrumb from '../../components/Breadcrumb';
 import HLayout from '../../components/Layout/Horizontal';
 import VLayout from '../../components/Layout/Vertical';
 import MapWrapper from '../../components/MapWrapper';
@@ -36,7 +37,11 @@ function PageOne() {
           <VLayout
             upRow={{
               className: classes.breadBarWrapper,
-              children: <div>Bread bar</div>,
+              children: (
+                <div className={classes.breadcrumbWrapper}>
+                  <Breadcrumb items={['Monitoramento', 'Todas as redes']} />
+                </div>
+              ),
             }}
             mainContainer={{
               className: classes.map,

@@ -19,6 +19,13 @@ const useStyles = createUseStyles(() => ({
     minWidth: 400,
     borderLeft: '2px solid black',
   },
+  breadcrumbWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    height: '100%',
+    width: '100%',
+    padding: '0px 15px',
+  },
 }));
 
 export default useStyles;
