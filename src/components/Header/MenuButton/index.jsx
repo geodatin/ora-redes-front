@@ -69,7 +69,6 @@ export default function MenuButton({ items }) {
         open={openDrawer}
         classes={{ root: classes.list }}
         style={{ zIndex: 20000 }}
-        onOpen={() => setOpenDrawer(true)}
         onClose={() => setOpenDrawer(false)}
       >
         <div className={classes.topContainer}>
