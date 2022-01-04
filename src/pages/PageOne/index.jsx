@@ -50,6 +50,7 @@ function PageOne() {
           label: 'Notifications',
           icon: <NotificationsActiveRoundedIcon />,
           navContainer: {
+            className: classes.notificationsMobileWrapper,
             children: <div>Notifications</div>,
           },
         },
@@ -64,9 +65,7 @@ function PageOne() {
             upRow={{
               className: classes.breadBarWrapper,
               children: (
-                <div className={classes.breadcrumbWrapper}>
-                  <Breadcrumb items={['Monitoramento', 'Todas as redes']} />
-                </div>
+                <Breadcrumb items={['Monitoramento', 'Todas as redes']} />
               ),
             }}
             mainContainer={{

@@ -5,7 +5,7 @@ const useStyles = createUseStyles(() => ({
     display: 'flex',
     flexFlow: 'column nowrap',
     width: '100%',
-    padding: 10,
+    padding: 15,
     marginBottom: 10,
   },
   header: {
