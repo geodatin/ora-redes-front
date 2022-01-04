@@ -30,16 +30,16 @@ function PageOne() {
       }}
       bottomNavBar={[
         {
-          label: 'Statistics',
-          icon: <AutoGraphRoundedIcon />,
+          label: 'Filters',
+          icon: <ManageSearchRoundedIcon />,
           navContainer: {
-            className: classes.statisticsMobileWrapper,
-            children: <Statistics />,
+            className: classes.filtersMobileWrapper,
+            children: <div>Filters</div>,
           },
         },
         {
-          label: 'Filters',
-          icon: <ManageSearchRoundedIcon />,
+          label: 'Statistics',
+          icon: <AutoGraphRoundedIcon />,
           navContainer: {
             className: classes.statisticsMobileWrapper,
             children: <Statistics />,

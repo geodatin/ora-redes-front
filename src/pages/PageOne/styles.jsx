@@ -9,6 +9,13 @@ const useStyles = createUseStyles(() => ({
     borderBottom: '2px solid black',
     height: 400,
   },
+  filtersMobileWrapper: {
+    position: 'absolute',
+    top: 'auto',
+    bottom: 0,
+    height: 200,
+    borderRadius: '10px 10px 0px 0px',
+  },
   notificationsWrapper: {},
   breadBarWrapper: {
     borderBottom: '2px solid black',
