@@ -1,12 +1,14 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles((theme) => ({
   filtersNotificationsWrapper: {
     minWidth: 280,
-    borderRight: '2px solid black',
+    borderRight: '1px solid',
+    borderRightColor: theme.stroke.dark,
   },
   filtersWrapper: {
-    borderBottom: '2px solid black',
+    borderBottom: '1px solid',
+    borderBottomColor: theme.stroke.dark,
     height: 400,
   },
   filtersMobileWrapper: {
@@ -18,13 +20,15 @@ const useStyles = createUseStyles(() => ({
   },
   notificationsWrapper: {},
   breadBarWrapper: {
-    borderBottom: '2px solid black',
+    borderBottom: '1px solid',
+    borderBottomColor: theme.stroke.dark,
   },
   mapWrapper: {},
   statisticsWrapper: {
     overflow: 'auto',
     minWidth: 400,
-    borderLeft: '2px solid black',
+    borderLeft: '1px solid',
+    borderLeftColor: theme.stroke.dark,
   },
   statisticsMobileWrapper: {
     overflow: 'auto',
