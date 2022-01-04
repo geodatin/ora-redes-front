@@ -1,9 +1,11 @@
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles((theme) => ({
-  container: {
+  breadcrumb: {
     display: 'flex',
     alignItems: 'center',
+    flexDirection: 'row',
+    whiteSpace: 'nowrap',
   },
   separator: {
     fontSize: 10,
@@ -16,6 +18,12 @@ const useStyles = createUseStyles((theme) => ({
   },
   secondaryItem: {
     color: theme.neutral.gray.main,
+  },
+  itemWithSeparator: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    whiteSpace: 'nowrap',
   },
 }));
 

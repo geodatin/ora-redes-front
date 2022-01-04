@@ -4,6 +4,7 @@ import React from 'react';
 
 import Typography from '../Typography';
 import useStyles from './styles';
+
 /**
  * This component renders a Breadcrumb
  * @returns Breadcrumb
@@ -27,14 +28,14 @@ export default function Breadcrumb({ items }) {
 
         if (index + 1 < items.length) {
           return (
-            <>
+            <div key={`${item}-div`} className={classes.itemWithSeparator}>
               {itemComponent}{' '}
               <ArrowForwardIosRoundedIcon
-                key={`${item}separator`}
+                key={`${item}-separator`}
                 className={classes.separator}
                 style={{ fontSize: 12 }}
               />
-            </>
+            </div>
           );
         }
 
@@ -45,5 +46,5 @@ export default function Breadcrumb({ items }) {
 }
 
 Breadcrumb.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
