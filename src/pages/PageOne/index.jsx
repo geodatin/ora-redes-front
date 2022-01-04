@@ -20,7 +20,7 @@ import useStyles from './styles';
  */
 function PageOne() {
   const classes = useStyles();
-  const isMobile = useMediaQuery(breakpoints.max.smd);
+  const isMobile = useMediaQuery(breakpoints.max.md);
 
   return isMobile ? (
     <MobileLayout

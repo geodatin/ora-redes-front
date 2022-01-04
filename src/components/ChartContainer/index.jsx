@@ -62,13 +62,21 @@ export default function ChartContainer({ children, title, info }) {
             {title}
           </Typography>
           <CustomTooltip title={info} placement="bottom">
-            <InfoOutlined
+            <div
               style={{
-                color: theme.secondary.dark,
-                fontSize: '16px',
-                marginLeft: '5px',
+                margin: 10,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
-            />
+            >
+              <InfoOutlined
+                style={{
+                  color: theme.secondary.dark,
+                  fontSize: '18px',
+                }}
+              />
+            </div>
           </CustomTooltip>
         </div>
 
