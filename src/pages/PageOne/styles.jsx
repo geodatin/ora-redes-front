@@ -10,6 +10,7 @@ const useStyles = createUseStyles((theme) => ({
     borderBottom: '1px solid',
     borderBottomColor: theme.stroke.dark,
     height: 400,
+    padding: 15,
   },
   filtersMobileWrapper: {
     position: 'absolute',
@@ -17,8 +18,10 @@ const useStyles = createUseStyles((theme) => ({
     bottom: 0,
     height: 200,
     borderRadius: '10px 10px 0px 0px',
+    padding: 15,
   },
-  notificationsWrapper: {},
+  notificationsWrapper: { padding: 15 },
+  notificationsMobileWrapper: { padding: 15 },
   breadBarWrapper: {
     borderBottom: '1px solid',
     borderBottomColor: theme.stroke.dark,
@@ -32,13 +35,6 @@ const useStyles = createUseStyles((theme) => ({
   },
   statisticsMobileWrapper: {
     overflow: 'auto',
-  },
-  breadcrumbWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    height: '100%',
-    width: '100%',
-    padding: '0px 15px',
   },
 }));
 

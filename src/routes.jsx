@@ -8,6 +8,7 @@ import {
 
 import Header from './components/Header';
 import PageOne from './pages/PageOne';
+import PageTwo from './pages/PageTwo';
 
 function Routes() {
   return (
@@ -21,7 +22,7 @@ function Routes() {
       />
       <BaseRoutes>
         <Route exact path="/" element={<PageOne />} />
-        <Route exact path="/page2" element={<PageOne />} />
+        <Route exact path="/page2" element={<PageTwo />} />
         <Route exact path="/page3" element={<PageOne />} />
         <Route path="*" element={<Navigate to="/" />} />
       </BaseRoutes>
