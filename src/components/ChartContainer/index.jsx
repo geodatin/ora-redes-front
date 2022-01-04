@@ -89,6 +89,7 @@ export default function ChartContainer({ children, title, info }) {
             transformOrigin={{ vertical: 'top', horizontal: 'center' }}
             open={open}
             onClose={handleClose}
+            style={{ zIndex: 20000 }}
             MenuListProps={{
               style: {
                 color: theme.secondary.dark,
