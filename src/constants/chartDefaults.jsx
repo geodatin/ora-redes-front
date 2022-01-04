@@ -26,7 +26,7 @@ ChartJS.register(
 
 ChartJS.defaults.font.family = `"Roboto", "Helvetica", "Arial", sans-serif`;
 ChartJS.defaults.font.weight = '500';
-ChartJS.defaults.font.size = 16;
+ChartJS.defaults.font.size = 12.8;
 
 ChartJS.defaults.maintainAspectRatio = false;
 ChartJS.defaults.responsive = true;
