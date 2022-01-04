@@ -88,7 +88,14 @@ export default function MenuButton({ items }) {
         <div className={classes.items}>
           <div className={classes.buttonWrapper}>
             {items.map((item) => (
-              <DrawerButton key={item.to} text={item.title} to={item.to} />
+              <DrawerButton
+                key={item.to}
+                text={item.title}
+                to={item.to}
+                onClick={() => {
+                  setOpenDrawer(false);
+                }}
+              />
             ))}
           </div>
           <DrawerButton
