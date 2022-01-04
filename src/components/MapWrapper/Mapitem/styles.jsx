@@ -49,18 +49,16 @@ const useStyles = createUseStyles((theme) => ({
         opacity: 0.4,
         zIndex: 0,
       },
-      '&:first-of-type': {
-        borderRadius: '5px 5px 0px 0px',
-      },
-      '&:last-of-type': {
-        borderRadius: '0px 0px 5px 5px',
-      },
     },
   },
-  icon: {
+  popup: {
     position: 'absolute',
     zIndex: 1,
-    transform: 'scale(0.8)',
+    left: 45,
+    top: 0,
+    backgroundColor: theme.background.main,
+    borderRadius: 5,
+    border: `1px solid ${theme.stroke.dark}`,
   },
 }));
 
