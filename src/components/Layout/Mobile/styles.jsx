@@ -11,7 +11,7 @@ const useStyles = createUseStyles((theme) => ({
   mainContainerWrapper: {
     position: 'relative',
     width: '100%',
-    height: '100%',
+    height: `calc(100% - ${layout.mobile.navbar.height}px)`,
   },
   navComponentWrapper: {
     zIndex: 10000,
@@ -29,6 +29,7 @@ const useStyles = createUseStyles((theme) => ({
     right: 0,
 
     '&.MuiBottomNavigation-root': {
+      height: layout.mobile.navbar.height,
       backgroundColor: theme.stroke.light,
     },
   },

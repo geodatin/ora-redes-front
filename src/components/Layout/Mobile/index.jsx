@@ -1,5 +1,4 @@
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
-import Box from '@mui/material/Box';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -45,28 +44,27 @@ export default function MobileLayout({ mainContainer, bottomNavBar }) {
         {getNavComponent()}
         {mainContainer.children}
       </div>
-      <Box sx={{ height: 60 }}>
-        <BottomNavigation
-          className={classes.nav}
-          showLabels
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        >
+
+      <BottomNavigation
+        className={classes.nav}
+        showLabels
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+      >
+        <BottomNavigationAction
+          label={mainContainer.label}
+          icon={mainContainer.icon}
+        />
+        {bottomNavBar.map((buttonAction) => (
           <BottomNavigationAction
-            label={mainContainer.label}
-            icon={mainContainer.icon}
+            key={buttonAction.label}
+            label={buttonAction.label}
+            icon={buttonAction.icon}
           />
-          {bottomNavBar.map((buttonAction) => (
-            <BottomNavigationAction
-              key={buttonAction.label}
-              label={buttonAction.label}
-              icon={buttonAction.icon}
-            />
-          ))}
-        </BottomNavigation>
-      </Box>
+        ))}
+      </BottomNavigation>
     </div>
   );
 }

@@ -11,7 +11,7 @@ const useStyles = createUseStyles(() => ({
   },
   filtersMobileWrapper: {
     position: 'absolute',
-    top: 'auto',
+    top: 'initial',
     bottom: 0,
     height: 200,
     borderRadius: '10px 10px 0px 0px',

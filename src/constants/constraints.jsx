@@ -41,6 +41,11 @@ export const layout = {
       width: 250,
     },
   },
+  mobile: {
+    navbar: {
+      height: 60,
+    },
+  },
 };
 
 export const transitions = {
