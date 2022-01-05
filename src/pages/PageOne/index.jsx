@@ -7,7 +7,7 @@ import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import HLayout from '../../components/Layout/Horizontal';
-import MobileLayout from '../../components/Layout/Mobile';
+import MobileNavbarLayout from '../../components/Layout/Mobile/Navbar';
 import VLayout from '../../components/Layout/Vertical';
 import MapWrapper from '../../components/MapWrapper';
 import { breakpoints } from '../../constants/constraints';
@@ -23,7 +23,7 @@ function PageOne() {
   const isMobile = useMediaQuery(breakpoints.max.md);
 
   return isMobile ? (
-    <MobileLayout
+    <MobileNavbarLayout
       mainContainer={{
         label: 'Map',
         icon: <MapRoundedIcon />,

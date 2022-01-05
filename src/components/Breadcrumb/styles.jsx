@@ -8,7 +8,6 @@ const useStyles = createUseStyles((theme) => ({
     whiteSpace: 'nowrap',
     height: '100%',
     width: '100%',
-    padding: '0px 15px',
   },
   separator: {
     fontSize: 10,

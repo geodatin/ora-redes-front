@@ -1,23 +1,55 @@
+import { useMediaQuery } from '@mui/material';
 import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import HLayout from '../../components/Layout/Horizontal';
+import MobileExpandLayout from '../../components/Layout/Mobile/Expand';
 import VLayout from '../../components/Layout/Vertical';
-import ApiPost from '../../components/Posts/Api';
-import FilePost from '../../components/Posts/File';
+import { breakpoints } from '../../constants/constraints';
+import Docs from './Docs';
 import useStyles from './styles';
+
 /**
  * This component renders a page
  * @returns page two
  */
 export default function PageTwo() {
   const classes = useStyles();
+  const isMobile = useMediaQuery(breakpoints.max.md);
 
-  return (
+  const methods = (
+    <ul>
+      <li> Methods 1</li>
+      <li> Methods 2</li>
+      <li> Methods 3</li>
+      <li> Methods 4</li>
+      <li> Methods 5</li>
+      <li> Methods 6</li>
+    </ul>
+  );
+
+  return isMobile ? (
+    <MobileExpandLayout
+      upRowBar={{
+        className: classes.breadBarMobileWrapper,
+        children: (
+          <Breadcrumb items={['Biblioteca de dados', 'Todas as redes']} />
+        ),
+      }}
+      expandable={{
+        className: classes.methodsMobileWrapper,
+        children: methods,
+      }}
+      mainContainer={{
+        className: classes.docsWrapper,
+        children: <Docs />,
+      }}
+    />
+  ) : (
     <HLayout
       leftColumn={{
-        className: classes.searchWrapper,
-        children: <div>Search</div>,
+        className: classes.methodsWrapper,
+        children: methods,
       }}
       mainContainer={{
         className: classes.breadMapWrapper,
@@ -31,62 +63,7 @@ export default function PageTwo() {
             }}
             mainContainer={{
               className: classes.docsWrapper,
-              children: (
-                <div>
-                  <FilePost
-                    title="Tabela de estações fluviométricas"
-                    description="Pensando mais a longo prazo, a utilização de recursos de hardware dedicados conduz a um melhor balancemanto de carga da utilização dos serviços nas nuvens. No entanto, não podemos esquecer que a disponibilização de ambientes faz parte de um processo de gerenciamento de memória avançado dos paradigmas de desenvolvimento de software. "
-                    items={[
-                      { key: 'País', value: 'Brasil' },
-                      {
-                        key: 'Instituição',
-                        value: 'Agência Nacional de Águas',
-                      },
-                    ]}
-                    fileTypes={[
-                      { name: 'CSV', color: '#FA7B00' },
-                      { name: 'PDF', color: '#A1BA09' },
-                    ]}
-                    url={[
-                      {
-                        link: 'https://speed.hetzner.de/100MB.bin',
-                        info: 'Baixar CSV',
-                      },
-                      {
-                        link: 'https://speed.hetzner.de/100MB.bin',
-                        info: 'Baixar PDF',
-                      },
-                    ]}
-                  />
-                  <ApiPost
-                    title="Contagem de estações"
-                    description="Método que retorna o total de estações."
-                    url="https://dev-redes-ora.geodatin.com/api/station/count"
-                    type={{ name: 'GET', color: '#A1BA09' }}
-                    requisitionExample="https://dev-redes-ora.geodatin.com/api/ostation/count"
-                    response={[
-                      {
-                        key: 'count',
-                        type: 'number',
-                        description: 'Contagem numérica de estações',
-                      },
-                    ]}
-                    bodyParams={[
-                      {
-                        key: 'count',
-                        type: 'number',
-                        description: 'Contagem numérica de estações',
-                      },
-                    ]}
-                    urlParams={[
-                      {
-                        key: 'count',
-                        description: 'Contagem numérica de estações',
-                      },
-                    ]}
-                  />
-                </div>
-              ),
+              children: <Docs />,
             }}
           />
         ),

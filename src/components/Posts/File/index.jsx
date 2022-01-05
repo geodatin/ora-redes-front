@@ -82,7 +82,7 @@ export default function FilePost({
           {t('posts.file.download').toUpperCase()}
         </CustomChip>
         <Menu
-          id="translate-menu"
+          id="posts-menu"
           anchorEl={anchorEl}
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           transformOrigin={{ vertical: 'top', horizontal: 'center' }}
