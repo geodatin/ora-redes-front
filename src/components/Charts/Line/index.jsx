@@ -27,7 +27,7 @@ export default function LineChart({
   };
 
   return (
-    <ChartContainer title={title} info={info}>
+    <ChartContainer title={title} info={info} isLoaded={data != null}>
       <Line options={{ ...options, ...mergeOptions }} data={data} />
     </ChartContainer>
   );

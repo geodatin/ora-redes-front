@@ -47,6 +47,7 @@ export default function RankingChart({
     <ChartContainer
       title={title}
       info={info}
+      isLoaded={data != null}
       pagination={
         <CustomPagination
           size="small"

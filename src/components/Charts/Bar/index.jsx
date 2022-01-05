@@ -22,7 +22,7 @@ export default function BarChart({ title, info, data, options: mergeOptions }) {
   };
 
   return (
-    <ChartContainer title={title} info={info}>
+    <ChartContainer title={title} info={info} isLoaded={data != null}>
       <Bar options={{ ...options, ...mergeOptions }} data={data} />
     </ChartContainer>
   );
