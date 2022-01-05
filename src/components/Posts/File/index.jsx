@@ -79,7 +79,7 @@ export default function FilePost({
           icon={<DownloadRoundedIcon style={{ color: theme.primary.main }} />}
           onClick={(event) => handleDownload(event)}
         >
-          {t('posts.download').toUpperCase()}
+          {t('posts.file.download').toUpperCase()}
         </CustomChip>
         <Menu
           id="translate-menu"

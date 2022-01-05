@@ -3,6 +3,7 @@ import React from 'react';
 import Breadcrumb from '../../components/Breadcrumb';
 import HLayout from '../../components/Layout/Horizontal';
 import VLayout from '../../components/Layout/Vertical';
+import ApiPost from '../../components/Posts/Api';
 import FilePost from '../../components/Posts/File';
 import useStyles from './styles';
 /**
@@ -54,6 +55,33 @@ export default function PageTwo() {
                       {
                         link: 'https://speed.hetzner.de/100MB.bin',
                         info: 'Baixar PDF',
+                      },
+                    ]}
+                  />
+                  <ApiPost
+                    title="Contagem de estações"
+                    description="Método que retorna o total de estações."
+                    url="https://dev-redes-ora.geodatin.com/api/station/count"
+                    type={{ name: 'GET', color: '#A1BA09' }}
+                    requisitionExample="https://dev-redes-ora.geodatin.com/api/ostation/count"
+                    response={[
+                      {
+                        key: 'count',
+                        type: 'number',
+                        description: 'Contagem numérica de estações',
+                      },
+                    ]}
+                    bodyParams={[
+                      {
+                        key: 'count',
+                        type: 'number',
+                        description: 'Contagem numérica de estações',
+                      },
+                    ]}
+                    urlParams={[
+                      {
+                        key: 'count',
+                        description: 'Contagem numérica de estações',
                       },
                     ]}
                   />

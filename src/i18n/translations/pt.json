@@ -8,6 +8,19 @@
     "changeTheme": "Alternar Tema"
   },
   "posts": {
-    "download": "Baixar Arquivo"
+    "file": {
+      "download": "Baixar Arquivo"
+    },
+    "api": {
+      "url": "URL",
+      "urlParams": "Parâmetros na URL",
+      "bodyParams": "Parâmetros do body",
+      "requisitionExample": "Exemplo de requisição",
+      "answer": "Resposta",
+      "key": "Chave",
+      "type": "Tipo",
+      "description": "Descrição",
+      "none": "Nenhum"
+    }
   }
 }
