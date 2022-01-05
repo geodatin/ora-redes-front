@@ -1,12 +1,9 @@
-/* eslint-disable no-unused-vars */
-
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Collapse, IconButton } from '@mui/material';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useTheme } from 'react-jss';
 
 import useStyles from './styles';
 
@@ -27,7 +24,6 @@ export default function MobileExpandLayout({
 
   const [open, setOpen] = React.useState(false);
 
-  const theme = useTheme();
   const classes = useStyles();
 
   const handleClick = () => {

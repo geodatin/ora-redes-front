@@ -16,6 +16,17 @@ export default function PageTwo() {
   const classes = useStyles();
   const isMobile = useMediaQuery(breakpoints.max.md);
 
+  const methods = (
+    <ul>
+      <li> Methods 1</li>
+      <li> Methods 2</li>
+      <li> Methods 3</li>
+      <li> Methods 4</li>
+      <li> Methods 5</li>
+      <li> Methods 6</li>
+    </ul>
+  );
+
   return isMobile ? (
     <MobileExpandLayout
       upRowBar={{
@@ -26,16 +37,7 @@ export default function PageTwo() {
       }}
       expandable={{
         className: classes.methodsMobileWrapper,
-        children: (
-          <ul>
-            <li> Methods 1</li>
-            <li> Methods 2</li>
-            <li> Methods 3</li>
-            <li> Methods 4</li>
-            <li> Methods 5</li>
-            <li> Methods 6</li>
-          </ul>
-        ),
+        children: methods,
       }}
       mainContainer={{
         className: classes.docsWrapper,
@@ -46,7 +48,7 @@ export default function PageTwo() {
     <HLayout
       leftColumn={{
         className: classes.methodsWrapper,
-        children: <div>Methods</div>,
+        children: methods,
       }}
       mainContainer={{
         className: classes.breadMapWrapper,
