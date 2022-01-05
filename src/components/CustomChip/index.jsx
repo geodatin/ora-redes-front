@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import Chip from '@mui/material/Chip';
 import PropTypes from 'prop-types';
@@ -17,10 +16,10 @@ export default function CustomChip({
   icon,
   onDelete,
   onClick,
-  clickable,
   borderColor,
   labelColor,
   deleteColor,
+  style,
 }) {
   const classes = useStyles();
   const theme = useTheme();
@@ -42,10 +41,10 @@ export default function CustomChip({
         />
       }
       icon={icon}
-      clickable={clickable}
       style={{
         borderColor: borderColor || theme.neutral.gray.main,
         color: labelColor || theme.secondary.dark,
+        ...style,
       }}
     />
   );
@@ -56,10 +55,10 @@ CustomChip.defaultProps = {
   onDelete: undefined,
   icon: undefined,
   onClick: undefined,
-  clickable: false,
   borderColor: undefined,
   labelColor: undefined,
   deleteColor: undefined,
+  style: {},
 };
 
 CustomChip.propTypes = {
@@ -68,8 +67,8 @@ CustomChip.propTypes = {
   onDelete: PropTypes.func,
   icon: PropTypes.shape(),
   onClick: PropTypes.func,
-  clickable: PropTypes.bool,
   borderColor: PropTypes.string,
   labelColor: PropTypes.string,
   deleteColor: PropTypes.string,
+  style: PropTypes.shape(),
 };

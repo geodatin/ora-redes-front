@@ -6,5 +6,8 @@
   },
   "header": {
     "changeTheme": "Cambiar Tema"
+  },
+  "posts": {
+    "download": "Descargar Archivo"
   }
 }

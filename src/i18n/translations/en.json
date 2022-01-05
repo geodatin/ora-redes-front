@@ -6,5 +6,8 @@
   },
   "header": {
     "changeTheme": "Change Theme"
+  },
+  "posts": {
+    "download": "Download File"
   }
 }

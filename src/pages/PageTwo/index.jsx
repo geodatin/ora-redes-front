@@ -1,10 +1,9 @@
-import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
-import CustomChip from '../../components/CustomChip';
 import HLayout from '../../components/Layout/Horizontal';
 import VLayout from '../../components/Layout/Vertical';
+import FilePost from '../../components/Posts/File';
 import useStyles from './styles';
 /**
  * This component renders a page
@@ -33,41 +32,49 @@ export default function PageTwo() {
               className: classes.docsWrapper,
               children: (
                 <div>
-                  <CustomChip
-                    onDelete={() => {}}
-                    onClick={() => {}}
-                    borderColor="#A1BA09"
-                    labelColor="#A1BA09"
-                  >
-                    Brasil
-                  </CustomChip>
-                  <CustomChip
-                    onDelete={() => {}}
-                    onClick={() => {}}
-                    borderColor="red"
-                    labelColor="red"
-                    deleteColor="red"
-                  >
-                    China
-                  </CustomChip>
-                  <CustomChip
-                    icon={<DownloadRoundedIcon style={{ color: 'orange' }} />}
-                    onClick={() => {}}
-                    borderColor="orange"
-                    labelColor="orange"
-                  >
-                    Download
-                  </CustomChip>
-                  <CustomChip>Simple</CustomChip>
-                  <CustomChip bold>Bold</CustomChip>
-                  <CustomChip
-                    onClick={() => {}}
-                    borderColor="#A1BA09"
-                    labelColor="#A1BA09"
-                    bold
-                  >
-                    GET
-                  </CustomChip>
+                  <FilePost
+                    title="Tabela de estações fluviométricas"
+                    description="Pensando mais a longo prazo, a utilização de recursos de hardware dedicados conduz a um melhor balancemanto de carga da utilização dos serviços nas nuvens. No entanto, não podemos esquecer que a disponibilização de ambientes faz parte de um processo de gerenciamento de memória avançado dos paradigmas de desenvolvimento de software. "
+                    items={[
+                      { key: 'País', value: 'Brasil' },
+                      {
+                        key: 'Instituição',
+                        value: 'Agência Nacional de Águas',
+                      },
+                    ]}
+                    fileTypes={[{ name: 'CSV', color: '#FA7B00' }]}
+                    url={[
+                      {
+                        link: 'https://speed.hetzner.de/100MB.bin',
+                        info: 'Baixar CSV',
+                      },
+                    ]}
+                  />
+                  <FilePost
+                    title="Tabela de estações fluviométricas"
+                    description="Pensando mais a longo prazo, a utilização de recursos de hardware dedicados conduz a um melhor balancemanto de carga da utilização dos serviços nas nuvens. No entanto, não podemos esquecer que a disponibilização de ambientes faz parte de um processo de gerenciamento de memória avançado dos paradigmas de desenvolvimento de software. "
+                    items={[
+                      { key: 'País', value: 'Brasil2' },
+                      {
+                        key: 'Instituição',
+                        value: 'Agência Nacional de Águas2',
+                      },
+                    ]}
+                    fileTypes={[
+                      { name: 'CSV', color: '#FA7B00' },
+                      { name: 'PDF', color: '#A1BA09' },
+                    ]}
+                    url={[
+                      {
+                        link: 'https://speed.hetzner.de/100MB.bin',
+                        info: 'Baixar CSV',
+                      },
+                      {
+                        link: 'https://speed.hetzner.de/100MB.bin',
+                        info: 'Baixar PDF',
+                      },
+                    ]}
+                  />
                 </div>
               ),
             }}
