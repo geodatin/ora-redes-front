@@ -1,9 +1,10 @@
 import faker from 'faker';
 import React from 'react';
-import { Bar, Line } from 'react-chartjs-2';
 import { useTheme } from 'react-jss';
 
-import ChartContainer from '../../../components/ChartContainer';
+import BarChart from '../../../components/Charts/Bar';
+import LineChart from '../../../components/Charts/Line';
+import RankingChart from '../../../components/Charts/Ranking';
 
 /**
  * This funcion provides a statistics list
@@ -11,37 +12,6 @@ import ChartContainer from '../../../components/ChartContainer';
  */
 export default function Statistics() {
   const theme = useTheme();
-
-  const optionsHorizontalBar = {
-    indexAxis: 'y',
-    plugins: {
-      datalabels: {
-        display: true,
-        anchor: 'end',
-        align: 'end',
-      },
-      legend: {
-        display: false,
-      },
-    },
-    scales: {
-      x: {
-        ticks: {
-          display: false,
-        },
-      },
-    },
-  };
-
-  const optionsVerticalBar = {
-    indexAxis: 'x',
-    plugins: {},
-  };
-
-  const optionsLine = {
-    indexAxis: 'x',
-    plugins: {},
-  };
 
   const labels = [
     'January',
@@ -68,28 +38,30 @@ export default function Statistics() {
 
   return (
     <ul>
-      <ChartContainer
+      <LineChart
         title="Gráfico de linhas"
         info="Este é um gráfico de linhas"
-      >
-        <Line options={optionsLine} data={data} />
-      </ChartContainer>
-      <ChartContainer
+        data={data}
+      />
+
+      <RankingChart
+        title="Gráfico de ranking"
+        info="Este é um gráfico de ranking"
+        data={data}
+      />
+
+      <BarChart
         title="Gráfico de barras horizontais"
         info="Este é um gráfico de barras horizontais"
-      >
-        <Bar
-          style={{ marginTop: -10 }}
-          options={optionsHorizontalBar}
-          data={data}
-        />
-      </ChartContainer>
-      <ChartContainer
+        data={data}
+      />
+
+      <BarChart
         title="Gráfico de barras verticais"
-        info="Este é um gráfico de barras verticais"
-      >
-        <Bar options={optionsVerticalBar} data={data} />
-      </ChartContainer>
+        info="Este é um gráfico de verticais"
+        data={data}
+        options={{ indexAxis: 'x' }}
+      />
     </ul>
   );
 }
