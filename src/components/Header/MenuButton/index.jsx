@@ -68,7 +68,7 @@ export default function MenuButton({ items }) {
         anchor="right"
         open={openDrawer}
         classes={{ root: classes.list }}
-        style={{ zIndex: 20000 }}
+        style={{ zIndex: 10000 }}
         onClose={() => setOpenDrawer(false)}
       >
         <div className={classes.topContainer}>
@@ -129,8 +129,12 @@ export default function MenuButton({ items }) {
             color: theme.secondary.dark,
           },
         }}
+        style={{ zIndex: 20000 }}
         PaperProps={{
-          style: { backgroundColor: theme.background.popup, marginLeft: 27 },
+          style: {
+            backgroundColor: theme.background.popup,
+            marginLeft: 27,
+          },
         }}
       >
         {Object.keys(availableLanguages).map((language) => (
