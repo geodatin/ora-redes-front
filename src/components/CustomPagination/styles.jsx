@@ -1,0 +1,18 @@
+import { createUseStyles } from 'react-jss';
+
+const useStyles = createUseStyles((theme) => ({
+  pagination: {
+    '& .MuiPaginationItem-root': {
+      color: theme.secondary.dark,
+    },
+    '& .MuiPaginationItem-page.Mui-selected': {
+      backgroundColor: theme.primary.main,
+      color: theme.background.main,
+    },
+    '& .MuiPaginationItem-page.Mui-selected:hover': {
+      backgroundColor: theme.primary,
+    },
+  },
+}));
+
+export default useStyles;

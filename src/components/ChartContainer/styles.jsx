@@ -22,6 +22,9 @@ const useStyles = createUseStyles(() => ({
   chartWrapper: {
     width: '100%',
     height: '300px',
+    display: 'flex',
+    flexFlow: 'column nowrap',
+    alignItems: 'center',
   },
 }));
 
