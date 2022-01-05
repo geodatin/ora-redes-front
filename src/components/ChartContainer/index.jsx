@@ -13,11 +13,16 @@ import useStyles from './styles';
  * This funcion provides a chart container item
  * @returns chart container
  */
-export default function ChartContainer({ children, title, info }) {
+export default function ChartContainer({ children, title, info, pagination }) {
   ChartContainer.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
+    pagination: PropTypes.node,
+  };
+
+  ChartContainer.defaultProps = {
+    pagination: undefined,
   };
 
   const classes = useStyles();
@@ -122,6 +127,7 @@ export default function ChartContainer({ children, title, info }) {
 
       <div className={classes.chartWrapper}>
         {React.cloneElement(children, { ref: childrenref })}
+        {pagination && pagination}
       </div>
     </li>
   );

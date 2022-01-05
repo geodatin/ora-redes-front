@@ -3,12 +3,23 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 
 import ChartContainer from '../../ChartContainer';
+import CustomPagination from '../../CustomPagination';
 
-export default function RankingChart({ title, info, data }) {
+export default function RankingChart({
+  title,
+  info,
+  data,
+  totalPages,
+  page,
+  setRankingPage,
+}) {
   RankingChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
     data: PropTypes.shape().isRequired,
+    totalPages: PropTypes.number.isRequired,
+    page: PropTypes.number.isRequired,
+    setRankingPage: PropTypes.func.isRequired,
   };
 
   const options = {
@@ -33,7 +44,18 @@ export default function RankingChart({ title, info, data }) {
   };
 
   return (
-    <ChartContainer title={title} info={info}>
+    <ChartContainer
+      title={title}
+      info={info}
+      pagination={
+        <CustomPagination
+          size="small"
+          count={totalPages}
+          page={page}
+          onChange={(event, value) => setRankingPage(value)}
+        />
+      }
+    >
       <Bar style={{ marginTop: -10 }} options={options} data={data} />
     </ChartContainer>
   );

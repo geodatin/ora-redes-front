@@ -1,10 +1,12 @@
 import faker from 'faker';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTheme } from 'react-jss';
 
 import BarChart from '../../../components/Charts/Bar';
 import LineChart from '../../../components/Charts/Line';
 import RankingChart from '../../../components/Charts/Ranking';
+
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
 /**
  * This funcion provides a statistics list
@@ -13,16 +15,8 @@ import RankingChart from '../../../components/Charts/Ranking';
 export default function Statistics() {
   const theme = useTheme();
 
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-  ];
-  const data = {
+  const [page, setRankingPage] = useState(1);
+  const [data /* setData */] = useState({
     labels,
     datasets: [
       {
@@ -34,7 +28,7 @@ export default function Statistics() {
         barThickness: 15,
       },
     ],
-  };
+  });
 
   return (
     <ul>
@@ -48,6 +42,9 @@ export default function Statistics() {
         title="Gráfico de ranking"
         info="Este é um gráfico de ranking"
         data={data}
+        totalPages={5}
+        page={page}
+        setRankingPage={setRankingPage}
       />
 
       <BarChart
