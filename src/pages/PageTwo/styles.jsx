@@ -5,7 +5,7 @@ const useStyles = createUseStyles((theme) => ({
     borderBottom: '1px solid',
     borderBottomColor: theme.stroke.dark,
   },
-  docsWrapper: { padding: 15 },
+  docsWrapper: { padding: 15, maxWidth: 1000 },
   searchWrapper: {
     minWidth: 280,
     padding: 15,
