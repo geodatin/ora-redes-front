@@ -23,6 +23,7 @@ const useStyles = createUseStyles((theme) => ({
   notificationsWrapper: { padding: 15 },
   notificationsMobileWrapper: { padding: 15 },
   breadBarWrapper: {
+    padding: 15,
     borderBottom: '1px solid',
     borderBottomColor: theme.stroke.dark,
   },

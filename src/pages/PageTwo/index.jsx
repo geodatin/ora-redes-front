@@ -1,10 +1,12 @@
-import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
+import { useMediaQuery } from '@mui/material';
 import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
-import CustomChip from '../../components/CustomChip';
 import HLayout from '../../components/Layout/Horizontal';
+import MobileExpandLayout from '../../components/Layout/Mobile/Expand';
 import VLayout from '../../components/Layout/Vertical';
+import { breakpoints } from '../../constants/constraints';
+import Docs from './Docs';
 import useStyles from './styles';
 /**
  * This component renders a page
@@ -12,12 +14,39 @@ import useStyles from './styles';
  */
 export default function PageTwo() {
   const classes = useStyles();
+  const isMobile = useMediaQuery(breakpoints.max.md);
 
-  return (
+  return isMobile ? (
+    <MobileExpandLayout
+      upRowBar={{
+        className: classes.breadBarMobileWrapper,
+        children: (
+          <Breadcrumb items={['Biblioteca de dados', 'Todas as redes']} />
+        ),
+      }}
+      expandable={{
+        className: classes.methodsMobileWrapper,
+        children: (
+          <ul>
+            <li> Methods 1</li>
+            <li> Methods 2</li>
+            <li> Methods 3</li>
+            <li> Methods 4</li>
+            <li> Methods 5</li>
+            <li> Methods 6</li>
+          </ul>
+        ),
+      }}
+      mainContainer={{
+        className: classes.docsWrapper,
+        children: <Docs />,
+      }}
+    />
+  ) : (
     <HLayout
       leftColumn={{
-        className: classes.searchWrapper,
-        children: <div>Search</div>,
+        className: classes.methodsWrapper,
+        children: <div>Methods</div>,
       }}
       mainContainer={{
         className: classes.breadMapWrapper,
@@ -31,45 +60,7 @@ export default function PageTwo() {
             }}
             mainContainer={{
               className: classes.docsWrapper,
-              children: (
-                <div>
-                  <CustomChip
-                    onDelete={() => {}}
-                    onClick={() => {}}
-                    borderColor="#A1BA09"
-                    labelColor="#A1BA09"
-                  >
-                    Brasil
-                  </CustomChip>
-                  <CustomChip
-                    onDelete={() => {}}
-                    onClick={() => {}}
-                    borderColor="red"
-                    labelColor="red"
-                    deleteColor="red"
-                  >
-                    China
-                  </CustomChip>
-                  <CustomChip
-                    icon={<DownloadRoundedIcon style={{ color: 'orange' }} />}
-                    onClick={() => {}}
-                    borderColor="orange"
-                    labelColor="orange"
-                  >
-                    Download
-                  </CustomChip>
-                  <CustomChip>Simple</CustomChip>
-                  <CustomChip bold>Bold</CustomChip>
-                  <CustomChip
-                    onClick={() => {}}
-                    borderColor="#A1BA09"
-                    labelColor="#A1BA09"
-                    bold
-                  >
-                    GET
-                  </CustomChip>
-                </div>
-              ),
+              children: <Docs />,
             }}
           />
         ),

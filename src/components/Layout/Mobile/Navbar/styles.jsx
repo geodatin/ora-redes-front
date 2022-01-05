@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-import { layout } from '../../../constants/constraints';
+import { layout } from '../../../../constants/constraints';
 
 const useStyles = createUseStyles((theme) => ({
   wrapper: {

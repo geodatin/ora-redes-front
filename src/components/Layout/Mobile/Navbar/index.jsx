@@ -9,8 +9,8 @@ import useStyles from './styles';
  * This component renders a common mobile layout for application
  * @returns common mobile layout
  */
-export default function MobileLayout({ mainContainer, bottomNavBar }) {
-  MobileLayout.propTypes = {
+export default function MobileNavbarLayout({ mainContainer, bottomNavBar }) {
+  MobileNavbarLayout.propTypes = {
     mainContainer: PropTypes.shape().isRequired,
     bottomNavBar: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   };
