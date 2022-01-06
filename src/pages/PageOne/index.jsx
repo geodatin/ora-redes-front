@@ -6,6 +6,7 @@ import { useMediaQuery } from '@mui/material';
 import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
+import CustomButton from '../../components/CustomButton';
 import HLayout from '../../components/Layout/Horizontal';
 import MobileNavbarLayout from '../../components/Layout/Mobile/Navbar';
 import VLayout from '../../components/Layout/Vertical';
@@ -35,7 +36,7 @@ function PageOne() {
           icon: <ManageSearchRoundedIcon />,
           navContainer: {
             className: classes.filtersMobileWrapper,
-            children: <div>Filters</div>,
+            children: <CustomButton>Aplicar</CustomButton>,
           },
         },
         {
@@ -81,7 +82,23 @@ function PageOne() {
           <VLayout
             upRow={{
               className: classes.filtersWrapper,
-              children: <div>Filters</div>,
+              children: (
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ marginBottom: 5 }}>
+                    <CustomButton mini disabled>
+                      Aplicar
+                    </CustomButton>
+                  </div>
+                  <div style={{ marginBottom: 5 }}>
+                    <CustomButton mini>Aplicar</CustomButton>
+                  </div>
+                  <div>
+                    <CustomButton style={{ width: '100%' }}>
+                      Aplicar
+                    </CustomButton>
+                  </div>
+                </div>
+              ),
             }}
             mainContainer={{
               className: classes.notificationsWrapper,

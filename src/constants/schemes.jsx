@@ -44,6 +44,8 @@ export const lightScheme = {
     actived: '#E9EAED',
     hover: '#E3E4E7',
     clicked: '#878C92',
+    disabled: '#F0F1F3',
+    disabledLabel: '#ffffff',
   },
 };
 
@@ -89,5 +91,7 @@ export const darkScheme = {
     actived: '#151C24',
     hover: '#20262E',
     clicked: '#CDD7DA',
+    disabled: '#161615',
+    disabledLabel: '#1B2935',
   },
 };
