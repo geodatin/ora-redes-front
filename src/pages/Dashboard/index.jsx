@@ -15,10 +15,10 @@ import Statistics from './Statistics';
 import useStyles from './styles';
 
 /**
- * This component renders a page
- * @returns page one
+ * This component renders a dashboard page
+ * @returns dashboard page
  */
-function PageOne() {
+function Dashboard() {
   const classes = useStyles();
   const isMobile = useMediaQuery(breakpoints.max.md);
 
@@ -98,4 +98,4 @@ function PageOne() {
   );
 }
 
-export default PageOne;
+export default Dashboard;

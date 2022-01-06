@@ -7,23 +7,24 @@ import {
 } from 'react-router-dom';
 
 import Header from './components/Header';
-import PageOne from './pages/PageOne';
-import PageTwo from './pages/PageTwo';
+import ApiMethods from './pages/ApiMethods';
+import Dashboard from './pages/Dashboard';
+import DataLibrary from './pages/DataLibrary';
 
 function Routes() {
   return (
     <BrowserRouter>
       <Header
         items={[
-          { title: 'Page one', to: '/' },
-          { title: 'Page two', to: '/page2' },
-          { title: 'Page three', to: '/page3' },
+          { title: 'Dashboard example', to: '/' },
+          { title: 'API example', to: '/api' },
+          { title: 'Data library example', to: '/library' },
         ]}
       />
       <BaseRoutes>
-        <Route exact path="/" element={<PageOne />} />
-        <Route exact path="/page2" element={<PageTwo />} />
-        <Route exact path="/page3" element={<PageOne />} />
+        <Route exact path="/" element={<Dashboard />} />
+        <Route exact path="/api" element={<ApiMethods />} />
+        <Route exact path="/library" element={<DataLibrary />} />
         <Route path="*" element={<Navigate to="/" />} />
       </BaseRoutes>
     </BrowserRouter>
