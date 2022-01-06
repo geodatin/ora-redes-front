@@ -25,6 +25,20 @@ export default function PageTwo() {
       <li> Methods 4</li>
       <li> Methods 5</li>
       <li> Methods 6</li>
+      <li> Methods 7</li>
+      <li> Methods 8</li>
+      <li> Methods 9</li>
+      <li> Methods 10</li>
+      <li> Methods 11</li>
+      <li> Methods 12</li>
+      <li> Methods 13</li>
+      <li> Methods 14</li>
+      <li> Methods 15</li>
+      <li> Methods 16</li>
+      <li> Methods 17</li>
+      <li> Methods 18</li>
+      <li> Methods 19</li>
+      <li> Methods 20</li>
     </ul>
   );
 
@@ -32,9 +46,7 @@ export default function PageTwo() {
     <MobileExpandLayout
       upRowBar={{
         className: classes.breadBarMobileWrapper,
-        children: (
-          <Breadcrumb items={['Biblioteca de dados', 'Todas as redes']} />
-        ),
+        children: <Breadcrumb items={['API', 'Todos os métodos']} />,
       }}
       expandable={{
         className: classes.methodsMobileWrapper,
@@ -57,9 +69,7 @@ export default function PageTwo() {
           <VLayout
             upRow={{
               className: classes.breadBarWrapper,
-              children: (
-                <Breadcrumb items={['Biblioteca de dados', 'Todas as redes']} />
-              ),
+              children: <Breadcrumb items={['API', 'Todos os métodos']} />,
             }}
             mainContainer={{
               className: classes.docsWrapper,

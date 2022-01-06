@@ -24,6 +24,8 @@ const useStyles = createUseStyles((theme) => ({
   expandableWrapper: {
     backgroundColor: theme.stroke.light,
     padding: 15,
+    maxHeight: '50vh',
+    overflow: 'auto',
   },
   mainContainerWrapper: {
     padding: 15,
