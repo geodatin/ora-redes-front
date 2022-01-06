@@ -12,6 +12,7 @@ import useStyles from './styles';
  */
 export default function ApiPost({
   title,
+  id,
   description,
   type,
   url,
@@ -24,7 +25,7 @@ export default function ApiPost({
   const { t } = useTranslation();
 
   return (
-    <div className={classes.container}>
+    <div id={id} className={classes.container}>
       <div className={classes.titleWrapper}>
         <Typography variant="h3" className={classes.title}>
           {title}
@@ -194,6 +195,7 @@ ApiPost.defaultProps = {
 
 ApiPost.propTypes = {
   title: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   type: PropTypes.shape().isRequired,
   url: PropTypes.string.isRequired,

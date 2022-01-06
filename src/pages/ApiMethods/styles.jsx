@@ -11,11 +11,10 @@ const useStyles = createUseStyles((theme) => ({
   methodsMobileWrapper: { padding: 15 },
   methodsListWrapper: {
     minWidth: 280,
-    padding: 15,
     borderRight: '1px solid',
     borderRightColor: theme.stroke.dark,
   },
-  methodsListMobileWrapper: { padding: 15 },
+  methodsListMobileWrapper: {},
 }));
 
 export default useStyles;
