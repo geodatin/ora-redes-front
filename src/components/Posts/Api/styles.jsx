@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles((theme) => ({
-  conteiner: {},
+  container: { marginBottom: 10 },
   title: {
     color: theme.secondary.dark,
     marginRight: 10,

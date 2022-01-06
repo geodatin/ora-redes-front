@@ -32,15 +32,11 @@ export default function Statistics() {
 
   return (
     <ul>
-      <LineChart
-        title="Gráfico de linhas"
-        info="Este é um gráfico de linhas"
-        data={data}
-      />
+      <LineChart title="Line chart" info="This is a line chart" data={data} />
 
       <RankingChart
-        title="Gráfico de ranking"
-        info="Este é um gráfico de ranking"
+        title="Ranking chart"
+        info="This is a ranking chart"
         data={data}
         totalPages={5}
         page={page}
@@ -48,14 +44,14 @@ export default function Statistics() {
       />
 
       <BarChart
-        title="Gráfico de barras horizontais"
-        info="Este é um gráfico de barras horizontais"
+        title="Horizontal bar chart"
+        info="This is a horizontal bar chart"
         data={data}
       />
 
       <BarChart
-        title="Gráfico de barras verticais"
-        info="Este é um gráfico de verticais"
+        title="Vertical bar chart"
+        info="This is a vertical bar chart"
         data={data}
         options={{ indexAxis: 'x' }}
       />

@@ -7,15 +7,15 @@ const useStyles = createUseStyles((theme) => ({
     borderBottomColor: theme.stroke.dark,
   },
   breadBarMobileWrapper: { padding: '10px 15px 10px 15px' },
-  docsWrapper: { padding: 15, maxWidth: 1000 },
-  docsMobileWrapper: { padding: 15 },
-  methodsWrapper: {
+  methodsWrapper: { padding: 15, overflow: 'auto' },
+  methodsMobileWrapper: { padding: 15 },
+  methodsListWrapper: {
     minWidth: 280,
     padding: 15,
     borderRight: '1px solid',
     borderRightColor: theme.stroke.dark,
   },
-  methodsMobileWrapper: { padding: 15 },
+  methodsListMobileWrapper: { padding: 15 },
 }));
 
 export default useStyles;

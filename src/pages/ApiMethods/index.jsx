@@ -6,18 +6,18 @@ import HLayout from '../../components/Layout/Horizontal';
 import MobileExpandLayout from '../../components/Layout/Mobile/Expand';
 import VLayout from '../../components/Layout/Vertical';
 import { breakpoints } from '../../constants/constraints';
-import Docs from './Docs';
+import Methods from './Methods';
 import useStyles from './styles';
 
 /**
- * This component renders a page
- * @returns page two
+ * This component renders a API methods page
+ * @returns API methods page
  */
-export default function PageTwo() {
+export default function ApiMethods() {
   const classes = useStyles();
   const isMobile = useMediaQuery(breakpoints.max.md);
 
-  const methods = (
+  const methodsList = (
     <ul>
       <li> Methods 1</li>
       <li> Methods 2</li>
@@ -42,26 +42,28 @@ export default function PageTwo() {
     </ul>
   );
 
+  const breadcrumb = <Breadcrumb items={['API', 'Todos os métodos']} />;
+
   return isMobile ? (
     <MobileExpandLayout
       upRowBar={{
         className: classes.breadBarMobileWrapper,
-        children: <Breadcrumb items={['API', 'Todos os métodos']} />,
+        children: breadcrumb,
       }}
       expandable={{
-        className: classes.methodsMobileWrapper,
-        children: methods,
+        className: classes.methodsListMobileWrapper,
+        children: methodsList,
       }}
       mainContainer={{
-        className: classes.docsWrapper,
-        children: <Docs />,
+        className: classes.methodsMobileWrapper,
+        children: <Methods />,
       }}
     />
   ) : (
     <HLayout
       leftColumn={{
-        className: classes.methodsWrapper,
-        children: methods,
+        className: classes.methodsListWrapper,
+        children: methodsList,
       }}
       mainContainer={{
         className: classes.breadMapWrapper,
@@ -69,11 +71,11 @@ export default function PageTwo() {
           <VLayout
             upRow={{
               className: classes.breadBarWrapper,
-              children: <Breadcrumb items={['API', 'Todos os métodos']} />,
+              children: breadcrumb,
             }}
             mainContainer={{
-              className: classes.docsWrapper,
-              children: <Docs />,
+              className: classes.methodsWrapper,
+              children: <Methods />,
             }}
           />
         ),
