@@ -10,7 +10,7 @@ const useStyles = createUseStyles((theme) => ({
       color: theme.background.main,
     },
     '& .MuiPaginationItem-page.Mui-selected:hover': {
-      backgroundColor: theme.primary,
+      backgroundColor: theme.primary.light,
     },
   },
 }));
