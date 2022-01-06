@@ -4,6 +4,7 @@ import { Collapse, IconButton } from '@mui/material';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTheme } from 'react-jss';
 
 import useStyles from './styles';
 
@@ -25,6 +26,7 @@ export default function MobileExpandLayout({
   const [open, setOpen] = React.useState(false);
 
   const classes = useStyles();
+  const theme = useTheme();
 
   const handleClick = () => {
     setOpen(!open);
@@ -32,33 +34,45 @@ export default function MobileExpandLayout({
 
   return (
     <div className={classes.wrapper}>
-      <div className={classNames(classes.bar, upRowBar.className)}>
-        {upRowBar.children}
-        <IconButton
-          onClick={handleClick}
-          aria-label="expand list"
-          component="span"
-        >
-          {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </IconButton>
-      </div>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <div className={classes.subWrapper}>
+        <div className={classNames(classes.bar, upRowBar.className)}>
+          {upRowBar.children}
+          <IconButton
+            onClick={handleClick}
+            aria-label="expand list"
+            component="span"
+          >
+            {open ? (
+              <ExpandLessIcon
+                style={{ fontSize: 20, color: theme.secondary.dark }}
+              />
+            ) : (
+              <ExpandMoreIcon
+                style={{ fontSize: 20, color: theme.secondary.dark }}
+              />
+            )}
+          </IconButton>
+        </div>
+
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <div
+            className={classNames(
+              classes.expandableWrapper,
+              expandable.className
+            )}
+          >
+            {expandable.children}
+          </div>
+        </Collapse>
+
         <div
           className={classNames(
-            classes.expandableWrapper,
-            expandable.className
+            classes.mainContainerWrapper,
+            mainContainer.className
           )}
         >
-          {expandable.children}
+          {mainContainer.children}
         </div>
-      </Collapse>
-      <div
-        className={classNames(
-          classes.mainContainerWrapper,
-          mainContainer.className
-        )}
-      >
-        {mainContainer.children}
       </div>
     </div>
   );
