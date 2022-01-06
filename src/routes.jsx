@@ -16,9 +16,9 @@ function Routes() {
     <BrowserRouter>
       <Header
         items={[
-          { title: 'Dashboard example', to: '/' },
-          { title: 'API example', to: '/api' },
-          { title: 'Data library example', to: '/library' },
+          { title: 'Dashboard', to: '/' },
+          { title: 'Data library', to: '/library' },
+          { title: 'API', to: '/api' },
         ]}
       />
       <BaseRoutes>
