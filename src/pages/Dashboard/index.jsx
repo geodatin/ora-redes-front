@@ -7,6 +7,7 @@ import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import CustomButton from '../../components/CustomButton';
+import CustomCheckbox from '../../components/CustomCheckbox';
 import HLayout from '../../components/Layout/Horizontal';
 import MobileNavbarLayout from '../../components/Layout/Mobile/Navbar';
 import VLayout from '../../components/Layout/Vertical';
@@ -96,6 +97,9 @@ function Dashboard() {
                     <CustomButton style={{ width: '100%' }}>
                       Aplicar
                     </CustomButton>
+                  </div>
+                  <div>
+                    <CustomCheckbox />
                   </div>
                 </div>
               ),

@@ -44,7 +44,7 @@ const useStyles = createUseStyles((theme) => ({
       maxWidth: '300px',
 
       [breakpoints.max.sm]: {
-        maxWidth: '100%',
+        maxWidth: '90%',
       },
     },
     '& .MuiListItemIcon-root': {
