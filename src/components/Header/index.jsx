@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { ReactComponent as OraLogo } from '../../assets/images/ora-logo.svg';
@@ -15,9 +14,8 @@ import TranslationMenu from './TranslationMenu';
  * This component renders a Header
  * @returns Application's header
  */
-export default function Header({ items }) {
+export default function Header({ items, projectName }) {
   const classes = useStyles();
-  const { t } = useTranslation();
 
   return (
     <header className={classes.container}>
@@ -25,9 +23,7 @@ export default function Header({ items }) {
         <div className={classes.logoDetail} />
         <div className={classes.logoWrapper}>
           <OraLogo alt="ORA" className={classes.logo} />
-          <Typography className={classes.caption}>
-            {t('general.projectName')}
-          </Typography>
+          <Typography className={classes.caption}>{projectName}</Typography>
         </div>
       </Link>
       <div className={classes.menuItems}>
@@ -45,7 +41,7 @@ export default function Header({ items }) {
             <ThemeButton />
           </div>
           <div className={classes.menuButton}>
-            <MenuButton items={items} />
+            <MenuButton items={items} projectName={projectName} />
           </div>
         </div>
       </div>
@@ -59,4 +55,5 @@ Header.defaultProps = {
 
 Header.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape()),
+  projectName: PropTypes.string.isRequired,
 };

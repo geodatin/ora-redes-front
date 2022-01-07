@@ -8,6 +8,7 @@ import {
   Legend,
   LineElement,
   PointElement,
+  ArcElement,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useTheme } from 'react-jss';
@@ -18,6 +19,7 @@ ChartJS.register(
   PointElement,
   LineElement,
   BarElement,
+  ArcElement,
   Title,
   Tooltip,
   Legend,

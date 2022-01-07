@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useTheme } from 'react-jss';
 
 import BarChart from '../../../components/Charts/Bar';
+import DoughnutChart from '../../../components/Charts/Doughnut';
 import LineChart from '../../../components/Charts/Line';
 import RankingChart from '../../../components/Charts/Ranking';
 
@@ -22,10 +23,22 @@ export default function Statistics() {
       {
         label: 'Dataset 1',
         data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-        backgroundColor: theme.primary.main,
-        borderColor: theme.primary.main,
+        backgroundColor: [theme.primary.main],
+        borderColor: [theme.primary.main],
         borderRadius: 5,
         barThickness: 15,
+      },
+    ],
+  });
+
+  const [doughnutData /* setData */] = useState({
+    labels: ['Fulll', 'Empty'],
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: [80, 20],
+        backgroundColor: [theme.primary.main, theme.neutral.gray.light],
+        borderColor: [theme.primary.main, theme.neutral.gray.light],
       },
     ],
   });
@@ -54,6 +67,19 @@ export default function Statistics() {
         info="This is a vertical bar chart"
         data={data}
         options={{ indexAxis: 'x' }}
+      />
+
+      <DoughnutChart
+        title="Doughnut chart"
+        info="This is a doughnut chart"
+        data={doughnutData}
+        options={{
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+        }}
       />
     </ul>
   );

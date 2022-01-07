@@ -21,7 +21,7 @@ import useStyles from './styles';
  * This functional component renders the menu button and its options.
  * @returns A button that opens the platform menu.
  */
-export default function MenuButton({ items }) {
+export default function MenuButton({ items, projectName }) {
   const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -74,9 +74,7 @@ export default function MenuButton({ items }) {
         <div className={classes.topContainer}>
           <div className={classes.logoWrapper}>
             <OraLogo alt="ORA" className={classes.logo} />
-            <Typography className={classes.caption}>
-              {t('general.projectName')}
-            </Typography>
+            <Typography className={classes.caption}>{projectName}</Typography>
           </div>
           <IconButton
             className={classes.button}
@@ -155,4 +153,5 @@ MenuButton.defaultProps = {
 
 MenuButton.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape()),
+  projectName: PropTypes.string.isRequired,
 };

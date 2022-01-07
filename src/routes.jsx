@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Routes as BaseRoutes,
   Route,
@@ -12,9 +13,11 @@ import Dashboard from './pages/Dashboard';
 import DataLibrary from './pages/DataLibrary';
 
 function Routes() {
+  const { t } = useTranslation();
   return (
     <BrowserRouter>
       <Header
+        projectName={t('general.projectName')}
         items={[
           { title: 'Dashboard', to: '/' },
           { title: 'Data library', to: '/library' },
