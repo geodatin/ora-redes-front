@@ -3,12 +3,10 @@ import { createUseStyles } from 'react-jss';
 const useStyles = createUseStyles((theme) => ({
   filtersNotificationsWrapper: {
     minWidth: 280,
-    borderRight: '1px solid',
-    borderRightColor: theme.stroke.dark,
+    borderRight: `1px solid ${theme.stroke.dark}`,
   },
   filtersWrapper: {
-    borderBottom: '1px solid',
-    borderBottomColor: theme.stroke.dark,
+    borderBottom: `1px solid ${theme.stroke.dark}`,
     height: 400,
     padding: 15,
   },
@@ -24,15 +22,13 @@ const useStyles = createUseStyles((theme) => ({
   notificationsMobileWrapper: { padding: 15 },
   breadBarWrapper: {
     padding: 15,
-    borderBottom: '1px solid',
-    borderBottomColor: theme.stroke.dark,
+    borderBottom: `1px solid ${theme.stroke.dark}`,
   },
   mapWrapper: {},
   statisticsWrapper: {
     overflow: 'auto',
     minWidth: 400,
-    borderLeft: '1px solid',
-    borderLeftColor: theme.stroke.dark,
+    borderLeft: `1px solid ${theme.stroke.dark}`,
   },
   statisticsMobileWrapper: {
     overflow: 'auto',

@@ -3,6 +3,10 @@ import React from 'react';
 import FilePost from '../../../components/Posts/File';
 import useStyles from './styles';
 
+/**
+ * This function renders a library list through FilePost
+ * @returns library list
+ */
 export default function Library() {
   const classes = useStyles();
 

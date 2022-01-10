@@ -4,6 +4,10 @@ import { Line } from 'react-chartjs-2';
 
 import ChartContainer from '../../ChartContainer';
 
+/**
+ * This component renders a Line Chart
+ * @returns Line Chart
+ */
 export default function LineChart({
   title,
   info,

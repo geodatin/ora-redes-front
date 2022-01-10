@@ -3,6 +3,10 @@ import React from 'react';
 
 import useStyles from './styles';
 
+/**
+ * This component renders a custom Tooltip for the application
+ * @returns Custom Tooltip
+ */
 function CustomTooltip(props) {
   const classes = useStyles();
 

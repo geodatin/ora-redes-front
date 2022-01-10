@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import {
   Chart as ChartJS,
   CategoryScale,

@@ -3,6 +3,10 @@ import React from 'react';
 
 import useStyles from './styles';
 
+/**
+ * This component renders a custom Pagination for the application
+ * @returns Custom Pagination
+ */
 export default function CustomPagination(props) {
   const classes = useStyles();
 

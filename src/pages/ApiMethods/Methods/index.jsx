@@ -4,6 +4,10 @@ import React from 'react';
 import ApiPost from '../../../components/Posts/Api';
 import useStyles from './styles';
 
+/**
+ * This function renders a methods list through ApiPost
+ * @returns methods list
+ */
 export default function Methods({ methods }) {
   Methods.propTypes = {
     methods: PropTypes.arrayOf(PropTypes.shape()).isRequired,

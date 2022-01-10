@@ -10,7 +10,7 @@ import RankingChart from '../../../components/Charts/Ranking';
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
 /**
- * This funcion provides a statistics list
+ * This function provides a statistics list
  * @returns statistics list
  */
 export default function Statistics() {
