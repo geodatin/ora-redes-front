@@ -2,12 +2,13 @@ import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
 import NotificationsActiveRoundedIcon from '@mui/icons-material/NotificationsActiveRounded';
-import { useMediaQuery } from '@mui/material';
+import { MenuItem, useMediaQuery } from '@mui/material';
 import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import CustomButton from '../../components/CustomButton';
 import CustomCheckbox from '../../components/CustomCheckbox';
+import CustomSelect from '../../components/CustomSelect';
 import HLayout from '../../components/Layout/Horizontal';
 import MobileNavbarLayout from '../../components/Layout/Mobile/Navbar';
 import VLayout from '../../components/Layout/Vertical';
@@ -100,6 +101,19 @@ function Dashboard() {
                   </div>
                   <div>
                     <CustomCheckbox />
+                  </div>
+                  <div>
+                    <CustomSelect
+                      style={{ width: '100%' }}
+                      defaultValue="Todas as Redes"
+                      emphasis
+                    >
+                      {['Todas as Redes', 'Redes Hidrológicas'].map((item) => (
+                        <MenuItem key={item} value={item}>
+                          {item}
+                        </MenuItem>
+                      ))}
+                    </CustomSelect>
                   </div>
                 </div>
               ),
