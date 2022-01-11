@@ -2,10 +2,10 @@ import faker from 'faker';
 import React, { useState } from 'react';
 import { useTheme } from 'react-jss';
 
-import BarChart from '../../../components/Charts/Bar';
-import DoughnutChart from '../../../components/Charts/Doughnut';
-import LineChart from '../../../components/Charts/Line';
-import RankingChart from '../../../components/Charts/Ranking';
+import BarChart from '../../../../components/Charts/Bar';
+import DoughnutChart from '../../../../components/Charts/Doughnut';
+import LineChart from '../../../../components/Charts/Line';
+import RankingChart from '../../../../components/Charts/Ranking';
 
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 

@@ -33,7 +33,8 @@ a:active {
 }
 
 ol,
-ul {
+ul,
+li {
   list-style: none;
 }
 
