@@ -14,7 +14,8 @@ import MobileNavbarLayout from '../../components/Layout/Mobile/Navbar';
 import VLayout from '../../components/Layout/Vertical';
 import MapWrapper from '../../components/MapWrapper';
 import { breakpoints } from '../../constants/constraints';
-import Statistics from './Statistics';
+import InfoPanel from './InfoPanel';
+import Statistics from './InfoPanel/Statistics';
 import useStyles from './styles';
 
 /**
@@ -126,8 +127,13 @@ function Dashboard() {
         ),
       }}
       rightColumn={{
-        className: classes.statisticsWrapper,
-        children: <Statistics />,
+        className: classes.infoPanelWrapper,
+        children: (
+          <InfoPanel
+            title="Info panel title"
+            subtitle="Last update in 11/08/2022"
+          />
+        ),
       }}
     />
   );
