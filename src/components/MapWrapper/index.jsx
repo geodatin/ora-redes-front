@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
+import NorthIcon from '../../assets/images/north.svg';
 import useStyles from './styles';
 import ZoomButton from './ZoomButton';
 
@@ -36,6 +37,7 @@ export default function MapWrapper() {
       <div ref={itemsRef} className={classes.itemContainer}>
         <ZoomButton />
       </div>
+      <img alt="north" src={NorthIcon} className={classes.northIcon} />
     </MapContainer>
   );
 }

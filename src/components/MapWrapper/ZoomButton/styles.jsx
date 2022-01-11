@@ -8,8 +8,6 @@ const useStyles = createUseStyles((theme) => ({
     backgroundColor: theme.background.main,
     color: theme.secondary.dark,
     width: 35,
-    top: 10,
-    left: 10,
     zIndex: 997,
     borderRadius: 5,
     border: `1px solid ${theme.stroke.dark}`,
