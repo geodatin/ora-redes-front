@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useTheme } from 'react-jss';
@@ -7,6 +6,7 @@ import CustomToggleButton from '../../../components/CustomToggleButton';
 import VLayout from '../../../components/Layout/Vertical';
 import TabPanel from '../../../components/TabPanel';
 import Typography from '../../../components/Typography';
+import CardList from './CardList';
 import Statistics from './Statistics';
 import useStyles from './styles';
 
@@ -91,7 +91,7 @@ export default function InfoPanel({ title, subtitle }) {
               <Statistics />
             </TabPanel>
             <TabPanel value={panel} index={1}>
-              <div style={{ padding: 15 }}>List here</div>
+              <CardList />
             </TabPanel>
           </>
         ),
