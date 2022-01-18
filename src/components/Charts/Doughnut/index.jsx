@@ -4,6 +4,10 @@ import { Doughnut } from 'react-chartjs-2';
 
 import ChartContainer from '../../ChartContainer';
 
+/**
+ * This component renders a Doughnut Chart
+ * @returns Doughnut Chart
+ */
 export default function DoughnutChart({
   title,
   info,

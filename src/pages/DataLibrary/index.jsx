@@ -2,6 +2,7 @@ import { useMediaQuery } from '@mui/material';
 import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
+import Checklist from '../../components/Checklist';
 import HLayout from '../../components/Layout/Horizontal';
 import MobileExpandLayout from '../../components/Layout/Mobile/Expand';
 import VLayout from '../../components/Layout/Vertical';
@@ -17,33 +18,31 @@ export default function DataLibrary() {
   const classes = useStyles();
   const isMobile = useMediaQuery(breakpoints.max.md);
 
-  const data = (
-    <ul>
-      <li> Data 1</li>
-      <li> Data 2</li>
-      <li> Data 3</li>
-      <li> Data 4</li>
-      <li> Data 5</li>
-      <li> Data 6</li>
-      <li> Data 7</li>
-      <li> Data 8</li>
-      <li> Data 9</li>
-      <li> Data 10</li>
-      <li> Data 11</li>
-      <li> Data 12</li>
-      <li> Data 13</li>
-      <li> Data 14</li>
-      <li> Data 15</li>
-      <li> Data 16</li>
-      <li> Data 17</li>
-      <li> Data 18</li>
-      <li> Data 19</li>
-      <li> Data 20</li>
-    </ul>
-  );
-
   const breadcrumb = (
     <Breadcrumb items={['BIBLIOTECA DE DADOS', 'Todos os arquivos']} />
+  );
+
+  const onChangeC1 = (values) => {
+    console.log(values);
+  };
+
+  const onChangeC2 = (values) => {
+    console.log(values);
+  };
+
+  const checklists = (
+    <>
+      <Checklist
+        title="CHECKLIST 1"
+        items={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']}
+        onChange={onChangeC1}
+      />
+      <Checklist
+        title="CHECKLIST 2"
+        items={['Item 1', 'Item 2', 'Item 3', 'Item 4']}
+        onChange={onChangeC2}
+      />
+    </>
   );
 
   return isMobile ? (
@@ -54,7 +53,7 @@ export default function DataLibrary() {
       }}
       expandable={{
         className: classes.dataMobileWrapper,
-        children: data,
+        children: checklists,
       }}
       mainContainer={{
         className: classes.libraryMobileWrapper,
@@ -65,7 +64,7 @@ export default function DataLibrary() {
     <HLayout
       leftColumn={{
         className: classes.dataWrapper,
-        children: data,
+        children: checklists,
       }}
       mainContainer={{
         className: classes.breadMapWrapper,

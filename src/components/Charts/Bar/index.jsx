@@ -4,6 +4,10 @@ import { Bar } from 'react-chartjs-2';
 
 import ChartContainer from '../../ChartContainer';
 
+/**
+ * This component renders a Bar Chart
+ * @returns Bar Chart
+ */
 export default function BarChart({ title, info, data, options: mergeOptions }) {
   BarChart.propTypes = {
     title: PropTypes.string.isRequired,
