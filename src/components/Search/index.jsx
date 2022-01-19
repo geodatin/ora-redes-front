@@ -26,10 +26,8 @@ export default function Search({ title, label, onSearch, resultsAmount }) {
   const theme = useTheme();
 
   const [value, setValue] = useState('');
-  const [disabled, setDisabled] = useState(true);
 
   const clearSearch = () => {
-    setDisabled(true);
     setValue('');
   };
 
@@ -37,7 +35,11 @@ export default function Search({ title, label, onSearch, resultsAmount }) {
     <div className={classes.wrapper}>
       <div className={classes.titleHeader}>
         <Typography>{title?.toUpperCase()}</Typography>
-        <CustomButton mini disabled={disabled} onClick={() => clearSearch()}>
+        <CustomButton
+          mini
+          disabled={value === ''}
+          onClick={() => clearSearch()}
+        >
           CLEAR
         </CustomButton>
 
@@ -54,7 +56,6 @@ export default function Search({ title, label, onSearch, resultsAmount }) {
             placeholder={label}
             onChange={(e) => {
               setValue(e.target.value);
-              setDisabled(false);
             }}
           />
           <IconButton onClick={() => onSearch(value)} aria-label="search">

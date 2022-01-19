@@ -24,8 +24,7 @@ export default function DataLibrary() {
     <Breadcrumb items={['BIBLIOTECA DE DADOS', 'Todos os arquivos']} />
   );
 
-  const onChangeC1 = (values) => {};
-  const onChangeC2 = (values) => {};
+  const onCheck = (values) => {};
   const onSearch = (value) => {};
 
   const filtering = (
@@ -39,12 +38,17 @@ export default function DataLibrary() {
       <Checklist
         title="CHECKLIST 1"
         items={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']}
-        onChange={onChangeC1}
+        onChange={onCheck}
       />
       <Checklist
         title="CHECKLIST 2"
         items={['Item 1', 'Item 2', 'Item 3', 'Item 4']}
-        onChange={onChangeC2}
+        onChange={onCheck}
+      />
+      <Checklist
+        title="CHECKLIST 3"
+        items={['Item 1', 'Item 2', 'Item 3', 'Item 4']}
+        onChange={onCheck}
       />
     </>
   );
