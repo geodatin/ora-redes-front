@@ -24,7 +24,6 @@ const useStyles = createUseStyles(() => ({
     height: '300px',
     display: 'flex',
     flexFlow: 'column nowrap',
-    alignItems: 'center',
   },
 }));
 

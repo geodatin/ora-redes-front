@@ -1,6 +1,9 @@
+import AlignHorizontalLeftRoundedIcon from '@mui/icons-material/AlignHorizontalLeftRounded';
+import { IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
+import { useTheme } from 'react-jss';
 
 import ChartContainer from '../../ChartContainer';
 import CustomPagination from '../../CustomPagination';
@@ -26,6 +29,8 @@ export default function RankingChart({
     setRankingPage: PropTypes.func.isRequired,
   };
 
+  const theme = useTheme();
+
   const options = {
     indexAxis: 'y',
     plugins: {
@@ -47,18 +52,39 @@ export default function RankingChart({
     },
   };
 
+  const [order, setOrder] = useState(true);
+
+  const handleClick = () => {
+    setOrder(!order);
+  };
+
   return (
     <ChartContainer
       title={title}
       info={info}
       isLoaded={data != null}
+      extraButton={
+        <IconButton id="order-button" onClick={handleClick}>
+          <AlignHorizontalLeftRoundedIcon
+            style={{
+              fontSize: 20,
+              color: theme.secondary.dark,
+              transform: order ? 'scaleY(1)' : 'scaleY(-1)',
+            }}
+          />
+        </IconButton>
+      }
       pagination={
-        <CustomPagination
-          size="small"
-          count={totalPages}
-          page={page}
-          onChange={(event, value) => setRankingPage(value)}
-        />
+        <div
+          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+        >
+          <CustomPagination
+            size="small"
+            count={totalPages}
+            page={page}
+            onChange={(event, value) => setRankingPage(value)}
+          />
+        </div>
       }
     >
       <Bar style={{ marginTop: -10 }} options={options} data={data} />

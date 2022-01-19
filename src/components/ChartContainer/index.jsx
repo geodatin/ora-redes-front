@@ -3,6 +3,10 @@ import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 import { IconButton, Menu, MenuItem, Skeleton, Stack } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
+import {
+  exportComponentAsJPEG,
+  exportComponentAsPNG,
+} from 'react-component-export-image';
 import { useTheme } from 'react-jss';
 
 import CustomTooltip from '../CustomTooltip';
@@ -18,6 +22,7 @@ export default function ChartContainer({
   title,
   info,
   pagination,
+  extraButton,
   isLoaded,
 }) {
   ChartContainer.propTypes = {
@@ -25,11 +30,13 @@ export default function ChartContainer({
     info: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
     pagination: PropTypes.node,
+    extraButton: PropTypes.node,
     isLoaded: PropTypes.bool.isRequired,
   };
 
   ChartContainer.defaultProps = {
     pagination: undefined,
+    extraButton: undefined,
   };
 
   const classes = useStyles();
@@ -48,19 +55,29 @@ export default function ChartContainer({
   };
 
   const handleExport = (ext) => {
-    const chart = childrenref.current;
-    const imgAnchor = document.createElement('a');
+    if (ext === 'csv') {
+      console.log('csv');
+      // csv logic here
+      handleClose();
+      return;
+    }
 
-    if (ext === 'jpeg') {
-      imgAnchor.href = chart.toBase64Image('image/jpeg', 1);
-      imgAnchor.download = 'chart.jpeg';
+    const { current } = childrenref;
+    const isDiv = current?.nodeName === 'DIV';
+
+    function downloadChart() {
+      const imgAnchor = document.createElement('a');
+      imgAnchor.href = current.toBase64Image(`image/${ext}`, 1);
+      imgAnchor.download = `chart.${ext}`;
       imgAnchor.click();
+    }
+
+    if (!isDiv) {
+      downloadChart();
+    } else if (ext === 'jpeg') {
+      exportComponentAsJPEG(childrenref, { fileName: 'chart' });
     } else if (ext === 'png') {
-      imgAnchor.href = chart.toBase64Image('image/png', 1);
-      imgAnchor.download = 'chart.png';
-      imgAnchor.click();
-    } else if (ext === 'csv') {
-      // csv download logic here
+      exportComponentAsPNG(childrenref, { fileName: 'chart' });
     }
 
     handleClose();
@@ -95,6 +112,7 @@ export default function ChartContainer({
             </div>
 
             <div>
+              {extraButton && extraButton}
               <IconButton
                 id="export-button"
                 className={classes.button}
@@ -121,8 +139,8 @@ export default function ChartContainer({
                   style: { backgroundColor: theme.background.popup },
                 }}
               >
-                <MenuItem key="jpg" onClick={() => handleExport('jpeg')}>
-                  <Typography variant="body">Baixar JPG</Typography>
+                <MenuItem key="jpeg" onClick={() => handleExport('jpeg')}>
+                  <Typography variant="body">Baixar JPEG</Typography>
                 </MenuItem>
                 <MenuItem key="png" onClick={() => handleExport('png')}>
                   <Typography variant="body">Baixar PNG</Typography>

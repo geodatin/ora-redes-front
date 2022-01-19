@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useTheme } from 'react-jss';
 
 import BarChart from '../../../../components/Charts/Bar';
+import CustomChart from '../../../../components/Charts/Custom';
 import DoughnutChart from '../../../../components/Charts/Doughnut';
 import LineChart from '../../../../components/Charts/Line';
 import RankingChart from '../../../../components/Charts/Ranking';
@@ -45,6 +46,11 @@ export default function Statistics() {
 
   return (
     <ul>
+      <CustomChart
+        title="Custom chart"
+        info="This is a custom chart"
+        data={data}
+      />
       <LineChart title="Line chart" info="This is a line chart" data={data} />
 
       <RankingChart
