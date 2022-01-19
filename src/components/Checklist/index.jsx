@@ -23,6 +23,7 @@ export default function Checklist({ items, title, onChange }) {
 
   const INITIAL_STATE = items.map(() => false);
   const [values, setValues] = useState(INITIAL_STATE);
+  const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
     onChange(values);
@@ -30,9 +31,11 @@ export default function Checklist({ items, title, onChange }) {
 
   const clearChecklist = () => {
     setValues(INITIAL_STATE);
+    setDisabled(true);
   };
 
   const handleChange = (index) => {
+    setDisabled(false);
     setValues((prev) => {
       const newValues = [...prev];
       newValues[index] = !newValues[index];
@@ -44,7 +47,7 @@ export default function Checklist({ items, title, onChange }) {
     <div className={classes.wrapper}>
       <div className={classes.titleHeader}>
         <Typography>{title?.toUpperCase()}</Typography>
-        <CustomButton mini onClick={() => clearChecklist()}>
+        <CustomButton disabled={disabled} mini onClick={() => clearChecklist()}>
           CLEAR
         </CustomButton>
       </div>
@@ -55,7 +58,9 @@ export default function Checklist({ items, title, onChange }) {
             checked={values[index]}
             onChange={() => handleChange(index)}
           />
-          <Typography style={{ color: theme.neutral.gray.main }}>
+          <Typography
+            style={{ marginLeft: 10, color: theme.neutral.gray.main }}
+          >
             {item}
           </Typography>
         </span>
