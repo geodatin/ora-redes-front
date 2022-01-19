@@ -1,10 +1,11 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles((theme) => ({
   wrapper: {
     display: 'flex',
     flexFlow: 'column nowrap',
     marginBottom: 15,
+    width: '100%',
   },
   titleHeader: {
     width: '100%',
@@ -14,8 +15,16 @@ const useStyles = createUseStyles(() => ({
     justifyContent: 'space-between',
     marginBottom: 10,
   },
-  item: {
-    marginBottom: 5,
+  searchField: {
+    width: '100%',
+    marginTop: 15,
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.stroke.dark,
+    borderRadius: 5,
+    padding: '0px 0px 0px 15px',
   },
 }));
 

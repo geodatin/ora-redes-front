@@ -44,7 +44,11 @@ export default function Checklist({ items, title, onChange }) {
     <div className={classes.wrapper}>
       <div className={classes.titleHeader}>
         <Typography>{title?.toUpperCase()}</Typography>
-        <CustomButton mini onClick={() => clearChecklist()}>
+        <CustomButton
+          disabled={values.every((v) => v === false)}
+          mini
+          onClick={() => clearChecklist()}
+        >
           CLEAR
         </CustomButton>
       </div>
@@ -55,7 +59,9 @@ export default function Checklist({ items, title, onChange }) {
             checked={values[index]}
             onChange={() => handleChange(index)}
           />
-          <Typography style={{ color: theme.neutral.gray.main }}>
+          <Typography
+            style={{ marginLeft: 10, color: theme.neutral.gray.main }}
+          >
             {item}
           </Typography>
         </span>
