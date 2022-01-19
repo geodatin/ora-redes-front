@@ -1,7 +1,7 @@
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import { FormControl, Select } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'react-jss';
 
 import useStyles from './styles';
@@ -15,13 +15,22 @@ export default function CustomSelect({
   selectStyle,
   children,
   MenuProps,
-  SelectProps,
+  FormProps,
   emphasis,
   ...rest
 }) {
   const classes = useStyles();
   const theme = useTheme();
   const formRef = useRef();
+  const [paperWidth, setPaperWidth] = useState(100);
+
+  /**
+   * Select the initial paper width
+   */
+  useEffect(() => {
+    const form = formRef.current;
+    setPaperWidth(form.offsetWidth);
+  }, [formRef?.current?.offsetWidth]);
 
   return (
     <FormControl
@@ -30,7 +39,7 @@ export default function CustomSelect({
         ...style,
       }}
       classes={{ root: classes.root }}
-      {...rest}
+      {...FormProps}
     >
       <Select
         autoWidth
@@ -50,13 +59,14 @@ export default function CustomSelect({
           PaperProps: {
             style: {
               backgroundColor: theme.background.popup,
-              width: formRef?.current?.offsetWidth,
+              width: paperWidth,
+              marginTop: 5,
             },
           },
           ...MenuProps,
         }}
         IconComponent={KeyboardArrowDownRoundedIcon}
-        {...SelectProps}
+        {...rest}
       >
         {children}
       </Select>
@@ -67,7 +77,7 @@ export default function CustomSelect({
 CustomSelect.defaultProps = {
   style: {},
   MenuProps: {},
-  SelectProps: {},
+  FormProps: {},
   selectStyle: {},
   emphasis: false,
 };
@@ -79,7 +89,7 @@ CustomSelect.propTypes = {
     PropTypes.arrayOf(PropTypes.shape()),
   ]).isRequired,
   MenuProps: PropTypes.shape(),
-  SelectProps: PropTypes.shape(),
+  FormProps: PropTypes.shape(),
   selectStyle: PropTypes.shape(),
   emphasis: PropTypes.bool,
 };

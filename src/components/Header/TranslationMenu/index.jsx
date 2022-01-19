@@ -2,7 +2,7 @@ import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownR
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 import { Button, Menu, MenuItem } from '@mui/material';
 import i18next from 'i18next';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
@@ -16,10 +16,12 @@ import useStyles from './styles';
 export default function TranslationMenu() {
   const classes = useStyles();
   const theme = useTheme();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const { t } = useTranslation();
   const availableLanguages = i18next.options.resources;
+  const buttonRef = useRef();
+  const [buttonWidth, setButtonWidth] = useState(100);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,9 +36,18 @@ export default function TranslationMenu() {
     handleClose();
   };
 
+  /**
+   * Select the initial paper width
+   */
+  useEffect(() => {
+    const button = buttonRef.current;
+    setButtonWidth(button.offsetWidth);
+  }, [buttonRef?.current?.offsetWidth]);
+
   return (
     <>
       <Button
+        ref={buttonRef}
         id="translate-button"
         className={classes.button}
         onClick={handleClick}
@@ -58,7 +69,10 @@ export default function TranslationMenu() {
           },
         }}
         PaperProps={{
-          style: { backgroundColor: theme.background.popup },
+          style: {
+            backgroundColor: theme.background.popup,
+            width: buttonWidth,
+          },
         }}
       >
         {Object.keys(availableLanguages).map((language) => (
