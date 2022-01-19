@@ -33,9 +33,11 @@ export default function Checklist({ items, title, onChange }) {
   };
 
   const handleChange = (index) => {
-    const newValues = [...values];
-    newValues[index] = !newValues[index];
-    setValues(newValues);
+    setValues((prev) => {
+      const newValues = [...prev];
+      newValues[index] = !newValues[index];
+      return newValues;
+    });
   };
 
   return (
