@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 import SearchIcon from '@mui/icons-material/Search';
-import { IconButton, TextField } from '@mui/material';
+import { IconButton } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTheme } from 'react-jss';
 
 import CustomButton from '../CustomButton';

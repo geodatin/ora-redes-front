@@ -65,21 +65,23 @@ export default function InfoPanel({ title, subtitle }) {
               handleChange={handleChangePanel}
               style={{ marginTop: 10 }}
             />
-            <CustomToggleButton
-              options={[
-                'Year',
-                'Semester',
-                'Quarter',
-                'Month',
-                'Day',
-                'Week',
-                'Hour',
-              ]}
-              value={timeGrouping}
-              handleChange={handleChangeTimeGrouping}
-              style={{ marginTop: 20 }}
-              typographyVariant="caption"
-            />
+            {panel === 1 && (
+              <CustomToggleButton
+                options={[
+                  'Year',
+                  'Semester',
+                  'Quarter',
+                  'Month',
+                  'Day',
+                  'Week',
+                  'Hour',
+                ]}
+                value={timeGrouping}
+                handleChange={handleChangeTimeGrouping}
+                style={{ marginTop: 20 }}
+                typographyVariant="caption"
+              />
+            )}
           </>
         ),
       }}
