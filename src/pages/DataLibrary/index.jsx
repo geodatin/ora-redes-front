@@ -28,7 +28,7 @@ export default function DataLibrary() {
   const onChangeC2 = (values) => {};
   const onSearch = (value) => {};
 
-  const checklists = (
+  const filtering = (
     <>
       <Search
         title="SEARCH"
@@ -57,7 +57,7 @@ export default function DataLibrary() {
       }}
       expandable={{
         className: classes.dataMobileWrapper,
-        children: checklists,
+        children: filtering,
       }}
       mainContainer={{
         className: classes.libraryMobileWrapper,
@@ -68,7 +68,7 @@ export default function DataLibrary() {
     <HLayout
       leftColumn={{
         className: classes.dataWrapper,
-        children: checklists,
+        children: filtering,
       }}
       mainContainer={{
         className: classes.breadMapWrapper,

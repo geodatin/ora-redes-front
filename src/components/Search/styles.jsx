@@ -5,6 +5,7 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
     flexFlow: 'column nowrap',
     marginBottom: 15,
+    width: '100%',
   },
   titleHeader: {
     width: '100%',
@@ -15,6 +16,7 @@ const useStyles = createUseStyles((theme) => ({
     marginBottom: 10,
   },
   searchField: {
+    width: '100%',
     marginTop: 15,
     display: 'flex',
     flexFlow: 'row nowrap',
