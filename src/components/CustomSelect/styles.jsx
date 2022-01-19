@@ -3,7 +3,10 @@ import { createUseStyles } from 'react-jss';
 const useStyles = createUseStyles((theme) => ({
   root: {
     width: '100%',
-
+    '& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"][class*="MuiOutlinedInput-marginDense"]':
+      {
+        paddingRight: 90,
+      },
     '& .MuiOutlinedInput-notchedOutline': {
       borderColor: theme.neutral.gray.main,
       borderRadius: 5,
@@ -27,6 +30,7 @@ const useStyles = createUseStyles((theme) => ({
   icon: {
     '&.MuiSelect-icon': {
       color: theme.secondary.dark,
+      fontSize: 20,
     },
   },
 }));
