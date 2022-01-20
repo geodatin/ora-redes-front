@@ -2,21 +2,49 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import ChartContainer from '../../ChartContainer';
+import Typography from '../../Typography';
+import useStyles from './styles';
 
 /**
- * This component renders a Custom HTML Chart
- * @returns Custom HTML Chart
+ * This component renders a items chart
+ * @returns items chart
  */
-export default function CustomChart({ title, info, data }) {
-  CustomChart.propTypes = {
+export default function ItemsChart({ title, info, data }) {
+  ItemsChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
-    data: PropTypes.shape().isRequired,
+    data: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   };
 
+  const classes = useStyles();
+
   return (
-    <ChartContainer title={title} info={info} isLoaded={data != null}>
-      <div>Hello custom chart</div>
+    <ChartContainer
+      style={{ height: 300 }}
+      title={title}
+      info={info}
+      isLoaded={data != null}
+    >
+      <div className={classes.childrenWrapper}>
+        {data.map((item) => (
+          <div key={item.title} className={classes.item}>
+            <div
+              style={{
+                display: 'flex',
+                flexFlow: 'row nowrap',
+                alignItems: 'center',
+              }}
+            >
+              {item?.icon}
+              <Typography format="bold"> {item.title}</Typography>
+            </div>
+            <div>
+              <Typography format="bold"> {item.value}</Typography>
+              <Typography> {item.dataType}</Typography>
+            </div>
+          </div>
+        ))}
+      </div>
     </ChartContainer>
   );
 }
