@@ -11,6 +11,7 @@ const useStyles = createUseStyles((theme) => ({
   methodsListWrapper: {
     minWidth: 280,
     borderRight: `1px solid ${theme.stroke.dark}`,
+    overflow: 'auto',
   },
   methodsListMobileWrapper: {},
 }));

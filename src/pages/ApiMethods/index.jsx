@@ -164,6 +164,151 @@ export default function ApiMethods() {
         },
       ],
     },
+    {
+      title: 'Tabela de estações fluviométricas 6',
+      id: '6',
+      description: 'Método que retorna o total de estações.',
+      url: 'https://dev-redes-ora.geodatin.com/api/station/count',
+      type: { name: 'GET', color: '#A1BA09' },
+      requisitionExample:
+        'https://dev-redes-ora.geodatin.com/api/ostation/count',
+      response: [
+        {
+          key: 'count',
+          type: 'number',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+      bodyParams: [
+        {
+          key: 'count',
+          type: 'number',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+      urlParams: [
+        {
+          key: 'count',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+    },
+    {
+      title: 'Tabela de estações fluviométricas 7',
+      id: '7',
+      description: 'Método que retorna o total de estações.',
+      url: 'https://dev-redes-ora.geodatin.com/api/station/count',
+      type: { name: 'GET', color: '#A1BA09' },
+      requisitionExample:
+        'https://dev-redes-ora.geodatin.com/api/ostation/count',
+      response: [
+        {
+          key: 'count',
+          type: 'number',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+      bodyParams: [
+        {
+          key: 'count',
+          type: 'number',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+      urlParams: [
+        {
+          key: 'count',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+    },
+    {
+      title: 'Tabela de estações fluviométricas 8',
+      id: '8',
+      description: 'Método que retorna o total de estações.',
+      url: 'https://dev-redes-ora.geodatin.com/api/station/count',
+      type: { name: 'GET', color: '#A1BA09' },
+      requisitionExample:
+        'https://dev-redes-ora.geodatin.com/api/ostation/count',
+      response: [
+        {
+          key: 'count',
+          type: 'number',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+      bodyParams: [
+        {
+          key: 'count',
+          type: 'number',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+      urlParams: [
+        {
+          key: 'count',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+    },
+    {
+      title: 'Tabela de estações fluviométricas 9',
+      id: '9',
+      description: 'Método que retorna o total de estações.',
+      url: 'https://dev-redes-ora.geodatin.com/api/station/count',
+      type: { name: 'GET', color: '#A1BA09' },
+      requisitionExample:
+        'https://dev-redes-ora.geodatin.com/api/ostation/count',
+      response: [
+        {
+          key: 'count',
+          type: 'number',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+      bodyParams: [
+        {
+          key: 'count',
+          type: 'number',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+      urlParams: [
+        {
+          key: 'count',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+    },
+    {
+      title: 'Tabela de estações fluviométricas 10',
+      id: '10',
+      description: 'Método que retorna o total de estações.',
+      url: 'https://dev-rede  s-ora.geodatin.com/api/station/count',
+      type: { name: 'GET', color: '#A1BA09' },
+      requisitionExample:
+        'https://dev-redes-ora.geodatin.com/api/ostation/count',
+      response: [
+        {
+          key: 'count',
+          type: 'number',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+      bodyParams: [
+        {
+          key: 'count',
+          type: 'number',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+      urlParams: [
+        {
+          key: 'count',
+          description: 'Contagem numérica de estações',
+        },
+      ],
+    },
   ];
 
   const methodsList = (

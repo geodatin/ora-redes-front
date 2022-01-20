@@ -60,7 +60,7 @@ export default function DataLibrary() {
         children: breadcrumb,
       }}
       expandable={{
-        className: classes.dataMobileWrapper,
+        className: classes.filteringMobileWrapper,
         children: filtering,
       }}
       mainContainer={{
@@ -71,7 +71,7 @@ export default function DataLibrary() {
   ) : (
     <HLayout
       leftColumn={{
-        className: classes.dataWrapper,
+        className: classes.filteringWrapper,
         children: filtering,
       }}
       mainContainer={{
