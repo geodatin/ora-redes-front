@@ -25,6 +25,13 @@ const useStyles = createUseStyles((theme) => ({
     backgroundColor: theme.stroke.dark,
     borderRadius: 5,
     padding: '0px 0px 0px 15px',
+
+    '&:hover': {
+      outline: `1px solid ${theme.secondary.dark}`,
+    },
+    '&:focus-within': {
+      outline: `2px solid ${theme.primary.main}`,
+    },
   },
 }));
 
