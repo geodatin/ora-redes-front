@@ -32,6 +32,16 @@ const useStyles = createUseStyles(() => ({
       left: 10,
     },
   },
+  geodatinLogoWrapper: {
+    position: 'absolute',
+    bottom: 0,
+    left: '50%',
+    transform: 'translateX(-50%)',
+    zIndex: 997,
+  },
+  geodatinLogo: {
+    height: 25,
+  },
 }));
 
 export default useStyles;

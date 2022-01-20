@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
+import GeodatinLogo from '../../assets/images/geodatin-map.svg';
 import NorthIcon from '../../assets/images/north.svg';
 import useStyles from './styles';
 import ZoomButton from './ZoomButton';
@@ -38,6 +39,18 @@ export default function MapWrapper() {
         <ZoomButton />
       </div>
       <img alt="north" src={NorthIcon} className={classes.northIcon} />
+      <a
+        href="https://geodatin.com"
+        target="_blank"
+        rel="noreferrer"
+        className={classes.geodatinLogoWrapper}
+      >
+        <img
+          alt="geodatin"
+          src={GeodatinLogo}
+          className={classes.geodatinLogo}
+        />
+      </a>
     </MapContainer>
   );
 }
