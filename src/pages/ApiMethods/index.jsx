@@ -284,7 +284,7 @@ export default function ApiMethods() {
       title: 'Tabela de estações fluviométricas 10',
       id: '10',
       description: 'Método que retorna o total de estações.',
-      url: 'https://dev-redes-ora.geodatin.com/api/station/count',
+      url: 'https://dev-rede  s-ora.geodatin.com/api/station/count',
       type: { name: 'GET', color: '#A1BA09' },
       requisitionExample:
         'https://dev-redes-ora.geodatin.com/api/ostation/count',

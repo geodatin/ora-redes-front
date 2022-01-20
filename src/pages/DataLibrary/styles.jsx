@@ -15,6 +15,16 @@ const useStyles = createUseStyles((theme) => ({
     borderRight: '1px solid',
     borderRightColor: theme.stroke.dark,
     overflow: 'auto',
+
+    '& > *': {
+      paddingBottom: 15,
+      marginBottom: 10,
+      borderBottom: `1px solid ${theme.stroke.light}`,
+    },
+    '& > *:last-of-type': {
+      borderBottom: `none`,
+      marginBottom: 0,
+    },
   },
   filteringMobileWrapper: { padding: 15 },
 }));
