@@ -9,13 +9,14 @@ const useStyles = createUseStyles((theme) => ({
   breadBarMobileWrapper: { padding: '10px 15px 10px 15px' },
   libraryWrapper: { padding: 15, overflow: 'auto' },
   librarysMobileWrapper: { padding: 15 },
-  dataWrapper: {
+  filteringWrapper: {
     minWidth: 280,
     padding: 15,
     borderRight: '1px solid',
     borderRightColor: theme.stroke.dark,
+    overflow: 'auto',
   },
-  dataMobileWrapper: { padding: 15 },
+  filteringMobileWrapper: { padding: 15 },
 }));
 
 export default useStyles;
