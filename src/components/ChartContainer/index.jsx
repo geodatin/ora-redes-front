@@ -24,6 +24,7 @@ export default function ChartContainer({
   pagination,
   extraButton,
   isLoaded,
+  style,
 }) {
   ChartContainer.propTypes = {
     title: PropTypes.string.isRequired,
@@ -32,11 +33,13 @@ export default function ChartContainer({
     pagination: PropTypes.node,
     extraButton: PropTypes.node,
     isLoaded: PropTypes.bool.isRequired,
+    style: PropTypes.shape(),
   };
 
   ChartContainer.defaultProps = {
     pagination: undefined,
     extraButton: undefined,
+    style: {},
   };
 
   const classes = useStyles();
@@ -56,7 +59,6 @@ export default function ChartContainer({
 
   const handleExport = (ext) => {
     if (ext === 'csv') {
-      console.log('csv');
       // csv logic here
       handleClose();
       return;
@@ -84,7 +86,7 @@ export default function ChartContainer({
   };
 
   return (
-    <li className={classes.wrapper}>
+    <li className={classes.wrapper} style={style}>
       {isLoaded ? (
         <>
           <div className={classes.header}>
