@@ -7,6 +7,9 @@ const useStyles = createUseStyles((theme) => ({
     },
   },
   textfield: {
+    backgroundColor: theme.stroke.dark,
+    borderRadius: 5,
+
     '& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child':
       {
         paddingLeft: 10,
@@ -14,7 +17,7 @@ const useStyles = createUseStyles((theme) => ({
         width: '100%',
       },
     '& .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.neutral.gray.main,
+      borderColor: 'transparent',
       borderRadius: 5,
     },
   },
