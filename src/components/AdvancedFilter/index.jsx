@@ -13,7 +13,13 @@ import useStyles from './styles';
  * This component renders a advanced filter
  * @returns Advanced Filter
  */
-export default function AdvancedFilter({ TextFieldProps, onSelect, ...rest }) {
+export default function AdvancedFilter({
+  TextFieldProps,
+  onSelect,
+  onInputChange,
+  onChange,
+  ...rest
+}) {
   const classes = useStyles();
   const theme = useTheme();
   const inputRef = useRef();
@@ -37,7 +43,10 @@ export default function AdvancedFilter({ TextFieldProps, onSelect, ...rest }) {
       }}
       value={null}
       inputValue={inputValue}
-      onInputChange={(e, newValue) => setInputValue(newValue)}
+      onInputChange={(e, newValue) => {
+        setInputValue(newValue);
+        onInputChange();
+      }}
       popupIcon={
         open ? (
           <CloseRoundedIcon
@@ -51,7 +60,10 @@ export default function AdvancedFilter({ TextFieldProps, onSelect, ...rest }) {
           />
         )
       }
-      onChange={(e, newValue) => onSelect(newValue)}
+      onChange={(e, newValue) => {
+        onSelect(newValue);
+        onChange();
+      }}
       renderInput={(params) => (
         <TextField
           {...params}
@@ -78,4 +90,6 @@ AdvancedFilter.defaultProps = {
 AdvancedFilter.propTypes = {
   TextFieldProps: PropTypes.shape(),
   onSelect: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
