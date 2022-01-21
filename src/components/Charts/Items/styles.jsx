@@ -8,7 +8,8 @@ const useStyles = createUseStyles(() => ({
     '& > *': {
       marginBottom: 10,
     },
-    '& > *:last-of-type': {
+
+    '& > :nth-last-child(-n+2)': {
       marginBottom: 0,
     },
   },

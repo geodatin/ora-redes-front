@@ -20,7 +20,7 @@ export default function ItemsChart({ title, info, data }) {
 
   return (
     <ChartContainer
-      style={{ height: 300 }}
+      style={{ height: 'auto' }}
       title={title}
       info={info}
       isLoaded={data != null}
@@ -36,7 +36,10 @@ export default function ItemsChart({ title, info, data }) {
               }}
             >
               {item?.icon}
-              <Typography format="bold"> {item.title}</Typography>
+              <Typography format="bold" variant="body" style={{ fontSize: 15 }}>
+                {' '}
+                {item.title}
+              </Typography>
             </div>
             <div>
               <Typography format="bold"> {item.value}</Typography>

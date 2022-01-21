@@ -67,15 +67,11 @@ export default function ChartContainer({
     const { current } = childrenref;
     const isDiv = current?.nodeName === 'DIV';
 
-    function downloadChart() {
+    if (!isDiv) {
       const imgAnchor = document.createElement('a');
       imgAnchor.href = current.toBase64Image(`image/${ext}`, 1);
       imgAnchor.download = `chart.${ext}`;
       imgAnchor.click();
-    }
-
-    if (!isDiv) {
-      downloadChart();
     } else if (ext === 'jpeg') {
       exportComponentAsJPEG(childrenref, { fileName: 'chart' });
     } else if (ext === 'png') {
@@ -86,7 +82,7 @@ export default function ChartContainer({
   };
 
   return (
-    <li className={classes.wrapper} style={style}>
+    <li className={classes.wrapper}>
       {isLoaded ? (
         <>
           <div className={classes.header}>
@@ -154,7 +150,7 @@ export default function ChartContainer({
             </div>
           </div>
 
-          <div className={classes.chartWrapper}>
+          <div className={classes.chartWrapper} style={style}>
             {React.cloneElement(children, { ref: childrenref })}
             {pagination && pagination}
           </div>

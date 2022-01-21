@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { useTheme } from 'react-jss';
 
 import BarChart from '../../../../components/Charts/Bar';
-import ItemsChart from '../../../../components/Charts/Custom';
 import DoughnutChart from '../../../../components/Charts/Doughnut';
+import ItemsChart from '../../../../components/Charts/Items';
 import LineChart from '../../../../components/Charts/Line';
 import RankingChart from '../../../../components/Charts/Ranking';
 
