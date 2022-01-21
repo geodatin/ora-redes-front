@@ -85,11 +85,13 @@ export default function AdvancedFilter({
 
 AdvancedFilter.defaultProps = {
   TextFieldProps: {},
+  onInputChange: () => {},
+  onChange: () => {},
 };
 
 AdvancedFilter.propTypes = {
   TextFieldProps: PropTypes.shape(),
   onSelect: PropTypes.func.isRequired,
-  onInputChange: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func,
+  onChange: PropTypes.func,
 };
