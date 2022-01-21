@@ -130,7 +130,7 @@ export default function MenuButton({ items, projectName }) {
         style={{ zIndex: 20000 }}
         PaperProps={{
           style: {
-            backgroundColor: theme.background.popup,
+            backgroundColor: theme.popup.background,
             marginLeft: 27,
           },
         }}

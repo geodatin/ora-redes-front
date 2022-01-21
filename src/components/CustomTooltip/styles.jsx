@@ -3,7 +3,7 @@ import { createUseStyles } from 'react-jss';
 const useStyles = createUseStyles((theme) => ({
   arrow: {
     '&.MuiTooltip-arrow': {
-      color: theme.background.popup,
+      color: theme.popup.background,
     },
   },
   tooltip: {
@@ -14,7 +14,7 @@ const useStyles = createUseStyles((theme) => ({
       display: 'flex',
       alignItems: 'center',
       minHeight: 32,
-      backgroundColor: theme.background.popup,
+      backgroundColor: theme.popup.background,
       color: theme.secondary.dark,
     },
   },

@@ -7,7 +7,7 @@ const useStyles = createUseStyles((theme) => ({
     },
   },
   textfield: {
-    backgroundColor: theme.stroke.dark,
+    backgroundColor: theme.textfield.background,
     borderRadius: 5,
 
     '& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child':
@@ -29,7 +29,7 @@ const useStyles = createUseStyles((theme) => ({
 
     '&.MuiPaper-root': {
       marginTop: 5,
-      backgroundColor: theme.background.popup,
+      backgroundColor: theme.popup.background,
       fontSize: 16,
     },
     '& .MuiListSubheader-root': {
@@ -37,10 +37,14 @@ const useStyles = createUseStyles((theme) => ({
     },
     '& .MuiAutocomplete-groupUl .MuiAutocomplete-option': {
       paddingLeft: 10,
+
+      '&.Mui-focused': {
+        backgroundColor: theme.popup.hover,
+      },
     },
     '& .MuiAutocomplete-groupLabel': {
       fontSize: 12.8,
-      backgroundColor: theme.background.popup,
+      backgroundColor: theme.popup.background,
     },
   },
 }));

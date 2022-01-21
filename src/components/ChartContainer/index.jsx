@@ -132,9 +132,11 @@ export default function ChartContainer({
                   style: {
                     color: theme.secondary.dark,
                   },
+                  className: classes.menu,
                 }}
                 PaperProps={{
-                  style: { backgroundColor: theme.background.popup },
+                  style: { backgroundColor: theme.popup.background },
+                  elevation: 1,
                 }}
               >
                 <MenuItem key="jpeg" onClick={() => handleExport('jpeg')}>

@@ -94,7 +94,7 @@ export default function FilePost({
             },
           }}
           PaperProps={{
-            style: { backgroundColor: theme.background.popup },
+            style: { backgroundColor: theme.popup.background },
           }}
         >
           {url.map((item) => (

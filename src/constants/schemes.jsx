@@ -38,7 +38,6 @@ export const lightScheme = {
   },
   background: {
     main: '#FAFBFD',
-    popup: '#F0F1F3',
   },
   button: {
     actived: '#E9EAED',
@@ -46,6 +45,19 @@ export const lightScheme = {
     clicked: '#878C92',
     disabled: '#F0F1F3',
     disabledLabel: '#ffffff',
+  },
+  popup: {
+    background: '#F0F1F3',
+    actived: '#DDDDDD',
+    hover: '#E3E4E7',
+  },
+  textfield: {
+    background: '#DFE1E6',
+  },
+  toggleButton: {
+    unabled: '#E7E9EE',
+    actived: '#464646',
+    hover: '#DBDBDB',
   },
 };
 
@@ -70,8 +82,8 @@ export const darkScheme = {
     },
   },
   stroke: {
-    light: '#0B1016',
-    dark: '#151C24',
+    light: '#19212B',
+    dark: '#1D2631',
   },
   blue: {
     light: '#67D9FC',
@@ -85,7 +97,6 @@ export const darkScheme = {
   },
   background: {
     main: '#0D1620',
-    popup: '#151C24',
   },
   button: {
     actived: '#151C24',
@@ -93,5 +104,18 @@ export const darkScheme = {
     clicked: '#CDD7DA',
     disabled: '#161615',
     disabledLabel: '#1B2935',
+  },
+  popup: {
+    background: '#151C24',
+    hover: '#272C32',
+    actived: '#323941',
+  },
+  textfield: {
+    background: '#212D3C',
+  },
+  toggleButton: {
+    unabled: '#19212B',
+    actived: '#212D3C',
+    hover: '#1C2734',
   },
 };

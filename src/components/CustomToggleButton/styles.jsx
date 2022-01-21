@@ -5,19 +5,19 @@ const useStyles = createUseStyles((theme) => ({
     '& .MuiToggleButton-root': {
       height: 35,
       color: theme.secondary.dark,
-      backgroundColor: theme.stroke.light,
+      backgroundColor: theme.toggleButton.unabled,
       border: 'none',
       borderRadius: '5px 5px 5px 5px',
       '&:hover': {
-        backgroundColor: theme.neutral.gray.light,
+        backgroundColor: theme.toggleButton.hover,
       },
     },
     '& .MuiToggleButton-root.Mui-selected': {
       color: theme.neutral.white,
-      backgroundColor: theme.neutral.gray.medium,
+      backgroundColor: theme.toggleButton.actived,
 
       '&:hover': {
-        backgroundColor: theme.neutral.gray.medium,
+        backgroundColor: theme.toggleButton.actived,
       },
     },
   },

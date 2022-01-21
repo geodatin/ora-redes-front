@@ -16,19 +16,6 @@ export default function CustomToggleButton({
   style,
   typographyVariant,
 }) {
-  CustomToggleButton.propTypes = {
-    options: PropTypes.arrayOf(PropTypes.string).isRequired,
-    style: PropTypes.shape(),
-    value: PropTypes.number.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    typographyVariant: PropTypes.string,
-  };
-
-  CustomToggleButton.defaultProps = {
-    style: {},
-    typographyVariant: 'body',
-  };
-
   const classes = useStyles();
 
   return (
@@ -56,3 +43,16 @@ export default function CustomToggleButton({
     </div>
   );
 }
+
+CustomToggleButton.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  style: PropTypes.shape(),
+  value: PropTypes.number.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  typographyVariant: PropTypes.string,
+};
+
+CustomToggleButton.defaultProps = {
+  style: {},
+  typographyVariant: 'body',
+};

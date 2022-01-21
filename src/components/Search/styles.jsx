@@ -22,7 +22,7 @@ const useStyles = createUseStyles((theme) => ({
     flexFlow: 'row nowrap',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: theme.stroke.dark,
+    backgroundColor: theme.textfield.background,
     borderRadius: 5,
     padding: '0px 0px 0px 15px',
 
