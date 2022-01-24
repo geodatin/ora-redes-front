@@ -6,14 +6,6 @@ const useStyles = createUseStyles(() => ({
     flexFlow: 'column nowrap',
     marginBottom: 15,
   },
-  titleHeader: {
-    width: '100%',
-    display: 'flex',
-    flexFlow: 'row wrap',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
   item: {
     marginBottom: 5,
   },

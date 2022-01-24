@@ -31,9 +31,9 @@ export default function DataLibrary() {
     <>
       <Search
         title="SEARCH"
-        label="Search here"
+        placeholder="Search here"
         onSearch={onSearch}
-        resultsAmount={0}
+        footerString="Showing 34 results"
       />
       <Checklist
         title="CHECKLIST 1"

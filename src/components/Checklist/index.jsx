@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useTheme } from 'react-jss';
 
-import CustomButton from '../CustomButton';
 import CustomCheckbox from '../CustomCheckbox';
+import TitleButton from '../TitleButton';
 import Typography from '../Typography';
 import useStyles from './styles';
 
@@ -42,16 +42,12 @@ export default function Checklist({ items, title, onChange }) {
 
   return (
     <div className={classes.wrapper}>
-      <div className={classes.titleHeader}>
-        <Typography>{title?.toUpperCase()}</Typography>
-        <CustomButton
-          disabled={values.every((v) => v === false)}
-          mini
-          onClick={() => clearChecklist()}
-        >
-          CLEAR
-        </CustomButton>
-      </div>
+      <TitleButton
+        title={title}
+        buttonTitle="CLEAR"
+        buttonDisabled={values.every((v) => v === false)}
+        onClick={() => clearChecklist()}
+      />
 
       {items.map((item, index) => (
         <span key={item} className={classes.item}>
