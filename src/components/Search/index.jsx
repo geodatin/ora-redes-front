@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import SearchIcon from '@mui/icons-material/Search';
 import { IconButton } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
@@ -6,6 +7,8 @@ import React, { useState } from 'react';
 import { useTheme } from 'react-jss';
 
 import CustomButton from '../CustomButton';
+import CustomSearch from '../CustomSearch';
+import TitleButton from '../TitleButton';
 import Typography from '../Typography';
 import useStyles from './styles';
 
@@ -13,12 +16,12 @@ import useStyles from './styles';
  * This component renders a search
  * @returns search component
  */
-export default function Search({ title, label, onSearch, resultsAmount }) {
+export default function Search({ title, placeholder, onSearch, footerString }) {
   Search.propTypes = {
     title: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    placeholder: PropTypes.string.isRequired,
     onSearch: PropTypes.func.isRequired,
-    resultsAmount: PropTypes.number.isRequired,
+    footerString: PropTypes.string.isRequired,
   };
 
   const classes = useStyles();
@@ -32,43 +35,27 @@ export default function Search({ title, label, onSearch, resultsAmount }) {
 
   return (
     <div className={classes.wrapper}>
-      <div className={classes.titleHeader}>
-        <Typography>{title?.toUpperCase()}</Typography>
-        <CustomButton
-          mini
-          disabled={value === ''}
-          onClick={() => clearSearch()}
-        >
-          CLEAR
-        </CustomButton>
+      <TitleButton
+        title={title}
+        buttonTitle="CLEAR"
+        buttonDisabled={value === ''}
+        onClick={clearSearch}
+      />
 
-        <div className={classes.searchField}>
-          <InputBase
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                onSearch(value);
-              }
-            }}
-            style={{ color: theme.secondary.main }}
-            fullWidth
-            value={value}
-            placeholder={label}
-            onChange={(e) => {
-              setValue(e.target.value);
-            }}
-          />
-          <IconButton onClick={() => onSearch(value)} aria-label="search">
-            <SearchIcon style={{ color: theme.secondary.main }} />
-          </IconButton>
-        </div>
-        {resultsAmount > 0 ? (
-          <Typography style={{ marginTop: 15, color: theme.neutral.gray.main }}>
-            Showing {resultsAmount} results
-          </Typography>
-        ) : (
-          <div />
-        )}
-      </div>
+      <CustomSearch
+        onSearch={onSearch}
+        placeholder={placeholder}
+        value={value}
+        setValue={setValue}
+      />
+
+      {footerString ? (
+        <Typography style={{ marginTop: 15, color: theme.neutral.gray.main }}>
+          {footerString}
+        </Typography>
+      ) : (
+        <div />
+      )}
     </div>
   );
 }
