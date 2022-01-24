@@ -67,12 +67,14 @@ export default function TranslationMenu() {
           style: {
             color: theme.secondary.dark,
           },
+          className: classes.menu,
         }}
         PaperProps={{
           style: {
-            backgroundColor: theme.background.popup,
+            backgroundColor: theme.popup.background,
             width: buttonWidth,
           },
+          elevation: 1,
         }}
       >
         {Object.keys(availableLanguages).map((language) => (

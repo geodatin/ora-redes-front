@@ -55,13 +55,15 @@ export default function CustomSelect({
             style: {
               color: theme.secondary.dark,
             },
+            className: classes.menu,
           },
           PaperProps: {
             style: {
-              backgroundColor: theme.background.popup,
+              backgroundColor: theme.popup.background,
               width: paperWidth,
               marginTop: 5,
             },
+            elevation: 1,
           },
           ...MenuProps,
         }}

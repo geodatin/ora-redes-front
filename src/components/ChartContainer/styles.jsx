@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles((theme) => ({
   wrapper: {
     display: 'flex',
     flexFlow: 'column nowrap',
@@ -25,6 +25,15 @@ const useStyles = createUseStyles(() => ({
     height: '300px',
     display: 'flex',
     flexFlow: 'column nowrap',
+  },
+  menu: {
+    backgroundColor: theme.popup.background,
+    '& .MuiMenuItem-root:hover': {
+      backgroundColor: theme.popup.hover,
+    },
+    '& .MuiMenuItem-root.MuiMenuItem-gutters.Mui-selected': {
+      backgroundColor: theme.popup.actived,
+    },
   },
 }));
 
