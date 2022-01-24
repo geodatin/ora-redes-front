@@ -13,10 +13,31 @@ export default function ItemsChart({ title, info, data }) {
   ItemsChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
-    data: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    data: PropTypes.shape().isRequired,
   };
 
   const classes = useStyles();
+
+  const itemComponent = (icon, label, value, dataType) => (
+    <div key={label} className={classes.item}>
+      <div
+        style={{
+          display: 'flex',
+          flexFlow: 'row nowrap',
+          alignItems: 'center',
+        }}
+      >
+        {icon}
+        <Typography format="bold" variant="body" style={{ fontSize: 15 }}>
+          {label}
+        </Typography>
+      </div>
+      <div>
+        <Typography format="bold"> {value}</Typography>
+        <Typography> {dataType}</Typography>
+      </div>
+    </div>
+  );
 
   return (
     <ChartContainer
@@ -26,27 +47,14 @@ export default function ItemsChart({ title, info, data }) {
       isLoaded={data != null}
     >
       <div className={classes.childrenWrapper}>
-        {data.map((item) => (
-          <div key={item.title} className={classes.item}>
-            <div
-              style={{
-                display: 'flex',
-                flexFlow: 'row nowrap',
-                alignItems: 'center',
-              }}
-            >
-              {item?.icon}
-              <Typography format="bold" variant="body" style={{ fontSize: 15 }}>
-                {' '}
-                {item.title}
-              </Typography>
-            </div>
-            <div>
-              <Typography format="bold"> {item.value}</Typography>
-              <Typography> {item.dataType}</Typography>
-            </div>
-          </div>
-        ))}
+        {data.labels.map((label, index) =>
+          itemComponent(
+            data.datasets[0].icons[index],
+            label,
+            data.datasets[0].data[index],
+            data.datasets[0].label
+          )
+        )}
       </div>
     </ChartContainer>
   );

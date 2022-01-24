@@ -34,7 +34,7 @@ const useStyles = createUseStyles((theme) => ({
     overflow: 'auto',
   },
   infoPanelWrapper: {
-    minWidth: 400,
+    minWidth: 480,
     borderLeft: `1px solid ${theme.stroke.dark}`,
   },
 }));

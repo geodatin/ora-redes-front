@@ -13,6 +13,7 @@ const useStyles = createUseStyles(() => ({
     flexFlow: 'row nowrap',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginBottom: 15,
   },
   headerTitle: {
     display: 'flex',

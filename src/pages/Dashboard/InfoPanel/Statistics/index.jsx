@@ -5,6 +5,7 @@ import { useTheme } from 'react-jss';
 import BarChart from '../../../../components/Charts/Bar';
 import DoughnutChart from '../../../../components/Charts/Doughnut';
 import ItemsChart from '../../../../components/Charts/Items';
+import LegendDoughnutChart from '../../../../components/Charts/LegendDoughnut';
 import LineChart from '../../../../components/Charts/Line';
 import RankingChart from '../../../../components/Charts/Ranking';
 
@@ -44,144 +45,94 @@ export default function Statistics() {
     ],
   });
 
+  const [legendDoughnutData /* setData */] = useState({
+    labels: [
+      'Legend data 1',
+      'Legend data 2',
+      'Legend data 3',
+      'Legend data 4',
+    ],
+    datasets: [
+      {
+        label: 'Datatype',
+        data: [123, 102, 93, 84],
+        backgroundColor: [
+          theme.blue.main,
+          theme.primary.main,
+          theme.green.main,
+          theme.secondary.light,
+        ],
+        borderColor: 'transparent',
+      },
+    ],
+  });
+
+  const [itemsData /* setData */] = useState({
+    labels: [
+      'Legend data 1',
+      'Legeng data 2',
+      'Legend data 3',
+      'Legend data 4',
+    ],
+    datasets: [
+      {
+        label: 'datatype',
+        data: [123, 102, 93, 84],
+        icons: [
+          <div
+            style={{
+              height: 20,
+              width: 30,
+              background: 'brown',
+              borderRadius: 5,
+              marginRight: 10,
+            }}
+          />,
+          <div
+            style={{
+              height: 20,
+              width: 30,
+              background: 'blue',
+              borderRadius: 5,
+              marginRight: 10,
+            }}
+          />,
+          <div
+            style={{
+              height: 20,
+              width: 30,
+              background: 'red',
+              borderRadius: 5,
+              marginRight: 10,
+            }}
+          />,
+          <div
+            style={{
+              height: 20,
+              width: 30,
+              background: 'green',
+              borderRadius: 5,
+              marginRight: 10,
+            }}
+          />,
+        ],
+      },
+    ],
+  });
+
   return (
     <ul>
+      <LegendDoughnutChart
+        title="Legend doughnut chart"
+        info="This is a legend custom doughnut chart"
+        data={legendDoughnutData}
+      />
+
       <ItemsChart
         title="Items chart"
         info="This is a items chart"
-        data={[
-          {
-            title: 'Example 1',
-            value: 80,
-            dataType: 'stations',
-            icon: (
-              <div
-                style={{
-                  height: 20,
-                  width: 30,
-                  background: 'green',
-                  borderRadius: 5,
-                  marginRight: 10,
-                }}
-              />
-            ),
-          },
-          {
-            title: 'Example 2',
-            value: 70,
-            dataType: 'stations',
-            icon: (
-              <div
-                style={{
-                  height: 20,
-                  width: 30,
-                  background: 'pink',
-                  borderRadius: 5,
-                  marginRight: 10,
-                }}
-              />
-            ),
-          },
-          {
-            title: 'Example 3',
-            value: 60,
-            dataType: 'stations',
-            icon: (
-              <div
-                style={{
-                  height: 20,
-                  width: 30,
-                  background: 'red',
-                  borderRadius: 5,
-                  marginRight: 10,
-                }}
-              />
-            ),
-          },
-          {
-            title: 'Example 4',
-            value: 50,
-            dataType: 'stations',
-            icon: (
-              <div
-                style={{
-                  height: 20,
-                  width: 30,
-                  background: 'blue',
-                  borderRadius: 5,
-                  marginRight: 10,
-                }}
-              />
-            ),
-          },
-          {
-            title: 'Example 5',
-            value: 40,
-            dataType: 'stations',
-            icon: (
-              <div
-                style={{
-                  height: 20,
-                  width: 30,
-                  background: 'brown',
-                  borderRadius: 5,
-                  marginRight: 10,
-                }}
-              />
-            ),
-          },
-          {
-            title: 'Example 6',
-            value: 30,
-            dataType: 'stations',
-            icon: (
-              <div
-                style={{
-                  height: 20,
-                  width: 30,
-                  background: 'black',
-                  borderRadius: 5,
-                  marginRight: 10,
-                }}
-              />
-            ),
-          },
-          {
-            title: 'Example 7',
-            value: 20,
-            dataType: 'stations',
-            icon: (
-              <div
-                style={{
-                  height: 20,
-                  width: 30,
-                  background: 'gray',
-                  borderRadius: 5,
-                  marginRight: 10,
-                }}
-              />
-            ),
-          },
-          {
-            title: 'Example 8',
-            value: 10,
-            dataType: 'stations',
-            icon: (
-              <div
-                style={{
-                  height: 20,
-                  width: 30,
-                  background: 'orange',
-                  borderRadius: 5,
-                  marginRight: 10,
-                }}
-              />
-            ),
-          },
-        ]}
+        data={itemsData}
       />
-
-      <LineChart title="Line chart" info="This is a line chart" data={data} />
 
       <RankingChart
         title="Ranking chart"
@@ -191,6 +142,8 @@ export default function Statistics() {
         page={page}
         setRankingPage={setRankingPage}
       />
+
+      <LineChart title="Line chart" info="This is a line chart" data={data} />
 
       <BarChart
         title="Horizontal bar chart"

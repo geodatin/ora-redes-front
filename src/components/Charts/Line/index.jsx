@@ -1,3 +1,4 @@
+import merge from 'lodash.merge';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
@@ -32,7 +33,7 @@ export default function LineChart({
 
   return (
     <ChartContainer title={title} info={info} isLoaded={data != null}>
-      <Line options={{ ...options, ...mergeOptions }} data={data} />
+      <Line options={merge(options, mergeOptions)} data={data} />
     </ChartContainer>
   );
 }

@@ -2,7 +2,6 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles(() => ({
   childrenWrapper: {
-    marginTop: 20,
     display: 'flex',
     flexFlow: 'row wrap',
     '& > *': {

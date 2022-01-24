@@ -1,3 +1,4 @@
+import merge from 'lodash.merge';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
@@ -35,7 +36,7 @@ export default function DoughnutChart({
 
   return (
     <ChartContainer title={title} info={info} isLoaded={data != null}>
-      <Doughnut options={{ ...options, ...mergeOptions }} data={data} />
+      <Doughnut options={merge(options, mergeOptions)} data={data} />
     </ChartContainer>
   );
 }
