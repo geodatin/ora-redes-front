@@ -7,6 +7,7 @@ import { useTheme } from 'react-jss';
 
 import ChartContainer from '../../ChartContainer';
 import Typography from '../../Typography';
+import MiddleDoughnut from '../MiddleDoughnut';
 import useStyles from './styles';
 
 /**
@@ -87,15 +88,18 @@ export default function LegendDoughnutChart({
       isLoaded={data != null}
     >
       <div className={classes.childrenWrapper}>
-        <div className={classes.doughnutWrapper}>
-          <Doughnut options={merge(options, mergeOptions)} data={data} />
-          <div className={classes.doughnutMiddle}>
-            <Typography format="bold" variant="h3">
-              {getTotal(data.datasets[0].data)}
-            </Typography>
-            <Typography variant="body">{data.datasets[0].label}</Typography>
-          </div>
-        </div>
+        <MiddleDoughnut
+          doughnut={
+            <Doughnut options={merge(options, mergeOptions)} data={data} />
+          }
+        >
+          <Typography format="bold" variant="h3">
+            {getTotal(data.datasets[0].data)}
+          </Typography>
+          <Typography variant="body" style={{ color: theme.neutral.gray.main }}>
+            {data.datasets[0].label}
+          </Typography>
+        </MiddleDoughnut>
 
         <div className={classes.legendWrapper}>
           {data.labels.map((label, index) =>
