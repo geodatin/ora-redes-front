@@ -45,7 +45,7 @@ export default function AdvancedFilter({
       inputValue={inputValue}
       onInputChange={(e, newValue) => {
         setInputValue(newValue);
-        onInputChange();
+        onInputChange(e, newValue);
       }}
       popupIcon={
         open ? (
