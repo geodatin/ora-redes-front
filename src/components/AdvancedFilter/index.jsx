@@ -62,7 +62,7 @@ export default function AdvancedFilter({
       }
       onChange={(e, newValue) => {
         onSelect(newValue);
-        onChange();
+        onChange(e, newValue);
       }}
       renderInput={(params) => (
         <TextField

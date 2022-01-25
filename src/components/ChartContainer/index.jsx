@@ -154,8 +154,8 @@ export default function ChartContainer({
 
           <div className={classes.chartWrapper} style={style}>
             {React.cloneElement(children, { ref: childrenref })}
-            {pagination && pagination}
           </div>
+          {pagination && pagination}
         </>
       ) : (
         <Stack spacing={1}>
