@@ -7,6 +7,24 @@
   "header": {
     "changeTheme": "Alternar Tema"
   },
+  "dataTypes": {
+    "stations": "Estações",
+    "RHA": "Rede hidrológica amazônica",
+    "RQA": "Rede de qualidade da água",
+    "HYBAM": "Rede HYBAM"
+  },
+  "statistics": {
+    "charts": {
+      "stationsPerNetwork": {
+        "title": "Estações por rede",
+        "info": "Este gráfico apresenta estações por rede"
+      },
+      "stationsPerCountry": {
+        "title": "Estações por países",
+        "info": "Este gráfico apresenta estações por países"
+      }
+    }
+  },
   "posts": {
     "file": {
       "download": "Baixar Arquivo"
@@ -27,5 +45,13 @@
     "advancedFilter": {
       "placeholder": "Adicionar filtro"
     }
+  },
+  "countries": {
+    "8": "Venezuela",
+    "5": "Peru",
+    "4": "Equador",
+    "7": "Colômbia",
+    "9": "Brasil",
+    "6": "Bolívia"
   }
 }
