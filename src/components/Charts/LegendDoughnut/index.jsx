@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import merge from 'lodash.merge';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -35,7 +34,7 @@ export default function LegendDoughnutChart({
   const theme = useTheme();
 
   const getTotal = (array) => {
-    const total = array.reduce(
+    const total = array?.reduce(
       (previousValue, currentValue) => previousValue + currentValue
     );
 
@@ -94,15 +93,15 @@ export default function LegendDoughnutChart({
           }
         >
           <Typography format="bold" variant="h3">
-            {getTotal(data.datasets[0].data)}
+            {getTotal(data?.datasets[0].data)}
           </Typography>
           <Typography variant="body" style={{ color: theme.neutral.gray.main }}>
-            {data.datasets[0].label}
+            {data?.datasets[0].label}
           </Typography>
         </MiddleDoughnut>
 
         <div className={classes.legendWrapper}>
-          {data.labels.map((label, index) =>
+          {data?.labels.map((label, index) =>
             legendItem(
               label,
               data.datasets[0].data[index],
