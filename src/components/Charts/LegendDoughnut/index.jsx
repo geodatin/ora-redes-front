@@ -22,12 +22,13 @@ export default function LegendDoughnutChart({
   LegendDoughnutChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
-    data: PropTypes.shape().isRequired,
+    data: PropTypes.shape(),
     options: PropTypes.shape(),
   };
 
   LegendDoughnutChart.defaultProps = {
     options: {},
+    data: undefined,
   };
 
   const classes = useStyles();
