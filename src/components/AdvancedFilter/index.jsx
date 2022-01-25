@@ -45,7 +45,7 @@ export default function AdvancedFilter({
       inputValue={inputValue}
       onInputChange={(e, newValue) => {
         setInputValue(newValue);
-        onInputChange();
+        onInputChange(e, newValue);
       }}
       popupIcon={
         open ? (
@@ -62,7 +62,7 @@ export default function AdvancedFilter({
       }
       onChange={(e, newValue) => {
         onSelect(newValue);
-        onChange();
+        onChange(e, newValue);
       }}
       renderInput={(params) => (
         <TextField
