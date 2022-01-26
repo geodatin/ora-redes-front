@@ -7,28 +7,6 @@
   "header": {
     "changeTheme": "Alternar Tema"
   },
-  "dataTypes": {
-    "station": { "singular": "Estação", "plural": "Estações" },
-    "RHA": "Rede hidrológica amazônica",
-    "RQA": "Rede de qualidade da água",
-    "HYBAM": "Rede de estações HYBAM"
-  },
-  "statistics": {
-    "charts": {
-      "stationsPerNetwork": {
-        "title": "Estações por rede",
-        "info": "Este gráfico apresenta estações por rede"
-      },
-      "stationsPerCountry": {
-        "title": "Estações por países",
-        "info": "Este gráfico apresenta estações por países"
-      },
-      "riverRanking": {
-        "title": "Ranking de rios por números de estações",
-        "info": "Este gráfico apresenta um ranking de rios por números de estações"
-      }
-    }
-  },
   "posts": {
     "file": {
       "download": "Baixar Arquivo"
@@ -64,12 +42,34 @@
       "noOptionsText": "Nenhuma opção encontrada",
       "emptyText": "Digite para buscar"
     },
+    "statistics": {
+      "charts": {
+        "stationsPerNetwork": {
+          "title": "Estações por rede",
+          "info": "Este gráfico apresenta estações por rede"
+        },
+        "stationsPerCountry": {
+          "title": "Estações por países",
+          "info": "Este gráfico apresenta estações por países"
+        },
+        "riverRanking": {
+          "title": "Ranking de rios por números de estações",
+          "info": "Este gráfico apresenta um ranking de rios por números de estações"
+        }
+      }
+    },
     "dataType": {
       "name": "Nome",
       "network": "Rede",
       "country": "País",
       "responsible": "Responsável",
       "river": "Rio",
+      "networks": {
+        "RHA": "Rede hidrológica amazônica",
+        "RQA": "Rede de qualidade da água",
+        "HYBAM": "Rede de estações HYBAM"
+      },
+      "station": { "singular": "Estação", "plural": "Estações" },
       "variable": {
         "title": "Variável",
         "items": {

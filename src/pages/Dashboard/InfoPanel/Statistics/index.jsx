@@ -48,11 +48,11 @@ export default function Statistics() {
           if (data) {
             setLegendDoughnutData({
               labels: data.values.map(({ network }) =>
-                t(`dataTypes.${network}`)
+                t(`specific.dataType.networks.${network}`)
               ),
               datasets: [
                 {
-                  label: t('dataTypes.station.plural'),
+                  label: t('specific.dataType.station.plural'),
                   data: data.values.map(({ count }) => count),
                   backgroundColor: [
                     theme.blue.main,
@@ -98,7 +98,7 @@ export default function Statistics() {
               ),
               datasets: [
                 {
-                  label: t('dataTypes.station.plural').toLowerCase(),
+                  label: t('specific.dataType.station.plural').toLowerCase(),
                   data: data.map(({ count }) => count),
                   icons: data.map(({ countryId }) => (
                     <ReactCountryFlag
@@ -154,7 +154,7 @@ export default function Statistics() {
                 ),
                 datasets: [
                   {
-                    label: t(`dataTypes.station.plural`),
+                    label: t(`specific.dataType.station.plural`),
                     data: data?.series[0]?.data,
                     backgroundColor: [theme.primary.main],
                     borderColor: [theme.primary.main],
@@ -180,20 +180,20 @@ export default function Statistics() {
   return (
     <ul>
       <LegendDoughnutChart
-        title={t('statistics.charts.stationsPerNetwork.title')}
-        info={t('statistics.charts.stationsPerNetwork.info')}
+        title={t('specific.statistics.charts.stationsPerNetwork.title')}
+        info={t('specific.statistics.charts.stationsPerNetwork.info')}
         data={legendDoughnutData}
       />
 
       <ItemsChart
-        title={t('statistics.charts.stationsPerCountry.title')}
-        info={t('statistics.charts.stationsPerCountry.info')}
+        title={t('specific.statistics.charts.stationsPerCountry.title')}
+        info={t('specific.statistics.charts.stationsPerCountry.info')}
         data={itemsData}
       />
 
       <RankingChart
-        title={t('statistics.charts.riverRanking.title')}
-        info={t('statistics.charts.riverRanking.info')}
+        title={t('specific.statistics.charts.riverRanking.title')}
+        info={t('specific.statistics.charts.riverRanking.info')}
         data={rankingData?.chartData}
         params={rankingParams}
         setParams={setRankingParams}
