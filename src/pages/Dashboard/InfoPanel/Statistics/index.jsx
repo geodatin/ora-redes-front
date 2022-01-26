@@ -175,7 +175,7 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [rankingParams, t]);
+  }, [rankingParams.page, rankingParams.order, t]);
 
   return (
     <ul>
