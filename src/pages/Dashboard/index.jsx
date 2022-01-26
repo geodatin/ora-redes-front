@@ -1,7 +1,6 @@
 import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
-import NotificationsActiveRoundedIcon from '@mui/icons-material/NotificationsActiveRounded';
 import { useMediaQuery } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +13,6 @@ import MapWrapper from '../../components/MapWrapper';
 import { breakpoints } from '../../constants/constraints';
 import Filters from './Filters';
 import InfoPanel from './InfoPanel';
-import Statistics from './InfoPanel/Statistics';
 import useStyles from './styles';
 
 /**
@@ -26,16 +24,23 @@ function Dashboard() {
   const isMobile = useMediaQuery(breakpoints.max.md);
   const { t } = useTranslation();
 
+  const infoPanel = (
+    <InfoPanel
+      title={t('specific.infoPanel.title')}
+      subtitle="Last update in 11/08/2022"
+    />
+  );
+
   return isMobile ? (
     <MobileNavbarLayout
       mainContainer={{
-        label: 'Mapa',
+        label: t('specific.mobileNavbar.map'),
         icon: <MapRoundedIcon />,
         children: <MapWrapper />,
       }}
       bottomNavBar={[
         {
-          label: 'Filtros',
+          label: t('specific.mobileNavbar.filters'),
           icon: <ManageSearchRoundedIcon />,
           navContainer: {
             className: classes.filtersMobileWrapper,
@@ -43,19 +48,11 @@ function Dashboard() {
           },
         },
         {
-          label: 'Estatísticas',
+          label: t('specific.mobileNavbar.panel'),
           icon: <AutoGraphRoundedIcon />,
           navContainer: {
-            className: classes.statisticsMobileWrapper,
-            children: <Statistics />,
-          },
-        },
-        {
-          label: 'Notificações',
-          icon: <NotificationsActiveRoundedIcon />,
-          navContainer: {
-            className: classes.notificationsMobileWrapper,
-            children: <div>Notificações</div>,
+            className: classes.infoPanelMobileWrapper,
+            children: infoPanel,
           },
         },
       ]}
@@ -88,25 +85,16 @@ function Dashboard() {
         className: classes.filtersNotificationsWrapper,
         children: (
           <VLayout
-            upRow={{
+            mainContainer={{
               className: classes.filtersWrapper,
               children: <Filters />,
-            }}
-            mainContainer={{
-              className: classes.notificationsWrapper,
-              children: <div>Notificações</div>,
             }}
           />
         ),
       }}
       rightColumn={{
         className: classes.infoPanelWrapper,
-        children: (
-          <InfoPanel
-            title={t('specific.infoPanel.title')}
-            subtitle="Last update in 11/08/2022"
-          />
-        ),
+        children: infoPanel,
       }}
     />
   );

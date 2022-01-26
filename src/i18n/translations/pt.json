@@ -50,6 +50,11 @@
       "monitoring": "Monitoramento",
       "allNetworks": "Todas as redes"
     },
+    "mobileNavbar": {
+      "map": "Mapa",
+      "filters": "Filtros",
+      "panel": "Painel"
+    },
     "infoPanel": {
       "title": "Todas as redes",
       "lastUpdate": "Última atualizacao em",

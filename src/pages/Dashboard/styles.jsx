@@ -30,7 +30,7 @@ const useStyles = createUseStyles((theme) => ({
     minWidth: 400,
     borderLeft: `1px solid ${theme.stroke.dark}`,
   },
-  statisticsMobileWrapper: {
+  infoPanelMobileWrapper: {
     overflow: 'auto',
   },
   infoPanelWrapper: {
