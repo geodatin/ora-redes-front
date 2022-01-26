@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import AdvancedFilter from '../../../components/AdvancedFilter';
 import CustomChip from '../../../components/CustomChip';
 import CustomSelect from '../../../components/CustomSelect';
-import { dataTypes } from '../../../constants/networkConstraints';
+import { dataTypes } from '../../../constants/definitions';
 import api from '../../../services/api';
 import useStyles from './styles';
 
