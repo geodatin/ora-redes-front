@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles({
   childrenWrapper: {
     display: 'flex',
     flexFlow: 'row nowrap',
@@ -31,6 +31,6 @@ const useStyles = createUseStyles(() => ({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-}));
+});
 
 export default useStyles;

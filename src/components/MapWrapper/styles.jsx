@@ -2,7 +2,7 @@ import { createUseStyles } from 'react-jss';
 
 import { breakpoints } from '../../constants/constraints';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles({
   mapContainer: {
     position: 'relative',
   },
@@ -42,6 +42,6 @@ const useStyles = createUseStyles(() => ({
   geodatinLogo: {
     height: 25,
   },
-}));
+});
 
 export default useStyles;
