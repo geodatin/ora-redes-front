@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles({
   wrapper: {
     overflow: 'auto',
     width: '100%',
@@ -8,6 +8,6 @@ const useStyles = createUseStyles(() => ({
     top: 0,
     bottom: 0,
   },
-}));
+});
 
 export default useStyles;

@@ -2,7 +2,7 @@ import { createUseStyles } from 'react-jss';
 
 import { layout } from '../../../constants/constraints';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles({
   wrapper: {
     display: 'flex',
     flexFlow: 'column nowrap',
@@ -18,6 +18,6 @@ const useStyles = createUseStyles(() => ({
   downRow: {
     height: layout.downRow.sizes.height,
   },
-}));
+});
 
 export default useStyles;

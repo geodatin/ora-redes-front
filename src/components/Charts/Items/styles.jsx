@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles({
   childrenWrapper: {
     display: 'flex',
     flexFlow: 'row wrap',
@@ -17,6 +17,6 @@ const useStyles = createUseStyles(() => ({
     flexFlow: 'column nowrap',
     width: '50%',
   },
-}));
+});
 
 export default useStyles;

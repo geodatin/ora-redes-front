@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles({
   headerWrapper: {
     padding: '15px 15px 10px 15px',
     height: 'initial',
@@ -8,6 +8,6 @@ const useStyles = createUseStyles(() => ({
   panelWrapper: {
     position: 'relative',
   },
-}));
+});
 
 export default useStyles;

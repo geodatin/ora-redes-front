@@ -2,7 +2,7 @@ import { createUseStyles } from 'react-jss';
 
 import { layout } from '../../../constants/constraints';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles({
   wrapper: {
     display: 'flex',
     flexFlow: 'row nowrap',
@@ -18,6 +18,6 @@ const useStyles = createUseStyles(() => ({
   rightColumn: {
     width: layout.rightColumn.sizes.width,
   },
-}));
+});
 
 export default useStyles;

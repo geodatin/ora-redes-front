@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles({
   loading: {
     paddingBottom: 40,
     paddingTop: 10,
@@ -9,6 +9,6 @@ const useStyles = createUseStyles(() => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-}));
+});
 
 export default useStyles;
