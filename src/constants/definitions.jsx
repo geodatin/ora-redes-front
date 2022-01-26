@@ -47,3 +47,12 @@ export const dataTypes = {
     },
   },
 };
+
+export const countryCodes = {
+  8: 'VE',
+  5: 'PE',
+  4: 'EC',
+  7: 'CO',
+  9: 'BR',
+  6: 'BO',
+};
