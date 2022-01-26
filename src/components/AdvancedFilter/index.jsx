@@ -2,6 +2,7 @@
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Autocomplete, TextField } from '@mui/material';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -20,6 +21,8 @@ export default function AdvancedFilter({
   onChange,
   onClose,
   onOpen,
+  paperClass,
+  className,
   ...rest
 }) {
   const classes = useStyles();
@@ -35,8 +38,8 @@ export default function AdvancedFilter({
       autoHighlight
       selectOnFocus
       disableClearable
-      classes={{ paper: classes.paper }}
-      className={classes.root}
+      classes={{ paper: classNames(classes.paper, paperClass) }}
+      className={classNames(classes.root, className)}
       open={open}
       onOpen={(e) => {
         setOpen(true);
@@ -95,6 +98,8 @@ AdvancedFilter.defaultProps = {
   onChange: () => {},
   onClose: () => {},
   onOpen: () => {},
+  paperClass: '',
+  className: '',
 };
 
 AdvancedFilter.propTypes = {
@@ -104,4 +109,6 @@ AdvancedFilter.propTypes = {
   onChange: PropTypes.func,
   onClose: PropTypes.func,
   onOpen: PropTypes.func,
+  paperClass: PropTypes.string,
+  className: PropTypes.string,
 };
