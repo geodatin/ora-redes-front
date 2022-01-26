@@ -18,7 +18,11 @@ const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 export default function Statistics() {
   const theme = useTheme();
 
-  const [page, setRankingPage] = useState(1);
+  const [rankingParams, setRankingParams] = useState({
+    order: true,
+    page: 1,
+    totalPages: 1,
+  });
   const [data /* setData */] = useState({
     labels,
     datasets: [
@@ -138,9 +142,8 @@ export default function Statistics() {
         title="Ranking chart"
         info="This is a ranking chart"
         data={data}
-        totalPages={5}
-        page={page}
-        setRankingPage={setRankingPage}
+        params={rankingParams}
+        setParams={setRankingParams}
       />
 
       <LineChart title="Line chart" info="This is a line chart" data={data} />
