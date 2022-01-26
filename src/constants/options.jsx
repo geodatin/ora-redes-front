@@ -56,3 +56,7 @@ export const countryCodes = {
   9: 'BR',
   6: 'BO',
 };
+
+export const filterDefaults = {
+  autocompleteSelection: [],
+};

@@ -6,7 +6,7 @@ import { useTheme } from 'react-jss';
 import ItemsChart from '../../../../components/Charts/Items';
 import LegendDoughnutChart from '../../../../components/Charts/LegendDoughnut';
 import RankingChart from '../../../../components/Charts/Ranking';
-import { countryCodes } from '../../../../constants/definitions';
+import { countryCodes } from '../../../../constants/options';
 import api from '../../../../services/api';
 
 /**

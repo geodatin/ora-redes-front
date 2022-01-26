@@ -1,11 +1,12 @@
 import { ListSubheader, MenuItem } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import AdvancedFilter from '../../../components/AdvancedFilter';
 import CustomChip from '../../../components/CustomChip';
 import CustomSelect from '../../../components/CustomSelect';
-import { dataTypes } from '../../../constants/definitions';
+import { dataTypes } from '../../../constants/options';
+import FilteringContext from '../../../contexts/filtering';
 import api from '../../../services/api';
 import useStyles from './styles';
 
@@ -16,9 +17,12 @@ import useStyles from './styles';
 export default function Filters() {
   const classes = useStyles();
   const [autocompleteOptions, setAutocompleteOptions] = useState([]);
-  const [autocompleteSelection, setAutocompleteSelection] = useState([]);
   const [autocompleteLoading, setAutocompleteLoading] = useState(false);
   const [noOptionsTextSelector, setNoOptionsTextSelector] = useState(false);
+  const {
+    values: { autocompleteSelection },
+    setters: { setAutocompleteSelection },
+  } = useContext(FilteringContext);
   const { t } = useTranslation();
 
   function onAutocompleteInputChange(newInput) {
