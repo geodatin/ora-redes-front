@@ -1,11 +1,15 @@
 {
-  "helloWorld": "Olá mundo!",
   "general": {
     "projectName": "Redes",
     "language": "Português"
   },
   "header": {
-    "changeTheme": "Alternar Tema"
+    "changeTheme": "Alternar Tema",
+    "buttons": {
+      "dashboard": "Monitoramento",
+      "dataLibrary": "Arquivos",
+      "api": "API"
+    }
   },
   "posts": {
     "file": {
@@ -41,6 +45,25 @@
       "loadingText": "Buscando...",
       "noOptionsText": "Nenhuma opção encontrada",
       "emptyText": "Digite para buscar"
+    },
+    "breadcrumbs": {
+      "monitoring": "Monitoramento",
+      "allNetworks": "Todas as redes"
+    },
+    "infoPanel": {
+      "title": "Todas as redes",
+      "lastUpdate": "Última atualizacao em",
+      "statistics": "Estatísticas",
+      "list": "Listagem",
+      "timeGrouping": {
+        "year": "Ano",
+        "semester": "Semestre",
+        "quarter": "Trimestre",
+        "month": "Mês",
+        "day": "Dia",
+        "week": "Semana",
+        "hour": "Hora"
+      }
     },
     "statistics": {
       "charts": {

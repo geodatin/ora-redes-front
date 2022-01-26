@@ -19,9 +19,9 @@ function Routes() {
       <Header
         projectName={t('general.projectName')}
         items={[
-          { title: 'Dashboard', to: '/' },
-          { title: 'Data library', to: '/library' },
-          { title: 'API', to: '/api' },
+          { title: t('header.buttons.dashboard'), to: '/' },
+          { title: t('header.buttons.dataLibrary'), to: '/library' },
+          { title: t('header.buttons.api'), to: '/api' },
         ]}
       />
       <BaseRoutes>

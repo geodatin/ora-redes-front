@@ -4,6 +4,7 @@ import MapRoundedIcon from '@mui/icons-material/MapRounded';
 import NotificationsActiveRoundedIcon from '@mui/icons-material/NotificationsActiveRounded';
 import { useMediaQuery } from '@mui/material';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import HLayout from '../../components/Layout/Horizontal';
@@ -23,17 +24,18 @@ import useStyles from './styles';
 function Dashboard() {
   const classes = useStyles();
   const isMobile = useMediaQuery(breakpoints.max.md);
+  const { t } = useTranslation();
 
   return isMobile ? (
     <MobileNavbarLayout
       mainContainer={{
-        label: 'Map',
+        label: 'Mapa',
         icon: <MapRoundedIcon />,
         children: <MapWrapper />,
       }}
       bottomNavBar={[
         {
-          label: 'Filters',
+          label: 'Filtros',
           icon: <ManageSearchRoundedIcon />,
           navContainer: {
             className: classes.filtersMobileWrapper,
@@ -41,7 +43,7 @@ function Dashboard() {
           },
         },
         {
-          label: 'Statistics',
+          label: 'Estatísticas',
           icon: <AutoGraphRoundedIcon />,
           navContainer: {
             className: classes.statisticsMobileWrapper,
@@ -49,11 +51,11 @@ function Dashboard() {
           },
         },
         {
-          label: 'Notifications',
+          label: 'Notificações',
           icon: <NotificationsActiveRoundedIcon />,
           navContainer: {
             className: classes.notificationsMobileWrapper,
-            children: <div>Notifications</div>,
+            children: <div>Notificações</div>,
           },
         },
       ]}
@@ -67,7 +69,12 @@ function Dashboard() {
             upRow={{
               className: classes.breadBarWrapper,
               children: (
-                <Breadcrumb items={['Monitoramento', 'Todas as redes']} />
+                <Breadcrumb
+                  items={[
+                    t('specific.breadcrumbs.monitoring'),
+                    t('specific.breadcrumbs.allNetworks'),
+                  ]}
+                />
               ),
             }}
             mainContainer={{
@@ -87,7 +94,7 @@ function Dashboard() {
             }}
             mainContainer={{
               className: classes.notificationsWrapper,
-              children: <div>Notifications</div>,
+              children: <div>Notificações</div>,
             }}
           />
         ),
@@ -96,7 +103,7 @@ function Dashboard() {
         className: classes.infoPanelWrapper,
         children: (
           <InfoPanel
-            title="Info panel title"
+            title={t('specific.infoPanel.title')}
             subtitle="Last update in 11/08/2022"
           />
         ),
