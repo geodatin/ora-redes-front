@@ -1,9 +1,9 @@
 import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
-import NotificationsActiveRoundedIcon from '@mui/icons-material/NotificationsActiveRounded';
 import { useMediaQuery } from '@mui/material';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import HLayout from '../../components/Layout/Horizontal';
@@ -13,7 +13,6 @@ import MapWrapper from '../../components/MapWrapper';
 import { breakpoints } from '../../constants/constraints';
 import Filters from './Filters';
 import InfoPanel from './InfoPanel';
-import Statistics from './InfoPanel/Statistics';
 import useStyles from './styles';
 
 /**
@@ -23,17 +22,25 @@ import useStyles from './styles';
 function Dashboard() {
   const classes = useStyles();
   const isMobile = useMediaQuery(breakpoints.max.md);
+  const { t } = useTranslation();
+
+  const infoPanel = (
+    <InfoPanel
+      title={t('specific.infoPanel.title')}
+      subtitle="Last update in 11/08/2022"
+    />
+  );
 
   return isMobile ? (
     <MobileNavbarLayout
       mainContainer={{
-        label: 'Map',
+        label: t('specific.mobileNavbar.map'),
         icon: <MapRoundedIcon />,
         children: <MapWrapper />,
       }}
       bottomNavBar={[
         {
-          label: 'Filters',
+          label: t('specific.mobileNavbar.filters'),
           icon: <ManageSearchRoundedIcon />,
           navContainer: {
             className: classes.filtersMobileWrapper,
@@ -41,19 +48,11 @@ function Dashboard() {
           },
         },
         {
-          label: 'Statistics',
+          label: t('specific.mobileNavbar.panel'),
           icon: <AutoGraphRoundedIcon />,
           navContainer: {
-            className: classes.statisticsMobileWrapper,
-            children: <Statistics />,
-          },
-        },
-        {
-          label: 'Notifications',
-          icon: <NotificationsActiveRoundedIcon />,
-          navContainer: {
-            className: classes.notificationsMobileWrapper,
-            children: <div>Notifications</div>,
+            className: classes.infoPanelMobileWrapper,
+            children: infoPanel,
           },
         },
       ]}
@@ -67,7 +66,12 @@ function Dashboard() {
             upRow={{
               className: classes.breadBarWrapper,
               children: (
-                <Breadcrumb items={['Monitoramento', 'Todas as redes']} />
+                <Breadcrumb
+                  items={[
+                    t('specific.breadcrumbs.monitoring'),
+                    t('specific.breadcrumbs.allNetworks'),
+                  ]}
+                />
               ),
             }}
             mainContainer={{
@@ -81,25 +85,16 @@ function Dashboard() {
         className: classes.filtersNotificationsWrapper,
         children: (
           <VLayout
-            upRow={{
+            mainContainer={{
               className: classes.filtersWrapper,
               children: <Filters />,
-            }}
-            mainContainer={{
-              className: classes.notificationsWrapper,
-              children: <div>Notifications</div>,
             }}
           />
         ),
       }}
       rightColumn={{
         className: classes.infoPanelWrapper,
-        children: (
-          <InfoPanel
-            title="Info panel title"
-            subtitle="Last update in 11/08/2022"
-          />
-        ),
+        children: infoPanel,
       }}
     />
   );

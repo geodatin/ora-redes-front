@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
 import CustomToggleButton from '../../../components/CustomToggleButton';
@@ -26,6 +27,7 @@ export default function InfoPanel({ title, subtitle }) {
 
   const classes = useStyles();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const [panel, setPanel] = useState(0);
   const [timeGrouping, setTimeGrouping] = useState(0);
@@ -60,7 +62,10 @@ export default function InfoPanel({ title, subtitle }) {
               </Typography>
             )}
             <CustomToggleButton
-              options={['Statistics', 'List']}
+              options={[
+                t('specific.infoPanel.statistics'),
+                t('specific.infoPanel.list'),
+              ]}
               value={panel}
               handleChange={handleChangePanel}
               style={{ marginTop: 10 }}
@@ -68,13 +73,13 @@ export default function InfoPanel({ title, subtitle }) {
             {panel === 1 && (
               <CustomToggleButton
                 options={[
-                  'Year',
-                  'Semester',
-                  'Quarter',
-                  'Month',
-                  'Day',
-                  'Week',
-                  'Hour',
+                  t('specific.infoPanel.timeGrouping.year'),
+                  t('specific.infoPanel.timeGrouping.semester'),
+                  t('specific.infoPanel.timeGrouping.quarter'),
+                  t('specific.infoPanel.timeGrouping.month'),
+                  t('specific.infoPanel.timeGrouping.day'),
+                  t('specific.infoPanel.timeGrouping.week'),
+                  t('specific.infoPanel.timeGrouping.hour'),
                 ]}
                 value={timeGrouping}
                 handleChange={handleChangeTimeGrouping}
