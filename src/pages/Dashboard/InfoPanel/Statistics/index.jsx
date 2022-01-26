@@ -1,13 +1,15 @@
+/* eslint-disable no-unused-vars */
 import faker from 'faker';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import ReactCountryFlag from 'react-country-flag';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
-import BarChart from '../../../../components/Charts/Bar';
-import DoughnutChart from '../../../../components/Charts/Doughnut';
 import ItemsChart from '../../../../components/Charts/Items';
 import LegendDoughnutChart from '../../../../components/Charts/LegendDoughnut';
-import LineChart from '../../../../components/Charts/Line';
 import RankingChart from '../../../../components/Charts/Ranking';
+import { countryCodes } from '../../../../constants/constraints';
+import api from '../../../../services/api';
 
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
@@ -17,9 +19,10 @@ const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
  */
 export default function Statistics() {
   const theme = useTheme();
+  const { t } = useTranslation();
 
-  const [page, setRankingPage] = useState(1);
-  const [data /* setData */] = useState({
+  const [rankingPage, setRankingPage] = useState(1);
+  const [rankingData /* setData */] = useState({
     labels,
     datasets: [
       {
@@ -33,142 +36,124 @@ export default function Statistics() {
     ],
   });
 
-  const [doughnutData /* setData */] = useState({
-    labels: ['Fulll', 'Empty'],
-    datasets: [
-      {
-        label: 'Dataset 1',
-        data: [80, 20],
-        backgroundColor: [theme.primary.main, theme.neutral.gray.light],
-        borderColor: [theme.primary.main, theme.neutral.gray.light],
-      },
-    ],
-  });
+  const [itemsData, setItemsData] = useState();
+  const [legendDoughnutData, setLegendDoughnutData] = useState();
 
-  const [legendDoughnutData /* setData */] = useState({
-    labels: [
-      'Legend data 1',
-      'Legend data 2',
-      'Legend data 3',
-      'Legend data 4',
-    ],
-    datasets: [
-      {
-        label: 'Datatype',
-        data: [123, 102, 93, 84],
-        backgroundColor: [
-          theme.blue.main,
-          theme.primary.main,
-          theme.green.main,
-          theme.secondary.light,
-        ],
-        borderColor: 'transparent',
-      },
-    ],
-  });
+  /**
+   * This userEffect fetch station count per network.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+    api
+      .post(`/station/count/network`, {
+        params: {
+          filters: {
+            name: [], // Nome da estação
+            network: [], // Tipo de rede (RQA, RHA ou HYBAM)
+            country: [], // País
+            responsible: [], // Órgão responsável
+            river: [], // Rio
+            variable: [], // Variáveis que a estação possui medição
+          },
+        },
+      })
+      .then(({ data }) => {
+        if (isSubscribed) {
+          if (data) {
+            setLegendDoughnutData({
+              labels: data.values.map(({ network }) =>
+                t(`dataTypes.${network}`)
+              ),
+              datasets: [
+                {
+                  label: t('dataTypes.stations'),
+                  data: data.values.map(({ count }) => count),
+                  backgroundColor: [
+                    theme.blue.main,
+                    theme.primary.main,
+                    theme.green.main,
+                    theme.secondary.light,
+                  ],
+                  borderColor: 'transparent',
+                },
+              ],
+            });
+          }
+        }
+      });
 
-  const [itemsData /* setData */] = useState({
-    labels: [
-      'Legend data 1',
-      'Legeng data 2',
-      'Legend data 3',
-      'Legend data 4',
-    ],
-    datasets: [
-      {
-        label: 'datatype',
-        data: [123, 102, 93, 84],
-        icons: [
-          <div
-            style={{
-              height: 20,
-              width: 30,
-              background: 'brown',
-              borderRadius: 5,
-              marginRight: 10,
-            }}
-          />,
-          <div
-            style={{
-              height: 20,
-              width: 30,
-              background: 'blue',
-              borderRadius: 5,
-              marginRight: 10,
-            }}
-          />,
-          <div
-            style={{
-              height: 20,
-              width: 30,
-              background: 'red',
-              borderRadius: 5,
-              marginRight: 10,
-            }}
-          />,
-          <div
-            style={{
-              height: 20,
-              width: 30,
-              background: 'green',
-              borderRadius: 5,
-              marginRight: 10,
-            }}
-          />,
-        ],
-      },
-    ],
-  });
+    return () => {
+      isSubscribed = false;
+    };
+  }, [t]);
+
+  /**
+   * This userEffect fetch station count per countries.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+    api
+      .post(`/station/count/country`, {
+        params: {
+          filters: {
+            name: [], // Nome da estação
+            network: [], // Tipo de rede (RQA, RHA ou HYBAM)
+            country: [], // País
+            responsible: [], // Órgão responsável
+            river: [], // Rio
+            variable: [], // Variáveis que a estação possui medição
+          },
+        },
+      })
+      .then(({ data }) => {
+        if (isSubscribed) {
+          if (data) {
+            setItemsData({
+              labels: data.map(({ countryId }) => t(`countries.${countryId}`)),
+              datasets: [
+                {
+                  label: t('dataTypes.stations').toLowerCase(),
+                  data: data.map(({ count }) => count),
+                  icons: data.map(({ countryId }) => (
+                    <ReactCountryFlag
+                      svg
+                      countryCode={countryCodes[countryId]}
+                      style={{ fontSize: 30, marginRight: 5, borderRadius: 12 }}
+                    />
+                  )),
+                },
+              ],
+            });
+          }
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [t]);
 
   return (
     <ul>
       <LegendDoughnutChart
-        title="Legend doughnut chart"
-        info="This is a legend custom doughnut chart"
+        title={t('statistics.charts.stationsPerNetwork.title')}
+        info={t('statistics.charts.stationsPerNetwork.info')}
         data={legendDoughnutData}
       />
 
       <ItemsChart
-        title="Items chart"
-        info="This is a items chart"
+        title={t('statistics.charts.stationsPerCountry.title')}
+        info={t('statistics.charts.stationsPerCountry.info')}
         data={itemsData}
       />
 
       <RankingChart
         title="Ranking chart"
         info="This is a ranking chart"
-        data={data}
+        data={rankingData}
         totalPages={5}
-        page={page}
+        page={rankingPage}
         setRankingPage={setRankingPage}
-      />
-
-      <LineChart title="Line chart" info="This is a line chart" data={data} />
-
-      <BarChart
-        title="Horizontal bar chart"
-        info="This is a horizontal bar chart"
-        data={data}
-      />
-
-      <BarChart
-        title="Vertical bar chart"
-        info="This is a vertical bar chart"
-        data={data}
-        options={{ indexAxis: 'x' }}
-      />
-
-      <DoughnutChart
-        title="Doughnut chart"
-        info="This is a doughnut chart"
-        data={doughnutData}
-        options={{
-          plugins: {
-            legend: {
-              display: false,
-            },
-          },
-        }}
       />
     </ul>
   );

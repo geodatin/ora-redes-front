@@ -13,7 +13,11 @@ export default function ItemsChart({ title, info, data }) {
   ItemsChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
-    data: PropTypes.shape().isRequired,
+    data: PropTypes.shape(),
+  };
+
+  ItemsChart.defaultProps = {
+    data: undefined,
   };
 
   const classes = useStyles();
@@ -47,7 +51,7 @@ export default function ItemsChart({ title, info, data }) {
       isLoaded={data != null}
     >
       <div className={classes.childrenWrapper}>
-        {data.labels.map((label, index) =>
+        {data?.labels.map((label, index) =>
           itemComponent(
             data.datasets[0].icons[index],
             label,
