@@ -53,5 +53,36 @@
     "7": "Colômbia",
     "9": "Brasil",
     "6": "Bolívia"
+  },
+  "specific": {
+    "autocomplete": {
+      "loadingText": "Buscando...",
+      "noOptionsText": "Nenhuma opção encontrada",
+      "emptyText": "Digite para buscar"
+    },
+    "dataType": {
+      "name": "Nome",
+      "network": "Rede",
+      "country": "País",
+      "responsible": "Responsável",
+      "river": "Rio",
+      "variable": {
+        "title": "Variável",
+        "items": {
+          "ph": "pH",
+          "OD": "Oxigênio Dissolvido",
+          "electricConductivity": "Condutividade Elétrica",
+          "turbidity": "Turbidez",
+          "sampleTemperature": "Temperatura",
+          "totalDissolvedSolid": "Sólidos Dissolvidos Totais",
+          "totalNitrogen": "Nitrogênio total",
+          "totalOrtophosphate": "Ortofosfato total",
+          "totalSuspensionSolid": "Sólidos suspensos totais",
+          "rain": "Precipitação",
+          "flowRate": "Vazão",
+          "adoptedLevel": "Nível"
+        }
+      }
+    }
   }
 }
