@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles({
   checkbox: {
     '&.MuiCheckbox-root': {
       boxSizing: 'border-box',
@@ -17,6 +17,6 @@ const useStyles = createUseStyles(() => ({
       },
     },
   },
-}));
+});
 
 export default useStyles;

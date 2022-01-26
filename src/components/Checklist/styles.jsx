@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles({
   wrapper: {
     display: 'flex',
     flexFlow: 'column nowrap',
@@ -9,6 +9,6 @@ const useStyles = createUseStyles(() => ({
   item: {
     marginBottom: 5,
   },
-}));
+});
 
 export default useStyles;

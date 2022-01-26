@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles({
   doughnutWrapper: {
     height: '130px',
     width: '130px',
@@ -22,6 +22,6 @@ const useStyles = createUseStyles(() => ({
     pointerEvents: 'none',
     userSelect: 'none',
   },
-}));
+});
 
 export default useStyles;

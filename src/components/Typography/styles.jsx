@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles({
   h1: {
     fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
     fontWeight: 700,
@@ -37,6 +37,6 @@ const useStyles = createUseStyles(() => ({
   italic: {
     fontStyle: 'italic',
   },
-}));
+});
 
 export default useStyles;
