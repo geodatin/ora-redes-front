@@ -20,6 +20,7 @@ export default function CustomChip({
   labelColor,
   deleteColor,
   style,
+  ...rest
 }) {
   const classes = useStyles();
   const theme = useTheme();
@@ -46,6 +47,7 @@ export default function CustomChip({
         color: labelColor || theme.secondary.dark,
         ...style,
       }}
+      {...rest}
     />
   );
 }
