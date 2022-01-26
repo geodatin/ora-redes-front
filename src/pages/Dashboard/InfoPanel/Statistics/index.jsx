@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import faker from 'faker';
 import React, { useEffect, useState } from 'react';
 import ReactCountryFlag from 'react-country-flag';
 import { useTranslation } from 'react-i18next';
@@ -11,8 +9,6 @@ import RankingChart from '../../../../components/Charts/Ranking';
 import { countryCodes } from '../../../../constants/constraints';
 import api from '../../../../services/api';
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
 /**
  * This function provides a statistics list
  * @returns statistics list
@@ -21,20 +17,12 @@ export default function Statistics() {
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const [rankingPage, setRankingPage] = useState(1);
-  const [rankingData /* setData */] = useState({
-    labels,
-    datasets: [
-      {
-        label: 'Dataset 1',
-        data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-        backgroundColor: [theme.primary.main],
-        borderColor: [theme.primary.main],
-        borderRadius: 5,
-        barThickness: 15,
-      },
-    ],
+  const [rankingParams, setRankingParams] = useState({
+    order: true,
+    page: 1,
+    totalPages: 1,
   });
+  const [rankingData, setRankingData] = useState();
 
   const [itemsData, setItemsData] = useState();
   const [legendDoughnutData, setLegendDoughnutData] = useState();
@@ -46,15 +34,13 @@ export default function Statistics() {
     let isSubscribed = true;
     api
       .post(`/station/count/network`, {
-        params: {
-          filters: {
-            name: [], // Nome da estação
-            network: [], // Tipo de rede (RQA, RHA ou HYBAM)
-            country: [], // País
-            responsible: [], // Órgão responsável
-            river: [], // Rio
-            variable: [], // Variáveis que a estação possui medição
-          },
+        filters: {
+          name: [], // Nome da estação
+          network: [], // Tipo de rede (RQA, RHA ou HYBAM)
+          country: [], // País
+          responsible: [], // Órgão responsável
+          river: [], // Rio
+          variable: [], // Variáveis que a estação possui medição
         },
       })
       .then(({ data }) => {
@@ -66,7 +52,7 @@ export default function Statistics() {
               ),
               datasets: [
                 {
-                  label: t('dataTypes.stations'),
+                  label: t('dataTypes.station.plural'),
                   data: data.values.map(({ count }) => count),
                   backgroundColor: [
                     theme.blue.main,
@@ -94,15 +80,13 @@ export default function Statistics() {
     let isSubscribed = true;
     api
       .post(`/station/count/country`, {
-        params: {
-          filters: {
-            name: [], // Nome da estação
-            network: [], // Tipo de rede (RQA, RHA ou HYBAM)
-            country: [], // País
-            responsible: [], // Órgão responsável
-            river: [], // Rio
-            variable: [], // Variáveis que a estação possui medição
-          },
+        filters: {
+          name: [], // Nome da estação
+          network: [], // Tipo de rede (RQA, RHA ou HYBAM)
+          country: [], // País
+          responsible: [], // Órgão responsável
+          river: [], // Rio
+          variable: [], // Variáveis que a estação possui medição
         },
       })
       .then(({ data }) => {
@@ -112,7 +96,7 @@ export default function Statistics() {
               labels: data.map(({ countryId }) => t(`countries.${countryId}`)),
               datasets: [
                 {
-                  label: t('dataTypes.stations').toLowerCase(),
+                  label: t('dataTypes.station.plural').toLowerCase(),
                   data: data.map(({ count }) => count),
                   icons: data.map(({ countryId }) => (
                     <ReactCountryFlag
@@ -133,6 +117,64 @@ export default function Statistics() {
     };
   }, [t]);
 
+  /**
+   * This userEffect fetch ranking data.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+    api
+      .post(
+        `/station/ranking/river`,
+        {
+          filters: {
+            name: [], // Nome da estação
+            network: [], // Tipo de rede (RQA, RHA ou HYBAM)
+            country: [], // País
+            responsible: [], // Órgão responsável
+            river: [], // Rio
+            variable: [], // Variáveis que a estação possui medição
+          },
+        },
+        {
+          params: {
+            page: rankingParams.page,
+            order: rankingParams.order ? 'desc' : 'asc',
+          },
+        }
+      )
+      .then(({ data }) => {
+        if (isSubscribed) {
+          if (data) {
+            setRankingData({
+              chartData: {
+                labels: data.x.map(
+                  (label, index) => `${data.position[index]}°  ${label}`
+                ),
+                datasets: [
+                  {
+                    label: t(`dataTypes.station.plural`),
+                    data: data?.series[0]?.data,
+                    backgroundColor: [theme.primary.main],
+                    borderColor: [theme.primary.main],
+                    borderRadius: 5,
+                    barThickness: 15,
+                  },
+                ],
+              },
+            });
+            setRankingParams((prevParams) => ({
+              ...prevParams,
+              totalPages: data.pages,
+            }));
+          }
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [rankingParams, t]);
+
   return (
     <ul>
       <LegendDoughnutChart
@@ -148,12 +190,11 @@ export default function Statistics() {
       />
 
       <RankingChart
-        title="Ranking chart"
-        info="This is a ranking chart"
-        data={rankingData}
-        totalPages={5}
-        page={rankingPage}
-        setRankingPage={setRankingPage}
+        title={t('statistics.charts.riverRanking.title')}
+        info={t('statistics.charts.riverRanking.info')}
+        data={rankingData?.chartData}
+        params={rankingParams}
+        setParams={setRankingParams}
       />
     </ul>
   );

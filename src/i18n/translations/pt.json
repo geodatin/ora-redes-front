@@ -8,10 +8,10 @@
     "changeTheme": "Alternar Tema"
   },
   "dataTypes": {
-    "stations": "Estações",
+    "station": { "singular": "Estação", "plural": "Estações" },
     "RHA": "Rede hidrológica amazônica",
     "RQA": "Rede de qualidade da água",
-    "HYBAM": "Rede HYBAM"
+    "HYBAM": "Rede de estações HYBAM"
   },
   "statistics": {
     "charts": {
@@ -22,6 +22,10 @@
       "stationsPerCountry": {
         "title": "Estações por países",
         "info": "Este gráfico apresenta estações por países"
+      },
+      "riverRanking": {
+        "title": "Ranking de rios por números de estações",
+        "info": "Este gráfico apresenta um ranking de rios por números de estações"
       }
     }
   },
