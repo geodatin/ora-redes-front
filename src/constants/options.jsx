@@ -57,6 +57,30 @@ export const countryCodes = {
   6: 'BO',
 };
 
+export const networks = {
+  all: {
+    code: 'all',
+    translation: 'specific.networks.type.all',
+    value: 1,
+  },
+  hydrologic: {
+    code: 'hydrologic',
+    translation: 'specific.networks.type.hydrologic',
+    value: 2,
+  },
+  quality: {
+    code: 'quality',
+    translation: 'specific.networks.type.quality',
+    value: 3,
+  },
+  hybam: {
+    code: 'hybam',
+    translation: 'specific.networks.type.hybam',
+    value: 4,
+  },
+};
+
 export const filterDefaults = {
   autocompleteSelection: [],
+  networkSelection: networks.all.value,
 };

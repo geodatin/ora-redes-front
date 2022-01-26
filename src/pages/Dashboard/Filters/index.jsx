@@ -1,11 +1,18 @@
 import { ListSubheader, MenuItem } from '@mui/material';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import AdvancedFilter from '../../../components/AdvancedFilter';
+import CustomButton from '../../../components/CustomButton';
 import CustomChip from '../../../components/CustomChip';
 import CustomSelect from '../../../components/CustomSelect';
-import { dataTypes } from '../../../constants/options';
+import TitleButton from '../../../components/TitleButton';
+import Typography from '../../../components/Typography';
+import {
+  dataTypes,
+  filterDefaults,
+  networks,
+} from '../../../constants/options';
 import FilteringContext from '../../../contexts/filtering';
 import api from '../../../services/api';
 import useStyles from './styles';
@@ -20,10 +27,34 @@ export default function Filters() {
   const [autocompleteLoading, setAutocompleteLoading] = useState(false);
   const [noOptionsTextSelector, setNoOptionsTextSelector] = useState(false);
   const {
-    values: { autocompleteSelection },
-    setters: { setAutocompleteSelection },
+    values: { autocompleteSelection, networkSelection },
+    setters: { setAutocompleteSelection, setNetworkSelection },
   } = useContext(FilteringContext);
   const { t } = useTranslation();
+  const [auxAutocompleteSelection, setAuxAutocompleteSelection] = useState(
+    autocompleteSelection
+  );
+  const [auxNetworkSelection, setAuxNetworkSelection] =
+    useState(networkSelection);
+  const [applyDisabled, setApplyDisabled] = useState(true);
+  const [firstLoad, setFirstLoad] = useState(true);
+
+  function applySelection() {
+    setAutocompleteSelection(auxAutocompleteSelection);
+    setNetworkSelection(auxNetworkSelection);
+    setApplyDisabled(true);
+  }
+
+  function clearSelection() {
+    setAuxAutocompleteSelection(filterDefaults.autocompleteSelection);
+    setAuxNetworkSelection(filterDefaults.networkSelection);
+  }
+
+  function removeAutocompleteSelection(toRemove) {
+    setAuxAutocompleteSelection((old) =>
+      old.filter((item) => item.value !== toRemove.value)
+    );
+  }
 
   function onAutocompleteInputChange(newInput) {
     let subscribed = true;
@@ -36,7 +67,7 @@ export default function Filters() {
         if (subscribed) {
           const filteredData = data.filter(
             ({ value: v1, type: t1 }) =>
-              !autocompleteSelection.some(
+              !auxAutocompleteSelection.some(
                 ({ value: v2, type: t2 }) => v1 === v2 && t1 === t2
               )
           );
@@ -58,15 +89,44 @@ export default function Filters() {
     setAutocompleteOptions([]);
 
     if (
-      !autocompleteSelection.filter((e) => e.value === newItem.value).length > 0
+      !auxAutocompleteSelection.filter((e) => e.value === newItem.value)
+        .length > 0
     ) {
-      setAutocompleteSelection((old) => [...old, newItem]);
+      setAuxAutocompleteSelection((old) => [...old, newItem]);
     }
   }
 
+  useEffect(() => {
+    if (!firstLoad) {
+      setApplyDisabled(false);
+    } else {
+      setFirstLoad(false);
+    }
+  }, [auxAutocompleteSelection, auxNetworkSelection]);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <div style={{ marginBottom: 5 }}>
+      <TitleButton
+        title={t('specific.filters.title')}
+        buttonTitle={t('specific.filters.clearButton')}
+        buttonDisabled={
+          auxAutocompleteSelection.length === 0 &&
+          auxNetworkSelection === filterDefaults.networkSelection
+        }
+        onClick={() => clearSelection()}
+      />
+      <div>
+        <CustomSelect emphasis value={auxNetworkSelection}>
+          <MenuItem
+            value={networks.all.value}
+            onSelect={() => setAuxNetworkSelection(networks.all.value)}
+          >
+            {t(networks.all.translation)}
+          </MenuItem>
+        </CustomSelect>
+      </div>
+      <span className={classes.separator} />
+      <div>
         <AdvancedFilter
           onSelect={(e) => {
             handleOnAutocompleteSelect(e);
@@ -96,29 +156,33 @@ export default function Filters() {
           paperClass={classes.autocompletePaper}
         />
       </div>
-      <div className={classes.chips}>
-        {autocompleteSelection.map((option) => (
+      <div className={classes.chips} style={{ marginTop: 15 }}>
+        {auxAutocompleteSelection.map((option) => (
           <CustomChip
             key={option.value}
             borderColor={dataTypes[option.type].color}
             labelColor={dataTypes[option.type].color}
-            className={classes.chip}
+            onDelete={() => removeAutocompleteSelection(option)}
+            style={{ marginRight: 7, marginBottom: 7 }}
           >
             {option.type === dataTypes.variable.code
               ? t(dataTypes.variable.translations[option.value])
               : option.value}
           </CustomChip>
         ))}
+        {auxAutocompleteSelection.length === 0 && (
+          <Typography className={classes.noSelectionText}>
+            {t('specific.filters.noSelection')}
+          </Typography>
+        )}
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ marginBottom: 5 }}>
-          <CustomSelect value={2}>
-            <MenuItem value={1}>Elemento 1</MenuItem>
-            <MenuItem value={2}>Elemento 2</MenuItem>
-            <MenuItem value={3}>Elemento 3</MenuItem>
-          </CustomSelect>
-        </div>
-      </div>
+      <CustomButton
+        style={{ marginTop: auxAutocompleteSelection.length > 0 ? 8 : 15 }}
+        disabled={applyDisabled}
+        onClick={() => applySelection()}
+      >
+        <Typography>{t('specific.filters.apply')}</Typography>
+      </CustomButton>
     </div>
   );
 }

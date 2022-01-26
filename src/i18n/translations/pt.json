@@ -29,6 +29,12 @@
     }
   },
   "specific": {
+    "filters": {
+      "title": "Filtros",
+      "clearButton": "Limpar",
+      "noSelection": "Nenhum filtro selecionado",
+      "apply": "Aplicar"
+    },
     "countries": {
       "8": "Venezuela",
       "5": "Peru",
@@ -69,7 +75,10 @@
         "RQA": "Rede de qualidade da água",
         "HYBAM": "Rede de estações HYBAM"
       },
-      "station": { "singular": "Estação", "plural": "Estações" },
+      "station": {
+        "singular": "Estação",
+        "plural": "Estações"
+      },
       "variable": {
         "title": "Variável",
         "items": {
@@ -86,6 +95,14 @@
           "flowRate": "Vazão",
           "adoptedLevel": "Nível"
         }
+      }
+    },
+    "networks": {
+      "type": {
+        "all": "Todas as Redes",
+        "hydrologic": "Rede Hidrológica Amazônica",
+        "quality": "Rede de Qualidade da Água",
+        "hybam": "Rede de Estações SO-HYBAM"
       }
     }
   }

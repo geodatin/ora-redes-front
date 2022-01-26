@@ -21,11 +21,15 @@ export function FilteringProvider({ children }) {
     filterDefaults.autocompleteSelection
   );
 
+  const [networkSelection, setNetworkSelection] = useState(
+    filterDefaults.networkSelection
+  );
+
   return (
     <FilteringContext.Provider
       value={{
-        values: { autocompleteSelection },
-        setters: { setAutocompleteSelection },
+        values: { autocompleteSelection, networkSelection },
+        setters: { setAutocompleteSelection, setNetworkSelection },
         functions: {},
         loaders: {},
       }}
