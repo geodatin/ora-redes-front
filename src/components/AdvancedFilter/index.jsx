@@ -18,6 +18,7 @@ export default function AdvancedFilter({
   onSelect,
   onInputChange,
   onChange,
+  onClose,
   ...rest
 }) {
   const classes = useStyles();
@@ -37,9 +38,10 @@ export default function AdvancedFilter({
       className={classes.root}
       open={open}
       onOpen={() => setOpen(true)}
-      onClose={() => {
+      onClose={(e) => {
         setOpen(false);
         setInputValue('');
+        onClose(e);
       }}
       value={null}
       inputValue={inputValue}
@@ -87,6 +89,7 @@ AdvancedFilter.defaultProps = {
   TextFieldProps: {},
   onInputChange: () => {},
   onChange: () => {},
+  onClose: () => {},
 };
 
 AdvancedFilter.propTypes = {
@@ -94,4 +97,5 @@ AdvancedFilter.propTypes = {
   onSelect: PropTypes.func.isRequired,
   onInputChange: PropTypes.func,
   onChange: PropTypes.func,
+  onClose: PropTypes.func,
 };
