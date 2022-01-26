@@ -38,7 +38,7 @@ export default function CustomChip({
       onDelete={onDelete}
       deleteIcon={
         <ClearRoundedIcon
-          style={{ color: deleteColor || theme.neutral.gray.medium }}
+          style={{ color: deleteColor || theme.secondary.dark }}
         />
       }
       icon={icon}
