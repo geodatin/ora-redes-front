@@ -50,15 +50,15 @@
       "placeholder": "Adicionar filtro"
     }
   },
-  "countries": {
-    "8": "Venezuela",
-    "5": "Peru",
-    "4": "Equador",
-    "7": "Colômbia",
-    "9": "Brasil",
-    "6": "Bolívia"
-  },
   "specific": {
+    "countries": {
+      "8": "Venezuela",
+      "5": "Peru",
+      "4": "Equador",
+      "7": "Colômbia",
+      "9": "Brasil",
+      "6": "Bolívia"
+    },
     "autocomplete": {
       "loadingText": "Buscando...",
       "noOptionsText": "Nenhuma opção encontrada",

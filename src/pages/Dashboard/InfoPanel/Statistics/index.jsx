@@ -93,7 +93,9 @@ export default function Statistics() {
         if (isSubscribed) {
           if (data) {
             setItemsData({
-              labels: data.map(({ countryId }) => t(`countries.${countryId}`)),
+              labels: data.map(({ countryId }) =>
+                t(`specific.countries.${countryId}`)
+              ),
               datasets: [
                 {
                   label: t('dataTypes.station.plural').toLowerCase(),
