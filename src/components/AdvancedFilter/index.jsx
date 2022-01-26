@@ -19,6 +19,7 @@ export default function AdvancedFilter({
   onInputChange,
   onChange,
   onClose,
+  onOpen,
   ...rest
 }) {
   const classes = useStyles();
@@ -37,7 +38,10 @@ export default function AdvancedFilter({
       classes={{ paper: classes.paper }}
       className={classes.root}
       open={open}
-      onOpen={() => setOpen(true)}
+      onOpen={(e) => {
+        setOpen(true);
+        onOpen(e);
+      }}
       onClose={(e) => {
         setOpen(false);
         setInputValue('');
@@ -90,6 +94,7 @@ AdvancedFilter.defaultProps = {
   onInputChange: () => {},
   onChange: () => {},
   onClose: () => {},
+  onOpen: () => {},
 };
 
 AdvancedFilter.propTypes = {
@@ -98,4 +103,5 @@ AdvancedFilter.propTypes = {
   onInputChange: PropTypes.func,
   onChange: PropTypes.func,
   onClose: PropTypes.func,
+  onOpen: PropTypes.func,
 };
