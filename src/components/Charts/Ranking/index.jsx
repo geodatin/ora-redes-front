@@ -1,7 +1,7 @@
 import AlignHorizontalLeftRoundedIcon from '@mui/icons-material/AlignHorizontalLeftRounded';
 import { IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useTheme } from 'react-jss';
 
@@ -12,21 +12,22 @@ import CustomPagination from '../../CustomPagination';
  * This component renders a Ranking Chart
  * @returns Ranking Chart
  */
-export default function RankingChart({
-  title,
-  info,
-  data,
-  totalPages,
-  page,
-  setRankingPage,
-}) {
+export default function RankingChart({ title, info, data, params, setParams }) {
   RankingChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
-    data: PropTypes.shape().isRequired,
-    totalPages: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    setRankingPage: PropTypes.func.isRequired,
+    data: PropTypes.shape(),
+    params: PropTypes.shape(),
+    setParams: PropTypes.func.isRequired,
+  };
+
+  RankingChart.defaultProps = {
+    data: undefined,
+    params: {
+      order: true,
+      page: 1,
+      totalPages: 1,
+    },
   };
 
   const theme = useTheme();
@@ -52,10 +53,8 @@ export default function RankingChart({
     },
   };
 
-  const [order, setOrder] = useState(true);
-
-  const handleClick = () => {
-    setOrder(!order);
+  const handleChangeOrder = () => {
+    setParams((prevParams) => ({ ...prevParams, order: !prevParams.order }));
   };
 
   return (
@@ -64,12 +63,12 @@ export default function RankingChart({
       info={info}
       isLoaded={data != null}
       extraButton={
-        <IconButton id="order-button" onClick={handleClick}>
+        <IconButton id="order-button" onClick={handleChangeOrder}>
           <AlignHorizontalLeftRoundedIcon
             style={{
               fontSize: 20,
               color: theme.secondary.dark,
-              transform: order ? 'scaleY(1)' : 'scaleY(-1)',
+              transform: params.order ? 'scaleY(1)' : 'scaleY(-1)',
             }}
           />
         </IconButton>
@@ -80,9 +79,11 @@ export default function RankingChart({
         >
           <CustomPagination
             size="small"
-            count={totalPages}
-            page={page}
-            onChange={(event, value) => setRankingPage(value)}
+            count={params.totalPages}
+            page={params.page}
+            onChange={(event, value) =>
+              setParams((prevParams) => ({ ...prevParams, page: value }))
+            }
           />
         </div>
       }
