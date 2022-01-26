@@ -92,7 +92,6 @@ export default function Statistics() {
       .then(({ data }) => {
         if (isSubscribed) {
           if (data) {
-            console.log(data);
             setItemsData({
               labels: data.map(({ countryId }) => t(`countries.${countryId}`)),
               datasets: [
