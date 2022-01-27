@@ -75,7 +75,7 @@ export default function Filters() {
   }
 
   /**
-   * Handles the Autocomplete Input Change
+   * Handles the Autocomplete Input Change.
    */
   function onAutocompleteInputChange(newInput) {
     let subscribed = true;
@@ -224,7 +224,7 @@ export default function Filters() {
         disabled={applyDisabled}
         onClick={() => applySelection()}
       >
-        <Typography>{t('specific.filters.apply')}</Typography>
+        {t('specific.filters.apply')}
       </CustomButton>
     </div>
   );
