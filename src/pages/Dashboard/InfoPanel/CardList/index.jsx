@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useTheme } from 'react-jss';
 
 import InfiniteScroll from '../../../../components/InfiniteScroll';
-import ListItemContainer from '../../../../components/ListItemContainer';
+import CardItem from './CardItem';
+import useStyles from './styles';
 
 /**
  * This function provides a card list
@@ -10,11 +10,54 @@ import ListItemContainer from '../../../../components/ListItemContainer';
  */
 export default function CardList() {
   const [list /* setList */] = useState([
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
+    {
+      location: {
+        type: 'Point',
+        coordinates: [-65.5275, -9.7847],
+      },
+      name: 'MORADA NOVA - JUSANTE',
+      rain: 12,
+      flowRate: 32,
+      code: 15326000,
+      level: 145,
+      timestamp: '2021-12-21T13:15:00.000Z',
+    },
+    {
+      location: {
+        type: 'Point',
+        coordinates: [-68.9119, -3.4569],
+      },
+      name: 'SÃO PAULO DE OLIVENÇA',
+      rain: 22,
+      flowRate: 23,
+      code: 11400000,
+      level: 43,
+      timestamp: '2021-12-21T02:45:00.000Z',
+    },
+    {
+      location: {
+        type: 'Point',
+        coordinates: [-68.9119, -3.4569],
+      },
+      name: 'JARAGUAIA',
+      rain: 22,
+      flowRate: 23,
+      code: 11420000,
+      level: 43,
+      timestamp: '2021-12-21T02:45:00.000Z',
+    },
+    {
+      location: {
+        type: 'Point',
+        coordinates: [-68.9119, -3.4569],
+      },
+      name: 'RIO DAS CONTAS',
+      rain: 22,
+      flowRate: 23,
+      code: 11420300,
+      level: 43,
+      timestamp: '2021-12-21T02:45:00.000Z',
+    },
   ]);
 
   const [page /* setPage */] = useState(1);
@@ -22,31 +65,23 @@ export default function CardList() {
   const [isLoadingPage /* setIsLoadingPage */] = useState(true);
   const [isFirstLoading /* setIsFirstLoading */] = useState(false);
 
-  const theme = useTheme();
+  const classes = useStyles();
 
-  const handleChangeBottom = (/* isBottom */) => {
-    // fetch logic here
+  const handleOnBottom = (/* isBottom */) => {
+    // fetch more items logic here
   };
 
   return (
-    <ul>
+    <ul className={classes.wrapper}>
       <InfiniteScroll
         isLoadingPage={isLoadingPage}
         isFirstLoading={isFirstLoading}
         page={page}
         maxPage={maxPage}
-        onChange={handleChangeBottom}
+        onChange={handleOnBottom}
       >
         {list.map((item) => (
-          <ListItemContainer key={item} isLoaded={!!item}>
-            <div
-              style={{
-                height: 300,
-                borderRadius: 5,
-                backgroundColor: theme.neutral.gray.light,
-              }}
-            />
-          </ListItemContainer>
+          <CardItem key={item.code} item={item} />
         ))}
       </InfiniteScroll>
     </ul>

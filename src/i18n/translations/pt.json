@@ -63,7 +63,7 @@
     },
     "infoPanel": {
       "title": "Todas as redes",
-      "lastUpdate": "Última atualizacao em",
+      "lastUpdate": "Última atualização em",
       "statistics": "Estatísticas",
       "list": "Listagem",
       "timeGrouping": {
@@ -91,6 +91,9 @@
           "info": "Este gráfico apresenta um ranking de rios por números de estações"
         }
       }
+    },
+    "list": {
+      "seeMoreStatistics": "Visualizar mais estatísticas"
     },
     "dataType": {
       "name": "Nome",
