@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactCountryFlag from 'react-country-flag';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -7,6 +7,7 @@ import ItemsChart from '../../../../components/Charts/Items';
 import LegendDoughnutChart from '../../../../components/Charts/LegendDoughnut';
 import RankingChart from '../../../../components/Charts/Ranking';
 import { countryCodes } from '../../../../constants/options';
+import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
 
 /**
@@ -27,6 +28,10 @@ export default function Statistics() {
   const [itemsData, setItemsData] = useState();
   const [legendDoughnutData, setLegendDoughnutData] = useState();
 
+  const {
+    values: { autocompleteSelection },
+  } = useContext(FilteringContext);
+
   /**
    * This userEffect fetch station count per network.
    */
@@ -34,14 +39,7 @@ export default function Statistics() {
     let isSubscribed = true;
     api
       .post(`/station/count/network`, {
-        filters: {
-          name: [], // Nome da estação
-          network: [], // Tipo de rede (RQA, RHA ou HYBAM)
-          country: [], // País
-          responsible: [], // Órgão responsável
-          river: [], // Rio
-          variable: [], // Variáveis que a estação possui medição
-        },
+        filters: autocompleteSelection,
       })
       .then(({ data }) => {
         if (isSubscribed) {
@@ -71,7 +69,7 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [t]);
+  }, [t, autocompleteSelection]);
 
   /**
    * This userEffect fetch station count per countries.
@@ -80,14 +78,7 @@ export default function Statistics() {
     let isSubscribed = true;
     api
       .post(`/station/count/country`, {
-        filters: {
-          name: [], // Nome da estação
-          network: [], // Tipo de rede (RQA, RHA ou HYBAM)
-          country: [], // País
-          responsible: [], // Órgão responsável
-          river: [], // Rio
-          variable: [], // Variáveis que a estação possui medição
-        },
+        filters: autocompleteSelection,
       })
       .then(({ data }) => {
         if (isSubscribed) {
@@ -117,7 +108,7 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [t]);
+  }, [t, autocompleteSelection]);
 
   /**
    * This userEffect fetch ranking data.
@@ -128,14 +119,7 @@ export default function Statistics() {
       .post(
         `/station/ranking/river`,
         {
-          filters: {
-            name: [], // Nome da estação
-            network: [], // Tipo de rede (RQA, RHA ou HYBAM)
-            country: [], // País
-            responsible: [], // Órgão responsável
-            river: [], // Rio
-            variable: [], // Variáveis que a estação possui medição
-          },
+          filters: autocompleteSelection,
         },
         {
           params: {
@@ -175,7 +159,7 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [rankingParams.page, rankingParams.order, t]);
+  }, [rankingParams.page, rankingParams.order, autocompleteSelection, t]);
 
   return (
     <ul>
