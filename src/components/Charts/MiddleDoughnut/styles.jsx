@@ -1,6 +1,11 @@
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
+  wrapper: {
+    display: 'flex',
+    flexFlow: 'column nowrap',
+    alignItems: 'center',
+  },
   doughnutWrapper: {
     height: '130px',
     width: '130px',

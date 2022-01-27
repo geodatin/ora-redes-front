@@ -33,12 +33,17 @@ export default function MiddleDoughnut({
   const theme = useTheme();
 
   return (
-    <div className={classes.doughnutWrapper} style={style}>
-      {doughnut}
-      <div className={classes.doughnutMiddle}>{children}</div>
+    <div className={classes.wrapper}>
+      <div className={classes.doughnutWrapper} style={style}>
+        {doughnut}
+        <div className={classes.doughnutMiddle}>{children}</div>
+      </div>
       {description && (
         <Typography
-          style={{ color: theme.neutral.gray.main, marginTop: 10 }}
+          style={{
+            color: theme.neutral.gray.main,
+            marginTop: 10,
+          }}
           variant="body"
         >
           {description}

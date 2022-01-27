@@ -2,7 +2,15 @@
   "helloWorld": "Olá mundo!",
   "general": {
     "projectName": "Project",
-    "language": "Português"
+    "language": "Português",
+    "number": "{{value, number}}",
+    "roundNumber": "{{value, roundNumber}}",
+    "date": {
+      "year": "{{date, YYYY}}",
+      "monthYear": "{{date, MM/YYYY}}",
+      "monthNameYear": "{{date, MMMM, YYYY}}",
+      "complete": "{{date, DD/MM/YYYY}}"
+    }
   },
   "header": {
     "changeTheme": "Alternar Tema"
