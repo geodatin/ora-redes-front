@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 import { useTheme } from 'react-jss';
@@ -14,7 +15,7 @@ import ZoomButton from './ZoomButton';
  * This component renders a react-leaflet component
  * @returns Map component
  */
-export default function MapWrapper() {
+export default function MapWrapper({ children, ...rest }) {
   const position = [-5.0800011, -61.3420118];
   const classes = useStyles();
   const itemsRef = useRef();
@@ -56,6 +57,7 @@ export default function MapWrapper() {
       center={position}
       zoom={5}
       zoomControl={false}
+      {...rest}
     >
       <TileLayer
         ref={lightTileRef}
@@ -84,6 +86,15 @@ export default function MapWrapper() {
           className={classes.geodatinLogo}
         />
       </a>
+      {children}
     </MapContainer>
   );
 }
+
+MapWrapper.defaultProps = {
+  children: undefined,
+};
+
+MapWrapper.propTypes = {
+  children: PropTypes.node,
+};
