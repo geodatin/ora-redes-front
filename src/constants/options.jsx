@@ -81,6 +81,13 @@ export const networks = {
 };
 
 export const filterDefaults = {
-  autocompleteSelection: [],
+  autocompleteSelection: {
+    name: [],
+    network: [],
+    country: [],
+    responsible: [],
+    river: [],
+    variable: [],
+  },
   networkSelection: networks.all.value,
 };
