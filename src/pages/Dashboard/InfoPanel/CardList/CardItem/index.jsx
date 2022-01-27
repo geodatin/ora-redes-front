@@ -135,7 +135,7 @@ export default function CardItem({ item }) {
         disabled={false}
         onClick={() => {}}
       >
-        <Typography>{t('specific.list.seeMoreStatistics')}</Typography>
+        {t('specific.list.seeMoreStatistics')}
       </CustomButton>
     </ListItemContainer>
   );
