@@ -151,7 +151,7 @@ export default function Filters() {
         title={t('specific.filters.title')}
         buttonTitle={t('specific.filters.clearButton')}
         buttonDisabled={
-          auxAutocompleteSelection.length === 0 &&
+          selectionSize === 0 &&
           auxNetworkSelection === filterDefaults.networkSelection
         }
         onClick={() => clearSelection()}
