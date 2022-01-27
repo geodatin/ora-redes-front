@@ -23,6 +23,9 @@ export default function MapWrapper() {
   const lightTileRef = useRef();
   const darkTileRef = useRef();
 
+  /**
+   * Disable click propagation
+   */
   useEffect(() => {
     if (itemsRef?.current) {
       const disableClickPropagation = L?.DomEvent?.disableClickPropagation;
@@ -30,17 +33,19 @@ export default function MapWrapper() {
     }
   }, []);
 
+  /**
+   * Handle map darkmode
+   */
   useEffect(() => {
     if (map && lightTileRef.current && darkTileRef.current) {
       if (theme === darkScheme) {
         lightTileRef.current.remove();
         darkTileRef.current.addTo(map);
-        console.log('dark');
       } else {
         darkTileRef.current.remove();
         lightTileRef.current.addTo(map);
-        console.log('light');
       }
+      map.getContainer().style.backgroundColor = theme.background.main;
     }
   }, [theme, map]);
 
