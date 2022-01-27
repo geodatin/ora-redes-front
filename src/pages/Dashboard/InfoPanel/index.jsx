@@ -74,7 +74,6 @@ export default function InfoPanel({ title, subtitle }) {
               <CustomToggleButton
                 options={[
                   t('specific.infoPanel.timeGrouping.year'),
-                  t('specific.infoPanel.timeGrouping.semester'),
                   t('specific.infoPanel.timeGrouping.quarter'),
                   t('specific.infoPanel.timeGrouping.month'),
                   t('specific.infoPanel.timeGrouping.day'),

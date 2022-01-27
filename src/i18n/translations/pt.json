@@ -1,7 +1,15 @@
 {
   "general": {
     "projectName": "Redes",
-    "language": "Português"
+    "language": "Português",
+    "number": "{{value, number}}",
+    "roundNumber": "{{value, roundNumber}}",
+    "date": {
+      "year": "{{date, YYYY}}",
+      "monthYear": "{{date, MM/YYYY}}",
+      "monthNameYear": "{{date, MMMM, YYYY}}",
+      "complete": "{{date, DD/MM/YYYY}}"
+    }
   },
   "header": {
     "changeTheme": "Alternar Tema",
@@ -63,7 +71,7 @@
     },
     "infoPanel": {
       "title": "Todas as redes",
-      "lastUpdate": "Última atualizacao em",
+      "lastUpdate": "Última atualização em",
       "statistics": "Estatísticas",
       "list": "Listagem",
       "timeGrouping": {
@@ -91,6 +99,9 @@
           "info": "Este gráfico apresenta um ranking de rios por números de estações"
         }
       }
+    },
+    "list": {
+      "seeMoreStatistics": "Visualizar mais estatísticas"
     },
     "dataType": {
       "name": "Nome",
