@@ -1,10 +1,13 @@
 import L from 'leaflet';
-import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
+import 'leaflet/dist/leaflet.css';
+import { useTheme } from 'react-jss';
 import { MapContainer, TileLayer } from 'react-leaflet';
 
-import 'leaflet/dist/leaflet.css';
 import GeodatinLogo from '../../assets/images/geodatin-map.svg';
 import NorthIcon from '../../assets/images/north.svg';
+import { darkScheme } from '../../constants/schemes';
 import useStyles from './styles';
 import ZoomButton from './ZoomButton';
 
@@ -12,11 +15,18 @@ import ZoomButton from './ZoomButton';
  * This component renders a react-leaflet component
  * @returns Map component
  */
-export default function MapWrapper() {
+export default function MapWrapper({ children, ...rest }) {
   const position = [-5.0800011, -61.3420118];
   const classes = useStyles();
   const itemsRef = useRef();
+  const theme = useTheme();
+  const [map, setMap] = useState();
+  const lightTileRef = useRef();
+  const darkTileRef = useRef();
 
+  /**
+   * Disable click propagation
+   */
   useEffect(() => {
     if (itemsRef?.current) {
       const disableClickPropagation = L?.DomEvent?.disableClickPropagation;
@@ -24,16 +34,41 @@ export default function MapWrapper() {
     }
   }, []);
 
+  /**
+   * Handle map darkmode
+   */
+  useEffect(() => {
+    if (map && lightTileRef.current && darkTileRef.current) {
+      if (theme === darkScheme) {
+        lightTileRef.current.remove();
+        darkTileRef.current.addTo(map);
+      } else {
+        darkTileRef.current.remove();
+        lightTileRef.current.addTo(map);
+      }
+      map.getContainer().style.backgroundColor = theme.background.main;
+    }
+  }, [theme, map]);
+
   return (
     <MapContainer
+      whenCreated={setMap}
       className={classes.mapContainer}
       center={position}
       zoom={5}
       zoomControl={false}
+      {...rest}
     >
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        ref={lightTileRef}
+        attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <TileLayer
+        ref={darkTileRef}
+        attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        className={classes.tileLayer}
       />
       <div ref={itemsRef} className={classes.itemContainer}>
         <ZoomButton />
@@ -51,6 +86,15 @@ export default function MapWrapper() {
           className={classes.geodatinLogo}
         />
       </a>
+      {children}
     </MapContainer>
   );
 }
+
+MapWrapper.defaultProps = {
+  children: undefined,
+};
+
+MapWrapper.propTypes = {
+  children: PropTypes.node,
+};

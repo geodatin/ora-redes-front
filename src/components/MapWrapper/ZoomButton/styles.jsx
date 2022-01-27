@@ -12,6 +12,7 @@ const useStyles = createUseStyles((theme) => ({
     borderRadius: 5,
     border: `1px solid ${theme.stroke.dark}`,
     cursor: 'pointer',
+    transition: transitions.bgColor,
   },
   button: {
     '&.MuiButtonBase-root': {
@@ -43,7 +44,7 @@ const useStyles = createUseStyles((theme) => ({
         width: '100%',
         height: '100%',
         backgroundColor: 'transparent',
-        transition: 'background-color .2s ease',
+        transition: transitions.bgColor,
         opacity: 0.4,
         zIndex: 0,
       },

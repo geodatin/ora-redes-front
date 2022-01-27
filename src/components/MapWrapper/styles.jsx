@@ -42,6 +42,9 @@ const useStyles = createUseStyles({
   geodatinLogo: {
     height: 25,
   },
+  tileLayer: {
+    filter: 'invert(1) hue-rotate(200deg) brightness(0.9)',
+  },
 });
 
 export default useStyles;

@@ -1,7 +1,8 @@
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { Button } from '@mui/material';
-import React from 'react';
+import L from 'leaflet';
+import React, { useEffect, useRef } from 'react';
 import { useMap } from 'react-leaflet';
 
 import useStyles from './styles';
@@ -14,8 +15,20 @@ export default function ZoomButton() {
   const classes = useStyles();
   const map = useMap();
 
+  const containerRef = useRef();
+
+  /**
+   * Disable click propagation
+   */
+  useEffect(() => {
+    if (containerRef?.current) {
+      const disableClickPropagation = L?.DomEvent?.disableClickPropagation;
+      disableClickPropagation(containerRef.current);
+    }
+  }, []);
+
   return (
-    <div className={classes.container}>
+    <div ref={containerRef} className={classes.container}>
       <Button onClick={() => map.zoomIn()} className={classes.button}>
         <AddRoundedIcon className={classes.icon} />
       </Button>
