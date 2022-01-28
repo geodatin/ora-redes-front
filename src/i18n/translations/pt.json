@@ -145,6 +145,12 @@
         "quality": "Rede de Qualidade da Água",
         "hybam": "Rede de Estações SO-HYBAM"
       }
+    },
+    "popup": {
+      "country": "País",
+      "network": "Rede",
+      "river": "Rio",
+      "responsible": "Responsável"
     }
   }
 }

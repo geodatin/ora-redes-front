@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import L from 'leaflet';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 import { Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
 
@@ -15,10 +16,12 @@ import OrangeStationLight from '../../../assets/icons/map/orange-station-light.p
 import BorderGeojson from '../../../assets/shapes/border.json';
 import InverseShape from '../../../assets/shapes/inverseShape.json';
 import MapWrapper from '../../../components/MapWrapper';
+import Typography from '../../../components/Typography';
 import { networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import api from '../../../services/api';
+import useStyles from './styles';
 
 /**
  * This function provides the monitoring map
@@ -30,6 +33,8 @@ export default function MonitoringMap() {
   } = useContext(FilteringContext);
   const [points, setPoints] = useState();
   const theme = useTheme();
+  const classes = useStyles();
+  const { t } = useTranslation();
 
   useEffect(() => {
     api
@@ -99,7 +104,67 @@ export default function MonitoringMap() {
 
         return (
           <Marker key={key} position={position} icon={icon}>
-            <Popup>.</Popup>
+            <Popup
+              key={theme === darkScheme ? `${key}-dark` : `${key}-light`}
+              className={classes.popup}
+            >
+              <Typography variant="caption" format="bold">
+                {point.properties.name}
+              </Typography>
+              <div className={classes.separator} />
+              {point.properties.country && (
+                <div className={classes.popupItem}>
+                  <Typography
+                    variant="caption"
+                    className={classes.popupItemTitle}
+                  >
+                    {t('specific.popup.country')}
+                  </Typography>
+                  <Typography variant="caption">
+                    {point.properties.country}
+                  </Typography>
+                </div>
+              )}
+              {point.properties.network && (
+                <div className={classes.popupItem}>
+                  <Typography
+                    variant="caption"
+                    className={classes.popupItemTitle}
+                  >
+                    {t('specific.popup.country')}
+                  </Typography>
+                  <Typography variant="caption">
+                    {point.properties.network}
+                  </Typography>
+                </div>
+              )}
+              {point.properties.responsible && (
+                <div className={classes.popupItem}>
+                  <Typography
+                    variant="caption"
+                    className={classes.popupItemTitle}
+                  >
+                    {t('specific.popup.responsible')}
+                  </Typography>
+                  <Typography variant="caption">
+                    {point.properties.responsible}
+                  </Typography>
+                </div>
+              )}
+              {point.properties.river && (
+                <div className={classes.popupItem}>
+                  <Typography
+                    variant="caption"
+                    className={classes.popupItemTitle}
+                  >
+                    {t('specific.popup.river')}
+                  </Typography>
+                  <Typography variant="caption">
+                    {point.properties.river}
+                  </Typography>
+                </div>
+              )}
+            </Popup>
           </Marker>
         );
       });
