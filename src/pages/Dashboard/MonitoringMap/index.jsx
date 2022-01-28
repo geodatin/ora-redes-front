@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { getFormHelperTextUtilityClasses } from '@mui/material';
-import L from 'leaflet';
+import L, { GeoJSON } from 'leaflet';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTheme } from 'react-jss';
-import { Marker, Popup } from 'react-leaflet';
+import { Marker, Popup, TileLayer } from 'react-leaflet';
 
 import BluesStationDark from '../../../assets/icons/map/blue-station-dark.png';
 import BluesStationLight from '../../../assets/icons/map/blue-station-light.png';
@@ -13,12 +12,14 @@ import GreenStationDark from '../../../assets/icons/map/green-station-dark.png';
 import GreenStationLight from '../../../assets/icons/map/green-station-light.png';
 import OrangeStationDark from '../../../assets/icons/map/orange-station-dark.png';
 import OrangeStationLight from '../../../assets/icons/map/orange-station-light.png';
+import BorderGeojson from '../../../assets/shapes/border.json';
 import MapWrapper from '../../../components/MapWrapper';
 import { networks } from '../../../constants/options';
 import { darkScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import api from '../../../services/api';
 
+console.log(BorderGeojson);
 /**
  * This function provides the monitoring map
  * @returns Monitoring Map
@@ -116,6 +117,10 @@ export default function MonitoringMap() {
         [10.511898, -46.591429],
       ]}
     >
+      <TileLayer
+        url="https://storage.googleapis.com/ora-otca/water/period/{z}/{x}/{y}.png"
+        opacity={0.5}
+      />
       {markers}
     </MapWrapper>
   );
