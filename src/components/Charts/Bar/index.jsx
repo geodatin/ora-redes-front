@@ -13,11 +13,12 @@ export default function BarChart({ title, info, data, options: mergeOptions }) {
   BarChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
-    data: PropTypes.shape().isRequired,
+    data: PropTypes.shape(),
     options: PropTypes.shape(),
   };
 
   BarChart.defaultProps = {
+    data: undefined,
     options: undefined,
   };
 
