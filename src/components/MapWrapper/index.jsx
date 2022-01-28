@@ -16,7 +16,7 @@ import ZoomButton from './ZoomButton';
  * @returns Map component
  */
 export default function MapWrapper({ children, ...rest }) {
-  const position = [-5.0800011, -61.3420118];
+  const position = [-7.3800011, -64.3420118];
   const classes = useStyles();
   const itemsRef = useRef();
   const theme = useTheme();
