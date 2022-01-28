@@ -16,7 +16,7 @@ import BorderGeojson from '../../../assets/shapes/border.json';
 import InverseShape from '../../../assets/shapes/inverseShape.json';
 import MapWrapper from '../../../components/MapWrapper';
 import { networks } from '../../../constants/options';
-import { darkScheme } from '../../../constants/schemes';
+import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import api from '../../../services/api';
 
@@ -118,6 +118,14 @@ export default function MonitoringMap() {
       ]}
     >
       <GeoJSON
+        data={InverseShape}
+        style={() => ({
+          stroke: false,
+          fillColor: theme === darkScheme ? 'black' : lightScheme.stroke.light,
+          fillOpacity: theme === darkScheme ? 0.5 : 0.65,
+        })}
+      />
+      <GeoJSON
         data={BorderGeojson}
         style={() => ({
           fillColor: 'transparent',
@@ -126,14 +134,6 @@ export default function MonitoringMap() {
           lineCap: 'round',
           lineJoin: 'round ',
           color: theme === darkScheme ? '#accc0c' : '#768705',
-        })}
-      />
-      <GeoJSON
-        data={InverseShape}
-        style={() => ({
-          stroke: false,
-          fillColor: 'black',
-          fillOpacity: theme === darkScheme ? 0.5 : 0.215,
         })}
       />
       <TileLayer
