@@ -35,11 +35,12 @@ export default function LegendDoughnutChart({
   const theme = useTheme();
 
   const getTotal = (array) => {
-    const total = array?.reduce(
+    if (!array || array.length === 0) {
+      return 0;
+    }
+    return array?.reduce(
       (previousValue, currentValue) => previousValue + currentValue
     );
-
-    return total;
   };
 
   const options = {
@@ -94,7 +95,7 @@ export default function LegendDoughnutChart({
           }
         >
           <Typography format="bold" variant="h3">
-            {getTotal(data?.datasets[0].data)}
+            {getTotal(data?.datasets[0]?.data)}
           </Typography>
           <Typography variant="body" style={{ color: theme.neutral.gray.main }}>
             {data?.datasets[0].label}
