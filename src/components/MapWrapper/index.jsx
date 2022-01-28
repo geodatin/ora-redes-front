@@ -5,8 +5,9 @@ import 'leaflet/dist/leaflet.css';
 import { useTheme } from 'react-jss';
 import { MapContainer, TileLayer } from 'react-leaflet';
 
+import DarkNorthIcon from '../../assets/images/dark-north.svg';
 import GeodatinLogo from '../../assets/images/geodatin-map.svg';
-import NorthIcon from '../../assets/images/north.svg';
+import LightNorthIcon from '../../assets/images/light-north.svg';
 import { darkScheme } from '../../constants/schemes';
 import useStyles from './styles';
 import ZoomButton from './ZoomButton';
@@ -73,7 +74,11 @@ export default function MapWrapper({ children, ...rest }) {
       <div ref={itemsRef} className={classes.itemContainer}>
         <ZoomButton />
       </div>
-      <img alt="north" src={NorthIcon} className={classes.northIcon} />
+      <img
+        alt="north"
+        src={theme === darkScheme ? DarkNorthIcon : LightNorthIcon}
+        className={classes.northIcon}
+      />
       <a
         href="https://geodatin.com"
         target="_blank"
