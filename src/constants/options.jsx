@@ -95,3 +95,45 @@ export const filterDefaults = {
   },
   networkSelection: networks.all.value,
 };
+
+export const timeGroupingOptions = [
+  {
+    code: 'year',
+    translation: 'specific.infoPanel.timeGrouping.year',
+  },
+  {
+    code: 'quarter',
+    translation: 'specific.infoPanel.timeGrouping.quarter',
+  },
+  {
+    code: 'month',
+    translation: 'specific.infoPanel.timeGrouping.month',
+  },
+  {
+    code: 'day',
+    translation: 'specific.infoPanel.timeGrouping.day',
+  },
+  {
+    code: 'week',
+    translation: 'specific.infoPanel.timeGrouping.week',
+  },
+  {
+    code: 'hour',
+    translation: 'specific.infoPanel.timeGrouping.hour',
+  },
+];
+
+export const panels = {
+  statistics: {
+    index: 0,
+    translation: 'specific.infoPanel.statistics',
+  },
+  list: {
+    index: 1,
+    translation: 'specific.infoPanel.list',
+  },
+  station: {
+    index: 2,
+    translation: undefined,
+  },
+};

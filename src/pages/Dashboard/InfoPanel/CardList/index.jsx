@@ -12,9 +12,10 @@ import useStyles from './styles';
  * This function provides a card list
  * @returns card list
  */
-export default function CardList({ tabpanelref }) {
+export default function CardList({ tabpanelref, timeGrouping }) {
   CardList.propTypes = {
     tabpanelref: PropTypes.shape(),
+    timeGrouping: PropTypes.string.isRequired,
   };
 
   CardList.defaultProps = {
@@ -50,7 +51,7 @@ export default function CardList({ tabpanelref }) {
     setIsFirstLoading(true);
     api
       .post(
-        `/observation/last/day`,
+        `/observation/last/${timeGrouping}`,
         {
           filters: autocompleteSelection,
         },
@@ -72,7 +73,7 @@ export default function CardList({ tabpanelref }) {
     return () => {
       isSubscribed = false;
     };
-  }, [autocompleteSelection]);
+  }, [autocompleteSelection, timeGrouping]);
 
   /**
    * This function fetch more stations.
@@ -84,7 +85,7 @@ export default function CardList({ tabpanelref }) {
       setIsLoadingPage(true);
       api
         .post(
-          `/observation/last/day`,
+          `/observation/last/${timeGrouping}`,
           {
             filters: autocompleteSelection,
           },

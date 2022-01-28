@@ -7,6 +7,7 @@ import CustomToggleButton from '../../../components/CustomToggleButton';
 import VLayout from '../../../components/Layout/Vertical';
 import TabPanel from '../../../components/TabPanel';
 import Typography from '../../../components/Typography';
+import { panels, timeGroupingOptions } from '../../../constants/options';
 import CardList from './CardList';
 import Statistics from './Statistics';
 import useStyles from './styles';
@@ -29,25 +30,10 @@ export default function InfoPanel({ title, subtitle }) {
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const panels = {
-    statistics: {
-      index: 0,
-      translation: t('specific.infoPanel.statistics'),
-    },
-    list: {
-      index: 1,
-      translation: t('specific.infoPanel.list'),
-    },
-    station: {
-      index: 2,
-      translation: undefined,
-    },
-  };
-
   const [panelIndexValue, setPanelIndexValue] = useState(
     panels.statistics.index
   );
-  const [timeGrouping, setTimeGrouping] = useState(0);
+  const [timeGroupingIndexValue, setTimeGroupingIndexValue] = useState(3);
 
   const handleChangePanel = (event, newPanel) => {
     if (newPanel !== null) {
@@ -57,7 +43,7 @@ export default function InfoPanel({ title, subtitle }) {
 
   const handleChangeTimeGrouping = (event, newTimeGrouping) => {
     if (newTimeGrouping !== null) {
-      setTimeGrouping(newTimeGrouping);
+      setTimeGroupingIndexValue(newTimeGrouping);
     }
   };
 
@@ -83,7 +69,10 @@ export default function InfoPanel({ title, subtitle }) {
               </Typography>
             )}
             <CustomToggleButton
-              options={[panels.statistics.translation, panels.list.translation]}
+              options={[
+                t(panels.statistics.translation),
+                t(panels.list.translation),
+              ]}
               value={
                 panelIndexValue === panels.station.index
                   ? panels.list.index
@@ -94,15 +83,10 @@ export default function InfoPanel({ title, subtitle }) {
             />
             {timeGroupingVisibility && (
               <CustomToggleButton
-                options={[
-                  t('specific.infoPanel.timeGrouping.year'),
-                  t('specific.infoPanel.timeGrouping.quarter'),
-                  t('specific.infoPanel.timeGrouping.month'),
-                  t('specific.infoPanel.timeGrouping.day'),
-                  t('specific.infoPanel.timeGrouping.week'),
-                  t('specific.infoPanel.timeGrouping.hour'),
-                ]}
-                value={timeGrouping}
+                options={timeGroupingOptions.map((option) =>
+                  t(option.translation)
+                )}
+                value={timeGroupingIndexValue}
                 handleChange={handleChangeTimeGrouping}
                 style={{ marginTop: 20 }}
                 typographyVariant="caption"
@@ -119,7 +103,9 @@ export default function InfoPanel({ title, subtitle }) {
               <Statistics />
             </TabPanel>
             <TabPanel value={panelIndexValue} index={panels.list.index}>
-              <CardList />
+              <CardList
+                timeGrouping={timeGroupingOptions[timeGroupingIndexValue].code}
+              />
             </TabPanel>
             <TabPanel value={panelIndexValue} index={panels.station.index}>
               <div>Station data</div>
