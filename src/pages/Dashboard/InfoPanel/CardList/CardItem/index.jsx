@@ -27,7 +27,7 @@ export default function CardItem({ item }) {
   function dataDough(value, sufix, description, color) {
     return (
       <MiddleDoughnut
-        style={{ width: 110 }}
+        style={{ width: 125 }}
         description={description}
         doughnut={
           <Doughnut
@@ -47,7 +47,7 @@ export default function CardItem({ item }) {
               },
               aspectRatio: 1,
               radius: '100%',
-              cutout: 47,
+              cutout: 55,
               rotation: 180,
             }}
             data={{
@@ -65,8 +65,8 @@ export default function CardItem({ item }) {
           />
         }
       >
-        <Typography format="bold" variant="h3">
-          {value || '-'}
+        <Typography format="bold" variant="p">
+          {t('general.number', { value }) || '-'}
         </Typography>
         <Typography variant="body" style={{ color: theme.neutral.gray.main }}>
           {sufix}
@@ -100,7 +100,7 @@ export default function CardItem({ item }) {
         <Typography style={{ color: theme.secondary.dark }} variant="caption">
           {t('specific.infoPanel.lastUpdate')}{' '}
           {t('general.date.complete', {
-            date: new Date(item.timestamp),
+            date: new Date(item.lastUpdate),
           })}
         </Typography>
       </div>

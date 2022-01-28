@@ -29,12 +29,29 @@ export default function InfoPanel({ title, subtitle }) {
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const [panel, setPanel] = useState(0);
+  const panels = {
+    statistics: {
+      index: 0,
+      translation: t('specific.infoPanel.statistics'),
+    },
+    list: {
+      index: 1,
+      translation: t('specific.infoPanel.list'),
+    },
+    station: {
+      index: 2,
+      translation: undefined,
+    },
+  };
+
+  const [panelIndexValue, setPanelIndexValue] = useState(
+    panels.statistics.index
+  );
   const [timeGrouping, setTimeGrouping] = useState(0);
 
   const handleChangePanel = (event, newPanel) => {
     if (newPanel !== null) {
-      setPanel(newPanel);
+      setPanelIndexValue(newPanel);
     }
   };
 
@@ -43,6 +60,10 @@ export default function InfoPanel({ title, subtitle }) {
       setTimeGrouping(newTimeGrouping);
     }
   };
+
+  const timeGroupingVisibility =
+    panelIndexValue === panels.list.index ||
+    panelIndexValue === panels.station.index;
 
   return (
     <VLayout
@@ -62,15 +83,16 @@ export default function InfoPanel({ title, subtitle }) {
               </Typography>
             )}
             <CustomToggleButton
-              options={[
-                t('specific.infoPanel.statistics'),
-                t('specific.infoPanel.list'),
-              ]}
-              value={panel}
+              options={[panels.statistics.translation, panels.list.translation]}
+              value={
+                panelIndexValue === panels.station.index
+                  ? panels.list.index
+                  : panelIndexValue
+              }
               handleChange={handleChangePanel}
               style={{ marginTop: 10 }}
             />
-            {panel === 1 && (
+            {timeGroupingVisibility && (
               <CustomToggleButton
                 options={[
                   t('specific.infoPanel.timeGrouping.year'),
@@ -93,11 +115,14 @@ export default function InfoPanel({ title, subtitle }) {
         className: classes.panelWrapper,
         children: (
           <>
-            <TabPanel value={panel} index={0}>
+            <TabPanel value={panelIndexValue} index={panels.statistics.index}>
               <Statistics />
             </TabPanel>
-            <TabPanel value={panel} index={1}>
+            <TabPanel value={panelIndexValue} index={panels.list.index}>
               <CardList />
+            </TabPanel>
+            <TabPanel value={panelIndexValue} index={panels.station.index}>
+              <div>Station data</div>
             </TabPanel>
           </>
         ),
