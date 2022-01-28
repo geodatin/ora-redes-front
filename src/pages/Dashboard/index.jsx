@@ -9,10 +9,10 @@ import Breadcrumb from '../../components/Breadcrumb';
 import HLayout from '../../components/Layout/Horizontal';
 import MobileNavbarLayout from '../../components/Layout/Mobile/Navbar';
 import VLayout from '../../components/Layout/Vertical';
-import MapWrapper from '../../components/MapWrapper';
 import { breakpoints } from '../../constants/constraints';
 import Filters from './Filters';
 import InfoPanel from './InfoPanel';
+import MonitoringMap from './MonitoringMap';
 import useStyles from './styles';
 
 /**
@@ -36,7 +36,7 @@ function Dashboard() {
       mainContainer={{
         label: t('specific.mobileNavbar.map'),
         icon: <MapRoundedIcon />,
-        children: <MapWrapper />,
+        children: <MonitoringMap />,
       }}
       bottomNavBar={[
         {
@@ -76,7 +76,7 @@ function Dashboard() {
             }}
             mainContainer={{
               className: classes.map,
-              children: <MapWrapper />,
+              children: <MonitoringMap />,
             }}
           />
         ),

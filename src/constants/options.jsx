@@ -59,22 +59,26 @@ export const countryCodes = {
 
 export const networks = {
   all: {
+    name: 'all',
     code: 'all',
     translation: 'specific.networks.type.all',
     value: 1,
   },
   hydrologic: {
-    code: 'hydrologic',
+    name: 'hydrologic',
+    code: 'RHA',
     translation: 'specific.networks.type.hydrologic',
     value: 2,
   },
   quality: {
-    code: 'quality',
+    name: 'quality',
+    code: 'RQA',
     translation: 'specific.networks.type.quality',
     value: 3,
   },
   hybam: {
-    code: 'hybam',
+    name: 'hybam',
+    code: 'HYBAM',
     translation: 'specific.networks.type.hybam',
     value: 4,
   },
