@@ -157,7 +157,7 @@ export default function Filters() {
         onClick={() => clearSelection()}
       />
       <div>
-        <CustomSelect emphasis value={auxNetworkSelection}>
+        <CustomSelect value={auxNetworkSelection}>
           <MenuItem
             value={networks.all.value}
             onSelect={() => setAuxNetworkSelection(networks.all.value)}
