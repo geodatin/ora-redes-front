@@ -122,7 +122,7 @@ export default function MonitoringMap() {
         style={() => ({
           stroke: false,
           fillColor: theme === darkScheme ? 'black' : lightScheme.stroke.light,
-          fillOpacity: theme === darkScheme ? 0.5 : 0.65,
+          fillOpacity: theme === darkScheme ? 0.5 : 0.7,
         })}
       />
       <GeoJSON
@@ -133,7 +133,7 @@ export default function MonitoringMap() {
           dashArray: 8,
           lineCap: 'round',
           lineJoin: 'round ',
-          color: theme === darkScheme ? '#accc0c' : '#768705',
+          color: theme === darkScheme ? '#accc0c' : '#728740',
         })}
       />
       <TileLayer
