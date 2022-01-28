@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
@@ -8,7 +9,10 @@ import VLayout from '../../../components/Layout/Vertical';
 import TabPanel from '../../../components/TabPanel';
 import Typography from '../../../components/Typography';
 import { panels, timeGroupingOptions } from '../../../constants/options';
+import PanelRoutingContext from '../../../contexts/panelRouting';
 import CardList from './CardList';
+import CardItem from './CardList/CardItem';
+import Station from './Station';
 import Statistics from './Statistics';
 import useStyles from './styles';
 
@@ -30,10 +34,12 @@ export default function InfoPanel({ title, subtitle }) {
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const [panelIndexValue, setPanelIndexValue] = useState(
-    panels.statistics.index
-  );
-  const [timeGroupingIndexValue, setTimeGroupingIndexValue] = useState(3);
+  const {
+    values: { panelIndexValue, station },
+    setters: { setPanelIndexValue },
+  } = useContext(PanelRoutingContext);
+
+  const [timeGroupingIndexValue, setTimeGroupingIndexValue] = useState(0);
 
   const handleChangePanel = (event, newPanel) => {
     if (newPanel !== null) {
@@ -108,7 +114,10 @@ export default function InfoPanel({ title, subtitle }) {
               />
             </TabPanel>
             <TabPanel value={panelIndexValue} index={panels.station.index}>
-              <div>Station data</div>
+              <Station
+                station={station}
+                timeGrouping={timeGroupingOptions[timeGroupingIndexValue].code}
+              />
             </TabPanel>
           </>
         ),

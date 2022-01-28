@@ -10,6 +10,7 @@ import HLayout from '../../components/Layout/Horizontal';
 import MobileNavbarLayout from '../../components/Layout/Mobile/Navbar';
 import VLayout from '../../components/Layout/Vertical';
 import { breakpoints } from '../../constants/constraints';
+import { PanelRoutingProvider } from '../../contexts/panelRouting';
 import Filters from './Filters';
 import InfoPanel from './InfoPanel';
 import MonitoringMap from './MonitoringMap';
@@ -25,10 +26,12 @@ function Dashboard() {
   const { t } = useTranslation();
 
   const infoPanel = (
-    <InfoPanel
-      title={t('specific.infoPanel.title')}
-      subtitle="Last update in 11/08/2022"
-    />
+    <PanelRoutingProvider>
+      <InfoPanel
+        title={t('specific.infoPanel.title')}
+        subtitle="Last update in 11/08/2022"
+      />
+    </PanelRoutingProvider>
   );
 
   return isMobile ? (

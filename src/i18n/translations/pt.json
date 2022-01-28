@@ -97,6 +97,18 @@
         "riverRanking": {
           "title": "Ranking de rios por números de estações",
           "info": "Este gráfico apresenta um ranking de rios por números de estações"
+        },
+        "rainTimeSeries": {
+          "title": "Histórico de precipitação",
+          "info": "Este gráfico apresenta um histórico de precipitação"
+        },
+        "levelTimeSeries": {
+          "title": "Histórico do nível médio",
+          "info": "Este gráfico apresenta o histórico do nível médio"
+        },
+        "flowRateTimeSeries": {
+          "title": "Histórico da vazão",
+          "info": "Este gráfico apresenta o histórico da vazão"
         }
       }
     },

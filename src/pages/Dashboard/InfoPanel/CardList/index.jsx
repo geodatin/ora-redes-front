@@ -26,14 +26,15 @@ export default function CardList({ tabpanelref, timeGrouping }) {
     values: { autocompleteSelection },
   } = useContext(FilteringContext);
 
+  const [isFirstLoading, setIsFirstLoading] = useState(false);
+
   const [list, setList] = useState([]);
   const [resultsAmount, setResultsAmount] = useState();
+
+  const pageSize = 10;
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(5);
   const [isLoadingPage, setIsLoadingPage] = useState(true);
-  const [isFirstLoading, setIsFirstLoading] = useState(false);
-
-  const pageSize = 10;
 
   function scrollToTop() {
     if (tabpanelref) {

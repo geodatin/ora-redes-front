@@ -1,6 +1,6 @@
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -9,20 +9,30 @@ import MiddleDoughnut from '../../../../../components/Charts/MiddleDoughnut';
 import CustomButton from '../../../../../components/CustomButton';
 import ListItemContainer from '../../../../../components/ListItemContainer';
 import Typography from '../../../../../components/Typography';
+import PanelRoutingContext from '../../../../../contexts/panelRouting';
 import useStyles from './styles';
 
 /**
  * This component provides a station card item
  * @returns station card item
  */
-export default function CardItem({ item }) {
+export default function CardItem({ item, disableMoreStatisticsButton }) {
   CardItem.propTypes = {
     item: PropTypes.shape().isRequired,
+    disableMoreStatisticsButton: PropTypes.bool,
+  };
+
+  CardItem.defaultProps = {
+    disableMoreStatisticsButton: false,
   };
 
   const theme = useTheme();
   const classes = useStyles();
   const { t } = useTranslation();
+
+  const {
+    functions: { openStation },
+  } = useContext(PanelRoutingContext);
 
   function dataDough(value, sufix, description, color) {
     return (
@@ -124,19 +134,21 @@ export default function CardItem({ item }) {
           theme.green.dark
         )}
       </div>
-      <CustomButton
-        style={{
-          width: '100%',
-          height: 30,
-          backgroundColor: theme.toggleButton.unabled,
-          textTransform: 'none',
-          color: theme.neutral.gray.main,
-        }}
-        disabled={false}
-        onClick={() => {}}
-      >
-        {t('specific.list.seeMoreStatistics')}
-      </CustomButton>
+      {!disableMoreStatisticsButton && (
+        <CustomButton
+          style={{
+            width: '100%',
+            height: 30,
+            backgroundColor: theme.toggleButton.unabled,
+            textTransform: 'none',
+            color: theme.neutral.gray.main,
+          }}
+          disabled={false}
+          onClick={() => openStation(item)}
+        >
+          {t('specific.list.seeMoreStatistics')}
+        </CustomButton>
+      )}
     </ListItemContainer>
   );
 }
