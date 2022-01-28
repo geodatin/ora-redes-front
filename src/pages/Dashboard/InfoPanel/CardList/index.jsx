@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import InfiniteScroll from '../../../../components/InfiniteScroll';
+import FilteringContext from '../../../../contexts/filtering';
+import api from '../../../../services/api';
 import CardItem from './CardItem';
 import useStyles from './styles';
 
@@ -8,67 +12,95 @@ import useStyles from './styles';
  * This function provides a card list
  * @returns card list
  */
-export default function CardList() {
-  const [list /* setList */] = useState([
-    {
-      location: {
-        type: 'Point',
-        coordinates: [-65.5275, -9.7847],
-      },
-      name: 'MORADA NOVA - JUSANTE',
-      rain: 12,
-      flowRate: 32,
-      code: 15326000,
-      level: 145,
-      timestamp: '2021-12-21T13:15:00.000Z',
-    },
-    {
-      location: {
-        type: 'Point',
-        coordinates: [-68.9119, -3.4569],
-      },
-      name: 'SÃO PAULO DE OLIVENÇA',
-      rain: 22,
-      flowRate: 23,
-      code: 11400000,
-      level: 43,
-      timestamp: '2021-12-21T02:45:00.000Z',
-    },
-    {
-      location: {
-        type: 'Point',
-        coordinates: [-68.9119, -3.4569],
-      },
-      name: 'JARAGUAIA',
-      rain: 22,
-      flowRate: 23,
-      code: 11420000,
-      level: 43,
-      timestamp: '2021-12-21T02:45:00.000Z',
-    },
-    {
-      location: {
-        type: 'Point',
-        coordinates: [-68.9119, -3.4569],
-      },
-      name: 'RIO DAS CONTAS',
-      rain: 22,
-      flowRate: 23,
-      code: 11420300,
-      level: 43,
-      timestamp: '2021-12-21T02:45:00.000Z',
-    },
-  ]);
+export default function CardList({ tabpanelref }) {
+  CardList.propTypes = {
+    tabpanelref: PropTypes.shape(),
+  };
 
-  const [page /* setPage */] = useState(1);
-  const [maxPage /* setMaxPage */] = useState(5);
-  const [isLoadingPage /* setIsLoadingPage */] = useState(true);
-  const [isFirstLoading /* setIsFirstLoading */] = useState(false);
+  CardList.defaultProps = {
+    tabpanelref: undefined,
+  };
 
+  const {
+    values: { autocompleteSelection },
+  } = useContext(FilteringContext);
+
+  const [list, setList] = useState([]);
+  const [resultsAmount, setResultsAmount] = useState();
+  const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(5);
+  const [isLoadingPage, setIsLoadingPage] = useState(true);
+  const [isFirstLoading, setIsFirstLoading] = useState(false);
+
+  const pageSize = 10;
+
+  function scrollToTop() {
+    if (tabpanelref) {
+      tabpanelref?.current.scrollTo(0, 0);
+    }
+  }
+  const { t } = useTranslation();
   const classes = useStyles();
 
-  const handleOnBottom = (/* isBottom */) => {
-    // fetch more items logic here
+  /**
+   * This userEffect fetch station list.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+    setIsFirstLoading(true);
+    api
+      .post(
+        `/observation/last/day`,
+        {
+          filters: autocompleteSelection,
+        },
+        { params: { page: 1, pageSize } }
+      )
+      .then(({ data }) => {
+        if (isSubscribed) {
+          if (data) {
+            setResultsAmount(data.total);
+            setMaxPage(data.pages);
+            scrollToTop();
+            setList(data.values);
+            setIsFirstLoading(false);
+            setPage(1);
+          }
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [autocompleteSelection]);
+
+  /**
+   * This function fetch more stations.
+   */
+  const handleOnBottom = (isBottom) => {
+    let isSubscribed = true;
+    const nextPage = page + 1;
+    if (!isFirstLoading && isBottom && nextPage <= maxPage) {
+      setIsLoadingPage(true);
+      api
+        .post(
+          `/observation/last/day`,
+          {
+            filters: autocompleteSelection,
+          },
+          { params: { page: nextPage, pageSize } }
+        )
+        .then(({ data }) => {
+          if (isSubscribed) {
+            setList((prev) => prev.concat(data.values));
+            setIsLoadingPage(false);
+            setPage(nextPage);
+          }
+        });
+    }
+    return () => {
+      isSubscribed = false;
+    };
   };
 
   return (
@@ -79,6 +111,9 @@ export default function CardList() {
         page={page}
         maxPage={maxPage}
         onChange={handleOnBottom}
+        resultsAmount={resultsAmount ?? 0}
+        noMoreResultsText={t('specific.list.noMoreResults')}
+        noResultsText={t('specific.list.noResults')}
       >
         {list.map((item) => (
           <CardItem key={item.code} item={item} />

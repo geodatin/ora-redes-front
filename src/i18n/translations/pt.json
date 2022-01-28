@@ -101,7 +101,9 @@
       }
     },
     "list": {
-      "seeMoreStatistics": "Visualizar mais estatísticas"
+      "seeMoreStatistics": "Visualizar mais estatísticas",
+      "noMoreResults": "Não há mais resultados a serem exibidos",
+      "noResults": "Não existem resultados para a filtragem aplicada"
     },
     "dataType": {
       "name": "Nome",

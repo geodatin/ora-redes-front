@@ -5,7 +5,7 @@ const useStyles = createUseStyles((theme) => ({
     '& > *': {
       borderBottom: `1px solid ${theme.stroke.light}`,
     },
-    '& > *:nth-last-child(3)': {
+    '& > *:nth-last-child(1)': {
       borderBottom: `none`,
     },
   },
