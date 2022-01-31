@@ -18,11 +18,12 @@ export default function LineChart({
   LineChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
-    data: PropTypes.shape().isRequired,
+    data: PropTypes.shape(),
     options: PropTypes.shape(),
   };
 
   LineChart.defaultProps = {
+    data: undefined,
     options: undefined,
   };
 
