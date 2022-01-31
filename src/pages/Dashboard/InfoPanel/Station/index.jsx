@@ -44,6 +44,25 @@ export default function Station({ station, timeGrouping }) {
     },
   };
 
+  const xAxisFormatter = (timestamps) =>
+    timestamps.map((timeStamp) => {
+      if (timeGrouping === 'year') {
+        return t('general.date.year', {
+          date: new Date(timeStamp),
+        });
+      }
+
+      if (timeGrouping === 'quarter' || timeGrouping === 'month') {
+        return t('general.date.monthYear', {
+          date: new Date(timeStamp),
+        });
+      }
+
+      return t('general.date.complete', {
+        date: new Date(timeStamp),
+      });
+    });
+
   /**
    * This userEffect updates station data.
    */
@@ -80,11 +99,7 @@ export default function Station({ station, timeGrouping }) {
         if (isSubscribed) {
           if (data) {
             setRainData({
-              labels: data.x.map((timeStamp) =>
-                t('general.date.complete', {
-                  date: new Date(timeStamp),
-                })
-              ),
+              labels: xAxisFormatter(data.x),
               datasets: [
                 {
                   label: t('specific.dataType.variable.items.rain'),
@@ -118,11 +133,7 @@ export default function Station({ station, timeGrouping }) {
         if (isSubscribed) {
           if (data) {
             setLevelData({
-              labels: data.x.map((timeStamp) =>
-                t('general.date.complete', {
-                  date: new Date(timeStamp),
-                })
-              ),
+              labels: xAxisFormatter(data.x),
               datasets: [
                 {
                   label: t('specific.dataType.variable.items.adoptedLevel'),
@@ -156,11 +167,7 @@ export default function Station({ station, timeGrouping }) {
         if (isSubscribed) {
           if (data) {
             setFlowRateData({
-              labels: data.x.map((timeStamp) =>
-                t('general.date.complete', {
-                  date: new Date(timeStamp),
-                })
-              ),
+              labels: xAxisFormatter(data.x),
               datasets: [
                 {
                   label: t('specific.dataType.variable.items.flowRate'),
