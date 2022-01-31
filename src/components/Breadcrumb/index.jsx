@@ -9,21 +9,29 @@ import useStyles from './styles';
  * This component renders a Breadcrumb
  * @returns Breadcrumb
  */
-export default function Breadcrumb({ items }) {
+export default function Breadcrumb({ items, onClickItem }) {
   const classes = useStyles();
 
   return (
     <div className={classes.breadcrumb}>
       {items.map((item, index) => {
         const itemComponent = (
-          <Typography
+          <div
+            role="button"
             key={item}
-            className={
-              index > 0 ? classes.secondaryItem : classes.principalItem
-            }
+            tabIndex={0}
+            style={{ cursor: 'pointer' }}
+            onClick={() => onClickItem({ item, index })}
+            onKeyDown={() => onClickItem({ item, index })}
           >
-            {item}
-          </Typography>
+            <Typography
+              className={
+                index > 0 ? classes.secondaryItem : classes.principalItem
+              }
+            >
+              {item}
+            </Typography>
+          </div>
         );
 
         if (index + 1 < items.length) {
@@ -47,4 +55,5 @@ export default function Breadcrumb({ items }) {
 
 Breadcrumb.propTypes = {
   items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClickItem: PropTypes.func.isRequired,
 };
