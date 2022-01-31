@@ -36,6 +36,14 @@ export default function Station({ station, timeGrouping }) {
   const [levelData, setLevelData] = useState();
   const [flowRateData, setFlowRateData] = useState();
 
+  const tooltipSufix = {
+    callbacks: {
+      label(context) {
+        return `${context.dataset.label}: ${context.formattedValue} ${context.dataset?.sufix}`;
+      },
+    },
+  };
+
   /**
    * This userEffect updates station data.
    */
@@ -81,6 +89,7 @@ export default function Station({ station, timeGrouping }) {
                 {
                   label: t('specific.dataType.variable.items.rain'),
                   data: data.y,
+                  sufix: t('specific.dataType.sufixes.rain'),
                   backgroundColor: [theme.blue.main],
                   borderColor: [theme.blue.main],
                   borderRadius: 5,
@@ -118,6 +127,7 @@ export default function Station({ station, timeGrouping }) {
                 {
                   label: t('specific.dataType.variable.items.adoptedLevel'),
                   data: data.y,
+                  sufix: t('specific.dataType.sufixes.adoptedLevel'),
                   backgroundColor: [theme.primary.main],
                   borderColor: [theme.primary.main],
                   borderRadius: 5,
@@ -155,8 +165,9 @@ export default function Station({ station, timeGrouping }) {
                 {
                   label: t('specific.dataType.variable.items.flowRate'),
                   data: data.y,
-                  backgroundColor: [theme.green.main],
-                  borderColor: [theme.green.main],
+                  sufix: t('specific.dataType.sufixes.flowRate'),
+                  backgroundColor: [theme.green.dark],
+                  borderColor: [theme.green.dark],
                   borderRadius: 5,
                   barThickness: 5,
                 },
@@ -182,7 +193,7 @@ export default function Station({ station, timeGrouping }) {
         }}
       >
         <Breadcrumb
-          items={[t('specific.infoPanel.list'), station?.name ?? '']}
+          items={[t('specific.dataType.station.plural'), station?.name ?? '']}
         />
         <IconButton onClick={() => closeStation()} aria-label="back">
           <ArrowBackIosNewRoundedIcon
@@ -200,19 +211,34 @@ export default function Station({ station, timeGrouping }) {
         title={t('specific.statistics.charts.rainTimeSeries.title')}
         info={t('specific.statistics.charts.rainTimeSeries.info')}
         data={rainData}
-        options={{ indexAxis: 'x' }}
+        options={{
+          indexAxis: 'x',
+          plugins: {
+            tooltip: tooltipSufix,
+          },
+        }}
       />
 
       <LineChart
         title={t('specific.statistics.charts.levelTimeSeries.title')}
         info={t('specific.statistics.charts.levelTimeSeries.info')}
         data={levelData}
+        options={{
+          plugins: {
+            tooltip: tooltipSufix,
+          },
+        }}
       />
 
       <LineChart
         title={t('specific.statistics.charts.flowRateTimeSeries.title')}
         info={t('specific.statistics.charts.flowRateTimeSeries.info')}
         data={flowRateData}
+        options={{
+          plugins: {
+            tooltip: tooltipSufix,
+          },
+        }}
       />
     </ul>
   );

@@ -34,11 +34,11 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
     functions: { openStation },
   } = useContext(PanelRoutingContext);
 
-  function dataDough(value, sufix, description, color) {
+  function dataDough(value, sufix, label, color) {
     return (
       <MiddleDoughnut
         style={{ width: 125 }}
-        description={description}
+        description={label}
         doughnut={
           <Doughnut
             options={{
@@ -50,7 +50,7 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
                   enabled: false,
                   callbacks: {
                     label(context) {
-                      return `${context.dataset.value} ${context.dataset.label} (${context.parsed}%)`;
+                      return `${context.dataset.value} ${context.dataset.sufix} (${context.parsed}%)`;
                     },
                   },
                 },
@@ -64,8 +64,9 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
               labels: ['', ''],
               datasets: [
                 {
-                  label: sufix,
+                  label,
                   value,
+                  sufix,
                   data: [80, 20],
                   backgroundColor: [color, theme.toggleButton.unabled],
                   borderColor: 'transparent',
@@ -117,19 +118,19 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
       <div className={classes.doughnuts}>
         {dataDough(
           item?.rain,
-          'mm',
+          t('specific.dataType.sufixes.rain'),
           t('specific.dataType.variable.items.rain'),
           theme.blue.main
         )}
         {dataDough(
           item?.level,
-          'cm',
+          t('specific.dataType.sufixes.adoptedLevel'),
           t('specific.dataType.variable.items.adoptedLevel'),
           theme.primary.main
         )}
         {dataDough(
           item?.flowRate,
-          'm³/s',
+          t('specific.dataType.sufixes.flowRate'),
           t('specific.dataType.variable.items.flowRate'),
           theme.green.dark
         )}

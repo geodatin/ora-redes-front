@@ -110,12 +110,12 @@ export const timeGroupingOptions = [
     translation: 'specific.infoPanel.timeGrouping.month',
   },
   {
-    code: 'day',
-    translation: 'specific.infoPanel.timeGrouping.day',
-  },
-  {
     code: 'week',
     translation: 'specific.infoPanel.timeGrouping.week',
+  },
+  {
+    code: 'day',
+    translation: 'specific.infoPanel.timeGrouping.day',
   },
   {
     code: 'hour',
@@ -130,7 +130,7 @@ export const panels = {
   },
   list: {
     index: 1,
-    translation: 'specific.infoPanel.list',
+    translation: 'specific.dataType.station.plural',
   },
   station: {
     index: 2,

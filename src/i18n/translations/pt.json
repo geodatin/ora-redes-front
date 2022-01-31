@@ -148,6 +148,11 @@
           "flowRate": "Vazão",
           "adoptedLevel": "Nível"
         }
+      },
+      "sufixes": {
+        "rain": "mm",
+        "flowRate": "m³/s",
+        "adoptedLevel": "cm"
       }
     },
     "networks": {
