@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
+import L from 'leaflet';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import useStyles from './styles';
 
@@ -12,8 +13,20 @@ export default function MapItem({ children, popupContent, onClick }) {
   const classes = useStyles();
   const [open, setOpen] = useState();
 
+  const containerRef = useRef();
+
+  /**
+   * Disable click propagation
+   */
+  useEffect(() => {
+    if (containerRef?.current) {
+      const disableClickPropagation = L?.DomEvent?.disableClickPropagation;
+      disableClickPropagation(containerRef.current);
+    }
+  }, []);
+
   return (
-    <div className={classes.container}>
+    <div ref={containerRef} className={classes.container}>
       <Button
         onClick={() => {
           setOpen((o) => !o);
