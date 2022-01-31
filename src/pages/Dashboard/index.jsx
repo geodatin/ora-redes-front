@@ -74,6 +74,7 @@ function Dashboard() {
                     t('specific.breadcrumbs.monitoring'),
                     t('specific.breadcrumbs.allNetworks'),
                   ]}
+                  onClickItem={() => {}}
                 />
               ),
             }}
