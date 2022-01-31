@@ -16,6 +16,7 @@ import OrangeStationLight from '../../../assets/icons/map/orange-station-light.p
 import BorderGeojson from '../../../assets/shapes/border.json';
 import InverseShape from '../../../assets/shapes/inverseShape.json';
 import MapWrapper from '../../../components/MapWrapper';
+import MapItem from '../../../components/MapWrapper/Mapitem';
 import Typography from '../../../components/Typography';
 import { networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
@@ -131,7 +132,7 @@ export default function MonitoringMap() {
                     variant="caption"
                     className={classes.popupItemTitle}
                   >
-                    {t('specific.popup.country')}
+                    {t('specific.popup.network')}
                   </Typography>
                   <Typography variant="caption">
                     {point.properties.network}
@@ -181,6 +182,7 @@ export default function MonitoringMap() {
         [-28.483177, -100.582582],
         [14.211898, -30.591429],
       ]}
+      itemChildren={<MapItem>.</MapItem>}
     >
       <GeoJSON
         data={InverseShape}
