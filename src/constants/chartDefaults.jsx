@@ -11,6 +11,7 @@ import {
   PointElement,
   ArcElement,
 } from 'chart.js';
+import { TreemapController, TreemapElement } from 'chartjs-chart-treemap';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useTheme } from 'react-jss';
 
@@ -24,12 +25,14 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
+  TreemapController,
+  TreemapElement
 );
 
 ChartJS.defaults.font.family = `"Roboto", "Helvetica", "Arial", sans-serif`;
 ChartJS.defaults.font.weight = '500';
-ChartJS.defaults.font.size = 12.8;
+ChartJS.defaults.font.size = 16;
 
 ChartJS.defaults.maintainAspectRatio = false;
 ChartJS.defaults.responsive = true;
