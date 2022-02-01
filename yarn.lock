@@ -3564,6 +3564,11 @@ chart.js@^3.6.2:
   resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-3.6.2.tgz#47342c551f688ffdda2cd53b534cb7e461ecec33"
   integrity sha512-Xz7f/fgtVltfQYWq0zL1Xbv7N2inpG+B54p3D5FSvpCdy3sM+oZhbqa42eNuYXltaVvajgX5UpKCU2GeeJIgxg==
 
+chartjs-chart-treemap@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/chartjs-chart-treemap/-/chartjs-chart-treemap-2.0.2.tgz#46ecd3720363f80773ed3cab10173fc874cd1f25"
+  integrity sha512-CXGL0LQx1k0vMCTHheabPDrx/vEQca/FYduVNs7uTrR/iGMeKTj2YymN8wMmvUC5UQZElTi/bRnFkvyN3Wofrw==
+
 chartjs-plugin-datalabels@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/chartjs-plugin-datalabels/-/chartjs-plugin-datalabels-2.0.0.tgz#caacefb26803d968785071eab012dde8746c5939"

@@ -223,6 +223,7 @@ export default function Station({ station, timeGrouping }) {
           indexAxis: 'x',
           plugins: {
             tooltip: tooltipSufix,
+            legend: false,
           },
         }}
       />
@@ -234,6 +235,7 @@ export default function Station({ station, timeGrouping }) {
         options={{
           plugins: {
             tooltip: tooltipSufix,
+            legend: false,
           },
         }}
       />
@@ -245,6 +247,7 @@ export default function Station({ station, timeGrouping }) {
         options={{
           plugins: {
             tooltip: tooltipSufix,
+            legend: false,
           },
         }}
       />

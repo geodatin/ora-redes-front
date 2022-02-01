@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import ReactCountryFlag from 'react-country-flag';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -6,9 +6,11 @@ import { useTheme } from 'react-jss';
 import ItemsChart from '../../../../components/Charts/Items';
 import LegendDoughnutChart from '../../../../components/Charts/LegendDoughnut';
 import RankingChart from '../../../../components/Charts/Ranking';
+import Treemap from '../../../../components/Charts/Treemap';
 import { countryCodes } from '../../../../constants/options';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
+import getTextWidth from '../../../../utils';
 
 /**
  * This function provides a statistics list
@@ -27,6 +29,7 @@ export default function Statistics() {
 
   const [itemsData, setItemsData] = useState();
   const [legendDoughnutData, setLegendDoughnutData] = useState();
+  const [treemapData, setTreemapData] = useState();
 
   const {
     values: { autocompleteSelection },
@@ -42,27 +45,25 @@ export default function Statistics() {
         filters: autocompleteSelection,
       })
       .then(({ data }) => {
-        if (isSubscribed) {
-          if (data) {
-            setLegendDoughnutData({
-              labels: data.values.map(({ network }) =>
-                t(`specific.dataType.networks.${network}`)
-              ),
-              datasets: [
-                {
-                  label: t('specific.dataType.station.plural'),
-                  data: data.values.map(({ count }) => count),
-                  backgroundColor: [
-                    theme.blue.main,
-                    theme.primary.main,
-                    theme.green.main,
-                    theme.secondary.light,
-                  ],
-                  borderColor: 'transparent',
-                },
-              ],
-            });
-          }
+        if (isSubscribed && data) {
+          setLegendDoughnutData({
+            labels: data.values.map(({ network }) =>
+              t(`specific.dataType.networks.${network}`)
+            ),
+            datasets: [
+              {
+                label: t('specific.dataType.station.plural'),
+                data: data.values.map(({ count }) => count),
+                backgroundColor: [
+                  theme.blue.main,
+                  theme.primary.main,
+                  theme.green.dark,
+                  theme.secondary.light,
+                ],
+                borderColor: 'transparent',
+              },
+            ],
+          });
         }
       });
 
@@ -81,27 +82,25 @@ export default function Statistics() {
         filters: autocompleteSelection,
       })
       .then(({ data }) => {
-        if (isSubscribed) {
-          if (data) {
-            setItemsData({
-              labels: data.map(({ countryId }) =>
-                t(`specific.countries.${countryId}`)
-              ),
-              datasets: [
-                {
-                  label: t('specific.dataType.station.plural').toLowerCase(),
-                  data: data.map(({ count }) => count),
-                  icons: data.map(({ countryId }) => (
-                    <ReactCountryFlag
-                      svg
-                      countryCode={countryCodes[countryId]}
-                      style={{ fontSize: 30, marginRight: 5, borderRadius: 12 }}
-                    />
-                  )),
-                },
-              ],
-            });
-          }
+        if (isSubscribed && data) {
+          setItemsData({
+            labels: data.map(({ countryId }) =>
+              t(`specific.countries.${countryId}`)
+            ),
+            datasets: [
+              {
+                label: t('specific.dataType.station.plural').toLowerCase(),
+                data: data.map(({ count }) => count),
+                icons: data.map(({ countryId }) => (
+                  <ReactCountryFlag
+                    svg
+                    countryCode={countryCodes[countryId]}
+                    style={{ fontSize: 30, marginRight: 5, borderRadius: 12 }}
+                  />
+                )),
+              },
+            ],
+          });
         }
       });
 
@@ -129,30 +128,26 @@ export default function Statistics() {
         }
       )
       .then(({ data }) => {
-        if (isSubscribed) {
-          if (data) {
-            setRankingData({
-              chartData: {
-                labels: data.x.map(
-                  (label, index) => `${data.position[index]}°  ${label}`
-                ),
-                datasets: [
-                  {
-                    label: t(`specific.dataType.station.plural`),
-                    data: data?.series[0]?.data,
-                    backgroundColor: [theme.primary.main],
-                    borderColor: [theme.primary.main],
-                    borderRadius: 5,
-                    barThickness: 15,
-                  },
-                ],
+        if (isSubscribed && data) {
+          setRankingData({
+            labels: data.x.map(
+              (label, index) => `${data.position[index]}°  ${label}`
+            ),
+            datasets: [
+              {
+                label: t(`specific.dataType.station.plural`),
+                data: data?.series[0]?.data,
+                backgroundColor: [theme.primary.main],
+                borderColor: [theme.primary.main],
+                borderRadius: 5,
+                barThickness: 15,
               },
-            });
-            setRankingParams((prevParams) => ({
-              ...prevParams,
-              totalPages: data.pages,
-            }));
-          }
+            ],
+          });
+          setRankingParams((prevParams) => ({
+            ...prevParams,
+            totalPages: data.pages,
+          }));
         }
       });
 
@@ -161,27 +156,129 @@ export default function Statistics() {
     };
   }, [rankingParams.page, rankingParams.order, autocompleteSelection, t]);
 
-  return (
-    <ul>
-      <LegendDoughnutChart
-        title={t('specific.statistics.charts.stationsPerNetwork.title')}
-        info={t('specific.statistics.charts.stationsPerNetwork.info')}
-        data={legendDoughnutData}
-      />
+  /**
+   * This userEffect fetch variable count per network.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+    api
+      .post(`/station/count/variable`, {
+        filters: autocompleteSelection,
+      })
+      .then(({ data }) => {
+        if (isSubscribed && data) {
+          setTreemapData({
+            datasets: [
+              {
+                tree: data,
+                key: 'stations',
+                groups: ['network', 'variable'],
+                borderColor: theme.background.main,
+                borderWidth: 2,
+                spacing: 0,
+                labels: {
+                  display: true,
+                  color: theme.background.main,
+                  font: {
+                    size: 16,
+                  },
+                  hoverFont: {
+                    weight: 'bold',
+                  },
+                  formatter: (ctx) => {
+                    const translation = t(
+                      `specific.dataType.variable.items.${ctx?.raw.g}`
+                    );
+                    let label = '';
+                    Array.from(translation).forEach((c) => {
+                      if (getTextWidth(`${label}...`, 16) < ctx.raw.w - 40) {
+                        label += c;
+                      }
+                    });
+                    return label === translation
+                      ? `${translation} (${ctx.raw.v})`
+                      : `${label}...`;
+                  },
+                },
+                captions: {
+                  display: false,
+                },
+                backgroundColor: (ctx) => {
+                  let bgColor = 'transparent';
+                  if (ctx.raw?.g === 'RHA') {
+                    bgColor = theme.blue.main;
+                  } else if (ctx.raw?.g === 'RQA') {
+                    bgColor = theme.primary.main;
+                  } else if (ctx.raw?.g === 'HYBAM') {
+                    bgColor = theme.green.dark;
+                  }
+                  return bgColor;
+                },
+              },
+            ],
+          });
+        }
+      });
 
-      <ItemsChart
-        title={t('specific.statistics.charts.stationsPerCountry.title')}
-        info={t('specific.statistics.charts.stationsPerCountry.info')}
-        data={itemsData}
-      />
+    return () => {
+      isSubscribed = false;
+    };
+  }, [t, theme, autocompleteSelection]);
 
-      <RankingChart
-        title={t('specific.statistics.charts.riverRanking.title')}
-        info={t('specific.statistics.charts.riverRanking.info')}
-        data={rankingData?.chartData}
-        params={rankingParams}
-        setParams={setRankingParams}
-      />
-    </ul>
+  return useMemo(
+    () => (
+      <ul>
+        <LegendDoughnutChart
+          title={t('specific.statistics.charts.stationsPerNetwork.title')}
+          info={t('specific.statistics.charts.stationsPerNetwork.info')}
+          data={legendDoughnutData}
+        />
+
+        <ItemsChart
+          title={t('specific.statistics.charts.stationsPerCountry.title')}
+          info={t('specific.statistics.charts.stationsPerCountry.info')}
+          data={itemsData}
+        />
+
+        <RankingChart
+          title={t('specific.statistics.charts.riverRanking.title')}
+          info={t('specific.statistics.charts.riverRanking.info')}
+          data={rankingData}
+          params={rankingParams}
+          setParams={setRankingParams}
+        />
+
+        <Treemap
+          title={t(
+            'specific.statistics.charts.stationsPerVariableTreemap.title'
+          )}
+          info={t('specific.statistics.charts.stationsPerVariableTreemap.info')}
+          data={treemapData}
+          options={{
+            plugins: {
+              tooltip: {
+                displayColors: false,
+                filter(ctx) {
+                  return !['RHA', 'RQA', 'HYBAM'].some(
+                    (network) => network === ctx.raw.g
+                  );
+                },
+                callbacks: {
+                  label(ctx) {
+                    return `${t(
+                      `specific.dataType.variable.items.${ctx.raw.g}`
+                    )}: ${ctx.raw.v} ${t(
+                      `specific.dataType.station.plural`
+                    ).toLowerCase()}`;
+                  },
+                  title() {},
+                },
+              },
+            },
+          }}
+        />
+      </ul>
+    ),
+    [legendDoughnutData, itemsData, rankingData, treemapData]
   );
 }

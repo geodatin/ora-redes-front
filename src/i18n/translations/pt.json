@@ -109,6 +109,10 @@
         "flowRateTimeSeries": {
           "title": "Histórico da vazão",
           "info": "Este gráfico apresenta o histórico da vazão"
+        },
+        "stationsPerVariableTreemap": {
+          "title": "Estações por variáveis em cada rede",
+          "info": "Este gráfico apresenta uma contagem de estações por variáveis em cada rede"
         }
       }
     },
