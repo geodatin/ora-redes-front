@@ -168,6 +168,9 @@
       "network": "Rede",
       "river": "Rio",
       "responsible": "Responsável"
+    },
+    "legend": {
+      "riverLine": "Linhas de drenagem"
     }
   }
 }

@@ -14,6 +14,7 @@ import GreenStationLight from '../../../assets/icons/map/green-station-light.png
 import OrangeStationDark from '../../../assets/icons/map/orange-station-dark.png';
 import OrangeStationLight from '../../../assets/icons/map/orange-station-light.png';
 import BorderGeojson from '../../../assets/shapes/border.json';
+/* import DrenageGeojson from '../../../assets/shapes/drenagem_bho.json'; */
 import InverseShape from '../../../assets/shapes/inverseShape.json';
 import MapWrapper from '../../../components/MapWrapper';
 import MapItem from '../../../components/MapWrapper/Mapitem';
@@ -92,7 +93,7 @@ export default function MonitoringMap() {
         const position = [...point.geometry.coordinates];
         position.reverse();
         let icon;
-
+        console.log(point);
         if (point.properties.network === networks.hydrologic.code) {
           icon = blueStation;
         } else if (point.properties.network === networks.quality.code) {
@@ -182,7 +183,92 @@ export default function MonitoringMap() {
         [-28.483177, -100.582582],
         [14.211898, -30.591429],
       ]}
-      itemChildren={<MapItem>.</MapItem>}
+      itemChildren={
+        <MapItem
+          popupContent={
+            <div className={classes.legendContent}>
+              <div className={classes.legendItem}>
+                <img
+                  alt="blue-station"
+                  src={
+                    theme === darkScheme ? BluesStationDark : BluesStationLight
+                  }
+                  className={classes.legendIcon}
+                />
+                {t('specific.networks.type.hydrologic')}
+              </div>
+              <div className={classes.legendItem}>
+                <img
+                  alt="orange-station"
+                  src={
+                    theme === darkScheme
+                      ? OrangeStationDark
+                      : OrangeStationLight
+                  }
+                  className={classes.legendIcon}
+                />
+                {t('specific.networks.type.quality')}
+              </div>
+              <div className={classes.legendItem}>
+                <img
+                  alt="green-station"
+                  src={
+                    theme === darkScheme ? GreenStationDark : GreenStationLight
+                  }
+                  className={classes.legendIcon}
+                />
+                {t('specific.networks.type.hybam')}
+              </div>
+              <div className={classes.legendItem}>
+                <div
+                  style={{
+                    borderColor: theme === darkScheme ? '#accc0c' : '#728740',
+                  }}
+                  className={classes.dashedLine}
+                />
+                {t('specific.networks.type.quality')}
+              </div>
+              <div className={classes.legendItem}>
+                <div
+                  style={{
+                    borderColor: '#0023FF',
+                    borderStyle: 'solid',
+                  }}
+                  className={classes.dashedLine}
+                />
+                {t('specific.legend.riverLine')}
+              </div>
+            </div>
+          }
+        >
+          <span
+            className={classes.legendBall}
+            style={{
+              backgroundColor: theme.blue.main,
+              height: 17,
+              width: 17,
+            }}
+          >
+            <span
+              className={classes.legendBall}
+              style={{
+                backgroundColor: theme.primary.main,
+                height: 14,
+                width: 14,
+              }}
+            >
+              <span
+                className={classes.legendBall}
+                style={{
+                  backgroundColor: theme.green.main,
+                  height: 10,
+                  width: 10,
+                }}
+              />
+            </span>
+          </span>
+        </MapItem>
+      }
     >
       <GeoJSON
         data={InverseShape}
@@ -208,6 +294,14 @@ export default function MonitoringMap() {
         opacity={0.7}
         zIndex={2}
       />
+      {/* <GeoJSON
+        data={DrenageGeojson}
+        style={() => ({
+          weight: 1,
+          color: '#0023FF',
+          opacity: 0.6,
+        })}
+      /> */}
       {markers}
     </MapWrapper>
   );
