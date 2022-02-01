@@ -201,6 +201,7 @@ export default function Station({ station, timeGrouping }) {
       >
         <Breadcrumb
           items={[t('specific.dataType.station.plural'), station?.name ?? '']}
+          onClickItem={({ index }) => index === 0 && closeStation()}
         />
         <IconButton onClick={() => closeStation()} aria-label="back">
           <ArrowBackIosNewRoundedIcon

@@ -22,7 +22,7 @@ import useStyles from './styles';
  */
 function Dashboard() {
   const classes = useStyles();
-  const isMobile = useMediaQuery(breakpoints.max.md);
+  const isMobile = useMediaQuery(breakpoints.max.lg);
   const { t } = useTranslation();
 
   const infoPanel = (
@@ -74,6 +74,7 @@ function Dashboard() {
                     t('specific.breadcrumbs.monitoring'),
                     t('specific.breadcrumbs.allNetworks'),
                   ]}
+                  onClickItem={() => {}}
                 />
               ),
             }}

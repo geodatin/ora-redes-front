@@ -21,7 +21,10 @@ export default function DataLibrary() {
   const isMobile = useMediaQuery(breakpoints.max.md);
 
   const breadcrumb = (
-    <Breadcrumb items={['BIBLIOTECA DE DADOS', 'Todos os arquivos']} />
+    <Breadcrumb
+      items={['BIBLIOTECA DE DADOS', 'Todos os arquivos']}
+      onClickItem={() => {}}
+    />
   );
 
   const onCheck = (values) => {};

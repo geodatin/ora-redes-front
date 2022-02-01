@@ -318,7 +318,9 @@ export default function ApiMethods() {
     />
   );
 
-  const breadcrumb = <Breadcrumb items={['API', 'Todos os métodos']} />;
+  const breadcrumb = (
+    <Breadcrumb items={['API', 'Todos os métodos']} onClickItem={() => {}} />
+  );
 
   return isMobile ? (
     <MobileExpandLayout
