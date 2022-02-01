@@ -32,6 +32,37 @@ const useStyles = createUseStyles((theme) => ({
   popupItemTitle: {
     color: theme.neutral.gray.main,
   },
+  legendBall: {
+    position: 'relative',
+    borderRadius: '100%',
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+  },
+  legendContent: {
+    padding: 10,
+  },
+  legendItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    whiteSpace: 'nowrap',
+    marginBottom: 10,
+
+    '&:last-of-type': { marginBottom: 0 },
+  },
+  legendIcon: {
+    width: 17,
+    marginRight: 5,
+  },
+  dashedLine: {
+    width: 17,
+    height: 1,
+    marginRight: 5,
+    border: '1px solid',
+    borderStyle: 'dashed',
+    transform: 'rotate(-45deg)',
+  },
 }));
 
 export default useStyles;
