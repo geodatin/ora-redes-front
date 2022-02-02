@@ -299,6 +299,7 @@ export default function MonitoringMap() {
                   style={{
                     borderColor: '#0023FF',
                     borderStyle: 'solid',
+                    opacity: theme === darkScheme ? 0.3 : 0.2,
                   }}
                   className={classes.dashedLine}
                 />
@@ -360,19 +361,10 @@ export default function MonitoringMap() {
         })}
       />
       <TileLayer
-        url="https://storage.googleapis.com/ora-otca/water/period/{z}/{x}/{y}.png"
-        opacity={0.7}
+        url="https://storage.googleapis.com/ora-otca/water/drainage/{z}/{x}/{y}.png"
+        opacity={theme === darkScheme ? 0.3 : 0.2}
         zIndex={2}
       />
-      {/* <GeoJSON
-        data={DrenageGeojson}
-        style={() => ({
-          weight: 1,
-          color: '#0023FF',
-          opacity: 0.6,
-        })}
-      /> */}
-
       {markers}
     </MapWrapper>
   );
