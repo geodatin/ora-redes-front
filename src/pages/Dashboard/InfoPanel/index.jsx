@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +10,6 @@ import Typography from '../../../components/Typography';
 import { panels, timeGroupingOptions } from '../../../constants/options';
 import PanelRoutingContext from '../../../contexts/panelRouting';
 import CardList from './CardList';
-import CardItem from './CardList/CardItem';
 import Station from './Station';
 import Statistics from './Statistics';
 import useStyles from './styles';
