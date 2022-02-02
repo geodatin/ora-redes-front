@@ -25,6 +25,17 @@ export default function BarChart({ title, info, data, options: mergeOptions }) {
   const options = {
     indexAxis: 'y',
     plugins: {},
+    scales: {
+      y: {
+        title: {
+          display: false,
+          padding: 0,
+          font: {
+            size: 13,
+          },
+        },
+      },
+    },
   };
 
   return (
