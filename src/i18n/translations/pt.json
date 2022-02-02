@@ -100,15 +100,18 @@
         },
         "rainTimeSeries": {
           "title": "Histórico de precipitação",
-          "info": "Este gráfico apresenta um histórico de precipitação"
+          "info": "Este gráfico apresenta um histórico de precipitação",
+          "yAxisLabel": "Milhares de milímetros"
         },
         "levelTimeSeries": {
           "title": "Histórico do nível médio",
-          "info": "Este gráfico apresenta o histórico do nível médio"
+          "info": "Este gráfico apresenta o histórico do nível médio",
+          "yAxisLabel": "Milhares de centímetros"
         },
         "flowRateTimeSeries": {
           "title": "Histórico da vazão",
-          "info": "Este gráfico apresenta o histórico da vazão"
+          "info": "Este gráfico apresenta o histórico da vazão",
+          "yAxisLabel": "Milhares de m³ por segundo"
         },
         "stationsPerVariableTreemap": {
           "title": "Estações por variáveis em cada rede",

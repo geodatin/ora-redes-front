@@ -48,6 +48,12 @@ export default function Station({ station, timeGrouping }) {
     },
   };
 
+  const ticksThousandFormatter = {
+    callback(value) {
+      return value / 1000;
+    },
+  };
+
   const xAxisFormatter = (timestamps) =>
     timestamps.map((timeStamp) => {
       if (timeGrouping === 'year') {
@@ -223,9 +229,10 @@ export default function Station({ station, timeGrouping }) {
           },
           scales: {
             y: {
+              ticks: ticksThousandFormatter,
               title: {
                 display: true,
-                text: t('specific.dataType.sufixes.rain'),
+                text: t('specific.statistics.charts.rainTimeSeries.yAxisLabel'),
                 color: theme.neutral.gray.main,
               },
             },
@@ -244,9 +251,12 @@ export default function Station({ station, timeGrouping }) {
           },
           scales: {
             y: {
+              ticks: ticksThousandFormatter,
               title: {
                 display: true,
-                text: t('specific.dataType.sufixes.adoptedLevel'),
+                text: t(
+                  'specific.statistics.charts.levelTimeSeries.yAxisLabel'
+                ),
                 color: theme.neutral.gray.main,
               },
             },
@@ -265,9 +275,12 @@ export default function Station({ station, timeGrouping }) {
           },
           scales: {
             y: {
+              ticks: ticksThousandFormatter,
               title: {
                 display: true,
-                text: t('specific.dataType.sufixes.flowRate'),
+                text: t(
+                  'specific.statistics.charts.flowRateTimeSeries.yAxisLabel'
+                ),
                 color: theme.neutral.gray.main,
               },
             },
