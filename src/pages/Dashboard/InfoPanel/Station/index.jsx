@@ -221,6 +221,15 @@ export default function Station({ station, timeGrouping }) {
             tooltip: tooltipSufix,
             legend: false,
           },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: t('specific.dataType.sufixes.rain'),
+                color: theme.neutral.gray.main,
+              },
+            },
+          },
         }}
       />
 
@@ -233,6 +242,15 @@ export default function Station({ station, timeGrouping }) {
             tooltip: tooltipSufix,
             legend: false,
           },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: t('specific.dataType.sufixes.adoptedLevel'),
+                color: theme.neutral.gray.main,
+              },
+            },
+          },
         }}
       />
 
@@ -244,6 +262,15 @@ export default function Station({ station, timeGrouping }) {
           plugins: {
             tooltip: tooltipSufix,
             legend: false,
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: t('specific.dataType.sufixes.flowRate'),
+                color: theme.neutral.gray.main,
+              },
+            },
           },
         }}
       />
