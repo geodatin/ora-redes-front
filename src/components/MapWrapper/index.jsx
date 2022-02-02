@@ -16,7 +16,12 @@ import ZoomButton from './ZoomButton';
  * This component renders a react-leaflet component
  * @returns Map component
  */
-export default function MapWrapper({ children, itemChildren, ...rest }) {
+export default function MapWrapper({
+  children,
+  itemChildren,
+  getMapRef,
+  ...rest
+}) {
   const position = [-7.3800011, -64.3420118];
   const classes = useStyles();
   const itemsRef = useRef();
@@ -24,6 +29,10 @@ export default function MapWrapper({ children, itemChildren, ...rest }) {
   const [map, setMap] = useState();
   const lightTileRef = useRef();
   const darkTileRef = useRef();
+
+  useEffect(() => {
+    getMapRef(map);
+  }, [map]);
 
   /**
    * Disable click propagation
@@ -100,9 +109,11 @@ export default function MapWrapper({ children, itemChildren, ...rest }) {
 MapWrapper.defaultProps = {
   children: undefined,
   itemChildren: undefined,
+  getMapRef: undefined,
 };
 
 MapWrapper.propTypes = {
   children: PropTypes.node,
   itemChildren: PropTypes.node,
+  getMapRef: PropTypes.func,
 };
