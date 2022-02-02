@@ -2,7 +2,7 @@ import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
 import { useMediaQuery } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Breadcrumb from '../../components/Breadcrumb';
@@ -10,6 +10,7 @@ import HLayout from '../../components/Layout/Horizontal';
 import MobileNavbarLayout from '../../components/Layout/Mobile/Navbar';
 import VLayout from '../../components/Layout/Vertical';
 import { breakpoints } from '../../constants/constraints';
+import api from '../../services/api';
 import Filters from './Filters';
 import InfoPanel from './InfoPanel';
 import MonitoringMap from './MonitoringMap';
@@ -24,10 +25,36 @@ function Dashboard() {
   const isMobile = useMediaQuery(breakpoints.max.lg);
   const { t } = useTranslation();
 
+  const [lastUpdateDatabase, setLastUpdateDatabase] = useState();
+
+  /**
+   * This userEffect fetches last database update timestamp.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+    api.get(`/observation/lastUpdate`).then(({ data }) => {
+      if (isSubscribed && data) {
+        setLastUpdateDatabase(data.lastUpdate);
+      }
+    });
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
+
   const infoPanel = (
     <InfoPanel
       title={t('specific.infoPanel.title')}
-      subtitle="Last update in 11/08/2022"
+      subtitle={
+        lastUpdateDatabase
+          ? `${t('specific.infoPanel.lastUpdate')} ${t(
+              'general.date.complete',
+              {
+                date: new Date(lastUpdateDatabase),
+              }
+            )}`
+          : t('specific.infoPanel.loadingLastUpdate')
+      }
     />
   );
 
