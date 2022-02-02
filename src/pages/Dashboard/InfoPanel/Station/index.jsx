@@ -12,6 +12,10 @@ import PanelRoutingContext from '../../../../contexts/panelRouting';
 import api from '../../../../services/api';
 import CardItem from '../CardList/CardItem';
 
+/**
+ * This function provides a station panel
+ * @returns station panel
+ */
 export default function Station({ station, timeGrouping }) {
   Station.propTypes = {
     station: PropTypes.shape(),
@@ -75,10 +79,8 @@ export default function Station({ station, timeGrouping }) {
         { params: { stationCode: station.code } }
       )
       .then(({ data }) => {
-        if (isSubscribed) {
-          if (data) {
-            setStationUpdate(data);
-          }
+        if (isSubscribed && data) {
+          setStationUpdate(data);
         }
       });
 

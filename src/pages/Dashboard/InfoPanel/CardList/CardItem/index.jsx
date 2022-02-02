@@ -9,6 +9,7 @@ import MiddleDoughnut from '../../../../../components/Charts/MiddleDoughnut';
 import CustomButton from '../../../../../components/CustomButton';
 import ListItemContainer from '../../../../../components/ListItemContainer';
 import Typography from '../../../../../components/Typography';
+import MapContext from '../../../../../contexts/mapping';
 import PanelRoutingContext from '../../../../../contexts/panelRouting';
 import useStyles from './styles';
 
@@ -33,6 +34,10 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
   const {
     functions: { openStation },
   } = useContext(PanelRoutingContext);
+
+  const {
+    functions: { panOnMap },
+  } = useContext(MapContext);
 
   function dataDough(value, sufix, label, color) {
     return (
@@ -100,8 +105,8 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
           <div
             role="button"
             tabIndex={0}
-            onClick={() => {}}
-            onKeyDown={() => {}}
+            onClick={() => panOnMap(item.location.coordinates.reverse())}
+            onKeyDown={() => panOnMap(item.location.coordinates.reverse())}
             className={classes.locationButton}
           >
             <MyLocationIcon style={{ fontSize: 18 }} />
