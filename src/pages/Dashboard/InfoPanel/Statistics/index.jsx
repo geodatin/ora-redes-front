@@ -7,7 +7,7 @@ import ItemsChart from '../../../../components/Charts/Items';
 import LegendDoughnutChart from '../../../../components/Charts/LegendDoughnut';
 import RankingChart from '../../../../components/Charts/Ranking';
 import Treemap from '../../../../components/Charts/Treemap';
-import { countryCodes } from '../../../../constants/options';
+import { countryCodes, networks } from '../../../../constants/options';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
 import getTextWidth from '../../../../utils';
@@ -48,18 +48,15 @@ export default function Statistics() {
         if (isSubscribed && data) {
           setLegendDoughnutData({
             labels: data.values.map(({ network }) =>
-              t(`specific.dataType.networks.${network}`)
+              t(networks[network].translation)
             ),
             datasets: [
               {
                 label: t('specific.dataType.station.plural'),
                 data: data.values.map(({ count }) => count),
-                backgroundColor: [
-                  theme.blue.main,
-                  theme.primary.main,
-                  theme.green.dark,
-                  theme.secondary.light,
-                ],
+                backgroundColor: data.values.map(
+                  ({ network }) => networks[network].color
+                ),
                 borderColor: 'transparent',
               },
             ],
@@ -204,15 +201,8 @@ export default function Statistics() {
                   display: false,
                 },
                 backgroundColor: (ctx) => {
-                  let bgColor = 'transparent';
-                  if (ctx.raw?.g === 'RHA') {
-                    bgColor = theme.blue.main;
-                  } else if (ctx.raw?.g === 'RQA') {
-                    bgColor = theme.primary.main;
-                  } else if (ctx.raw?.g === 'HYBAM') {
-                    bgColor = theme.green.dark;
-                  }
-                  return bgColor;
+                  const network = ctx.raw?.g;
+                  return networks[network]?.color ?? 'transparent';
                 },
               },
             ],
@@ -259,7 +249,7 @@ export default function Statistics() {
               tooltip: {
                 displayColors: false,
                 filter(ctx) {
-                  return !['RHA', 'RQA', 'HYBAM'].some(
+                  return !Object.keys(networks).some(
                     (network) => network === ctx.raw.g
                   );
                 },

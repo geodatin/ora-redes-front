@@ -94,11 +94,11 @@ export default function MonitoringMap() {
         position.reverse();
         let icon;
         console.log(point);
-        if (point.properties.network === networks.hydrologic.code) {
+        if (point.properties.network === networks.RHA.code) {
           icon = blueStation;
-        } else if (point.properties.network === networks.quality.code) {
+        } else if (point.properties.network === networks.RQA.code) {
           icon = orangeStation;
-        } else if (point.properties.network === networks.hybam.code) {
+        } else if (point.properties.network === networks.HYBAM.code) {
           icon = greenStation;
         } else {
           icon = grayStation;
