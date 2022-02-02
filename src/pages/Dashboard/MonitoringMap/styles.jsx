@@ -1,5 +1,15 @@
 import { createUseStyles } from 'react-jss';
 
+import BlueStationDark from '../../../assets/icons/map/blue-station-dark.png';
+import BlueStationLight from '../../../assets/icons/map/blue-station-light.png';
+import GrayStationDark from '../../../assets/icons/map/gray-station-dark.png';
+import GrayStationLight from '../../../assets/icons/map/gray-station-light.png';
+import GreenStationDark from '../../../assets/icons/map/green-station-dark.png';
+import GreenStationLight from '../../../assets/icons/map/green-station-light.png';
+import OrangeStationDark from '../../../assets/icons/map/orange-station-dark.png';
+import OrangeStationLight from '../../../assets/icons/map/orange-station-light.png';
+import { darkScheme } from '../../../constants/schemes';
+
 const useStyles = createUseStyles((theme) => ({
   popup: {
     '& .leaflet-popup-content-wrapper': {
@@ -62,6 +72,80 @@ const useStyles = createUseStyles((theme) => ({
     border: '1px solid',
     borderStyle: 'dashed',
     transform: 'rotate(-45deg)',
+  },
+  '@keyframes pulseRing': {
+    '0%': {
+      transform: 'translate(-50%, -50%) scale(0.33)',
+    },
+    '80%, 100%': {
+      transform: 'translate(-50%, -50%)',
+      opacity: 0,
+    },
+  },
+  '@keyframes pulseDot': {
+    '0%': {
+      transform: 'translate(-50%, -50%) scale(1)',
+    },
+    '50%': {
+      transform: 'translate(-50%, -50%) scale(1.25)',
+    },
+    '100%': {
+      transform: 'translate(-50%, -50%) scale(1)',
+    },
+  },
+  orangePulsatingCircle: {
+    '&::after': {
+      background:
+        theme === darkScheme
+          ? `url(${OrangeStationDark})`
+          : `url(${OrangeStationLight})`,
+    },
+  },
+  bluePulsatingCircle: {
+    '&::after': {
+      background:
+        theme === darkScheme
+          ? `url(${BlueStationDark})`
+          : `url(${BlueStationLight})`,
+    },
+  },
+  grayPulsatingCircle: {
+    '&::after': {
+      background:
+        theme === darkScheme
+          ? `url(${GrayStationDark})`
+          : `url(${GrayStationLight})`,
+    },
+  },
+  pulsatingCircle: {
+    position: 'absolute',
+
+    '&::after': {
+      content: "''",
+      width: '20px',
+      height: '20px',
+      background:
+        theme === darkScheme
+          ? `url(${GreenStationDark})`
+          : `url(${GreenStationLight})`,
+      backgroundSize: '20px 20px',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseDot infinite 1.25s',
+    },
+    '&::before': {
+      content: "''",
+      width: '50px',
+      height: '50px',
+      backgroundColor: 'red',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseRing infinite 1.25s',
+    },
   },
 }));
 
