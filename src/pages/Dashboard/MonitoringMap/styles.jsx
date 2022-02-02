@@ -147,6 +147,36 @@ const useStyles = createUseStyles((theme) => ({
       animation: '$pulseRing infinite 1.25s',
     },
   },
+  alertStationLegend: {
+    position: 'relative',
+    width: 17,
+    height: 17,
+    marginRight: 5,
+
+    '&::after': {
+      content: "''",
+      width: 6,
+      height: 6,
+      backgroundColor: theme.stroke.dark,
+      border: `solid 1px ${theme.stroke.dark}`,
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseDot infinite 1.25s',
+    },
+    '&::before': {
+      content: "''",
+      width: 17,
+      height: 17,
+      backgroundColor: 'red',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseRing infinite 1.25s',
+    },
+  },
 }));
 
 export default useStyles;

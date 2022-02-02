@@ -304,6 +304,10 @@ export default function MonitoringMap() {
                 />
                 {t('specific.legend.riverLine')}
               </div>
+              <div className={classes.legendItem}>
+                <div className={classes.alertStationLegend} />
+                {t('specific.legend.alertStation')}
+              </div>
             </div>
           }
         >
