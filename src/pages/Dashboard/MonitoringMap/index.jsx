@@ -93,7 +93,6 @@ export default function MonitoringMap() {
         const position = [...point.geometry.coordinates];
         position.reverse();
         let icon;
-        console.log(point);
         if (point.properties.network === networks.RHA.code) {
           icon = blueStation;
         } else if (point.properties.network === networks.RQA.code) {

@@ -92,12 +92,11 @@ export default function Station({ station, timeGrouping }) {
    */
   useEffect(() => {
     let isSubscribed = true;
-
-    api
-      .get(`/observation/timeSeries/${station.code}/rain/${timeGrouping}`)
-      .then(({ data }) => {
-        if (isSubscribed) {
-          if (data) {
+    if (station.code) {
+      api
+        .get(`/observation/timeSeries/${station.code}/rain/${timeGrouping}`)
+        .then(({ data }) => {
+          if (isSubscribed && data) {
             setRainData({
               labels: xAxisFormatter(data.x),
               datasets: [
@@ -113,9 +112,8 @@ export default function Station({ station, timeGrouping }) {
               ],
             });
           }
-        }
-      });
-
+        });
+    }
     return () => {
       isSubscribed = false;
     };
@@ -126,12 +124,11 @@ export default function Station({ station, timeGrouping }) {
    */
   useEffect(() => {
     let isSubscribed = true;
-
-    api
-      .get(`/observation/timeSeries/${station.code}/level/${timeGrouping}`)
-      .then(({ data }) => {
-        if (isSubscribed) {
-          if (data) {
+    if (station.code) {
+      api
+        .get(`/observation/timeSeries/${station.code}/level/${timeGrouping}`)
+        .then(({ data }) => {
+          if (isSubscribed && data) {
             setLevelData({
               labels: xAxisFormatter(data.x),
               datasets: [
@@ -147,9 +144,8 @@ export default function Station({ station, timeGrouping }) {
               ],
             });
           }
-        }
-      });
-
+        });
+    }
     return () => {
       isSubscribed = false;
     };
@@ -160,12 +156,11 @@ export default function Station({ station, timeGrouping }) {
    */
   useEffect(() => {
     let isSubscribed = true;
-
-    api
-      .get(`/observation/timeSeries/${station.code}/flowRate/${timeGrouping}`)
-      .then(({ data }) => {
-        if (isSubscribed) {
-          if (data) {
+    if (station.code) {
+      api
+        .get(`/observation/timeSeries/${station.code}/flowRate/${timeGrouping}`)
+        .then(({ data }) => {
+          if (isSubscribed && data) {
             setFlowRateData({
               labels: xAxisFormatter(data.x),
               datasets: [
@@ -181,9 +176,8 @@ export default function Station({ station, timeGrouping }) {
               ],
             });
           }
-        }
-      });
-
+        });
+    }
     return () => {
       isSubscribed = false;
     };
