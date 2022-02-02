@@ -42,7 +42,6 @@ ChartJS.defaults.plugins.legend.display = true;
 ChartJS.defaults.plugins.datalabels.display = false;
 ChartJS.defaults.plugins.legend.position = 'bottom';
 
-ChartJS.defaults.scale.ticks.crossAlign = 'far';
 ChartJS.defaults.scale.ticks.align = 'center';
 ChartJS.defaults.scale.ticks.autoSkip = true;
 ChartJS.defaults.scale.ticks.autoSkipPadding = 1;

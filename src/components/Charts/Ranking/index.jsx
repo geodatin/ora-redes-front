@@ -45,6 +45,11 @@ export default function RankingChart({ title, info, data, params, setParams }) {
       },
     },
     scales: {
+      y: {
+        ticks: {
+          crossAlign: 'far',
+        },
+      },
       x: {
         ticks: {
           display: false,

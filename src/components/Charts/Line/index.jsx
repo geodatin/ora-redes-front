@@ -30,6 +30,17 @@ export default function LineChart({
   const options = {
     indexAxis: 'x',
     plugins: {},
+    scales: {
+      y: {
+        title: {
+          display: false,
+          padding: 0,
+          font: {
+            size: 13,
+          },
+        },
+      },
+    },
   };
 
   return (
