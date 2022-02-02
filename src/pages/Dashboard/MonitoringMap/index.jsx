@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import classNames from 'classnames';
 import L from 'leaflet';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -61,12 +62,35 @@ export default function MonitoringMap() {
     [theme]
   );
 
+  const blueStationPulsing = useMemo(
+    () =>
+      L.divIcon({
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+        className: classNames(
+          classes.pulsatingCircle,
+          classes.bluesPulsatingCircle
+        ),
+      }),
+    [theme]
+  );
+
   const greenStation = useMemo(
     () =>
       L.icon({
         iconUrl: theme === darkScheme ? GreenStationDark : GreenStationLight,
         iconSize: [20, 20],
         iconAnchor: [10, 10],
+      }),
+    [theme]
+  );
+
+  const greenStationPulsing = useMemo(
+    () =>
+      L.divIcon({
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+        className: classes.pulsatingCircle,
       }),
     [theme]
   );
@@ -81,12 +105,38 @@ export default function MonitoringMap() {
     [theme]
   );
 
+  const grayStationPulsing = useMemo(
+    () =>
+      L.divIcon({
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+        className: classNames(
+          classes.pulsatingCircle,
+          classes.grayPulsatingCircle
+        ),
+      }),
+    [theme]
+  );
+
   const orangeStation = useMemo(
     () =>
       L.icon({
         iconUrl: theme === darkScheme ? OrangeStationDark : OrangeStationLight,
         iconSize: [20, 20],
         iconAnchor: [10, 10],
+      }),
+    [theme]
+  );
+
+  const orangeStationPulsing = useMemo(
+    () =>
+      L.divIcon({
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+        className: classNames(
+          classes.pulsatingCircle,
+          classes.orangePulsatingCircle
+        ),
       }),
     [theme]
   );
@@ -98,7 +148,18 @@ export default function MonitoringMap() {
         const position = [...point.geometry.coordinates];
         position.reverse();
         let icon;
-        if (point.properties.network === networks.RHA.code) {
+
+        if (point.properties.situation === 'alert') {
+          if (point.properties.network === networks.RHA.code) {
+            icon = blueStationPulsing;
+          } else if (point.properties.network === networks.RQA.code) {
+            icon = orangeStationPulsing;
+          } else if (point.properties.network === networks.HYBAM.code) {
+            icon = greenStationPulsing;
+          } else {
+            icon = grayStationPulsing;
+          }
+        } else if (point.properties.network === networks.RHA.code) {
           icon = blueStation;
         } else if (point.properties.network === networks.RQA.code) {
           icon = orangeStation;
@@ -307,6 +368,7 @@ export default function MonitoringMap() {
           opacity: 0.6,
         })}
       /> */}
+
       {markers}
     </MapWrapper>
   );
