@@ -12,6 +12,10 @@ import PanelRoutingContext from '../../../../contexts/panelRouting';
 import api from '../../../../services/api';
 import CardItem from '../CardList/CardItem';
 
+/**
+ * This function provides a station panel
+ * @returns station panel
+ */
 export default function Station({ station, timeGrouping }) {
   Station.propTypes = {
     station: PropTypes.shape(),
@@ -41,6 +45,12 @@ export default function Station({ station, timeGrouping }) {
       label(context) {
         return `${context.dataset.label}: ${context.formattedValue} ${context.dataset?.sufix}`;
       },
+    },
+  };
+
+  const ticksThousandFormatter = {
+    callback(value) {
+      return value / 1000;
     },
   };
 
@@ -75,10 +85,8 @@ export default function Station({ station, timeGrouping }) {
         { params: { stationCode: station.code } }
       )
       .then(({ data }) => {
-        if (isSubscribed) {
-          if (data) {
-            setStationUpdate(data);
-          }
+        if (isSubscribed && data) {
+          setStationUpdate(data);
         }
       });
 
@@ -92,12 +100,11 @@ export default function Station({ station, timeGrouping }) {
    */
   useEffect(() => {
     let isSubscribed = true;
-
-    api
-      .get(`/observation/timeSeries/${station.code}/rain/${timeGrouping}`)
-      .then(({ data }) => {
-        if (isSubscribed) {
-          if (data) {
+    if (station.code) {
+      api
+        .get(`/observation/timeSeries/${station.code}/rain/${timeGrouping}`)
+        .then(({ data }) => {
+          if (isSubscribed && data) {
             setRainData({
               labels: xAxisFormatter(data.x),
               datasets: [
@@ -113,9 +120,8 @@ export default function Station({ station, timeGrouping }) {
               ],
             });
           }
-        }
-      });
-
+        });
+    }
     return () => {
       isSubscribed = false;
     };
@@ -126,12 +132,11 @@ export default function Station({ station, timeGrouping }) {
    */
   useEffect(() => {
     let isSubscribed = true;
-
-    api
-      .get(`/observation/timeSeries/${station.code}/level/${timeGrouping}`)
-      .then(({ data }) => {
-        if (isSubscribed) {
-          if (data) {
+    if (station.code) {
+      api
+        .get(`/observation/timeSeries/${station.code}/level/${timeGrouping}`)
+        .then(({ data }) => {
+          if (isSubscribed && data) {
             setLevelData({
               labels: xAxisFormatter(data.x),
               datasets: [
@@ -147,9 +152,8 @@ export default function Station({ station, timeGrouping }) {
               ],
             });
           }
-        }
-      });
-
+        });
+    }
     return () => {
       isSubscribed = false;
     };
@@ -160,12 +164,11 @@ export default function Station({ station, timeGrouping }) {
    */
   useEffect(() => {
     let isSubscribed = true;
-
-    api
-      .get(`/observation/timeSeries/${station.code}/flowRate/${timeGrouping}`)
-      .then(({ data }) => {
-        if (isSubscribed) {
-          if (data) {
+    if (station.code) {
+      api
+        .get(`/observation/timeSeries/${station.code}/flowRate/${timeGrouping}`)
+        .then(({ data }) => {
+          if (isSubscribed && data) {
             setFlowRateData({
               labels: xAxisFormatter(data.x),
               datasets: [
@@ -181,9 +184,8 @@ export default function Station({ station, timeGrouping }) {
               ],
             });
           }
-        }
-      });
-
+        });
+    }
     return () => {
       isSubscribed = false;
     };
@@ -225,6 +227,16 @@ export default function Station({ station, timeGrouping }) {
             tooltip: tooltipSufix,
             legend: false,
           },
+          scales: {
+            y: {
+              ticks: ticksThousandFormatter,
+              title: {
+                display: true,
+                text: t('specific.statistics.charts.rainTimeSeries.yAxisLabel'),
+                color: theme.neutral.gray.main,
+              },
+            },
+          },
         }}
       />
 
@@ -237,6 +249,18 @@ export default function Station({ station, timeGrouping }) {
             tooltip: tooltipSufix,
             legend: false,
           },
+          scales: {
+            y: {
+              ticks: ticksThousandFormatter,
+              title: {
+                display: true,
+                text: t(
+                  'specific.statistics.charts.levelTimeSeries.yAxisLabel'
+                ),
+                color: theme.neutral.gray.main,
+              },
+            },
+          },
         }}
       />
 
@@ -248,6 +272,18 @@ export default function Station({ station, timeGrouping }) {
           plugins: {
             tooltip: tooltipSufix,
             legend: false,
+          },
+          scales: {
+            y: {
+              ticks: ticksThousandFormatter,
+              title: {
+                display: true,
+                text: t(
+                  'specific.statistics.charts.flowRateTimeSeries.yAxisLabel'
+                ),
+                color: theme.neutral.gray.main,
+              },
+            },
           },
         }}
       />

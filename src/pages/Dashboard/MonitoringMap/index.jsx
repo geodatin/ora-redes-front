@@ -15,7 +15,6 @@ import GreenStationLight from '../../../assets/icons/map/green-station-light.png
 import OrangeStationDark from '../../../assets/icons/map/orange-station-dark.png';
 import OrangeStationLight from '../../../assets/icons/map/orange-station-light.png';
 import BorderGeojson from '../../../assets/shapes/border.json';
-/* import DrenageGeojson from '../../../assets/shapes/drenagem_bho.json'; */
 import InverseShape from '../../../assets/shapes/inverseShape.json';
 import MapWrapper from '../../../components/MapWrapper';
 import MapItem from '../../../components/MapWrapper/Mapitem';
@@ -23,6 +22,7 @@ import Typography from '../../../components/Typography';
 import { networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
+import MapContext from '../../../contexts/mapping';
 import api from '../../../services/api';
 import useStyles from './styles';
 
@@ -34,6 +34,11 @@ export default function MonitoringMap() {
   const {
     values: { autocompleteSelection },
   } = useContext(FilteringContext);
+
+  const {
+    setters: { setMapRef },
+  } = useContext(MapContext);
+
   const [points, setPoints] = useState();
   const theme = useTheme();
   const classes = useStyles();
@@ -145,20 +150,20 @@ export default function MonitoringMap() {
         let icon;
 
         if (point.properties.situation === 'alert') {
-          if (point.properties.network === networks.hydrologic.code) {
+          if (point.properties.network === networks.RHA.code) {
             icon = blueStationPulsing;
-          } else if (point.properties.network === networks.quality.code) {
+          } else if (point.properties.network === networks.RQA.code) {
             icon = orangeStationPulsing;
-          } else if (point.properties.network === networks.hybam.code) {
+          } else if (point.properties.network === networks.HYBAM.code) {
             icon = greenStationPulsing;
           } else {
             icon = grayStationPulsing;
           }
-        } else if (point.properties.network === networks.hydrologic.code) {
+        } else if (point.properties.network === networks.RHA.code) {
           icon = blueStation;
-        } else if (point.properties.network === networks.quality.code) {
+        } else if (point.properties.network === networks.RQA.code) {
           icon = orangeStation;
-        } else if (point.properties.network === networks.hybam.code) {
+        } else if (point.properties.network === networks.HYBAM.code) {
           icon = greenStation;
         } else {
           icon = grayStation;
@@ -237,6 +242,7 @@ export default function MonitoringMap() {
 
   return (
     <MapWrapper
+      getMapRef={(ref) => setMapRef(ref)}
       minZoom={5}
       maxZoom={15}
       maxBounds={[

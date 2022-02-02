@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom';
 
 import Header from './components/Header';
+import { MappingProvider } from './contexts/mapping';
+import { PanelRoutingProvider } from './contexts/panelRouting';
 import ApiMethods from './pages/ApiMethods';
 import Dashboard from './pages/Dashboard';
 import DataLibrary from './pages/DataLibrary';
@@ -25,7 +27,17 @@ function Routes() {
         ]}
       />
       <BaseRoutes>
-        <Route exact path="/" element={<Dashboard />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <MappingProvider>
+              <PanelRoutingProvider>
+                <Dashboard />
+              </PanelRoutingProvider>
+            </MappingProvider>
+          }
+        />
         <Route exact path="/api" element={<ApiMethods />} />
         <Route exact path="/library" element={<DataLibrary />} />
         <Route path="*" element={<Navigate to="/" />} />

@@ -159,10 +159,10 @@ export default function Filters() {
       <div>
         <CustomSelect value={auxNetworkSelection}>
           <MenuItem
-            value={networks.all.value}
-            onSelect={() => setAuxNetworkSelection(networks.all.value)}
+            value={networks.ALL.value}
+            onSelect={() => setAuxNetworkSelection(networks.ALL.value)}
           >
-            {t(networks.all.translation)}
+            {t(networks.ALL.translation)}
           </MenuItem>
         </CustomSelect>
       </div>

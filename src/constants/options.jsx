@@ -58,28 +58,31 @@ export const countryCodes = {
 };
 
 export const networks = {
-  all: {
+  ALL: {
     name: 'all',
     code: 'all',
     translation: 'specific.networks.type.all',
     value: 1,
   },
-  hydrologic: {
+  RHA: {
     name: 'hydrologic',
     code: 'RHA',
     translation: 'specific.networks.type.hydrologic',
+    color: '#00B9F1',
     value: 2,
   },
-  quality: {
+  RQA: {
     name: 'quality',
     code: 'RQA',
     translation: 'specific.networks.type.quality',
+    color: '#FA7B00',
     value: 3,
   },
-  hybam: {
+  HYBAM: {
     name: 'hybam',
     code: 'HYBAM',
     translation: 'specific.networks.type.hybam',
+    color: '#A1BA09',
     value: 4,
   },
 };
@@ -93,7 +96,7 @@ export const filterDefaults = {
     river: [],
     variable: [],
   },
-  networkSelection: networks.all.value,
+  networkSelection: networks.ALL.value,
 };
 
 export const timeGroupingOptions = [
