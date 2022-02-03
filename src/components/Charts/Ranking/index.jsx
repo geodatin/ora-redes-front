@@ -12,17 +12,26 @@ import CustomPagination from '../../CustomPagination';
  * This component renders a Ranking Chart
  * @returns Ranking Chart
  */
-export default function RankingChart({ title, info, data, params, setParams }) {
+export default function RankingChart({
+  title,
+  info,
+  data,
+  csvCallback,
+  params,
+  setParams,
+}) {
   RankingChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
+    csvCallback: PropTypes.func,
     params: PropTypes.shape(),
     setParams: PropTypes.func.isRequired,
   };
 
   RankingChart.defaultProps = {
     data: undefined,
+    csvCallback: undefined,
     params: {
       order: true,
       page: 1,
@@ -67,6 +76,7 @@ export default function RankingChart({ title, info, data, params, setParams }) {
       title={title}
       info={info}
       isLoaded={data != null}
+      csvCallback={csvCallback}
       extraButton={
         <IconButton id="order-button" onClick={handleChangeOrder}>
           <AlignHorizontalLeftRoundedIcon
