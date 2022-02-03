@@ -145,6 +145,7 @@ const useStyles = createUseStyles((theme) => ({
       top: '50%',
       left: '50%',
       animation: '$pulseRing infinite 1.25s',
+      pointerEvents: 'none',
     },
   },
   alertStationLegend: {

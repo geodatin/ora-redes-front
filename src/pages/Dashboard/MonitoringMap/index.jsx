@@ -170,7 +170,13 @@ export default function MonitoringMap() {
         }
 
         return (
-          <Marker key={key} position={position} icon={icon}>
+          <Marker
+            key={key}
+            position={position}
+            icon={icon}
+            riseOnHover
+            zIndexOffset={point.properties.situation === 'alert' ? 10 : 2}
+          >
             <Popup
               key={theme === darkScheme ? `${key}-dark` : `${key}-light`}
               className={classes.popup}
