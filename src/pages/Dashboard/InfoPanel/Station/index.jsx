@@ -10,6 +10,7 @@ import BarChart from '../../../../components/Charts/Bar';
 import LineChart from '../../../../components/Charts/Line';
 import PanelRoutingContext from '../../../../contexts/panelRouting';
 import api from '../../../../services/api';
+import { downloadCSV } from '../../../../utils/helpers';
 import CardItem from '../CardList/CardItem';
 
 /**
@@ -45,12 +46,6 @@ export default function Station({ station, timeGrouping }) {
       label(context) {
         return `${context.dataset.label}: ${context.formattedValue} ${context.dataset?.sufix}`;
       },
-    },
-  };
-
-  const ticksThousandFormatter = {
-    callback(value) {
-      return value / 1000;
     },
   };
 
@@ -191,6 +186,24 @@ export default function Station({ station, timeGrouping }) {
     };
   }, [station, timeGrouping]);
 
+  const csvFetching = (dataType, stationCode) => {
+    api
+      .get(
+        `/observation/timeSeries/${stationCode}/${dataType}/${timeGrouping}`,
+        {
+          params: {
+            format: 'csv',
+          },
+        }
+      )
+      .then(({ data }) => {
+        downloadCSV(
+          data,
+          t(`specific.statistics.charts.${dataType}TimeSeries.title`)
+        );
+      });
+  };
+
   return (
     <ul>
       <li
@@ -221,6 +234,7 @@ export default function Station({ station, timeGrouping }) {
         title={t('specific.statistics.charts.rainTimeSeries.title')}
         info={t('specific.statistics.charts.rainTimeSeries.info')}
         data={rainData}
+        csvCallback={() => csvFetching('rain', station.code)}
         options={{
           indexAxis: 'x',
           plugins: {
@@ -229,7 +243,6 @@ export default function Station({ station, timeGrouping }) {
           },
           scales: {
             y: {
-              ticks: ticksThousandFormatter,
               title: {
                 display: true,
                 text: t('specific.statistics.charts.rainTimeSeries.yAxisLabel'),
@@ -244,6 +257,7 @@ export default function Station({ station, timeGrouping }) {
         title={t('specific.statistics.charts.levelTimeSeries.title')}
         info={t('specific.statistics.charts.levelTimeSeries.info')}
         data={levelData}
+        csvCallback={() => csvFetching('level', station.code)}
         options={{
           plugins: {
             tooltip: tooltipSufix,
@@ -251,7 +265,6 @@ export default function Station({ station, timeGrouping }) {
           },
           scales: {
             y: {
-              ticks: ticksThousandFormatter,
               title: {
                 display: true,
                 text: t(
@@ -268,6 +281,7 @@ export default function Station({ station, timeGrouping }) {
         title={t('specific.statistics.charts.flowRateTimeSeries.title')}
         info={t('specific.statistics.charts.flowRateTimeSeries.info')}
         data={flowRateData}
+        csvCallback={() => csvFetching('flowRate', station.code)}
         options={{
           plugins: {
             tooltip: tooltipSufix,
@@ -275,7 +289,6 @@ export default function Station({ station, timeGrouping }) {
           },
           scales: {
             y: {
-              ticks: ticksThousandFormatter,
               title: {
                 display: true,
                 text: t(

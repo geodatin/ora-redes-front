@@ -10,7 +10,7 @@ import Treemap from '../../../../components/Charts/Treemap';
 import { countryCodes, networks } from '../../../../constants/options';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
-import getTextWidth from '../../../../utils';
+import { downloadCSV, getTextWidth } from '../../../../utils/helpers';
 
 /**
  * This function provides a statistics list
@@ -215,6 +215,24 @@ export default function Statistics() {
     };
   }, [t, theme, autocompleteSelection]);
 
+  const csvFetching = (dataType, title) => {
+    api
+      .post(
+        `/station/count/${dataType}`,
+        {
+          filters: autocompleteSelection,
+        },
+        {
+          params: {
+            format: 'csv',
+          },
+        }
+      )
+      .then(({ data }) => {
+        downloadCSV(data, title);
+      });
+  };
+
   return useMemo(
     () => (
       <ul>
@@ -222,18 +240,52 @@ export default function Statistics() {
           title={t('specific.statistics.charts.stationsPerNetwork.title')}
           info={t('specific.statistics.charts.stationsPerNetwork.info')}
           data={legendDoughnutData}
+          csvCallback={() =>
+            csvFetching(
+              'network',
+              t('specific.statistics.charts.stationsPerNetwork.title')
+            )
+          }
         />
 
         <ItemsChart
           title={t('specific.statistics.charts.stationsPerCountry.title')}
           info={t('specific.statistics.charts.stationsPerCountry.info')}
           data={itemsData}
+          csvCallback={() =>
+            csvFetching(
+              'country',
+              t('specific.statistics.charts.stationsPerCountry.title')
+            )
+          }
         />
 
         <RankingChart
           title={t('specific.statistics.charts.riverRanking.title')}
           info={t('specific.statistics.charts.riverRanking.info')}
           data={rankingData}
+          csvCallback={() => {
+            api
+              .post(
+                `/station/ranking/river`,
+                {
+                  filters: autocompleteSelection,
+                },
+                {
+                  params: {
+                    page: rankingParams.page,
+                    order: rankingParams.order ? 'desc' : 'asc',
+                    format: 'csv',
+                  },
+                }
+              )
+              .then(({ data }) => {
+                downloadCSV(
+                  data,
+                  t('specific.statistics.charts.riverRanking.title')
+                );
+              });
+          }}
           params={rankingParams}
           setParams={setRankingParams}
         />
