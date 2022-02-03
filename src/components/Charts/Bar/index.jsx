@@ -9,17 +9,25 @@ import ChartContainer from '../../ChartContainer';
  * This component renders a Bar Chart
  * @returns Bar Chart
  */
-export default function BarChart({ title, info, data, options: mergeOptions }) {
+export default function BarChart({
+  title,
+  info,
+  data,
+  csvCallback,
+  options: mergeOptions,
+}) {
   BarChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
     options: PropTypes.shape(),
+    csvCallback: PropTypes.func,
   };
 
   BarChart.defaultProps = {
     data: undefined,
     options: undefined,
+    csvCallback: undefined,
   };
 
   const options = {
@@ -39,7 +47,12 @@ export default function BarChart({ title, info, data, options: mergeOptions }) {
   };
 
   return (
-    <ChartContainer title={title} info={info} isLoaded={data != null}>
+    <ChartContainer
+      title={title}
+      info={info}
+      csvCallback={csvCallback}
+      isLoaded={data != null}
+    >
       <Bar options={merge(options, mergeOptions)} data={data} />
     </ChartContainer>
   );

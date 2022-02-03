@@ -13,17 +13,20 @@ export default function DoughnutChart({
   title,
   info,
   data,
+  csvCallback,
   options: mergeOptions,
 }) {
   DoughnutChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
     data: PropTypes.shape().isRequired,
+    csvCallback: PropTypes.func,
     options: PropTypes.shape(),
   };
 
   DoughnutChart.defaultProps = {
     options: undefined,
+    csvCallback: undefined,
   };
 
   const options = {
@@ -35,7 +38,12 @@ export default function DoughnutChart({
   };
 
   return (
-    <ChartContainer title={title} info={info} isLoaded={data != null}>
+    <ChartContainer
+      title={title}
+      info={info}
+      csvCallback={csvCallback}
+      isLoaded={data != null}
+    >
       <Doughnut options={merge(options, mergeOptions)} data={data} />
     </ChartContainer>
   );

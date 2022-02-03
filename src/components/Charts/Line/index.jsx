@@ -13,6 +13,7 @@ export default function LineChart({
   title,
   info,
   data,
+  csvCallback,
   options: mergeOptions,
 }) {
   LineChart.propTypes = {
@@ -20,11 +21,13 @@ export default function LineChart({
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
     options: PropTypes.shape(),
+    csvCallback: PropTypes.func,
   };
 
   LineChart.defaultProps = {
     data: undefined,
     options: undefined,
+    csvCallback: undefined,
   };
 
   const options = {
@@ -44,7 +47,12 @@ export default function LineChart({
   };
 
   return (
-    <ChartContainer title={title} info={info} isLoaded={data != null}>
+    <ChartContainer
+      title={title}
+      info={info}
+      csvCallback={csvCallback}
+      isLoaded={data != null}
+    >
       <Line options={merge(options, mergeOptions)} data={data} />
     </ChartContainer>
   );

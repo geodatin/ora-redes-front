@@ -23,6 +23,7 @@ export default function ChartContainer({
   info,
   pagination,
   extraButton,
+  csvCallback,
   isLoaded,
   style,
 }) {
@@ -33,12 +34,14 @@ export default function ChartContainer({
     pagination: PropTypes.node,
     extraButton: PropTypes.node,
     isLoaded: PropTypes.bool.isRequired,
+    csvCallback: PropTypes.func,
     style: PropTypes.shape(),
   };
 
   ChartContainer.defaultProps = {
     pagination: undefined,
     extraButton: undefined,
+    csvCallback: undefined,
     style: {},
   };
 
@@ -59,7 +62,7 @@ export default function ChartContainer({
 
   const handleExport = (ext) => {
     if (ext === 'csv') {
-      // csv logic here
+      csvCallback();
       handleClose();
       return;
     }

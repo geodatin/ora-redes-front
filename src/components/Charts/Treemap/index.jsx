@@ -9,16 +9,24 @@ import ChartContainer from '../../ChartContainer';
  * This component renders a Treemap Chart
  * @returns Treemap Chart
  */
-export default function Treemap({ title, info, data, options: mergeOptions }) {
+export default function Treemap({
+  title,
+  info,
+  data,
+  csvCallback,
+  options: mergeOptions,
+}) {
   Treemap.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
+    csvCallback: PropTypes.func,
     options: PropTypes.shape(),
   };
 
   Treemap.defaultProps = {
     data: undefined,
+    csvCallback: undefined,
     options: undefined,
   };
 
@@ -35,7 +43,12 @@ export default function Treemap({ title, info, data, options: mergeOptions }) {
   };
 
   return (
-    <ChartContainer title={title} info={info} isLoaded={data != null}>
+    <ChartContainer
+      title={title}
+      info={info}
+      csvCallback={csvCallback}
+      isLoaded={data != null}
+    >
       <Chart
         options={merge(options, mergeOptions)}
         data={data}
