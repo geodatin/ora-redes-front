@@ -62,7 +62,7 @@ export default function ChartContainer({
 
   const handleExport = (ext) => {
     if (ext === 'csv') {
-      csvCallback();
+      csvCallback?.();
       handleClose();
       return;
     }
@@ -148,9 +148,11 @@ export default function ChartContainer({
                 <MenuItem key="png" onClick={() => handleExport('png')}>
                   <Typography variant="body">Baixar PNG</Typography>
                 </MenuItem>
-                <MenuItem key="csv" onClick={() => handleExport('csv')}>
-                  <Typography variant="body">Baixar CSV</Typography>
-                </MenuItem>
+                {csvCallback && (
+                  <MenuItem key="csv" onClick={() => handleExport('csv')}>
+                    <Typography variant="body">Baixar CSV</Typography>
+                  </MenuItem>
+                )}
               </Menu>
             </div>
           </div>
