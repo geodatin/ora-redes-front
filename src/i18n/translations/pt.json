@@ -175,7 +175,8 @@
       "country": "País",
       "network": "Rede",
       "river": "Rio",
-      "responsible": "Responsável"
+      "responsible": "Responsável",
+      "viewMoreButton": "Visualizar Estatísticas"
     },
     "legend": {
       "riverLine": "Linhas de drenagem",

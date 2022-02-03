@@ -16,6 +16,7 @@ import OrangeStationDark from '../../../assets/icons/map/orange-station-dark.png
 import OrangeStationLight from '../../../assets/icons/map/orange-station-light.png';
 import BorderGeojson from '../../../assets/shapes/border.json';
 import InverseShape from '../../../assets/shapes/inverseShape.json';
+import CustomButton from '../../../components/CustomButton';
 import MapWrapper from '../../../components/MapWrapper';
 import MapItem from '../../../components/MapWrapper/Mapitem';
 import Typography from '../../../components/Typography';
@@ -237,6 +238,10 @@ export default function MonitoringMap() {
                   </Typography>
                 </div>
               )}
+              <div className={classes.separator} />
+              <CustomButton mini style={{ fontWeigth: 400, marginTop: 3 }}>
+                {t('specific.popup.viewMoreButton')}
+              </CustomButton>
             </Popup>
           </Marker>
         );
