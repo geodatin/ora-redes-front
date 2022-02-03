@@ -24,6 +24,7 @@ import { networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
+import PanelRoutingContext from '../../../contexts/panelRouting';
 import api from '../../../services/api';
 import useStyles from './styles';
 
@@ -33,12 +34,16 @@ import useStyles from './styles';
  */
 export default function MonitoringMap() {
   const {
-    values: { autocompleteSelection },
+    values: { autocompleteSelection, timeGrouping },
   } = useContext(FilteringContext);
 
   const {
     setters: { setMapRef },
   } = useContext(MapContext);
+
+  const {
+    functions: { openStation },
+  } = useContext(PanelRoutingContext);
 
   const [points, setPoints] = useState();
   const theme = useTheme();
@@ -239,7 +244,23 @@ export default function MonitoringMap() {
                 </div>
               )}
               <div className={classes.separator} />
-              <CustomButton mini style={{ fontWeigth: 400, marginTop: 3 }}>
+              <CustomButton
+                mini
+                style={{ fontWeigth: 400, marginTop: 3 }}
+                onClick={() => {
+                  api
+                    .post(
+                      `/observation/last/${timeGrouping}`,
+                      {},
+                      { params: { stationCode: point.properties.code } }
+                    )
+                    .then(({ data }) => {
+                      if (data) {
+                        openStation(data);
+                      }
+                    });
+                }}
+              >
                 {t('specific.popup.viewMoreButton')}
               </CustomButton>
             </Popup>

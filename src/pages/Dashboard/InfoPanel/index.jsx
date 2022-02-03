@@ -8,6 +8,7 @@ import VLayout from '../../../components/Layout/Vertical';
 import TabPanel from '../../../components/TabPanel';
 import Typography from '../../../components/Typography';
 import { panels, timeGroupingOptions } from '../../../constants/options';
+import FilteringContext from '../../../contexts/filtering';
 import PanelRoutingContext from '../../../contexts/panelRouting';
 import CardList from './CardList';
 import Station from './Station';
@@ -33,6 +34,11 @@ export default function InfoPanel({ title, subtitle }) {
   const { t } = useTranslation();
 
   const {
+    values: { timeGrouping },
+    setters: { setTimeGrouping },
+  } = useContext(FilteringContext);
+
+  const {
     values: { panelIndexValue, station },
     setters: { setPanelIndexValue },
   } = useContext(PanelRoutingContext);
@@ -48,6 +54,7 @@ export default function InfoPanel({ title, subtitle }) {
   const handleChangeTimeGrouping = (event, newTimeGrouping) => {
     if (newTimeGrouping !== null) {
       setTimeGroupingIndexValue(newTimeGrouping);
+      setTimeGrouping(timeGroupingOptions[newTimeGrouping].code);
     }
   };
 
@@ -107,15 +114,10 @@ export default function InfoPanel({ title, subtitle }) {
               <Statistics />
             </TabPanel>
             <TabPanel value={panelIndexValue} index={panels.list.index}>
-              <CardList
-                timeGrouping={timeGroupingOptions[timeGroupingIndexValue].code}
-              />
+              <CardList timeGrouping={timeGrouping} />
             </TabPanel>
             <TabPanel value={panelIndexValue} index={panels.station.index}>
-              <Station
-                station={station}
-                timeGrouping={timeGroupingOptions[timeGroupingIndexValue].code}
-              />
+              <Station station={station} timeGrouping={timeGrouping} />
             </TabPanel>
           </>
         ),

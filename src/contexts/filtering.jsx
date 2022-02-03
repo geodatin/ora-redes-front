@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import React, { createContext, useState } from 'react';
 
-import { filterDefaults } from '../constants/options';
+import { filterDefaults, timeGroupingOptions } from '../constants/options';
 
 const FilteringContext = createContext({});
 
@@ -17,6 +17,8 @@ export function FilteringProvider({ children }) {
     ]).isRequired,
   };
 
+  const [timeGrouping, setTimeGrouping] = useState(timeGroupingOptions[0].code);
+
   const [autocompleteSelection, setAutocompleteSelection] = useState(
     filterDefaults.autocompleteSelection
   );
@@ -28,8 +30,12 @@ export function FilteringProvider({ children }) {
   return (
     <FilteringContext.Provider
       value={{
-        values: { autocompleteSelection, networkSelection },
-        setters: { setAutocompleteSelection, setNetworkSelection },
+        values: { autocompleteSelection, networkSelection, timeGrouping },
+        setters: {
+          setAutocompleteSelection,
+          setNetworkSelection,
+          setTimeGrouping,
+        },
         functions: {},
         loaders: {},
       }}
