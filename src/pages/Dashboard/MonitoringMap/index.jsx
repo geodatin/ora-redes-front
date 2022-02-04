@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import ShareIcon from '@mui/icons-material/Share';
 import L from 'leaflet';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -276,6 +277,11 @@ export default function MonitoringMap() {
         [-28.483177, -100.582582],
         [14.211898, -30.591429],
       ]}
+      itemTopChildren={
+        <MapItem>
+          <ShareIcon style={{ fontSize: 18 }} />
+        </MapItem>
+      }
       itemChildren={
         <MapItem
           popupContent={
