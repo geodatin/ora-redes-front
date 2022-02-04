@@ -7,7 +7,7 @@ const useStyles = createUseStyles((theme) => ({
   },
   filtersWrapper: {
     borderBottom: `1px solid ${theme.stroke.dark}`,
-    height: 400,
+    height: 'auto',
     padding: 15,
   },
   filtersMobileWrapper: {
