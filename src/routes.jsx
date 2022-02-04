@@ -17,9 +17,9 @@ import Dashboard from './pages/Dashboard';
 import DataLibrary from './pages/DataLibrary';
 
 function FilteringWrapper({ redirect, children }) {
-  const [params] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
-  if (params.keys.length === 0) {
+  if ([...searchParams].length === 0) {
     return <Navigate replace to={redirect} />;
   }
 
