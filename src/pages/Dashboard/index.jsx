@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
+import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
 import { useMediaQuery } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +16,7 @@ import api from '../../services/api';
 import Filters from './Filters';
 import InfoPanel from './InfoPanel';
 import MonitoringMap from './MonitoringMap';
+import Notifications from './Notifications';
 import useStyles from './styles';
 
 /**
@@ -75,6 +78,14 @@ function Dashboard() {
           },
         },
         {
+          label: t('specific.mobileNavbar.notifications'),
+          icon: <NotificationsNoneRoundedIcon />,
+          navContainer: {
+            className: classes.notificationsMobileWrapper,
+            children: <Notifications />,
+          },
+        },
+        {
           label: t('specific.mobileNavbar.panel'),
           icon: <AutoGraphRoundedIcon />,
           navContainer: {
@@ -116,6 +127,10 @@ function Dashboard() {
             mainContainer={{
               className: classes.filtersWrapper,
               children: <Filters />,
+            }}
+            downRow={{
+              className: classes.notificationsWrapper,
+              children: <Notifications />,
             }}
           />
         ),

@@ -17,8 +17,11 @@ const useStyles = createUseStyles((theme) => ({
     borderRadius: '10px 10px 0px 0px',
     padding: 15,
   },
-  notificationsWrapper: { padding: 15 },
-  notificationsMobileWrapper: { padding: 15 },
+  notificationsWrapper: {
+    position: 'relative',
+    height: '100%',
+  },
+  notificationsMobileWrapper: {},
   breadBarWrapper: {
     padding: 15,
     borderBottom: `1px solid ${theme.stroke.dark}`,

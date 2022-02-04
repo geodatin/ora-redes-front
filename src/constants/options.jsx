@@ -87,6 +87,18 @@ export const networks = {
   },
 };
 
+export const notificationsTypes = {
+  rain: {
+    color: '#00B9F1',
+  },
+  adoptedLevel: {
+    color: '#FA7B00',
+  },
+  flowRate: {
+    color: '#A1BA09',
+  },
+};
+
 export const filterDefaults = {
   autocompleteSelection: {
     name: [],

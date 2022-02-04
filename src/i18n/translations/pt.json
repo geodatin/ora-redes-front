@@ -67,7 +67,8 @@
     "mobileNavbar": {
       "map": "Mapa",
       "filters": "Filtros",
-      "panel": "Painel"
+      "panel": "Painel",
+      "notifications": "Notificações"
     },
     "infoPanel": {
       "title": "Todas as redes",
@@ -124,6 +125,18 @@
       "seeMoreStatistics": "Visualizar mais estatísticas",
       "noMoreResults": "Não há mais resultados a serem exibidos",
       "noResults": "Não existem resultados para a filtragem aplicada"
+    },
+    "notifications": {
+      "title": "Notificações",
+      "noMoreResults": "Não há mais notificações a serem exibidas",
+      "noResults": "Não existem notificações no momento",
+      "afterReaching": "após atingir",
+      "state": "Estado",
+      "of": "de",
+      "situations": {
+        "alert": "alerta",
+        "attention": "atenção"
+      }
     },
     "dataType": {
       "name": "Nome",

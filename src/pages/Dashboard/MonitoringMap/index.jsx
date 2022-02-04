@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import classNames from 'classnames';
 import L from 'leaflet';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
