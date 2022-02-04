@@ -1,4 +1,5 @@
-import classNames from 'classnames';
+/* eslint-disable no-unused-vars */
+import ShareIcon from '@mui/icons-material/Share';
 import L from 'leaflet';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -72,10 +73,7 @@ export default function MonitoringMap() {
       L.divIcon({
         iconSize: [20, 20],
         iconAnchor: [10, 10],
-        className: classNames(
-          classes.pulsatingCircle,
-          classes.bluesPulsatingCircle
-        ),
+        className: classes.bluePulsatingCircle,
       }),
     [theme]
   );
@@ -95,7 +93,7 @@ export default function MonitoringMap() {
       L.divIcon({
         iconSize: [20, 20],
         iconAnchor: [10, 10],
-        className: classes.pulsatingCircle,
+        className: classes.greenPulsatingCircle,
       }),
     [theme]
   );
@@ -115,10 +113,7 @@ export default function MonitoringMap() {
       L.divIcon({
         iconSize: [20, 20],
         iconAnchor: [10, 10],
-        className: classNames(
-          classes.pulsatingCircle,
-          classes.grayPulsatingCircle
-        ),
+        className: classes.grayPulsatingCircle,
       }),
     [theme]
   );
@@ -138,10 +133,7 @@ export default function MonitoringMap() {
       L.divIcon({
         iconSize: [20, 20],
         iconAnchor: [10, 10],
-        className: classNames(
-          classes.pulsatingCircle,
-          classes.orangePulsatingCircle
-        ),
+        className: classes.orangePulsatingCircle,
       }),
     [theme]
   );
@@ -285,6 +277,11 @@ export default function MonitoringMap() {
         [-28.483177, -100.582582],
         [14.211898, -30.591429],
       ]}
+      itemTopChildren={
+        <MapItem>
+          <ShareIcon style={{ fontSize: 18 }} />
+        </MapItem>
+      }
       itemChildren={
         <MapItem
           popupContent={

@@ -94,30 +94,98 @@ const useStyles = createUseStyles((theme) => ({
     },
   },
   orangePulsatingCircle: {
+    position: 'absolute',
+
     '&::after': {
+      content: "''",
+      width: '20px',
+      height: '20px',
       background:
         theme === darkScheme
           ? `url(${OrangeStationDark})`
           : `url(${OrangeStationLight})`,
+      backgroundSize: '20px 20px',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+    },
+    '&::before': {
+      content: "''",
+      width: '50px',
+      height: '50px',
+      backgroundColor: 'red',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseRing infinite 1.25s',
+      pointerEvents: 'none',
     },
   },
   bluePulsatingCircle: {
+    position: 'absolute',
+
     '&::after': {
+      content: "''",
+      width: '20px',
+      height: '20px',
       background:
         theme === darkScheme
           ? `url(${BlueStationDark})`
           : `url(${BlueStationLight})`,
+      backgroundSize: '20px 20px',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseDot infinite 1.25s',
+    },
+    '&::before': {
+      content: "''",
+      width: '50px',
+      height: '50px',
+      backgroundColor: 'red',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseRing infinite 1.25s',
+      pointerEvents: 'none',
     },
   },
   grayPulsatingCircle: {
+    position: 'absolute',
+
     '&::after': {
+      content: "''",
+      width: '20px',
+      height: '20px',
       background:
         theme === darkScheme
           ? `url(${GrayStationDark})`
           : `url(${GrayStationLight})`,
+      backgroundSize: '20px 20px',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseDot infinite 1.25s',
+    },
+    '&::before': {
+      content: "''",
+      width: '50px',
+      height: '50px',
+      backgroundColor: 'red',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseRing infinite 1.25s',
+      pointerEvents: 'none',
     },
   },
-  pulsatingCircle: {
+  greenPulsatingCircle: {
     position: 'absolute',
 
     '&::after': {
