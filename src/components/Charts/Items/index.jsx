@@ -9,15 +9,17 @@ import useStyles from './styles';
  * This component renders a items chart
  * @returns items chart
  */
-export default function ItemsChart({ title, info, data }) {
+export default function ItemsChart({ title, info, data, csvCallback }) {
   ItemsChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
+    csvCallback: PropTypes.func,
   };
 
   ItemsChart.defaultProps = {
     data: undefined,
+    csvCallback: undefined,
   };
 
   const classes = useStyles();
@@ -48,6 +50,7 @@ export default function ItemsChart({ title, info, data }) {
       style={{ height: 'auto' }}
       title={title}
       info={info}
+      csvCallback={csvCallback}
       isLoaded={data != null}
     >
       <div className={classes.childrenWrapper}>

@@ -1,47 +1,43 @@
 import merge from 'lodash.merge';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Chart } from 'react-chartjs-2';
 
 import ChartContainer from '../../ChartContainer';
 
 /**
- * This component renders a Bar Chart
- * @returns Bar Chart
+ * This component renders a Treemap Chart
+ * @returns Treemap Chart
  */
-export default function BarChart({
+export default function Treemap({
   title,
   info,
   data,
   csvCallback,
   options: mergeOptions,
 }) {
-  BarChart.propTypes = {
+  Treemap.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
-    options: PropTypes.shape(),
     csvCallback: PropTypes.func,
+    options: PropTypes.shape(),
   };
 
-  BarChart.defaultProps = {
+  Treemap.defaultProps = {
     data: undefined,
-    options: undefined,
     csvCallback: undefined,
+    options: undefined,
   };
 
   const options = {
-    indexAxis: 'y',
-    plugins: {},
-    scales: {
-      y: {
-        title: {
-          display: false,
-          padding: 0,
-          font: {
-            size: 13,
-          },
-        },
+    plugins: {
+      datalabels: false,
+      title: {
+        display: false,
+      },
+      legend: {
+        display: false,
       },
     },
   };
@@ -53,7 +49,11 @@ export default function BarChart({
       csvCallback={csvCallback}
       isLoaded={data != null}
     >
-      <Bar options={merge(options, mergeOptions)} data={data} />
+      <Chart
+        options={merge(options, mergeOptions)}
+        data={data}
+        type="treemap"
+      />
     </ChartContainer>
   );
 }

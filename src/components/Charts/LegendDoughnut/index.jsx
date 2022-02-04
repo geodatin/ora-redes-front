@@ -17,18 +17,21 @@ export default function LegendDoughnutChart({
   title,
   info,
   data,
+  csvCallback,
   options: mergeOptions,
 }) {
   LegendDoughnutChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
+    csvCallback: PropTypes.func,
     options: PropTypes.shape(),
   };
 
   LegendDoughnutChart.defaultProps = {
     options: {},
     data: undefined,
+    csvCallback: undefined,
   };
 
   const classes = useStyles();
@@ -87,6 +90,7 @@ export default function LegendDoughnutChart({
       title={title}
       info={info}
       isLoaded={data != null}
+      csvCallback={csvCallback}
     >
       <div className={classes.childrenWrapper}>
         <MiddleDoughnut

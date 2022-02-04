@@ -20,6 +20,7 @@ export default function MapWrapper({
   children,
   itemChildren,
   itemTopChildren,
+  getMapRef,
   ...rest
 }) {
   const position = [-7.3800011, -64.3420118];
@@ -29,6 +30,10 @@ export default function MapWrapper({
   const [map, setMap] = useState();
   const lightTileRef = useRef();
   const darkTileRef = useRef();
+
+  useEffect(() => {
+    getMapRef(map);
+  }, [map]);
 
   /**
    * Disable click propagation
@@ -107,10 +112,12 @@ MapWrapper.defaultProps = {
   children: undefined,
   itemChildren: undefined,
   itemTopChildren: undefined,
+  getMapRef: undefined,
 };
 
 MapWrapper.propTypes = {
   children: PropTypes.node,
   itemChildren: PropTypes.node,
   itemTopChildren: PropTypes.node,
+  getMapRef: PropTypes.func,
 };
