@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import classNames from 'classnames';
 import L from 'leaflet';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -73,10 +72,7 @@ export default function MonitoringMap() {
       L.divIcon({
         iconSize: [20, 20],
         iconAnchor: [10, 10],
-        className: classNames(
-          classes.pulsatingCircle,
-          classes.bluesPulsatingCircle
-        ),
+        className: classes.bluePulsatingCircle,
       }),
     [theme]
   );
@@ -96,7 +92,7 @@ export default function MonitoringMap() {
       L.divIcon({
         iconSize: [20, 20],
         iconAnchor: [10, 10],
-        className: classes.pulsatingCircle,
+        className: classes.greenPulsatingCircle,
       }),
     [theme]
   );
@@ -116,10 +112,7 @@ export default function MonitoringMap() {
       L.divIcon({
         iconSize: [20, 20],
         iconAnchor: [10, 10],
-        className: classNames(
-          classes.pulsatingCircle,
-          classes.grayPulsatingCircle
-        ),
+        className: classes.grayPulsatingCircle,
       }),
     [theme]
   );
@@ -139,10 +132,7 @@ export default function MonitoringMap() {
       L.divIcon({
         iconSize: [20, 20],
         iconAnchor: [10, 10],
-        className: classNames(
-          classes.pulsatingCircle,
-          classes.orangePulsatingCircle
-        ),
+        className: classes.orangePulsatingCircle,
       }),
     [theme]
   );
