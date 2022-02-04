@@ -1,10 +1,12 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Routes as BaseRoutes,
   Route,
   BrowserRouter,
   Navigate,
+  useSearchParams,
 } from 'react-router-dom';
 
 import Header from './components/Header';
@@ -14,8 +16,30 @@ import ApiMethods from './pages/ApiMethods';
 import Dashboard from './pages/Dashboard';
 import DataLibrary from './pages/DataLibrary';
 
+function FilteringWrapper({ children }) {
+  const [params] = useSearchParams();
+
+  if (params.keys.length === 0) {
+    return <Navigate replace to="/" />;
+  }
+
+  return children;
+}
+
 function Routes() {
   const { t } = useTranslation();
+
+  const defaultPage = useMemo(
+    () => (
+      <MappingProvider>
+        <PanelRoutingProvider>
+          <Dashboard />
+        </PanelRoutingProvider>
+      </MappingProvider>
+    ),
+    []
+  );
+
   return (
     <BrowserRouter>
       <Header
@@ -27,20 +51,15 @@ function Routes() {
         ]}
       />
       <BaseRoutes>
+        <Route exact path="/" element={defaultPage} />
         <Route
           exact
-          path="/"
-          element={
-            <MappingProvider>
-              <PanelRoutingProvider>
-                <Dashboard />
-              </PanelRoutingProvider>
-            </MappingProvider>
-          }
+          path="/filter"
+          element={<FilteringWrapper>{defaultPage}</FilteringWrapper>}
         />
         <Route exact path="/api" element={<ApiMethods />} />
         <Route exact path="/library" element={<DataLibrary />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate replace to="/" />} />
       </BaseRoutes>
     </BrowserRouter>
   );
