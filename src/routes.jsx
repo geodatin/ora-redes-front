@@ -16,11 +16,11 @@ import ApiMethods from './pages/ApiMethods';
 import Dashboard from './pages/Dashboard';
 import DataLibrary from './pages/DataLibrary';
 
-function FilteringWrapper({ children }) {
+function FilteringWrapper({ redirect, children }) {
   const [params] = useSearchParams();
 
   if (params.keys.length === 0) {
-    return <Navigate replace to="/" />;
+    return <Navigate replace to={redirect} />;
   }
 
   return children;
@@ -55,7 +55,9 @@ function Routes() {
         <Route
           exact
           path="/filter"
-          element={<FilteringWrapper>{defaultPage}</FilteringWrapper>}
+          element={
+            <FilteringWrapper redirect="/">{defaultPage}</FilteringWrapper>
+          }
         />
         <Route exact path="/api" element={<ApiMethods />} />
         <Route exact path="/library" element={<DataLibrary />} />
