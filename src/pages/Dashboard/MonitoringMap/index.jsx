@@ -233,26 +233,31 @@ export default function MonitoringMap() {
                   </Typography>
                 </div>
               )}
-              <div className={classes.separator} />
-              <CustomButton
-                mini
-                style={{ fontWeigth: 400, marginTop: 3 }}
-                onClick={() => {
-                  api
-                    .post(
-                      `/observation/last/${timeGrouping}`,
-                      {},
-                      { params: { stationCode: point.properties.code } }
-                    )
-                    .then(({ data }) => {
-                      if (data) {
-                        openStation(data);
-                      }
-                    });
-                }}
-              >
-                {t('specific.popup.viewMoreButton')}
-              </CustomButton>
+
+              {point.properties.hasData && (
+                <>
+                  <div className={classes.separator} />
+                  <CustomButton
+                    mini
+                    style={{ fontWeigth: 400, marginTop: 3 }}
+                    onClick={() => {
+                      api
+                        .post(
+                          `/observation/last/${timeGrouping}`,
+                          {},
+                          { params: { stationCode: point.properties.code } }
+                        )
+                        .then(({ data }) => {
+                          if (data) {
+                            openStation(data);
+                          }
+                        });
+                    }}
+                  >
+                    {t('specific.popup.viewMoreButton')}
+                  </CustomButton>
+                </>
+              )}
             </Popup>
           </Marker>
         );
