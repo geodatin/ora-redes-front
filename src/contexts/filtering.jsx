@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import PropTypes from 'prop-types';
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 import { filterDefaults, timeGroupingOptions } from '../constants/options';
 
@@ -26,6 +26,36 @@ export function FilteringProvider({ children }) {
   const [networkSelection, setNetworkSelection] = useState(
     filterDefaults.networkSelection
   );
+
+  useEffect(() => {
+    let newQuery = `${window.location.pathname}?`;
+
+    if (window.location.pathname === '/') {
+      newQuery = `/filter?`;
+    }
+
+    const initialSize = newQuery.length;
+
+    /**
+     * This function verifies if there is a need to add a separator between the query params.
+     */
+    const trySeparator = () => {
+      if (newQuery.length > initialSize) {
+        newQuery += '&';
+      }
+    };
+
+    if (networkSelection !== filterDefaults.networkSelection) {
+      trySeparator();
+      newQuery += `networkSelection=${networkSelection}`;
+    }
+
+    if (newQuery.length === initialSize) {
+      window.history.replaceState(null, '', '/');
+    } else {
+      window.history.replaceState(null, '', newQuery);
+    }
+  }, [networkSelection, autocompleteSelection]);
 
   return (
     <FilteringContext.Provider
