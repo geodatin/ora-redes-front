@@ -60,7 +60,7 @@ export const countryCodes = {
 export const networks = {
   ALL: {
     name: 'all',
-    code: 'all',
+    code: '',
     translation: 'specific.networks.type.all',
     value: 1,
   },
@@ -84,6 +84,21 @@ export const networks = {
     translation: 'specific.networks.type.hybam',
     color: '#A1BA09',
     value: 4,
+  },
+};
+
+export const networkByValue = {
+  1: {
+    ...networks.ALL,
+  },
+  2: {
+    ...networks.RHA,
+  },
+  3: {
+    ...networks.RQA,
+  },
+  4: {
+    ...networks.HYBAM,
   },
 };
 
