@@ -52,7 +52,7 @@ function Dashboard() {
 
   const infoPanel = (
     <InfoPanel
-      title={t('specific.infoPanel.title')}
+      title={t(networkByValue[networkSelection].translation)}
       subtitle={
         lastUpdateDatabase
           ? `${t('specific.infoPanel.lastUpdate')} ${t(
