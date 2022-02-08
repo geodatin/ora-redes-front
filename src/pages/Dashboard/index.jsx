@@ -121,6 +121,7 @@ function Dashboard() {
         ),
       }}
       leftColumn={{
+        isHidden: false,
         className: classes.filtersNotificationsWrapper,
         children: (
           <VLayout
@@ -136,6 +137,7 @@ function Dashboard() {
         ),
       }}
       rightColumn={{
+        isHidden: false,
         className: classes.infoPanelWrapper,
         children: infoPanel,
       }}
