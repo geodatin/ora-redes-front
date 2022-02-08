@@ -4,7 +4,7 @@ import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
 import { useMediaQuery } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Breadcrumb from '../../components/Breadcrumb';
@@ -12,6 +12,8 @@ import HLayout from '../../components/Layout/Horizontal';
 import MobileNavbarLayout from '../../components/Layout/Mobile/Navbar';
 import VLayout from '../../components/Layout/Vertical';
 import { breakpoints } from '../../constants/constraints';
+import { networkByValue } from '../../constants/options';
+import FilteringContext from '../../contexts/filtering';
 import api from '../../services/api';
 import Filters from './Filters';
 import InfoPanel from './InfoPanel';
@@ -27,6 +29,9 @@ function Dashboard() {
   const classes = useStyles();
   const isMobile = useMediaQuery(breakpoints.max.lg);
   const { t } = useTranslation();
+  const {
+    values: { networkSelection },
+  } = useContext(FilteringContext);
 
   const [lastUpdateDatabase, setLastUpdateDatabase] = useState();
 
@@ -107,7 +112,7 @@ function Dashboard() {
                 <Breadcrumb
                   items={[
                     t('specific.breadcrumbs.monitoring'),
-                    t('specific.breadcrumbs.allNetworks'),
+                    t(networkByValue[networkSelection].translation),
                   ]}
                   onClickItem={() => {}}
                 />

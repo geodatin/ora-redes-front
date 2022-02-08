@@ -160,9 +160,27 @@ export default function Filters() {
         <CustomSelect value={auxNetworkSelection}>
           <MenuItem
             value={networks.ALL.value}
-            onSelect={() => setAuxNetworkSelection(networks.ALL.value)}
+            onClick={() => setAuxNetworkSelection(networks.ALL.value)}
           >
             {t(networks.ALL.translation)}
+          </MenuItem>
+          <MenuItem
+            value={networks.RHA.value}
+            onClick={() => setAuxNetworkSelection(networks.RHA.value)}
+          >
+            {t(networks.RHA.translation)}
+          </MenuItem>
+          <MenuItem
+            value={networks.HYBAM.value}
+            onClick={() => setAuxNetworkSelection(networks.HYBAM.value)}
+          >
+            {t(networks.HYBAM.translation)}
+          </MenuItem>
+          <MenuItem
+            value={networks.RQA.value}
+            onClick={() => setAuxNetworkSelection(networks.RQA.value)}
+          >
+            {t(networks.RQA.translation)}
           </MenuItem>
         </CustomSelect>
       </div>

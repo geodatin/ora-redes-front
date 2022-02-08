@@ -20,7 +20,7 @@ import CustomButton from '../../../components/CustomButton';
 import MapWrapper from '../../../components/MapWrapper';
 import MapItem from '../../../components/MapWrapper/Mapitem';
 import Typography from '../../../components/Typography';
-import { networks } from '../../../constants/options';
+import { networkByValue, networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
@@ -34,7 +34,7 @@ import useStyles from './styles';
  */
 export default function MonitoringMap() {
   const {
-    values: { autocompleteSelection, timeGrouping },
+    values: { autocompleteSelection, networkSelection, timeGrouping },
   } = useContext(FilteringContext);
 
   const {
@@ -51,12 +51,23 @@ export default function MonitoringMap() {
   const { t } = useTranslation();
 
   useEffect(() => {
+    let isSubscribed = true;
+
     api
-      .post('/station/location', { filters: autocompleteSelection })
+      .post(
+        `/station/location?network=${networkByValue[networkSelection].code}`,
+        { filters: autocompleteSelection }
+      )
       .then(({ data }) => {
-        setPoints(data.features);
+        if (isSubscribed) {
+          setPoints(data.features);
+        }
       });
-  }, [autocompleteSelection]);
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [autocompleteSelection, networkSelection]);
 
   const blueStation = useMemo(
     () =>
