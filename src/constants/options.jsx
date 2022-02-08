@@ -60,7 +60,6 @@ export const countryCodes = {
 export const networks = {
   ALL: {
     name: 'all',
-    code: '',
     translation: 'specific.networks.type.all',
     value: 1,
   },

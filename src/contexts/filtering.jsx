@@ -2,7 +2,11 @@
 import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
 
-import { filterDefaults, timeGroupingOptions } from '../constants/options';
+import {
+  filterDefaults,
+  networkByValue,
+  timeGroupingOptions,
+} from '../constants/options';
 
 const FilteringContext = createContext({});
 
@@ -26,6 +30,16 @@ export function FilteringProvider({ children }) {
   const [networkSelection, setNetworkSelection] = useState(
     filterDefaults.networkSelection
   );
+
+  const [filters, setFilters] = useState(filterDefaults.autocompleteSelection);
+
+  useEffect(() => {
+    setFilters({
+      ...autocompleteSelection,
+      network:
+        networkSelection === 1 ? [] : [networkByValue[networkSelection].code],
+    });
+  }, [autocompleteSelection, networkSelection]);
 
   useEffect(() => {
     let newQuery = `${window.location.pathname}?`;
@@ -60,11 +74,17 @@ export function FilteringProvider({ children }) {
   return (
     <FilteringContext.Provider
       value={{
-        values: { autocompleteSelection, networkSelection, timeGrouping },
+        values: {
+          autocompleteSelection,
+          networkSelection,
+          timeGrouping,
+          filters,
+        },
         setters: {
           setAutocompleteSelection,
           setNetworkSelection,
           setTimeGrouping,
+          setFilters,
         },
         functions: {},
         loaders: {},

@@ -34,7 +34,7 @@ import useStyles from './styles';
  */
 export default function MonitoringMap() {
   const {
-    values: { autocompleteSelection, networkSelection, timeGrouping },
+    values: { filters, timeGrouping },
   } = useContext(FilteringContext);
 
   const {
@@ -53,21 +53,16 @@ export default function MonitoringMap() {
   useEffect(() => {
     let isSubscribed = true;
 
-    api
-      .post(
-        `/station/location?network=${networkByValue[networkSelection].code}`,
-        { filters: autocompleteSelection }
-      )
-      .then(({ data }) => {
-        if (isSubscribed) {
-          setPoints(data.features);
-        }
-      });
+    api.post(`/station/location`, { filters }).then(({ data }) => {
+      if (isSubscribed) {
+        setPoints(data.features);
+      }
+    });
 
     return () => {
       isSubscribed = false;
     };
-  }, [autocompleteSelection, networkSelection]);
+  }, [filters]);
 
   const blueStation = useMemo(
     () =>
