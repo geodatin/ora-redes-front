@@ -22,6 +22,13 @@ export default function NotificationCard({ circleColor, notification }) {
     functions: { panOnMap },
   } = useContext(MapContext);
 
+  const handleOnClickLocation = () => {
+    panOnMap([
+      notification.location.coordinates[1],
+      notification.location.coordinates[0],
+    ]);
+  };
+
   return (
     <li className={classes.wrapper}>
       <div
@@ -30,25 +37,17 @@ export default function NotificationCard({ circleColor, notification }) {
           background: circleColor,
         }}
       >
-        <Typography variant="h3">!</Typography>
+        <Typography style={{ color: theme.neutral.white }} variant="h3">
+          !
+        </Typography>
       </div>
 
       <div style={{ width: '100%' }}>
         <div
           role="button"
           tabIndex={0}
-          onClick={() =>
-            panOnMap([
-              notification.location.coordinates[1],
-              notification.location.coordinates[0],
-            ])
-          }
-          onKeyDown={() =>
-            panOnMap([
-              notification.location.coordinates[1],
-              notification.location.coordinates[0],
-            ])
-          }
+          onClick={() => handleOnClickLocation()}
+          onKeyDown={() => handleOnClickLocation()}
           className={classes.locationButton}
         >
           <Typography format="bold" variant="caption">
