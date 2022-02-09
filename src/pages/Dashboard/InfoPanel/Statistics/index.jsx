@@ -127,10 +127,10 @@ export default function Statistics() {
       .then(({ data }) => {
         if (isSubscribed && data) {
           setRankingData({
-            labels: data.labels.map(
+            labels: data.x.map(
               (label, index) => `${data.position[index]}°  ${label}`
             ),
-            datasets: data.series.map((dataset) => ({
+            datasets: data.datasets.map((dataset) => ({
               ...dataset,
               sufix: t('specific.dataType.station.plural').toLowerCase(),
               backgroundColor: networks[dataset.label]?.color,
