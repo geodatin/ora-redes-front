@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import InfiniteScroll from '../../../components/InfiniteScroll';
 import VLayout from '../../../components/Layout/Vertical';
 import Typography from '../../../components/Typography';
-import { notificationsTypes } from '../../../constants/options';
+import { networks } from '../../../constants/options';
 import FilteringContext from '../../../contexts/filtering';
 import api from '../../../services/api';
 import NotificationCard from './NotificationCard';
@@ -15,7 +15,7 @@ export default function Notifications() {
   const { t } = useTranslation();
 
   const {
-    values: { autocompleteSelection },
+    values: { filters },
   } = useContext(FilteringContext);
 
   const [notifications, setNotifications] = useState([]);
@@ -37,7 +37,7 @@ export default function Notifications() {
       .post(
         `/station/notification`,
         {
-          filters: autocompleteSelection,
+          filters,
         },
         { params: { page: 1, pageSize } }
       )
@@ -54,7 +54,7 @@ export default function Notifications() {
     return () => {
       isSubscribed = false;
     };
-  }, [autocompleteSelection]);
+  }, [filters]);
 
   /**
    * This function fetch more notifications.
@@ -68,7 +68,7 @@ export default function Notifications() {
         .post(
           `/station/notification`,
           {
-            filters: autocompleteSelection,
+            filters,
           },
           { params: { page: nextPage, pageSize } }
         )
@@ -113,8 +113,7 @@ export default function Notifications() {
                 <NotificationCard
                   key={notification.id}
                   circleColor={
-                    notificationsTypes[notification?.type]?.color ??
-                    'transparent'
+                    networks[notification.network]?.color ?? 'transparent'
                   }
                   notification={notification}
                 />

@@ -2,7 +2,11 @@
 import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
 
-import { filterDefaults, timeGroupingOptions } from '../constants/options';
+import {
+  filterDefaults,
+  networkByValue,
+  timeGroupingOptions,
+} from '../constants/options';
 
 const FilteringContext = createContext({});
 
@@ -30,6 +34,16 @@ export function FilteringProvider({ children }) {
   const [networkSelection, setNetworkSelection] = useState(
     filterDefaults.networkSelection
   );
+
+  const [filters, setFilters] = useState(filterDefaults.autocompleteSelection);
+
+  useEffect(() => {
+    setFilters({
+      ...autocompleteSelection,
+      network:
+        networkSelection === 1 ? [] : [networkByValue[networkSelection].code],
+    });
+  }, [autocompleteSelection, networkSelection]);
 
   /**
    * This useEffect puts the current selection into the route.
@@ -87,12 +101,14 @@ export function FilteringProvider({ children }) {
           autocompleteStraightSelection,
           networkSelection,
           timeGrouping,
+          filters,
         },
         setters: {
           setAutocompleteSelection,
           setAutocompleteStraightSelection,
           setNetworkSelection,
           setTimeGrouping,
+          setFilters,
         },
         functions: {},
         loaders: {},

@@ -25,7 +25,7 @@ export const layout = {
   },
   leftColumn: {
     sizes: {
-      width: 250,
+      width: 280,
     },
   },
   upRow: {
@@ -40,7 +40,7 @@ export const layout = {
   },
   rightColumn: {
     sizes: {
-      width: 250,
+      width: 450,
     },
   },
   mobile: {

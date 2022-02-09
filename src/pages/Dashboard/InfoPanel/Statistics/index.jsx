@@ -32,7 +32,7 @@ export default function Statistics() {
   const [treemapData, setTreemapData] = useState();
 
   const {
-    values: { autocompleteSelection },
+    values: { filters },
   } = useContext(FilteringContext);
 
   /**
@@ -42,7 +42,7 @@ export default function Statistics() {
     let isSubscribed = true;
     api
       .post(`/station/count/network`, {
-        filters: autocompleteSelection,
+        filters,
       })
       .then(({ data }) => {
         if (isSubscribed && data) {
@@ -67,7 +67,7 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [t, autocompleteSelection]);
+  }, [t, filters]);
 
   /**
    * This userEffect fetch station count per countries.
@@ -76,7 +76,7 @@ export default function Statistics() {
     let isSubscribed = true;
     api
       .post(`/station/count/country`, {
-        filters: autocompleteSelection,
+        filters,
       })
       .then(({ data }) => {
         if (isSubscribed && data) {
@@ -104,7 +104,7 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [t, autocompleteSelection]);
+  }, [t, filters]);
 
   /**
    * This userEffect fetch ranking data.
@@ -115,7 +115,7 @@ export default function Statistics() {
       .post(
         `/station/ranking/river`,
         {
-          filters: autocompleteSelection,
+          filters,
         },
         {
           params: {
@@ -151,7 +151,7 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [rankingParams.page, rankingParams.order, autocompleteSelection, t]);
+  }, [rankingParams.page, rankingParams.order, filters, t]);
 
   /**
    * This userEffect fetch variable count per network.
@@ -160,7 +160,7 @@ export default function Statistics() {
     let isSubscribed = true;
     api
       .post(`/station/count/variable`, {
-        filters: autocompleteSelection,
+        filters,
       })
       .then(({ data }) => {
         if (isSubscribed && data) {
@@ -213,14 +213,14 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [t, theme, autocompleteSelection]);
+  }, [t, theme, filters]);
 
   const csvFetching = (dataType, title) => {
     api
       .post(
         `/station/count/${dataType}`,
         {
-          filters: autocompleteSelection,
+          filters,
         },
         {
           params: {
@@ -269,7 +269,7 @@ export default function Statistics() {
               .post(
                 `/station/ranking/river`,
                 {
-                  filters: autocompleteSelection,
+                  filters,
                 },
                 {
                   params: {

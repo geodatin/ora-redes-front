@@ -2,7 +2,6 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles((theme) => ({
   filtersNotificationsWrapper: {
-    minWidth: 280,
     borderRight: `1px solid ${theme.stroke.dark}`,
   },
   filtersWrapper: {
@@ -27,16 +26,10 @@ const useStyles = createUseStyles((theme) => ({
     borderBottom: `1px solid ${theme.stroke.dark}`,
   },
   mapWrapper: {},
-  statisticsWrapper: {
-    overflow: 'auto',
-    minWidth: 400,
-    borderLeft: `1px solid ${theme.stroke.dark}`,
-  },
   infoPanelMobileWrapper: {
     overflow: 'auto',
   },
   infoPanelWrapper: {
-    minWidth: 480,
     borderLeft: `1px solid ${theme.stroke.dark}`,
   },
 }));

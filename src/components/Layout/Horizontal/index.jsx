@@ -25,7 +25,12 @@ export default function HLayout({ leftColumn, mainContainer, rightColumn }) {
   return (
     <div className={classes.wrapper}>
       {leftColumn && (
-        <div className={classNames(classes.leftColumn, leftColumn.className)}>
+        <div
+          className={classNames(classes.leftColumn, leftColumn.className)}
+          style={
+            leftColumn?.isHidden ? { minWidth: 0, width: 0, opacity: 0 } : {}
+          }
+        >
           {leftColumn.children}
         </div>
       )}
@@ -37,7 +42,12 @@ export default function HLayout({ leftColumn, mainContainer, rightColumn }) {
       </div>
 
       {rightColumn && (
-        <div className={classNames(classes.rightColumn, rightColumn.className)}>
+        <div
+          className={classNames(classes.rightColumn, rightColumn.className)}
+          style={
+            rightColumn?.isHidden ? { minWidth: 0, width: 0, opacity: 0 } : {}
+          }
+        >
           {rightColumn.children}
         </div>
       )}

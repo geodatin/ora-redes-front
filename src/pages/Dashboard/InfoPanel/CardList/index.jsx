@@ -23,7 +23,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
   };
 
   const {
-    values: { autocompleteSelection },
+    values: { filters },
   } = useContext(FilteringContext);
 
   const [isFirstLoading, setIsFirstLoading] = useState(false);
@@ -54,7 +54,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
       .post(
         `/observation/last/${timeGrouping}`,
         {
-          filters: autocompleteSelection,
+          filters,
         },
         { params: { page: 1, pageSize } }
       )
@@ -74,7 +74,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
     return () => {
       isSubscribed = false;
     };
-  }, [autocompleteSelection, timeGrouping]);
+  }, [filters, timeGrouping]);
 
   /**
    * This function fetch more stations.
@@ -88,7 +88,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
         .post(
           `/observation/last/${timeGrouping}`,
           {
-            filters: autocompleteSelection,
+            filters,
           },
           { params: { page: nextPage, pageSize } }
         )

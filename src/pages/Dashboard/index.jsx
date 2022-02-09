@@ -52,7 +52,7 @@ function Dashboard() {
 
   const infoPanel = (
     <InfoPanel
-      title={t('specific.infoPanel.title')}
+      title={t(networkByValue[networkSelection].translation)}
       subtitle={
         lastUpdateDatabase
           ? `${t('specific.infoPanel.lastUpdate')} ${t(
@@ -126,6 +126,7 @@ function Dashboard() {
         ),
       }}
       leftColumn={{
+        isHidden: false,
         className: classes.filtersNotificationsWrapper,
         children: (
           <VLayout
@@ -141,6 +142,7 @@ function Dashboard() {
         ),
       }}
       rightColumn={{
+        isHidden: false,
         className: classes.infoPanelWrapper,
         children: infoPanel,
       }}
