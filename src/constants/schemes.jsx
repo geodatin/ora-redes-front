@@ -59,6 +59,10 @@ export const lightScheme = {
     actived: '#464646',
     hover: '#DBDBDB',
   },
+  scrollBar: {
+    thumb: '#A4A4A4 ',
+    track: '#E9EAED',
+  },
 };
 
 export const darkScheme = {
@@ -117,5 +121,9 @@ export const darkScheme = {
     unabled: '#19212B',
     actived: '#212D3C',
     hover: '#1C2734',
+  },
+  scrollBar: {
+    thumb: '#323941',
+    track: '#19212B',
   },
 };

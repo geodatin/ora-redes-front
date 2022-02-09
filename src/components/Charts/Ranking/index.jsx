@@ -48,18 +48,44 @@ export default function RankingChart({
         display: true,
         anchor: 'end',
         align: 'end',
+        formatter(value, context) {
+          const { datasets } = context.chart.data;
+          const lastDatasetIndex = datasets.length - 1;
+
+          const arrSum = new Array(datasets[0].data.length).fill(0);
+          datasets.forEach(({ data: dt }) =>
+            dt.forEach((num, indx) => {
+              arrSum[indx] += num;
+            })
+          );
+
+          return context.datasetIndex !== lastDatasetIndex
+            ? ''
+            : arrSum[context.dataIndex];
+        },
       },
       legend: {
         display: false,
       },
+      tooltip: {
+        callbacks: {
+          label(ctx) {
+            return `${ctx.dataset.label}: ${ctx.formattedValue} ${
+              ctx.dataset?.sufix ?? ''
+            }`;
+          },
+        },
+      },
     },
     scales: {
       y: {
+        stacked: true,
         ticks: {
           crossAlign: 'far',
         },
       },
       x: {
+        stacked: true,
         ticks: {
           display: false,
         },
