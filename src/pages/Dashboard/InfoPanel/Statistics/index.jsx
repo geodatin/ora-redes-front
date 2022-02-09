@@ -127,19 +127,17 @@ export default function Statistics() {
       .then(({ data }) => {
         if (isSubscribed && data) {
           setRankingData({
-            labels: data.x.map(
+            labels: data.labels.map(
               (label, index) => `${data.position[index]}°  ${label}`
             ),
-            datasets: [
-              {
-                label: t(`specific.dataType.station.plural`),
-                data: data?.series[0]?.data,
-                backgroundColor: [theme.primary.main],
-                borderColor: [theme.primary.main],
-                borderRadius: 5,
-                barThickness: 15,
-              },
-            ],
+            datasets: data.series.map((dataset) => ({
+              ...dataset,
+              sufix: t('specific.dataType.station.plural').toLowerCase(),
+              backgroundColor: networks[dataset.label]?.color,
+              borderColor: 'transparent',
+              borderRadius: 5,
+              barThickness: 15,
+            })),
           });
           setRankingParams((prevParams) => ({
             ...prevParams,

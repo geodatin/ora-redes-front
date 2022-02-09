@@ -7,7 +7,20 @@ const useStyles = createUseStyles((theme) => ({
     borderBottomColor: theme.stroke.dark,
   },
   breadBarMobileWrapper: { padding: '10px 15px 10px 15px' },
-  libraryWrapper: { padding: 15, overflow: 'auto' },
+  libraryWrapper: {
+    padding: 15,
+    overflow: 'auto',
+    '&::-webkit-scrollbar': {
+      width: 8,
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: theme.scrollBar.track,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: theme.scrollBar.thumb,
+      borderRadius: 10,
+    },
+  },
   librarysMobileWrapper: { padding: 15 },
   filteringWrapper: {
     minWidth: 280,
@@ -15,6 +28,17 @@ const useStyles = createUseStyles((theme) => ({
     borderRight: '1px solid',
     borderRightColor: theme.stroke.dark,
     overflow: 'auto',
+
+    '&::-webkit-scrollbar': {
+      width: 8,
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: theme.scrollBar.track,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: theme.scrollBar.thumb,
+      borderRadius: 10,
+    },
 
     '& > *': {
       paddingBottom: 15,
