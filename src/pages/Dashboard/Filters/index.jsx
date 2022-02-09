@@ -27,8 +27,16 @@ export default function Filters() {
   const [autocompleteLoading, setAutocompleteLoading] = useState(false);
   const [noOptionsTextSelector, setNoOptionsTextSelector] = useState(false);
   const {
-    values: { autocompleteSelection, networkSelection },
-    setters: { setAutocompleteSelection, setNetworkSelection },
+    values: {
+      autocompleteSelection,
+      autocompleteStraightSelection,
+      networkSelection,
+    },
+    setters: {
+      setAutocompleteSelection,
+      setAutocompleteStraightSelection,
+      setNetworkSelection,
+    },
   } = useContext(FilteringContext);
   const { t } = useTranslation();
   const [auxAutocompleteSelection, setAuxAutocompleteSelection] = useState(
@@ -39,9 +47,7 @@ export default function Filters() {
   const [applyDisabled, setApplyDisabled] = useState(true);
   const [firstLoad, setFirstLoad] = useState(true);
   const [auxStraightSelection, setAuxStraightSelection] = useState(
-    Object.keys(autocompleteSelection).map((type) =>
-      autocompleteSelection[type].map((value) => ({ value, type }))
-    )
+    autocompleteStraightSelection
   );
 
   /**
@@ -50,6 +56,7 @@ export default function Filters() {
   function applySelection() {
     setAutocompleteSelection(auxAutocompleteSelection);
     setNetworkSelection(auxNetworkSelection);
+    setAutocompleteStraightSelection(auxStraightSelection);
     setApplyDisabled(true);
   }
 
