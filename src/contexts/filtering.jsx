@@ -22,11 +22,15 @@ export function FilteringProvider({ children }) {
   };
 
   const [timeGrouping, setTimeGrouping] = useState(timeGroupingOptions[0].code);
-
   const [autocompleteSelection, setAutocompleteSelection] = useState(
     filterDefaults.autocompleteSelection
   );
-
+  const [autocompleteStraightSelection, setAutocompleteStraightSelection] =
+    useState(
+      Object.keys(autocompleteSelection).map((type) =>
+        autocompleteSelection[type].map((value) => ({ value, type }))
+      )
+    );
   const [networkSelection, setNetworkSelection] = useState(
     filterDefaults.networkSelection
   );
@@ -41,6 +45,9 @@ export function FilteringProvider({ children }) {
     });
   }, [autocompleteSelection, networkSelection]);
 
+  /**
+   * This useEffect puts the current selection into the route.
+   */
   useEffect(() => {
     let newQuery = `${window.location.pathname}?`;
 
@@ -64,6 +71,21 @@ export function FilteringProvider({ children }) {
       newQuery += `networkSelection=${networkSelection}`;
     }
 
+    const selectionAux = {};
+
+    Object.keys(autocompleteSelection).forEach((key) => {
+      if (autocompleteSelection[key].length > 0) {
+        selectionAux[key] = autocompleteSelection[key];
+      }
+    });
+
+    if (Object.keys(selectionAux).length > 0) {
+      trySeparator();
+      const searchValueParams = JSON.stringify(selectionAux);
+      const searchValueEncoded = encodeURI(searchValueParams);
+      newQuery += `search=${searchValueEncoded}`;
+    }
+
     if (newQuery.length === initialSize) {
       window.history.replaceState(null, '', '/');
     } else {
@@ -76,12 +98,14 @@ export function FilteringProvider({ children }) {
       value={{
         values: {
           autocompleteSelection,
+          autocompleteStraightSelection,
           networkSelection,
           timeGrouping,
           filters,
         },
         setters: {
           setAutocompleteSelection,
+          setAutocompleteStraightSelection,
           setNetworkSelection,
           setTimeGrouping,
           setFilters,
