@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
+import AspectRatioRoundedIcon from '@mui/icons-material/AspectRatioRounded';
 import ShareIcon from '@mui/icons-material/Share';
-import ViewArrayRoundedIcon from '@mui/icons-material/ViewArrayRounded';
-import ViewColumnRoundedIcon from '@mui/icons-material/ViewColumnRounded';
 import L from 'leaflet';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -293,7 +291,7 @@ export default function MonitoringMap() {
       }
       itemBottomChildren={
         <MapItem onClick={() => nextLayoutConfig()}>
-          <ViewColumnRoundedIcon />
+          <AspectRatioRoundedIcon style={{ fontSize: 20 }} />
         </MapItem>
       }
       itemChildren={
