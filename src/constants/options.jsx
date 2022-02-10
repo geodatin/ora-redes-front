@@ -166,3 +166,8 @@ export const panels = {
     translation: undefined,
   },
 };
+
+export const layoutConfigs = {
+  isLeftHidden: [false, true, true, false],
+  isRightHidden: [false, false, true, true],
+};

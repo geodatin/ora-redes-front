@@ -12,8 +12,9 @@ import HLayout from '../../components/Layout/Horizontal';
 import MobileNavbarLayout from '../../components/Layout/Mobile/Navbar';
 import VLayout from '../../components/Layout/Vertical';
 import { breakpoints } from '../../constants/constraints';
-import { networkByValue } from '../../constants/options';
+import { layoutConfigs, networkByValue } from '../../constants/options';
 import FilteringContext from '../../contexts/filtering';
+import MapContext from '../../contexts/mapping';
 import api from '../../services/api';
 import Filters from './Filters';
 import InfoPanel from './InfoPanel';
@@ -29,9 +30,14 @@ function Dashboard() {
   const classes = useStyles();
   const isMobile = useMediaQuery(breakpoints.max.lg);
   const { t } = useTranslation();
+
   const {
     values: { networkSelection },
   } = useContext(FilteringContext);
+
+  const {
+    values: { layoutConfig },
+  } = useContext(MapContext);
 
   const [lastUpdateDatabase, setLastUpdateDatabase] = useState();
 
@@ -126,7 +132,7 @@ function Dashboard() {
         ),
       }}
       leftColumn={{
-        isHidden: false,
+        isHidden: layoutConfigs.isLeftHidden[layoutConfig],
         className: classes.filtersNotificationsWrapper,
         children: (
           <VLayout
@@ -142,7 +148,7 @@ function Dashboard() {
         ),
       }}
       rightColumn={{
-        isHidden: false,
+        isHidden: layoutConfigs.isRightHidden[layoutConfig],
         className: classes.infoPanelWrapper,
         children: infoPanel,
       }}

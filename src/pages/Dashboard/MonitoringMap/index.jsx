@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import ShareIcon from '@mui/icons-material/Share';
+import ViewArrayRoundedIcon from '@mui/icons-material/ViewArrayRounded';
+import ViewColumnRoundedIcon from '@mui/icons-material/ViewColumnRounded';
 import L from 'leaflet';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +22,7 @@ import CustomButton from '../../../components/CustomButton';
 import MapWrapper from '../../../components/MapWrapper';
 import MapItem from '../../../components/MapWrapper/Mapitem';
 import Typography from '../../../components/Typography';
-import { networkByValue, networks } from '../../../constants/options';
+import { networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
@@ -39,6 +41,7 @@ export default function MonitoringMap() {
 
   const {
     setters: { setMapRef },
+    functions: { nextLayoutConfig },
   } = useContext(MapContext);
 
   const {
@@ -286,6 +289,11 @@ export default function MonitoringMap() {
       itemTopChildren={
         <MapItem>
           <ShareIcon style={{ fontSize: 18 }} />
+        </MapItem>
+      }
+      itemBottomChildren={
+        <MapItem onClick={() => nextLayoutConfig()}>
+          <ViewColumnRoundedIcon />
         </MapItem>
       }
       itemChildren={

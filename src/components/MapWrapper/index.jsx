@@ -20,6 +20,7 @@ export default function MapWrapper({
   children,
   itemChildren,
   itemTopChildren,
+  itemBottomChildren,
   getMapRef,
   ...rest
 }) {
@@ -85,6 +86,7 @@ export default function MapWrapper({
         {itemTopChildren}
         <ZoomButton />
         {itemChildren}
+        {itemBottomChildren}
       </div>
       <img
         alt="north"
@@ -112,6 +114,7 @@ MapWrapper.defaultProps = {
   children: undefined,
   itemChildren: undefined,
   itemTopChildren: undefined,
+  itemBottomChildren: undefined,
   getMapRef: undefined,
 };
 
@@ -119,5 +122,6 @@ MapWrapper.propTypes = {
   children: PropTypes.node,
   itemChildren: PropTypes.node,
   itemTopChildren: PropTypes.node,
+  itemBottomChildren: PropTypes.node,
   getMapRef: PropTypes.func,
 };

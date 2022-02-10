@@ -2,6 +2,8 @@
 import PropTypes from 'prop-types';
 import React, { createContext, useState } from 'react';
 
+import { layoutConfigs } from '../constants/options';
+
 const MapContext = createContext({});
 
 /**
@@ -17,6 +19,8 @@ export function MappingProvider({ children }) {
 
   const [mapRef, setMapRef] = useState();
 
+  const [layoutConfig, setLayoutConfig] = useState(0);
+
   function panOnMap(coordinates) {
     mapRef?.setView(coordinates, 10, {
       animate: true,
@@ -26,12 +30,19 @@ export function MappingProvider({ children }) {
     });
   }
 
+  function nextLayoutConfig() {
+    setLayoutConfig((current) => {
+      const next = current + 1;
+      return next > layoutConfigs.isRightHidden.length - 1 ? 0 : next;
+    });
+  }
+
   return (
     <MapContext.Provider
       value={{
-        values: { mapRef },
+        values: { mapRef, layoutConfig },
         setters: { setMapRef },
-        functions: { panOnMap },
+        functions: { panOnMap, nextLayoutConfig },
         loaders: {},
       }}
     >
