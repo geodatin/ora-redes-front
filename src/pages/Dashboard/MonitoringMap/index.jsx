@@ -38,6 +38,7 @@ export default function MonitoringMap() {
   } = useContext(FilteringContext);
 
   const {
+    values: { isMobile },
     setters: { setMapRef },
     functions: { nextLayoutConfig },
   } = useContext(MapContext);
@@ -285,16 +286,18 @@ export default function MonitoringMap() {
         [14.211898, -30.591429],
       ]}
       itemTopChildren={
+        !isMobile ? (
+          <MapItem onClick={() => nextLayoutConfig()}>
+            <AspectRatioRoundedIcon style={{ fontSize: 20 }} />
+          </MapItem>
+        ) : undefined
+      }
+      itemChildren={
         <MapItem>
           <ShareIcon style={{ fontSize: 18 }} />
         </MapItem>
       }
       itemBottomChildren={
-        <MapItem onClick={() => nextLayoutConfig()}>
-          <AspectRatioRoundedIcon style={{ fontSize: 20 }} />
-        </MapItem>
-      }
-      itemChildren={
         <MapItem
           popupContent={
             <div className={classes.legendContent}>
