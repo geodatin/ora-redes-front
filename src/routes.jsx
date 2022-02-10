@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 
 import Header from './components/Header';
+import { FilteringProvider } from './contexts/filtering';
 import { MappingProvider } from './contexts/mapping';
 import { PanelRoutingProvider } from './contexts/panelRouting';
 import ApiMethods from './pages/ApiMethods';
@@ -31,11 +32,13 @@ function Routes() {
 
   const defaultPage = useMemo(
     () => (
-      <MappingProvider>
-        <PanelRoutingProvider>
-          <Dashboard />
-        </PanelRoutingProvider>
-      </MappingProvider>
+      <FilteringProvider>
+        <MappingProvider>
+          <PanelRoutingProvider>
+            <Dashboard />
+          </PanelRoutingProvider>
+        </MappingProvider>
+      </FilteringProvider>
     ),
     []
   );
