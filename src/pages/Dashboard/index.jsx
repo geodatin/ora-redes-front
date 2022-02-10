@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
 import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
-import { useMediaQuery } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -11,7 +9,6 @@ import Breadcrumb from '../../components/Breadcrumb';
 import HLayout from '../../components/Layout/Horizontal';
 import MobileNavbarLayout from '../../components/Layout/Mobile/Navbar';
 import VLayout from '../../components/Layout/Vertical';
-import { breakpoints } from '../../constants/constraints';
 import { layoutConfigs, networkByValue } from '../../constants/options';
 import FilteringContext from '../../contexts/filtering';
 import MapContext from '../../contexts/mapping';
@@ -28,7 +25,6 @@ import useStyles from './styles';
  */
 function Dashboard() {
   const classes = useStyles();
-  const isMobile = useMediaQuery(breakpoints.max.lg);
   const { t } = useTranslation();
 
   const {
@@ -36,7 +32,7 @@ function Dashboard() {
   } = useContext(FilteringContext);
 
   const {
-    values: { layoutConfig },
+    values: { layoutConfig, isMobile },
   } = useContext(MapContext);
 
   const [lastUpdateDatabase, setLastUpdateDatabase] = useState();

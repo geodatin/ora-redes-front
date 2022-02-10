@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
+import AspectRatioRoundedIcon from '@mui/icons-material/AspectRatioRounded';
 import ShareIcon from '@mui/icons-material/Share';
-import ViewArrayRoundedIcon from '@mui/icons-material/ViewArrayRounded';
-import ViewColumnRoundedIcon from '@mui/icons-material/ViewColumnRounded';
 import L from 'leaflet';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -40,6 +38,7 @@ export default function MonitoringMap() {
   } = useContext(FilteringContext);
 
   const {
+    values: { isMobile },
     setters: { setMapRef },
     functions: { nextLayoutConfig },
   } = useContext(MapContext);
@@ -287,16 +286,18 @@ export default function MonitoringMap() {
         [14.211898, -30.591429],
       ]}
       itemTopChildren={
+        !isMobile ? (
+          <MapItem onClick={() => nextLayoutConfig()}>
+            <AspectRatioRoundedIcon style={{ fontSize: 20 }} />
+          </MapItem>
+        ) : undefined
+      }
+      itemChildren={
         <MapItem>
           <ShareIcon style={{ fontSize: 18 }} />
         </MapItem>
       }
       itemBottomChildren={
-        <MapItem onClick={() => nextLayoutConfig()}>
-          <ViewColumnRoundedIcon />
-        </MapItem>
-      }
-      itemChildren={
         <MapItem
           popupContent={
             <div className={classes.legendContent}>

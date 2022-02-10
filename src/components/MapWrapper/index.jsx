@@ -84,8 +84,8 @@ export default function MapWrapper({
       />
       <div ref={itemsRef} className={classes.itemContainer}>
         {itemTopChildren}
-        <ZoomButton />
         {itemChildren}
+        <ZoomButton />
         {itemBottomChildren}
       </div>
       <img
