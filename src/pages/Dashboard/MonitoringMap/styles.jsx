@@ -109,6 +109,7 @@ const useStyles = createUseStyles((theme) => ({
       position: 'absolute',
       top: '50%',
       left: '50%',
+      animation: '$pulseDot infinite 1.25s',
     },
     '&::before': {
       content: "''",
