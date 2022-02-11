@@ -176,6 +176,21 @@ export const panels = {
   },
 };
 
+export const mobileNavs = {
+  map: {
+    value: 0,
+  },
+  filters: {
+    value: 1,
+  },
+  notifications: {
+    value: 2,
+  },
+  panel: {
+    value: 3,
+  },
+};
+
 export const layoutConfigs = {
   isLeftHidden: [false, true, true, false],
   isRightHidden: [false, false, true, true],

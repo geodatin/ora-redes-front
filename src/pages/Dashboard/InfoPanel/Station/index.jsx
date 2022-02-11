@@ -8,7 +8,7 @@ import { useTheme } from 'react-jss';
 import Breadcrumb from '../../../../components/Breadcrumb';
 import BarChart from '../../../../components/Charts/Bar';
 import LineChart from '../../../../components/Charts/Line';
-import PanelRoutingContext from '../../../../contexts/panelRouting';
+import NavigationContext from '../../../../contexts/navigation';
 import api from '../../../../services/api';
 import { downloadCSV } from '../../../../utils/helpers';
 import CardItem from '../CardList/CardItem';
@@ -34,7 +34,7 @@ export default function Station({ station, timeGrouping }) {
   const { t } = useTranslation();
   const {
     functions: { closeStation },
-  } = useContext(PanelRoutingContext);
+  } = useContext(NavigationContext);
 
   const [stationUpdate, setStationUpdate] = useState(undefined);
   const [rainData, setRainData] = useState();

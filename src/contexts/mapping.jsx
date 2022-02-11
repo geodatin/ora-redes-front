@@ -1,10 +1,9 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import { useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { createContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-import { breakpoints } from '../constants/constraints';
-import { layoutConfigs } from '../constants/options';
+import { layoutConfigs, mobileNavs } from '../constants/options';
+import NavigationContext from './navigation';
 
 const MapContext = createContext({});
 
@@ -19,11 +18,16 @@ export function MappingProvider({ children }) {
     ]).isRequired,
   };
 
+  const {
+    values: { isMobile },
+    setters: { setMobileNavValue },
+  } = useContext(NavigationContext);
+
   const [mapRef, setMapRef] = useState();
-  const isMobile = useMediaQuery(breakpoints.max.lg);
   const [layoutConfig, setLayoutConfig] = useState(0);
 
   function panOnMap(coordinates) {
+    if (isMobile) setMobileNavValue(mobileNavs.map.value);
     mapRef?.setView(coordinates, 10, {
       animate: true,
       pan: {
@@ -42,8 +46,8 @@ export function MappingProvider({ children }) {
   return (
     <MapContext.Provider
       value={{
-        values: { mapRef, layoutConfig, isMobile },
-        setters: { setMapRef },
+        values: { mapRef, layoutConfig },
+        setters: { setMapRef, setLayoutConfig },
         functions: { panOnMap, nextLayoutConfig },
         loaders: {},
       }}

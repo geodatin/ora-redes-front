@@ -9,7 +9,7 @@ import TabPanel from '../../../components/TabPanel';
 import Typography from '../../../components/Typography';
 import { panels, timeGroupingOptions } from '../../../constants/options';
 import FilteringContext from '../../../contexts/filtering';
-import PanelRoutingContext from '../../../contexts/panelRouting';
+import NavigationContext from '../../../contexts/navigation';
 import CardList from './CardList';
 import Station from './Station';
 import Statistics from './Statistics';
@@ -41,7 +41,7 @@ export default function InfoPanel({ title, subtitle }) {
   const {
     values: { panelIndexValue, station },
     setters: { setPanelIndexValue },
-  } = useContext(PanelRoutingContext);
+  } = useContext(NavigationContext);
 
   const [timeGroupingIndexValue, setTimeGroupingIndexValue] = useState(0);
 

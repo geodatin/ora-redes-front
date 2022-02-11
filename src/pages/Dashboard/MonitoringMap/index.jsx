@@ -24,7 +24,7 @@ import { networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
-import PanelRoutingContext from '../../../contexts/panelRouting';
+import NavigationContext from '../../../contexts/navigation';
 import api from '../../../services/api';
 import useStyles from './styles';
 
@@ -38,14 +38,14 @@ export default function MonitoringMap() {
   } = useContext(FilteringContext);
 
   const {
-    values: { isMobile },
     setters: { setMapRef },
     functions: { nextLayoutConfig },
   } = useContext(MapContext);
 
   const {
+    values: { isMobile },
     functions: { openStation },
-  } = useContext(PanelRoutingContext);
+  } = useContext(NavigationContext);
 
   const [points, setPoints] = useState();
   const theme = useTheme();

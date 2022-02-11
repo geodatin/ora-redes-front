@@ -12,7 +12,7 @@ import {
 import Header from './components/Header';
 import { FilteringProvider } from './contexts/filtering';
 import { MappingProvider } from './contexts/mapping';
-import { PanelRoutingProvider } from './contexts/panelRouting';
+import { NavigationProvider } from './contexts/navigation';
 import ApiMethods from './pages/ApiMethods';
 import Dashboard from './pages/Dashboard';
 import DataLibrary from './pages/DataLibrary';
@@ -32,13 +32,13 @@ function Routes() {
 
   const defaultPage = useMemo(
     () => (
-      <FilteringProvider>
-        <MappingProvider>
-          <PanelRoutingProvider>
+      <NavigationProvider>
+        <FilteringProvider>
+          <MappingProvider>
             <Dashboard />
-          </PanelRoutingProvider>
-        </MappingProvider>
-      </FilteringProvider>
+          </MappingProvider>
+        </FilteringProvider>
+      </NavigationProvider>
     ),
     []
   );

@@ -10,7 +10,7 @@ import CustomButton from '../../../../../components/CustomButton';
 import ListItemContainer from '../../../../../components/ListItemContainer';
 import Typography from '../../../../../components/Typography';
 import MapContext from '../../../../../contexts/mapping';
-import PanelRoutingContext from '../../../../../contexts/panelRouting';
+import NavigationContext from '../../../../../contexts/navigation';
 import useStyles from './styles';
 
 /**
@@ -33,7 +33,7 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
 
   const {
     functions: { openStation },
-  } = useContext(PanelRoutingContext);
+  } = useContext(NavigationContext);
 
   const {
     functions: { panOnMap },
@@ -91,6 +91,10 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
     );
   }
 
+  const handleOnClickLocation = () => {
+    panOnMap([item.location.coordinates[1], item.location.coordinates[0]]);
+  };
+
   return (
     <ListItemContainer isLoaded={!!item}>
       <div className={classes.cardHeader}>
@@ -105,18 +109,8 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
           <div
             role="button"
             tabIndex={0}
-            onClick={() =>
-              panOnMap([
-                item.location.coordinates[1],
-                item.location.coordinates[0],
-              ])
-            }
-            onKeyDown={() =>
-              panOnMap([
-                item.location.coordinates[1],
-                item.location.coordinates[0],
-              ])
-            }
+            onClick={() => handleOnClickLocation()}
+            onKeyDown={() => handleOnClickLocation()}
             className={classes.locationButton}
           >
             <MyLocationIcon style={{ fontSize: 18 }} />
