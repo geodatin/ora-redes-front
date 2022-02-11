@@ -1,7 +1,7 @@
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 
 import useStyles from './styles';
 
@@ -9,13 +9,19 @@ import useStyles from './styles';
  * This component renders a common mobile layout for application
  * @returns common mobile layout
  */
-export default function MobileNavbarLayout({ mainContainer, bottomNavBar }) {
+export default function MobileNavbarLayout({
+  mainContainer,
+  bottomNavBar,
+  value,
+  setValue,
+}) {
   MobileNavbarLayout.propTypes = {
     mainContainer: PropTypes.shape().isRequired,
     bottomNavBar: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    value: PropTypes.number.isRequired,
+    setValue: PropTypes.func.isRequired,
   };
   const classes = useStyles();
-  const [value, setValue] = useState(0);
 
   const getNavComponent = () => {
     if (value === 0) {
