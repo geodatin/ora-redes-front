@@ -128,7 +128,9 @@ export function FilteringProvider({ children }) {
           setFilters,
         },
         functions: {},
-        loaders: {},
+        loaders: {
+          paramsLoaded,
+        },
       }}
     >
       {children}
