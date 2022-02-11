@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
 
 import {
+  autocompletePropertyTypes,
   filterDefaults,
   networkByValue,
   timeGroupingOptions,
@@ -39,6 +40,9 @@ export function FilteringProvider({ children }) {
   const [filters, setFilters] = useState(filterDefaults.autocompleteSelection);
   const [paramsLoaded, setParamsLoaded] = useState(false);
 
+  /**
+   * Merge the autocomplete and network selection.
+   */
   useEffect(() => {
     setFilters({
       ...autocompleteSelection,
@@ -47,14 +51,43 @@ export function FilteringProvider({ children }) {
     });
   }, [autocompleteSelection, networkSelection]);
 
+  /**
+   * Loads the search params.
+   */
   useEffect(() => {
     const networkSelectionParam = query.get('networkSelection');
+    const searchParam = query.get('search');
 
     if (
+      networkSelectionParam &&
       !Number.isNaN(networkSelectionParam) &&
       !!networkByValue[networkSelectionParam]
     ) {
       setNetworkSelection(networkSelectionParam);
+    }
+
+    if (searchParam) {
+      const decodedURI = decodeURI(searchParam);
+      const queryObject = JSON.parse(decodedURI);
+      const paramsKeys = Object.keys(queryObject);
+
+      let isParamsValid = true;
+
+      for (let i = 0; i < paramsKeys.length; i += 1) {
+        if (!autocompletePropertyTypes[paramsKeys[i]]) {
+          isParamsValid = false;
+          break;
+        }
+      }
+
+      if (isParamsValid) {
+        setAutocompleteSelection(queryObject);
+        setAutocompleteStraightSelection(
+          Object.keys(queryObject).map((type) =>
+            queryObject[type].map((value) => ({ value, type }))
+          )
+        );
+      }
     }
 
     setParamsLoaded(true);
