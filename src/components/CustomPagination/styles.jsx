@@ -3,14 +3,14 @@ import { createUseStyles } from 'react-jss';
 const useStyles = createUseStyles((theme) => ({
   pagination: {
     '& .MuiPaginationItem-root': {
-      color: theme.secondary.dark,
+      color: theme.neutral.gray.main,
     },
     '& .MuiPaginationItem-page.Mui-selected': {
-      backgroundColor: theme.primary.main,
+      backgroundColor: theme.secondary.main,
       color: theme.background.main,
     },
     '& .MuiPaginationItem-page.Mui-selected:hover': {
-      backgroundColor: theme.primary.light,
+      backgroundColor: theme.neutral.gray.light,
     },
   },
 }));
