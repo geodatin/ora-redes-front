@@ -155,7 +155,6 @@ export default function MonitoringMap() {
         let icon;
 
         if (point.properties.situation === 'alert') {
-          console.log(point.properties);
           if (point.properties.network === networks.RHA.code) {
             icon = blueStationPulsing;
           } else if (point.properties.network === networks.RQA.code) {

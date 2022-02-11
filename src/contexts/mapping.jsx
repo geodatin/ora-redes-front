@@ -41,6 +41,9 @@ export function MappingProvider({ children }) {
       const next = current + 1;
       return next > layoutConfigs.isRightHidden.length - 1 ? 0 : next;
     });
+    setTimeout(() => {
+      mapRef?.invalidateSize();
+    }, [1000]);
   }
 
   return (
