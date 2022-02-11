@@ -7,6 +7,7 @@ import {
   networkByValue,
   timeGroupingOptions,
 } from '../constants/options';
+import { useQuery } from '../hooks/useQuery';
 
 const FilteringContext = createContext({});
 
@@ -34,8 +35,9 @@ export function FilteringProvider({ children }) {
   const [networkSelection, setNetworkSelection] = useState(
     filterDefaults.networkSelection
   );
-
+  const query = useQuery();
   const [filters, setFilters] = useState(filterDefaults.autocompleteSelection);
+  const [paramsLoaded, setParamsLoaded] = useState(false);
 
   useEffect(() => {
     setFilters({
@@ -45,51 +47,66 @@ export function FilteringProvider({ children }) {
     });
   }, [autocompleteSelection, networkSelection]);
 
+  useEffect(() => {
+    const networkSelectionParam = query.get('networkSelection');
+
+    if (
+      !Number.isNaN(networkSelectionParam) &&
+      !!networkByValue[networkSelectionParam]
+    ) {
+      setNetworkSelection(networkSelectionParam);
+    }
+
+    setParamsLoaded(true);
+  }, []);
+
   /**
    * This useEffect puts the current selection into the route.
    */
   useEffect(() => {
-    let newQuery = `${window.location.pathname}?`;
+    if (paramsLoaded) {
+      let newQuery = `${window.location.pathname}?`;
 
-    if (window.location.pathname === '/') {
-      newQuery = `/filter?`;
-    }
-
-    const initialSize = newQuery.length;
-
-    /**
-     * This function verifies if there is a need to add a separator between the query params.
-     */
-    const trySeparator = () => {
-      if (newQuery.length > initialSize) {
-        newQuery += '&';
+      if (window.location.pathname === '/') {
+        newQuery = `/filter?`;
       }
-    };
 
-    if (networkSelection !== filterDefaults.networkSelection) {
-      trySeparator();
-      newQuery += `networkSelection=${networkSelection}`;
-    }
+      const initialSize = newQuery.length;
 
-    const selectionAux = {};
+      /**
+       * This function verifies if there is a need to add a separator between the query params.
+       */
+      const trySeparator = () => {
+        if (newQuery.length > initialSize) {
+          newQuery += '&';
+        }
+      };
 
-    Object.keys(autocompleteSelection).forEach((key) => {
-      if (autocompleteSelection[key].length > 0) {
-        selectionAux[key] = autocompleteSelection[key];
+      if (networkSelection !== filterDefaults.networkSelection) {
+        trySeparator();
+        newQuery += `networkSelection=${networkSelection}`;
       }
-    });
 
-    if (Object.keys(selectionAux).length > 0) {
-      trySeparator();
-      const searchValueParams = JSON.stringify(selectionAux);
-      const searchValueEncoded = encodeURI(searchValueParams);
-      newQuery += `search=${searchValueEncoded}`;
-    }
+      const selectionAux = {};
 
-    if (newQuery.length === initialSize) {
-      window.history.replaceState(null, '', '/');
-    } else {
-      window.history.replaceState(null, '', newQuery);
+      Object.keys(autocompleteSelection).forEach((key) => {
+        if (autocompleteSelection[key].length > 0) {
+          selectionAux[key] = autocompleteSelection[key];
+        }
+      });
+
+      if (Object.keys(selectionAux).length > 0) {
+        trySeparator();
+        const searchValueParams = JSON.stringify(selectionAux);
+        const searchValueEncoded = encodeURI(searchValueParams);
+        newQuery += `search=${searchValueEncoded}`;
+      }
+
+      if (newQuery.length === initialSize) {
+        window.history.replaceState(null, '', '/');
+      } else {
+        window.history.replaceState(null, '', newQuery);
+      }
     }
   }, [networkSelection, autocompleteSelection]);
 
