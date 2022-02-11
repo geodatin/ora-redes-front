@@ -125,6 +125,15 @@ export const filterDefaults = {
   networkSelection: networks.ALL.value,
 };
 
+export const autocompletePropertyTypes = {
+  name: { key: 'name' },
+  network: { key: 'network' },
+  country: { key: 'country' },
+  responsible: { key: 'responsible' },
+  river: { key: 'river' },
+  variable: { key: 'variable' },
+};
+
 export const timeGroupingOptions = [
   {
     code: 'year',

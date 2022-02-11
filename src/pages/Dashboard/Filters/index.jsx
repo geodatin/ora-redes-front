@@ -37,6 +37,7 @@ export default function Filters() {
       setAutocompleteStraightSelection,
       setNetworkSelection,
     },
+    loaders: { paramsLoaded },
   } = useContext(FilteringContext);
   const { t } = useTranslation();
   const [auxAutocompleteSelection, setAuxAutocompleteSelection] = useState(
@@ -151,6 +152,12 @@ export default function Filters() {
 
     return size;
   }, [auxAutocompleteSelection]);
+
+  useEffect(() => {
+    setAuxNetworkSelection(networkSelection);
+    setAuxAutocompleteSelection(autocompleteSelection);
+    setAutocompleteStraightSelection(auxStraightSelection);
+  }, [paramsLoaded]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
