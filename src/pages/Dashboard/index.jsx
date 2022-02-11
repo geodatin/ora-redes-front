@@ -12,6 +12,7 @@ import VLayout from '../../components/Layout/Vertical';
 import { layoutConfigs, networkByValue } from '../../constants/options';
 import FilteringContext from '../../contexts/filtering';
 import MapContext from '../../contexts/mapping';
+import NavigationContext from '../../contexts/navigation';
 import api from '../../services/api';
 import Filters from './Filters';
 import InfoPanel from './InfoPanel';
@@ -27,15 +28,20 @@ function Dashboard() {
   const classes = useStyles();
   const { t } = useTranslation();
 
+  const [lastUpdateDatabase, setLastUpdateDatabase] = useState();
+
   const {
     values: { networkSelection },
   } = useContext(FilteringContext);
 
   const {
-    values: { layoutConfig, isMobile },
+    values: { layoutConfig },
   } = useContext(MapContext);
 
-  const [lastUpdateDatabase, setLastUpdateDatabase] = useState();
+  const {
+    values: { mobileNavValue, isMobile },
+    setters: { setMobileNavValue },
+  } = useContext(NavigationContext);
 
   /**
    * This userEffect fetches last database update timestamp.
@@ -70,6 +76,8 @@ function Dashboard() {
 
   return isMobile ? (
     <MobileNavbarLayout
+      value={mobileNavValue}
+      setValue={setMobileNavValue}
       mainContainer={{
         label: t('specific.mobileNavbar.map'),
         icon: <MapRoundedIcon />,
