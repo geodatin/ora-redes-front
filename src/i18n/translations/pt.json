@@ -31,6 +31,13 @@
       "none": "Nenhum"
     }
   },
+  "share": {
+    "headerTitle": "Compartilhar Pagina",
+    "page1Text1": "Compartilhe o mapa nas redes sociais através dos seguintes botões:",
+    "page1Text2": "Ou através do link abaixo:",
+    "copyButton": "Copiar",
+    "copiedButton": "Copiado"
+  },
   "components": {
     "advancedFilter": {
       "placeholder": "Adicionar filtro"

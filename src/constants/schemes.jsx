@@ -63,6 +63,11 @@ export const lightScheme = {
     thumb: '#A4A4A4 ',
     track: '#E9EAED',
   },
+  share: {
+    twitter: '#00acee',
+    whatsapp: '#128c7E',
+    facebook: '#3B5998',
+  },
 };
 
 export const darkScheme = {
@@ -125,5 +130,10 @@ export const darkScheme = {
   scrollBar: {
     thumb: '#323941',
     track: '#19212B',
+  },
+  share: {
+    twitter: '#00acee',
+    whatsapp: '#128c7E',
+    facebook: '#3B5998',
   },
 };
