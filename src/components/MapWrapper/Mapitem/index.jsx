@@ -49,7 +49,10 @@ MapItem.defaultProps = {
 };
 
 MapItem.propTypes = {
-  children: PropTypes.shape().isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.shape(),
+    PropTypes.arrayOf(PropTypes.shape()),
+  ]).isRequired,
   popupContent: PropTypes.shape(),
   onClick: PropTypes.func,
 };

@@ -21,23 +21,8 @@ export default function MobileNavbarLayout({
     value: PropTypes.number.isRequired,
     setValue: PropTypes.func.isRequired,
   };
-  const classes = useStyles();
 
-  const getNavComponent = () => {
-    if (value === 0) {
-      return null;
-    }
-    return (
-      <div
-        className={classNames(
-          classes.navComponentWrapper,
-          bottomNavBar[value - 1].navContainer.className
-        )}
-      >
-        {bottomNavBar[value - 1].navContainer.children}
-      </div>
-    );
-  };
+  const classes = useStyles();
 
   return (
     <div className={classes.wrapper}>
@@ -47,7 +32,26 @@ export default function MobileNavbarLayout({
           mainContainer.className
         )}
       >
-        {getNavComponent()}
+        {bottomNavBar.map((navBar, index) => (
+          <div
+            key={navBar.label}
+            style={
+              value - 1 === index
+                ? { opacity: 1 }
+                : {
+                    opacity: 0,
+                    pointerEvents: 'none',
+                    userSelect: 'none',
+                  }
+            }
+            className={classNames(
+              classes.navComponentWrapper,
+              navBar.navContainer.className
+            )}
+          >
+            {navBar.navContainer.children}
+          </div>
+        ))}
         {mainContainer.children}
       </div>
 
