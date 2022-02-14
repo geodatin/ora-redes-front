@@ -34,6 +34,7 @@ export default function MobileNavbarLayout({
       >
         {bottomNavBar.map((navBar, index) => (
           <div
+            key={navBar.label}
             style={
               value - 1 === index
                 ? { opacity: 1 }
