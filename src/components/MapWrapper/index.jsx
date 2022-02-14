@@ -33,7 +33,7 @@ export default function MapWrapper({
   const darkTileRef = useRef();
 
   useEffect(() => {
-    getMapRef(map);
+    if (getMapRef) getMapRef(map);
   }, [map]);
 
   /**
