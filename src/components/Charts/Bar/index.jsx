@@ -31,6 +31,10 @@ export default function BarChart({
   };
 
   const options = {
+    interaction: {
+      mode: 'index',
+      intersect: false,
+    },
     indexAxis: 'y',
     plugins: {},
     scales: {
