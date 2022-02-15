@@ -206,6 +206,9 @@
     "legend": {
       "riverLine": "Linhas de drenagem",
       "alertStation": "Estação em alerta"
+    },
+    "share": {
+      "message": ""
     }
   }
 }

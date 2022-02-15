@@ -19,6 +19,7 @@ import InverseShape from '../../../assets/shapes/inverseShape.json';
 import CustomButton from '../../../components/CustomButton';
 import MapWrapper from '../../../components/MapWrapper';
 import MapItem from '../../../components/MapWrapper/Mapitem';
+import ShareDialog from '../../../components/ShareDialog';
 import Typography from '../../../components/Typography';
 import { networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
@@ -51,6 +52,7 @@ export default function MonitoringMap() {
   const theme = useTheme();
   const classes = useStyles();
   const { t } = useTranslation();
+  const [openShare, setOpenShare] = useState(false);
 
   useEffect(() => {
     let isSubscribed = true;
@@ -276,6 +278,10 @@ export default function MonitoringMap() {
     return null;
   }, [points, theme]);
 
+  function handleShareDialog() {
+    setOpenShare(!openShare);
+  }
+
   return (
     <MapWrapper
       getMapRef={(ref) => setMapRef(ref)}
@@ -293,9 +299,17 @@ export default function MonitoringMap() {
         ) : undefined
       }
       itemChildren={
-        <MapItem>
-          <ShareIcon style={{ fontSize: 18 }} />
-        </MapItem>
+        <>
+          <MapItem onClick={() => handleShareDialog()}>
+            <ShareIcon style={{ fontSize: 18 }} />
+          </MapItem>
+          <ShareDialog
+            open={openShare}
+            onClose={() => setOpenShare(false)}
+            url={window.location.href}
+            shareMessage={t('specific.share.message')}
+          />
+        </>
       }
       itemBottomChildren={
         <MapItem

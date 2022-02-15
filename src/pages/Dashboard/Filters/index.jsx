@@ -206,7 +206,13 @@ export default function Filters() {
           }}
           options={autocompleteOptions}
           onInputChange={(e, newInput) => onAutocompleteInputChange(newInput)}
-          getOptionLabel={(option) => option.value}
+          getOptionLabel={(option) => {
+            if (option.type === dataTypes.variable.code) {
+              return t(dataTypes.variable.translations[option.value]);
+            }
+
+            return option.value;
+          }}
           onOpen={() => setAutocompleteOptions([])}
           onClose={() => setAutocompleteOptions([])}
           noOptionsText={
