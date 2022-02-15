@@ -42,6 +42,10 @@ export default function RankingChart({
   const theme = useTheme();
 
   const options = {
+    interaction: {
+      mode: 'index',
+      intersect: true,
+    },
     indexAxis: 'y',
     plugins: {
       datalabels: {

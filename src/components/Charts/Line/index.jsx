@@ -31,6 +31,10 @@ export default function LineChart({
   };
 
   const options = {
+    interaction: {
+      mode: 'index',
+      intersect: false,
+    },
     indexAxis: 'x',
     plugins: {},
     scales: {
