@@ -34,8 +34,9 @@ export function NavigationProvider({ children }) {
     if (isMobile) setMobileNavValue(mobileNavs.panel.value);
   };
 
-  const closeStation = () => {
+  const closeStation = (panelRef) => {
     setPanelIndexValue(panels.list.index);
+    panelRef?.current.scrollTo(0, 0);
     setStation(undefined);
   };
 

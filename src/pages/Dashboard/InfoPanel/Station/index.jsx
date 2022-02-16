@@ -9,6 +9,7 @@ import Breadcrumb from '../../../../components/Breadcrumb';
 import BarChart from '../../../../components/Charts/Bar';
 import LineChart from '../../../../components/Charts/Line';
 import Multiple from '../../../../components/Charts/Multiple';
+import CustomButton from '../../../../components/CustomButton';
 import NavigationContext from '../../../../contexts/navigation';
 import api from '../../../../services/api';
 import { downloadCSV } from '../../../../utils/helpers';
@@ -18,13 +19,16 @@ import CardItem from '../CardList/CardItem';
  * This function provides a station panel
  * @returns station panel
  */
-export default function Station({ station, timeGrouping }) {
+export default function Station({ station, timeGrouping, tabpanelref }) {
   Station.propTypes = {
     station: PropTypes.shape(),
     timeGrouping: PropTypes.string.isRequired,
+    tabpanelref: PropTypes.shape(),
   };
+
   Station.defaultProps = {
     station: {},
+    tabpanelref: undefined,
   };
 
   if (!station) {
@@ -288,9 +292,9 @@ export default function Station({ station, timeGrouping }) {
       >
         <Breadcrumb
           items={[t('specific.dataType.station.plural'), station?.name ?? '']}
-          onClickItem={({ index }) => index === 0 && closeStation()}
+          onClickItem={({ index }) => index === 0 && closeStation(tabpanelref)}
         />
-        <IconButton onClick={() => closeStation()} aria-label="back">
+        <IconButton onClick={() => closeStation(tabpanelref)} aria-label="back">
           <ArrowBackIosNewRoundedIcon
             style={{ color: theme.secondary.main, fontSize: 17 }}
           />
@@ -387,7 +391,7 @@ export default function Station({ station, timeGrouping }) {
               reverse: true,
               title: {
                 display: true,
-                text: t('specific.dataType.sufixes.rain'),
+                text: t('specific.statistics.charts.rainTimeSeries.yAxisLabel'),
                 color: theme.neutral.gray.main,
               },
             },
@@ -399,6 +403,26 @@ export default function Station({ station, timeGrouping }) {
           },
         }}
       />
+
+      <li
+        style={{
+          margin: 15,
+        }}
+      >
+        <CustomButton
+          style={{
+            width: '100%',
+            height: 30,
+            backgroundColor: theme.toggleButton.unabled,
+            textTransform: 'none',
+            color: theme.neutral.gray.main,
+          }}
+          disabled={false}
+          onClick={() => closeStation(tabpanelref)}
+        >
+          {t('specific.list.seeMoreStations')}
+        </CustomButton>
+      </li>
     </ul>
   );
 }
