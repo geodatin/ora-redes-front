@@ -29,17 +29,12 @@ const useStyles = createUseStyles((theme) => ({
   },
   shareButton: {
     transition: 'all 0.3s ease',
-
-    '&.MuiButton-root': {
-      minWidth: 34,
-      minHeight: 30,
-      maxWidth: 34,
-      maxHeight: 30,
-      position: 'relative',
-      alignItems: 'center',
-      justifyContent: 'center',
-      display: 'flex',
-    },
+    width: 34,
+    heigth: 34,
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex',
   },
   iconsWrapper: {
     display: 'flex',

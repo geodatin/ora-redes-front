@@ -54,24 +54,28 @@ export default function ShareDialog({ url, shareMessage, open, onClose }) {
         {t('share.page1Text1')}
       </Typography>
       <div className={classes.iconsWrapper}>
-        <TwitterShareButton title={shareMessage} url={url}>
-          <Button className={classes.shareButton} style={{ marginRight: 5 }}>
-            <Twitter className={classes.twitterIcon} />
-          </Button>
+        <TwitterShareButton
+          title={shareMessage}
+          url={url}
+          className={classes.shareButton}
+          style={{ marginRight: 5 }}
+        >
+          <Twitter className={classes.twitterIcon} />
         </TwitterShareButton>
         <FacebookShareButton
           title={shareMessage}
           url={url}
           style={{ marginRight: 5 }}
+          className={classes.shareButton}
         >
-          <Button className={classes.shareButton}>
-            <Facebook className={classes.facebookIcon} />
-          </Button>
+          <Facebook className={classes.facebookIcon} />
         </FacebookShareButton>
-        <WhatsappShareButton title={shareMessage} url={url}>
-          <Button className={classes.shareButton}>
-            <WhatsApp className={classes.whatsappIcon} />
-          </Button>
+        <WhatsappShareButton
+          title={shareMessage}
+          url={url}
+          className={classes.shareButton}
+        >
+          <WhatsApp className={classes.whatsappIcon} />
         </WhatsappShareButton>
       </div>
       <Typography variant="caption" style={{ color: theme.neutral.gray.main }}>
