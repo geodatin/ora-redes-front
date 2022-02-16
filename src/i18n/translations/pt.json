@@ -8,6 +8,7 @@
       "year": "{{date, YYYY}}",
       "monthYear": "{{date, MM/YYYY}}",
       "monthNameYear": "{{date, MMMM, YYYY}}",
+      "hour": "{{date, HH:mm}}",
       "complete": "{{date, DD/MM/YYYY}}"
     }
   },
@@ -122,6 +123,10 @@
           "info": "Este gráfico apresenta o histórico da vazão",
           "yAxisLabel": "m³ por segundo"
         },
+        "rawDataMultiple": {
+          "title": "Histórico de dados brutos",
+          "info": "Este gráfico apresenta o histórico de dados brutos para precipitação, vazão e nível."
+        },
         "stationsPerVariableTreemap": {
           "title": "Estações por variáveis em cada rede",
           "info": "Este gráfico apresenta uma contagem de estações por variáveis em cada rede"
@@ -130,6 +135,7 @@
     },
     "list": {
       "seeMoreStatistics": "Visualizar mais estatísticas",
+      "seeMoreStations": "Visualizar mais estações",
       "noMoreResults": "Não há mais resultados a serem exibidos",
       "noResults": "Não existem resultados para a filtragem aplicada"
     },

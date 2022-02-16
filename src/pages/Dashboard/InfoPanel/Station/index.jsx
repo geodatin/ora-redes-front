@@ -8,6 +8,8 @@ import { useTheme } from 'react-jss';
 import Breadcrumb from '../../../../components/Breadcrumb';
 import BarChart from '../../../../components/Charts/Bar';
 import LineChart from '../../../../components/Charts/Line';
+import Multiple from '../../../../components/Charts/Multiple';
+import CustomButton from '../../../../components/CustomButton';
 import NavigationContext from '../../../../contexts/navigation';
 import api from '../../../../services/api';
 import { downloadCSV } from '../../../../utils/helpers';
@@ -17,13 +19,16 @@ import CardItem from '../CardList/CardItem';
  * This function provides a station panel
  * @returns station panel
  */
-export default function Station({ station, timeGrouping }) {
+export default function Station({ station, timeGrouping, tabpanelref }) {
   Station.propTypes = {
     station: PropTypes.shape(),
     timeGrouping: PropTypes.string.isRequired,
+    tabpanelref: PropTypes.shape(),
   };
+
   Station.defaultProps = {
     station: {},
+    tabpanelref: undefined,
   };
 
   if (!station) {
@@ -36,10 +41,11 @@ export default function Station({ station, timeGrouping }) {
     functions: { closeStation },
   } = useContext(NavigationContext);
 
-  const [stationUpdate, setStationUpdate] = useState(undefined);
+  const [stationUpdate, setStationUpdate] = useState();
   const [rainData, setRainData] = useState();
   const [levelData, setLevelData] = useState();
   const [flowRateData, setFlowRateData] = useState();
+  const [rawData, setRawData] = useState();
 
   const tooltipSufix = {
     callbacks: {
@@ -67,6 +73,20 @@ export default function Station({ station, timeGrouping }) {
         date: new Date(timeStamp),
       });
     });
+
+  const getDatasetObj = (type, y, label, sufix, color, extraProps) => ({
+    type,
+    label,
+    sufix,
+    data: y,
+    backgroundColor: color,
+    borderColor: color,
+    borderRadius: 5,
+    borderWidth: 1,
+    pointRadius: 2,
+    barThickness: 2,
+    ...extraProps,
+  });
 
   /**
    * This userEffect updates station data.
@@ -99,19 +119,17 @@ export default function Station({ station, timeGrouping }) {
       api
         .get(`/observation/timeSeries/${station.code}/rain/${timeGrouping}`)
         .then(({ data }) => {
-          if (isSubscribed && data) {
+          if (isSubscribed && data?.y) {
             setRainData({
               labels: xAxisFormatter(data.x),
               datasets: [
-                {
-                  label: t('specific.dataType.variable.items.rain'),
-                  data: data.y,
-                  sufix: t('specific.dataType.sufixes.rain'),
-                  backgroundColor: [theme.blue.main],
-                  borderColor: [theme.blue.main],
-                  borderRadius: 5,
-                  barThickness: 5,
-                },
+                getDatasetObj(
+                  'bar',
+                  data.y,
+                  t('specific.dataType.variable.items.rain'),
+                  t('specific.dataType.sufixes.rain'),
+                  theme.blue.main
+                ),
               ],
             });
           }
@@ -131,19 +149,17 @@ export default function Station({ station, timeGrouping }) {
       api
         .get(`/observation/timeSeries/${station.code}/level/${timeGrouping}`)
         .then(({ data }) => {
-          if (isSubscribed && data) {
+          if (isSubscribed && data?.y) {
             setLevelData({
               labels: xAxisFormatter(data.x),
               datasets: [
-                {
-                  label: t('specific.dataType.variable.items.adoptedLevel'),
-                  data: data.y,
-                  sufix: t('specific.dataType.sufixes.adoptedLevel'),
-                  backgroundColor: [theme.primary.main],
-                  borderColor: [theme.primary.main],
-                  borderRadius: 5,
-                  barThickness: 5,
-                },
+                getDatasetObj(
+                  'line',
+                  data.y,
+                  t('specific.dataType.variable.items.adoptedLevel'),
+                  t('specific.dataType.sufixes.adoptedLevel'),
+                  theme.primary.main
+                ),
               ],
             });
           }
@@ -163,19 +179,79 @@ export default function Station({ station, timeGrouping }) {
       api
         .get(`/observation/timeSeries/${station.code}/flowRate/${timeGrouping}`)
         .then(({ data }) => {
-          if (isSubscribed && data) {
+          if (isSubscribed && data?.y) {
             setFlowRateData({
               labels: xAxisFormatter(data.x),
               datasets: [
-                {
-                  label: t('specific.dataType.variable.items.flowRate'),
-                  data: data.y,
-                  sufix: t('specific.dataType.sufixes.flowRate'),
-                  backgroundColor: [theme.green.dark],
-                  borderColor: [theme.green.dark],
-                  borderRadius: 5,
-                  barThickness: 5,
-                },
+                getDatasetObj(
+                  'line',
+                  data.y,
+                  t('specific.dataType.variable.items.flowRate'),
+                  t('specific.dataType.sufixes.flowRate'),
+                  theme.green.dark
+                ),
+              ],
+            });
+          }
+        });
+    }
+    return () => {
+      isSubscribed = false;
+    };
+  }, [station, timeGrouping]);
+
+  /**
+   * This userEffect fetch station raw data e time series.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+    if (station.code) {
+      api
+        .get(`/observation/timeSeries/${station.code}/raw/${timeGrouping}`)
+        .then(({ data }) => {
+          if (isSubscribed && data?.rain) {
+            setRawData({
+              labels: data.x.map((timestamp) =>
+                t('general.date.hour', {
+                  date: new Date(timestamp),
+                })
+              ),
+              datasets: [
+                getDatasetObj(
+                  'line',
+                  data.adoptedLevel,
+                  t('specific.dataType.variable.items.adoptedLevel'),
+                  t('specific.dataType.sufixes.adoptedLevel'),
+                  theme.primary.main,
+                  {
+                    yAxisID: 'y2',
+                    borderWidth: 0.5,
+                    pointRadius: 1,
+                  }
+                ),
+                getDatasetObj(
+                  'line',
+                  data.flowRate,
+                  t('specific.dataType.variable.items.flowRate'),
+                  t('specific.dataType.sufixes.flowRate'),
+                  theme.green.dark,
+                  {
+                    yAxisID: 'y2',
+                    borderWidth: 0.5,
+                    pointRadius: 1,
+                  }
+                ),
+                getDatasetObj(
+                  'bar',
+                  data.rain,
+                  t('specific.dataType.variable.items.rain'),
+                  t('specific.dataType.sufixes.rain'),
+                  theme.blue.main,
+                  {
+                    yAxisID: 'y1',
+                    barThickness: 0.5,
+                  }
+                ),
               ],
             });
           }
@@ -216,9 +292,9 @@ export default function Station({ station, timeGrouping }) {
       >
         <Breadcrumb
           items={[t('specific.dataType.station.plural'), station?.name ?? '']}
-          onClickItem={({ index }) => index === 0 && closeStation()}
+          onClickItem={({ index }) => index === 0 && closeStation(tabpanelref)}
         />
-        <IconButton onClick={() => closeStation()} aria-label="back">
+        <IconButton onClick={() => closeStation(tabpanelref)} aria-label="back">
           <ArrowBackIosNewRoundedIcon
             style={{ color: theme.secondary.main, fontSize: 17 }}
           />
@@ -300,6 +376,53 @@ export default function Station({ station, timeGrouping }) {
           },
         }}
       />
+
+      <Multiple
+        title={t('specific.statistics.charts.rawDataMultiple.title')}
+        info={t('specific.statistics.charts.rawDataMultiple.info')}
+        data={rawData}
+        options={{
+          plugins: {
+            tooltip: tooltipSufix,
+            legend: false,
+          },
+          scales: {
+            y1: {
+              reverse: true,
+              title: {
+                display: true,
+                text: t('specific.statistics.charts.rainTimeSeries.yAxisLabel'),
+                color: theme.neutral.gray.main,
+              },
+            },
+            y2: {
+              title: {
+                display: false,
+              },
+            },
+          },
+        }}
+      />
+
+      <li
+        style={{
+          margin: 15,
+        }}
+      >
+        <CustomButton
+          style={{
+            width: '100%',
+            height: 30,
+            backgroundColor: theme.toggleButton.unabled,
+            textTransform: 'none',
+            color: theme.neutral.gray.main,
+          }}
+          disabled={false}
+          onClick={() => closeStation(tabpanelref)}
+        >
+          {t('specific.list.seeMoreStations')}
+        </CustomButton>
+      </li>
     </ul>
   );
 }
