@@ -83,7 +83,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
     borderColor: color,
     borderRadius: 5,
     borderWidth: 1,
-    pointRadius: 2,
+    pointRadius: 1.5,
     barThickness: 2,
     ...extraProps,
   });
@@ -227,6 +227,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
                     yAxisID: 'y2',
                     borderWidth: 0.5,
                     pointRadius: 1,
+                    hidden: true,
                   }
                 ),
                 getDatasetObj(
@@ -378,13 +379,46 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       />
 
       <Multiple
-        title={t('specific.statistics.charts.rawDataMultiple.title')}
-        info={t('specific.statistics.charts.rawDataMultiple.info')}
+        title={t('specific.statistics.charts.rawTimeSeries.title')}
+        info={t('specific.statistics.charts.rawTimeSeries.info')}
         data={rawData}
+        csvCallback={() => csvFetching('raw', station.code)}
         options={{
           plugins: {
             tooltip: tooltipSufix,
-            legend: false,
+            legend: {
+              display: true,
+              reverse: true,
+              borderRadius: 10,
+              labels: {
+                usePointStyle: true,
+                boxWidth: 10,
+                borderRadius: 10,
+              },
+              onClick: (e, legendItem, legend) => {
+                const index = legendItem.datasetIndex;
+                if (index !== 2) {
+                  const ci = legend.chart;
+                  if (!ci.isDatasetVisible(index)) {
+                    if (index === 1) {
+                      ci.hide(0);
+                      ci.show(index);
+                      ci.options.scales.y2.title.text = t(
+                        'specific.statistics.charts.flowRateTimeSeries.yAxisLabel'
+                      );
+                      ci.update();
+                    } else {
+                      ci.hide(1);
+                      ci.show(index);
+                      ci.options.scales.y2.title.text = t(
+                        'specific.statistics.charts.levelTimeSeries.yAxisLabel'
+                      );
+                      ci.update();
+                    }
+                  }
+                }
+              },
+            },
           },
           scales: {
             y1: {
@@ -397,7 +431,11 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
             },
             y2: {
               title: {
-                display: false,
+                display: true,
+                text: t(
+                  'specific.statistics.charts.flowRateTimeSeries.yAxisLabel'
+                ),
+                color: theme.neutral.gray.main,
               },
             },
           },
