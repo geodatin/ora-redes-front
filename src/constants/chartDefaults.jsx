@@ -44,12 +44,13 @@ ChartJS.defaults.plugins.legend.position = 'bottom';
 
 ChartJS.defaults.scale.ticks.align = 'center';
 ChartJS.defaults.scale.ticks.autoSkip = true;
-ChartJS.defaults.scale.ticks.autoSkipPadding = 1;
+ChartJS.defaults.scale.ticks.maxTicksLimit = 5;
+ChartJS.defaults.scale.ticks.maxRotation = 20;
+ChartJS.defaults.scale.ticks.autoSkipPadding = 10;
 ChartJS.defaults.scale.ticks.padding = 10;
-ChartJS.defaults.scale.ticks.labelOffset = 0;
 
 ChartJS.defaults.scale.beginAtZero = true;
-ChartJS.defaults.scale.grace = '80%';
+ChartJS.defaults.scale.grace = '10%';
 
 ChartJS.defaults.layout.autoPadding = false;
 ChartJS.defaults.layout.padding = { top: 0, right: 0, bottom: 0, left: 0 };
