@@ -64,7 +64,7 @@ function Dashboard() {
       subtitle={
         lastUpdateDatabase
           ? `${t('specific.infoPanel.lastUpdate')} ${t(
-              'general.date.complete',
+              'general.date.dayMonthYearHour',
               {
                 date: new Date(lastUpdateDatabase),
               }

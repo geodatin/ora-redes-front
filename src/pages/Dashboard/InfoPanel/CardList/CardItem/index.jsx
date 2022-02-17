@@ -119,7 +119,7 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
 
         <Typography style={{ color: theme.secondary.dark }} variant="caption">
           {t('specific.infoPanel.lastUpdate')}{' '}
-          {t('general.date.complete', {
+          {t('general.date.dayMonthYearHour', {
             date: new Date(item.lastUpdate),
           })}
         </Typography>

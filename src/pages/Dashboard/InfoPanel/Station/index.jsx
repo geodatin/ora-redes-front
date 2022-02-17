@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
@@ -47,32 +48,40 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
   const [flowRateData, setFlowRateData] = useState();
   const [rawData, setRawData] = useState();
 
-  const tooltipSufix = {
+  const customTooltip = {
     callbacks: {
       label(context) {
         return `${context.dataset.label}: ${context.formattedValue} ${context.dataset?.sufix}`;
       },
+      title(context) {
+        return t('general.date.dayMonthYearHour', {
+          date: new Date(context[0]?.label),
+        });
+      },
     },
   };
 
-  const xAxisFormatter = (timestamps) =>
-    timestamps.map((timeStamp) => {
+  const xTicksByTimeGrouping = {
+    callback(value, index, ticks) {
+      const timestamp = this.getLabelForValue(value);
+
       if (timeGrouping === 'year') {
         return t('general.date.year', {
-          date: new Date(timeStamp),
+          date: new Date(timestamp),
         });
       }
 
       if (timeGrouping === 'quarter' || timeGrouping === 'month') {
         return t('general.date.monthYear', {
-          date: new Date(timeStamp),
+          date: new Date(timestamp),
         });
       }
 
-      return t('general.date.complete', {
-        date: new Date(timeStamp),
+      return t('general.date.dayMonthYear', {
+        date: new Date(timestamp),
       });
-    });
+    },
+  };
 
   const getDatasetObj = (type, y, label, sufix, color, extraProps) => ({
     type,
@@ -121,7 +130,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         .then(({ data }) => {
           if (isSubscribed && data?.y) {
             setRainData({
-              labels: xAxisFormatter(data.x),
+              labels: data.x,
               datasets: [
                 getDatasetObj(
                   'bar',
@@ -151,7 +160,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         .then(({ data }) => {
           if (isSubscribed && data?.y) {
             setLevelData({
-              labels: xAxisFormatter(data.x),
+              labels: data.x,
               datasets: [
                 getDatasetObj(
                   'line',
@@ -181,7 +190,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         .then(({ data }) => {
           if (isSubscribed && data?.y) {
             setFlowRateData({
-              labels: xAxisFormatter(data.x),
+              labels: data.x,
               datasets: [
                 getDatasetObj(
                   'line',
@@ -211,11 +220,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         .then(({ data }) => {
           if (isSubscribed && data?.rain) {
             setRawData({
-              labels: data.x.map((timestamp) =>
-                t('general.date.hour', {
-                  date: new Date(timestamp),
-                })
-              ),
+              labels: data.x,
               datasets: [
                 getDatasetObj(
                   'line',
@@ -315,10 +320,13 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         options={{
           indexAxis: 'x',
           plugins: {
-            tooltip: tooltipSufix,
+            tooltip: customTooltip,
             legend: false,
           },
           scales: {
+            x: {
+              ticks: xTicksByTimeGrouping,
+            },
             y: {
               title: {
                 display: true,
@@ -337,10 +345,13 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         csvCallback={() => csvFetching('level', station.code)}
         options={{
           plugins: {
-            tooltip: tooltipSufix,
+            tooltip: customTooltip,
             legend: false,
           },
           scales: {
+            x: {
+              ticks: xTicksByTimeGrouping,
+            },
             y: {
               title: {
                 display: true,
@@ -361,10 +372,13 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         csvCallback={() => csvFetching('flowRate', station.code)}
         options={{
           plugins: {
-            tooltip: tooltipSufix,
+            tooltip: customTooltip,
             legend: false,
           },
           scales: {
+            x: {
+              ticks: xTicksByTimeGrouping,
+            },
             y: {
               title: {
                 display: true,
@@ -385,7 +399,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         csvCallback={() => csvFetching('raw', station.code)}
         options={{
           plugins: {
-            tooltip: tooltipSufix,
+            tooltip: customTooltip,
             legend: {
               display: true,
               reverse: true,
@@ -421,6 +435,15 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
             },
           },
           scales: {
+            x: {
+              ticks: {
+                callback(value, index, ticks) {
+                  return t('general.date.dayMonthYear', {
+                    date: new Date(this.getLabelForValue(value)),
+                  });
+                },
+              },
+            },
             y1: {
               reverse: true,
               title: {

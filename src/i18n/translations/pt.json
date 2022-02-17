@@ -9,7 +9,8 @@
       "monthYear": "{{date, MM/YYYY}}",
       "monthNameYear": "{{date, MMMM, YYYY}}",
       "hour": "{{date, HH:mm}}",
-      "complete": "{{date, DD/MM/YYYY}}"
+      "dayMonthYear": "{{date, DD/MM/YYYY}}",
+      "dayMonthYearHour": "{{date, DD/MM/YYYY, HH:mm}}"
     }
   },
   "header": {

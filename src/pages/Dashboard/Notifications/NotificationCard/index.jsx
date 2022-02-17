@@ -75,7 +75,7 @@ export default function NotificationCard({ circleColor, notification }) {
           style={{ color: theme.neutral.gray.main, lineHeight: 0.5 }}
           variant="caption"
         >
-          {t('general.date.complete', {
+          {t('general.date.dayMonthYearHour', {
             date: new Date(notification.lastUpdate),
           })}
         </Typography>
