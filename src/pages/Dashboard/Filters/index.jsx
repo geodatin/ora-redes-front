@@ -1,14 +1,17 @@
-import { MenuItem } from '@mui/material';
+import { Button, MenuItem } from '@mui/material';
 import React from 'react';
 
 import AdvancedFilter from '../../../components/AdvancedFilter';
 import CustomSelect from '../../../components/CustomSelect';
+import ShareDialog from '../../../components/ShareDialog';
 
 /**
  * This function provides filters components
  * @returns filters components
  */
 export default function Filters() {
+  const [open, setOpen] = React.useState(false);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div style={{ marginBottom: 5 }}>
@@ -42,6 +45,19 @@ export default function Filters() {
           </CustomSelect>
         </div>
       </div>
+      <Button onClick={() => setOpen(true)}>Share</Button>
+      <ShareDialog
+        open={open}
+        onClose={() => setOpen(false)}
+        url={window.location.href}
+        shareMessage="a"
+        setOpen={(b) => setOpen(b)}
+        embedItems={[
+          { label: 'label1', key: 'key1', defaultOption: false },
+          { label: 'label2', key: 'key2', defaultOption: true },
+          { label: 'label3', key: 'key3', defaultOption: true },
+        ]}
+      />
     </div>
   );
 }

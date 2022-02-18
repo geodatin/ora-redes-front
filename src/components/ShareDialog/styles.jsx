@@ -68,6 +68,47 @@ const useStyles = createUseStyles((theme) => ({
     },
     '& .MuiOutlinedInput-root': {
       borderRadius: '5px',
+      height: 35,
+      minHeight: 35,
+      maxHeight: 35,
+    },
+    '& .MuiIconButton-root': {
+      color: theme.secondary.dark,
+    },
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.neutral.gray.main,
+      transition: 'border-color .2s ease',
+    },
+    '& .MuiOutlinedInput-root:hover': {
+      transition: 'background-color 0.15s ease',
+      borderColor: theme.secondary.dark,
+      backgroundColor: theme.background.main,
+    },
+    '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.secondary.dark,
+    },
+    '& .MuiFormLabel-root.Mui-focused': {
+      color: theme.primary.main,
+    },
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.primary.main,
+    },
+    '& .MuiInputBase-input': {
+      color: theme.secondary.dark,
+    },
+    '& .MuiAutocomplete-popupIndicatorOpen': {
+      transform: 'rotate(0deg)',
+    },
+  },
+
+  embedTextfieldRoot: {
+    width: '100%',
+
+    '& .MuiFormLabel-root': {
+      color: theme.neutral.gray.main,
+    },
+    '& .MuiOutlinedInput-root': {
+      borderRadius: '5px',
     },
     '& .MuiIconButton-root': {
       color: theme.secondary.dark,
@@ -101,6 +142,8 @@ const useStyles = createUseStyles((theme) => ({
     '&.MuiButton-root': {
       minWidth: 120,
       maxWidth: 120,
+      minHeight: 35,
+      maxHeight: 35,
       backgroundColor: theme.primary.main,
       color: theme.secondary.dark,
       marginLeft: 10,
@@ -109,6 +152,23 @@ const useStyles = createUseStyles((theme) => ({
         backgroundColor: theme.primary.main,
       },
     },
+  },
+  embedButton: {
+    '&.MuiButton-root': {
+      minWidth: 0,
+      color: theme.neutral.gray.main,
+      textTransform: 'none',
+      fontSize: 12.8,
+    },
+  },
+  formLabelChecked: {
+    color: theme.secondary.dark,
+  },
+  formLabelDisabled: {
+    color: theme.neutral.gray.main,
+  },
+  formGroup: {
+    width: '50%',
   },
 }));
 
