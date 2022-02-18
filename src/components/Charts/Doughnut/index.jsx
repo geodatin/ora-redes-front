@@ -14,6 +14,7 @@ export default function DoughnutChart({
   info,
   data,
   csvCallback,
+  fullScreenEnabled,
   options: mergeOptions,
 }) {
   DoughnutChart.propTypes = {
@@ -21,12 +22,14 @@ export default function DoughnutChart({
     info: PropTypes.string.isRequired,
     data: PropTypes.shape().isRequired,
     csvCallback: PropTypes.func,
+    fullScreenEnabled: PropTypes.bool,
     options: PropTypes.shape(),
   };
 
   DoughnutChart.defaultProps = {
     options: undefined,
     csvCallback: undefined,
+    fullScreenEnabled: false,
   };
 
   const options = {
@@ -42,6 +45,7 @@ export default function DoughnutChart({
       title={title}
       info={info}
       csvCallback={csvCallback}
+      fullScreenEnabled={fullScreenEnabled}
       isLoaded={data != null}
     >
       <Doughnut options={merge(options, mergeOptions)} data={data} />

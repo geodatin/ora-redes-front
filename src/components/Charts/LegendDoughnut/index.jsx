@@ -18,6 +18,7 @@ export default function LegendDoughnutChart({
   info,
   data,
   csvCallback,
+  fullScreenEnabled,
   options: mergeOptions,
 }) {
   LegendDoughnutChart.propTypes = {
@@ -25,6 +26,7 @@ export default function LegendDoughnutChart({
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
     csvCallback: PropTypes.func,
+    fullScreenEnabled: PropTypes.bool,
     options: PropTypes.shape(),
   };
 
@@ -32,6 +34,7 @@ export default function LegendDoughnutChart({
     options: {},
     data: undefined,
     csvCallback: undefined,
+    fullScreenEnabled: false,
   };
 
   const classes = useStyles();
@@ -90,6 +93,7 @@ export default function LegendDoughnutChart({
       title={title}
       info={info}
       isLoaded={data != null}
+      fullScreenEnabled={fullScreenEnabled}
       csvCallback={csvCallback}
     >
       <div className={classes.childrenWrapper}>
