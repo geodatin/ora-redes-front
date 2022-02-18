@@ -14,6 +14,7 @@ export default function BarChart({
   info,
   data,
   csvCallback,
+  fullScreenEnabled,
   options: mergeOptions,
 }) {
   BarChart.propTypes = {
@@ -21,6 +22,7 @@ export default function BarChart({
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
     options: PropTypes.shape(),
+    fullScreenEnabled: PropTypes.bool,
     csvCallback: PropTypes.func,
   };
 
@@ -28,6 +30,7 @@ export default function BarChart({
     data: undefined,
     options: undefined,
     csvCallback: undefined,
+    fullScreenEnabled: false,
   };
 
   const options = {
@@ -55,6 +58,7 @@ export default function BarChart({
       title={title}
       info={info}
       csvCallback={csvCallback}
+      fullScreenEnabled={fullScreenEnabled}
       isLoaded={data != null}
     >
       <Bar options={merge(options, mergeOptions)} data={data} />

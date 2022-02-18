@@ -17,6 +17,7 @@ export default function RankingChart({
   info,
   data,
   csvCallback,
+  fullScreenEnabled,
   params,
   setParams,
 }) {
@@ -26,12 +27,14 @@ export default function RankingChart({
     data: PropTypes.shape(),
     csvCallback: PropTypes.func,
     params: PropTypes.shape(),
+    fullScreenEnabled: PropTypes.bool,
     setParams: PropTypes.func.isRequired,
   };
 
   RankingChart.defaultProps = {
     data: undefined,
     csvCallback: undefined,
+    fullScreenEnabled: false,
     params: {
       order: true,
       page: 1,
@@ -107,6 +110,7 @@ export default function RankingChart({
       info={info}
       isLoaded={data != null}
       csvCallback={csvCallback}
+      fullScreenEnabled={fullScreenEnabled}
       extraButton={
         <IconButton id="order-button" onClick={handleChangeOrder}>
           <AlignHorizontalLeftRoundedIcon

@@ -14,6 +14,7 @@ export default function Treemap({
   info,
   data,
   csvCallback,
+  fullScreenEnabled,
   options: mergeOptions,
 }) {
   Treemap.propTypes = {
@@ -21,6 +22,7 @@ export default function Treemap({
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
     csvCallback: PropTypes.func,
+    fullScreenEnabled: PropTypes.bool,
     options: PropTypes.shape(),
   };
 
@@ -28,6 +30,7 @@ export default function Treemap({
     data: undefined,
     csvCallback: undefined,
     options: undefined,
+    fullScreenEnabled: false,
   };
 
   const options = {
@@ -47,6 +50,7 @@ export default function Treemap({
       title={title}
       info={info}
       csvCallback={csvCallback}
+      fullScreenEnabled={fullScreenEnabled}
       isLoaded={data != null}
     >
       <Chart
