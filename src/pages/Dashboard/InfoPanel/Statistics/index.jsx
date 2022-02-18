@@ -294,6 +294,7 @@ export default function Statistics() {
           )}
           info={t('specific.statistics.charts.stationsPerVariableTreemap.info')}
           data={treemapData}
+          fullScreenEnabled
           csvCallback={() =>
             csvFetching(
               'variable',

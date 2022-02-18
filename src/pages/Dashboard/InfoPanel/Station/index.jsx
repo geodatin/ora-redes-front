@@ -316,6 +316,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         title={t('specific.statistics.charts.rainTimeSeries.title')}
         info={t('specific.statistics.charts.rainTimeSeries.info')}
         data={rainData}
+        fullScreenEnabled
         csvCallback={() => csvFetching('rain', station.code)}
         options={{
           indexAxis: 'x',
@@ -342,6 +343,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         title={t('specific.statistics.charts.levelTimeSeries.title')}
         info={t('specific.statistics.charts.levelTimeSeries.info')}
         data={levelData}
+        fullScreenEnabled
         csvCallback={() => csvFetching('level', station.code)}
         options={{
           plugins: {
@@ -369,6 +371,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         title={t('specific.statistics.charts.flowRateTimeSeries.title')}
         info={t('specific.statistics.charts.flowRateTimeSeries.info')}
         data={flowRateData}
+        fullScreenEnabled
         csvCallback={() => csvFetching('flowRate', station.code)}
         options={{
           plugins: {
@@ -396,6 +399,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         title={t('specific.statistics.charts.rawTimeSeries.title')}
         info={t('specific.statistics.charts.rawTimeSeries.info')}
         data={rawData}
+        fullScreenEnabled
         csvCallback={() => csvFetching('raw', station.code)}
         options={{
           plugins: {
