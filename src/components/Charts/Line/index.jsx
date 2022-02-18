@@ -14,6 +14,7 @@ export default function LineChart({
   info,
   data,
   csvCallback,
+  fullScreenEnabled,
   options: mergeOptions,
 }) {
   LineChart.propTypes = {
@@ -21,6 +22,7 @@ export default function LineChart({
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
     options: PropTypes.shape(),
+    fullScreenEnabled: PropTypes.bool,
     csvCallback: PropTypes.func,
   };
 
@@ -28,6 +30,7 @@ export default function LineChart({
     data: undefined,
     options: undefined,
     csvCallback: undefined,
+    fullScreenEnabled: false,
   };
 
   const options = {
@@ -55,6 +58,7 @@ export default function LineChart({
       title={title}
       info={info}
       csvCallback={csvCallback}
+      fullScreenEnabled={fullScreenEnabled}
       isLoaded={data != null}
     >
       <Line options={merge(options, mergeOptions)} data={data} />

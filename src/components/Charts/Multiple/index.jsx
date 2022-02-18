@@ -14,6 +14,7 @@ export default function Multiple({
   info,
   data,
   csvCallback,
+  fullScreenEnabled,
   options: mergeOptions,
 }) {
   Multiple.propTypes = {
@@ -21,6 +22,7 @@ export default function Multiple({
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
     csvCallback: PropTypes.func,
+    fullScreenEnabled: PropTypes.bool,
     options: PropTypes.shape(),
   };
 
@@ -28,6 +30,7 @@ export default function Multiple({
     data: undefined,
     csvCallback: undefined,
     options: undefined,
+    fullScreenEnabled: false,
   };
 
   const options = {
@@ -83,6 +86,7 @@ export default function Multiple({
       info={info}
       csvCallback={csvCallback}
       isLoaded={data != null}
+      fullScreenEnabled={fullScreenEnabled}
     >
       <Chart options={merge(options, mergeOptions)} data={data} type="bar" />
     </ChartContainer>

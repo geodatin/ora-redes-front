@@ -9,17 +9,25 @@ import useStyles from './styles';
  * This component renders a items chart
  * @returns items chart
  */
-export default function ItemsChart({ title, info, data, csvCallback }) {
+export default function ItemsChart({
+  title,
+  info,
+  data,
+  csvCallback,
+  fullScreenEnabled,
+}) {
   ItemsChart.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
     data: PropTypes.shape(),
+    fullScreenEnabled: PropTypes.bool,
     csvCallback: PropTypes.func,
   };
 
   ItemsChart.defaultProps = {
     data: undefined,
     csvCallback: undefined,
+    fullScreenEnabled: false,
   };
 
   const classes = useStyles();
@@ -51,6 +59,7 @@ export default function ItemsChart({ title, info, data, csvCallback }) {
       title={title}
       info={info}
       csvCallback={csvCallback}
+      fullScreenEnabled={fullScreenEnabled}
       isLoaded={data != null}
     >
       <div className={classes.childrenWrapper}>
