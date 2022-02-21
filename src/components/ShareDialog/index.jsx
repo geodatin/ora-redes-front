@@ -68,7 +68,7 @@ export default function ShareDialog({
      * This function verifies if there is a need to add a separator between the query params.
      */
     function trySeparator() {
-      if (embedQuery.length > initialSize || customParam.length > initialSize) {
+      if (embedQuery.length > initialSize || customParam.length > 0) {
         embedQuery += '&';
       }
     }
