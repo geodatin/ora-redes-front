@@ -60,7 +60,7 @@ export default function ItemsChart({
       info={info}
       csvCallback={csvCallback}
       fullScreenEnabled={fullScreenEnabled}
-      isLoaded={data != null}
+      isLoaded={!!data}
     >
       <div className={classes.childrenWrapper}>
         {data?.labels.map((label, index) =>

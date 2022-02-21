@@ -108,7 +108,7 @@ export default function RankingChart({
     <ChartContainer
       title={title}
       info={info}
-      isLoaded={data != null}
+      isLoaded={!!data}
       csvCallback={csvCallback}
       fullScreenEnabled={fullScreenEnabled}
       extraButton={

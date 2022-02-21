@@ -51,7 +51,7 @@ export default function Treemap({
       info={info}
       csvCallback={csvCallback}
       fullScreenEnabled={fullScreenEnabled}
-      isLoaded={data != null}
+      isLoaded={!!data}
     >
       <Chart
         options={merge(options, mergeOptions)}
