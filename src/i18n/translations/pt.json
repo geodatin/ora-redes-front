@@ -149,7 +149,8 @@
       "of": "de",
       "situations": {
         "alert": "alerta",
-        "attention": "atenção"
+        "attention": "atenção",
+        "emergency": "emergência"
       }
     },
     "dataType": {
