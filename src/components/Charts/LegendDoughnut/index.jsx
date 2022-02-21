@@ -92,7 +92,7 @@ export default function LegendDoughnutChart({
       style={{ height: 'auto' }}
       title={title}
       info={info}
-      isLoaded={data != null}
+      isLoaded={!!data}
       fullScreenEnabled={fullScreenEnabled}
       csvCallback={csvCallback}
     >

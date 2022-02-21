@@ -42,7 +42,12 @@
     "page1Text1": "Compartilhe o mapa nas redes sociais através dos seguintes botões:",
     "page1Text2": "Ou através do link abaixo:",
     "copyButton": "Copiar",
-    "copiedButton": "Copiado"
+    "copiedButton": "Copiado",
+    "embedButton": "Incorporar o painel em outra página",
+    "linkShareButton": "Voltar para o compartilhamento de links",
+    "page2Text1": "Configure a incorporação:",
+    "page2Text2": "Código:",
+    "embedTitle": "Incorporar página"
   },
   "components": {
     "advancedFilter": {

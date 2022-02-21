@@ -59,7 +59,7 @@ export default function LineChart({
       info={info}
       csvCallback={csvCallback}
       fullScreenEnabled={fullScreenEnabled}
-      isLoaded={data != null}
+      isLoaded={!!data}
     >
       <Line options={merge(options, mergeOptions)} data={data} />
     </ChartContainer>
