@@ -32,6 +32,7 @@ export default function ShareDialog({
   setOpen,
   onClose,
   embedItems,
+  customParam,
 }) {
   const classes = useStyles();
   const { t } = useTranslation();
@@ -60,14 +61,14 @@ export default function ShareDialog({
   }
 
   const code = useMemo(() => {
-    let embedQuery = '/embed?';
+    let embedQuery = `/embed?${customParam}`;
     const initialSize = embedQuery.length;
 
     /**
      * This function verifies if there is a need to add a separator between the query params.
      */
     function trySeparator() {
-      if (embedQuery.length > initialSize) {
+      if (embedQuery.length > initialSize || customParam.length > initialSize) {
         embedQuery += '&';
       }
     }
@@ -271,6 +272,7 @@ export default function ShareDialog({
 
 ShareDialog.defaultProps = {
   embedItems: undefined,
+  customParam: '',
 };
 
 ShareDialog.propTypes = {
@@ -280,4 +282,5 @@ ShareDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   setOpen: PropTypes.func.isRequired,
   embedItems: PropTypes.arrayOf(PropTypes.shape()),
+  customParam: PropTypes.string,
 };
