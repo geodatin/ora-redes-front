@@ -48,6 +48,92 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
   const [flowRateData, setFlowRateData] = useState();
   const [rawData, setRawData] = useState();
 
+  /**
+   * This userEffect updates station data.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+    api
+      .post(
+        `/observation/last/${timeGrouping}`,
+        {},
+        { params: { stationCode: station.code } }
+      )
+      .then(({ data }) => {
+        if (isSubscribed && data) {
+          setStationUpdate(data);
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [station.code, timeGrouping]);
+
+  /**
+   * This userEffect fetch data chart time series.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+
+    if (station.code) {
+      const dataChartFetches = [
+        { dataType: 'rain', dataSetter: setRainData },
+        { dataType: 'level', dataSetter: setLevelData },
+        { dataType: 'flowRate', dataSetter: setFlowRateData },
+        { dataType: 'raw', dataSetter: setRawData },
+      ];
+
+      dataChartFetches.forEach(({ dataType, dataSetter }) => {
+        api
+          .get(
+            `/observation/timeSeries/${station.code}/${dataType}/${timeGrouping}`
+          )
+          .then(({ data }) => {
+            if (isSubscribed && data) {
+              dataSetter(data);
+            }
+          });
+      });
+    }
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [station, timeGrouping]);
+
+  const csvFetching = (dataType, stationCode) => {
+    api
+      .get(
+        `/observation/timeSeries/${stationCode}/${dataType}/${timeGrouping}`,
+        {
+          params: {
+            format: 'csv',
+          },
+        }
+      )
+      .then(({ data }) => {
+        downloadCSV(
+          data,
+          t(`specific.statistics.charts.${dataType}TimeSeries.title`)
+        );
+      });
+  };
+
+  const getDatasetObj = (type, y, label, sufix, color, extraProps) => ({
+    type,
+    label,
+    sufix,
+    data: y,
+    backgroundColor: color,
+    borderColor: color,
+    borderRadius: 5,
+    borderWidth: 1,
+    pointRadius: 1.5,
+    barThickness: 2,
+    ...extraProps,
+  });
+
   const customTooltip = {
     callbacks: {
       label(context) {
@@ -83,208 +169,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
     },
   };
 
-  const getDatasetObj = (type, y, label, sufix, color, extraProps) => ({
-    type,
-    label,
-    sufix,
-    data: y,
-    backgroundColor: color,
-    borderColor: color,
-    borderRadius: 5,
-    borderWidth: 1,
-    pointRadius: 1.5,
-    barThickness: 2,
-    ...extraProps,
-  });
-
-  /**
-   * This userEffect updates station data.
-   */
-  useEffect(() => {
-    let isSubscribed = true;
-    api
-      .post(
-        `/observation/last/${timeGrouping}`,
-        {},
-        { params: { stationCode: station.code } }
-      )
-      .then(({ data }) => {
-        if (isSubscribed && data) {
-          setStationUpdate(data);
-        }
-      });
-
-    return () => {
-      isSubscribed = false;
-    };
-  }, [station.code, timeGrouping]);
-
-  /**
-   * This userEffect fetch station rain time series.
-   */
-  useEffect(() => {
-    let isSubscribed = true;
-    if (station.code) {
-      api
-        .get(`/observation/timeSeries/${station.code}/rain/${timeGrouping}`)
-        .then(({ data }) => {
-          if (isSubscribed && data?.y) {
-            setRainData({
-              labels: data.x,
-              datasets: [
-                getDatasetObj(
-                  'bar',
-                  data.y,
-                  t('specific.dataType.variable.items.rain'),
-                  t('specific.dataType.sufixes.rain'),
-                  theme.blue.main
-                ),
-              ],
-            });
-          }
-        });
-    }
-    return () => {
-      isSubscribed = false;
-    };
-  }, [station, timeGrouping]);
-
-  /**
-   * This userEffect fetch station level time series.
-   */
-  useEffect(() => {
-    let isSubscribed = true;
-    if (station.code) {
-      api
-        .get(`/observation/timeSeries/${station.code}/level/${timeGrouping}`)
-        .then(({ data }) => {
-          if (isSubscribed && data?.y) {
-            setLevelData({
-              labels: data.x,
-              datasets: [
-                getDatasetObj(
-                  'line',
-                  data.y,
-                  t('specific.dataType.variable.items.adoptedLevel'),
-                  t('specific.dataType.sufixes.adoptedLevel'),
-                  theme.primary.main
-                ),
-              ],
-            });
-          }
-        });
-    }
-    return () => {
-      isSubscribed = false;
-    };
-  }, [station, timeGrouping]);
-
-  /**
-   * This userEffect fetch station flow rate time series.
-   */
-  useEffect(() => {
-    let isSubscribed = true;
-    if (station.code) {
-      api
-        .get(`/observation/timeSeries/${station.code}/flowRate/${timeGrouping}`)
-        .then(({ data }) => {
-          if (isSubscribed && data?.y) {
-            setFlowRateData({
-              labels: data.x,
-              datasets: [
-                getDatasetObj(
-                  'line',
-                  data.y,
-                  t('specific.dataType.variable.items.flowRate'),
-                  t('specific.dataType.sufixes.flowRate'),
-                  theme.green.dark
-                ),
-              ],
-            });
-          }
-        });
-    }
-    return () => {
-      isSubscribed = false;
-    };
-  }, [station, timeGrouping]);
-
-  /**
-   * This userEffect fetch station raw data e time series.
-   */
-  useEffect(() => {
-    let isSubscribed = true;
-    if (station.code) {
-      api
-        .get(`/observation/timeSeries/${station.code}/raw/${timeGrouping}`)
-        .then(({ data }) => {
-          if (isSubscribed && data?.rain) {
-            setRawData({
-              labels: data.x,
-              datasets: [
-                getDatasetObj(
-                  'line',
-                  data.adoptedLevel,
-                  t('specific.dataType.variable.items.adoptedLevel'),
-                  t('specific.dataType.sufixes.adoptedLevel'),
-                  theme.primary.main,
-                  {
-                    yAxisID: 'y2',
-                    borderWidth: 0.5,
-                    pointRadius: 1,
-                    hidden: true,
-                  }
-                ),
-                getDatasetObj(
-                  'line',
-                  data.flowRate,
-                  t('specific.dataType.variable.items.flowRate'),
-                  t('specific.dataType.sufixes.flowRate'),
-                  theme.green.dark,
-                  {
-                    yAxisID: 'y2',
-                    borderWidth: 0.5,
-                    pointRadius: 1,
-                  }
-                ),
-                getDatasetObj(
-                  'bar',
-                  data.rain,
-                  t('specific.dataType.variable.items.rain'),
-                  t('specific.dataType.sufixes.rain'),
-                  theme.blue.main,
-                  {
-                    yAxisID: 'y1',
-                    barThickness: 0.5,
-                  }
-                ),
-              ],
-            });
-          }
-        });
-    }
-    return () => {
-      isSubscribed = false;
-    };
-  }, [station, timeGrouping]);
-
-  const csvFetching = (dataType, stationCode) => {
-    api
-      .get(
-        `/observation/timeSeries/${stationCode}/${dataType}/${timeGrouping}`,
-        {
-          params: {
-            format: 'csv',
-          },
-        }
-      )
-      .then(({ data }) => {
-        downloadCSV(
-          data,
-          t(`specific.statistics.charts.${dataType}TimeSeries.title`)
-        );
-      });
-  };
+  const [selectedDatasetOnMultiple, setSelectedDatasetOnMultiple] = useState(1);
 
   return (
     <ul>
@@ -315,7 +200,20 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       <BarChart
         title={t('specific.statistics.charts.rainTimeSeries.title')}
         info={t('specific.statistics.charts.rainTimeSeries.info')}
-        data={rainData}
+        data={
+          rainData && {
+            labels: rainData.x,
+            datasets: [
+              getDatasetObj(
+                'bar',
+                rainData.y,
+                t('specific.dataType.variable.items.rain'),
+                t('specific.dataType.sufixes.rain'),
+                theme.blue.main
+              ),
+            ],
+          }
+        }
         fullScreenEnabled
         csvCallback={() => csvFetching('rain', station.code)}
         options={{
@@ -342,7 +240,20 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       <LineChart
         title={t('specific.statistics.charts.levelTimeSeries.title')}
         info={t('specific.statistics.charts.levelTimeSeries.info')}
-        data={levelData}
+        data={
+          levelData && {
+            labels: levelData.x,
+            datasets: [
+              getDatasetObj(
+                'line',
+                levelData.y,
+                t('specific.dataType.variable.items.adoptedLevel'),
+                t('specific.dataType.sufixes.adoptedLevel'),
+                theme.primary.main
+              ),
+            ],
+          }
+        }
         fullScreenEnabled
         csvCallback={() => csvFetching('level', station.code)}
         options={{
@@ -370,7 +281,20 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       <LineChart
         title={t('specific.statistics.charts.flowRateTimeSeries.title')}
         info={t('specific.statistics.charts.flowRateTimeSeries.info')}
-        data={flowRateData}
+        data={
+          flowRateData && {
+            labels: flowRateData.x,
+            datasets: [
+              getDatasetObj(
+                'line',
+                flowRateData.y,
+                t('specific.dataType.variable.items.flowRate'),
+                t('specific.dataType.sufixes.flowRate'),
+                theme.green.dark
+              ),
+            ],
+          }
+        }
         fullScreenEnabled
         csvCallback={() => csvFetching('flowRate', station.code)}
         options={{
@@ -398,10 +322,56 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       <Multiple
         title={t('specific.statistics.charts.rawTimeSeries.title')}
         info={t('specific.statistics.charts.rawTimeSeries.info')}
-        data={rawData}
+        data={
+          rawData && {
+            labels: rawData.x,
+            datasets: [
+              getDatasetObj(
+                'line',
+                rawData.adoptedLevel,
+                t('specific.dataType.variable.items.adoptedLevel'),
+                t('specific.dataType.sufixes.adoptedLevel'),
+                theme.primary.main,
+                {
+                  yAxisID: 'y2',
+                  borderWidth: 0.5,
+                  pointRadius: 0.5,
+                  hidden: true,
+                  normalized: true,
+                }
+              ),
+              getDatasetObj(
+                'line',
+                rawData.flowRate,
+                t('specific.dataType.variable.items.flowRate'),
+                t('specific.dataType.sufixes.flowRate'),
+                theme.green.dark,
+                {
+                  yAxisID: 'y2',
+                  borderWidth: 0.5,
+                  pointRadius: 0.5,
+                  normalized: true,
+                }
+              ),
+              getDatasetObj(
+                'bar',
+                rawData.rain,
+                t('specific.dataType.variable.items.rain'),
+                t('specific.dataType.sufixes.rain'),
+                theme.blue.main,
+                {
+                  yAxisID: 'y1',
+                  barThickness: 1,
+                }
+              ),
+            ],
+          }
+        }
         fullScreenEnabled
         csvCallback={() => csvFetching('raw', station.code)}
         options={{
+          showLine: false,
+          animation: false,
           plugins: {
             tooltip: customTooltip,
             legend: {
@@ -420,17 +390,13 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
                   if (!ci.isDatasetVisible(index)) {
                     if (index === 1) {
                       ci.hide(0);
+                      setSelectedDatasetOnMultiple(index);
                       ci.show(index);
-                      ci.options.scales.y2.title.text = t(
-                        'specific.statistics.charts.flowRateTimeSeries.yAxisLabel'
-                      );
                       ci.update();
                     } else {
                       ci.hide(1);
+                      setSelectedDatasetOnMultiple(index);
                       ci.show(index);
-                      ci.options.scales.y2.title.text = t(
-                        'specific.statistics.charts.levelTimeSeries.yAxisLabel'
-                      );
                       ci.update();
                     }
                   }
@@ -441,10 +407,22 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
           scales: {
             x: {
               ticks: {
+                autoSkip: false,
+                maxRotation: 0,
                 callback(value, index, ticks) {
-                  return t('general.date.dayMonthYear', {
-                    date: new Date(this.getLabelForValue(value)),
-                  });
+                  const arrayLength = rawData.x.length;
+                  const middleIndex = Math.round((arrayLength - 1) / 2);
+                  const lastIndex = arrayLength - 1;
+                  if (
+                    index === 0 ||
+                    index === middleIndex ||
+                    index === lastIndex
+                  ) {
+                    return t('general.date.dayMonthYear', {
+                      date: new Date(this.getLabelForValue(value)),
+                    });
+                  }
+                  return null;
                 },
               },
             },
@@ -459,9 +437,14 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
             y2: {
               title: {
                 display: true,
-                text: t(
-                  'specific.statistics.charts.flowRateTimeSeries.yAxisLabel'
-                ),
+                text:
+                  selectedDatasetOnMultiple === 1
+                    ? t(
+                        'specific.statistics.charts.flowRateTimeSeries.yAxisLabel'
+                      )
+                    : t(
+                        'specific.statistics.charts.levelTimeSeries.yAxisLabel'
+                      ),
                 color: theme.neutral.gray.main,
               },
             },
@@ -469,11 +452,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         }}
       />
 
-      <li
-        style={{
-          margin: 15,
-        }}
-      >
+      <li style={{ margin: 15 }}>
         <CustomButton
           style={{
             width: '100%',

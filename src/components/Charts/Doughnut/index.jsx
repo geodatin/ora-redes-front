@@ -46,7 +46,7 @@ export default function DoughnutChart({
       info={info}
       csvCallback={csvCallback}
       fullScreenEnabled={fullScreenEnabled}
-      isLoaded={data != null}
+      isLoaded={!!data}
     >
       <Doughnut options={merge(options, mergeOptions)} data={data} />
     </ChartContainer>
