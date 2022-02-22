@@ -62,6 +62,13 @@ function Routes() {
             <FilteringWrapper redirect="/">{defaultPage}</FilteringWrapper>
           }
         />
+        <Route
+          exact
+          path="/embed"
+          element={
+            <FilteringWrapper redirect="/">{defaultPage}</FilteringWrapper>
+          }
+        />
         <Route exact path="/api" element={<ApiMethods />} />
         <Route exact path="/library" element={<DataLibrary />} />
         <Route path="*" element={<Navigate replace to="/" />} />

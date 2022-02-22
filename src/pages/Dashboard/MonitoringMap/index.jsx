@@ -36,6 +36,7 @@ import useStyles from './styles';
 export default function MonitoringMap() {
   const {
     values: { filters, timeGrouping, autocompleteSelection, networkSelection },
+    functions: { generateRoute },
   } = useContext(FilteringContext);
 
   const {
@@ -308,6 +309,11 @@ export default function MonitoringMap() {
     return customParam;
   }, [networkSelection, autocompleteSelection]);
 
+  const shareUrl = useMemo(
+    () => window.location.origin + generateRoute(`/embed?`),
+    [networkSelection, autocompleteSelection]
+  );
+
   return (
     <MapWrapper
       getMapRef={(ref) => setMapRef(ref)}
@@ -332,11 +338,24 @@ export default function MonitoringMap() {
           <ShareDialog
             open={openShare}
             onClose={() => setOpenShare(false)}
-            url={window.location.href}
+            url={shareUrl}
             shareMessage={t('specific.share.message')}
             setOpen={setOpenShare}
             embedItems={[
-              { key: 'left', label: 'Esquerda', defaultOption: false },
+              { key: 'leftBar', label: 'Esquerda', defaultOption: true },
+              { key: 'rightBar', label: 'Direita', defaultOption: true },
+              { key: 'topBar', label: 'Cima', defaultOption: true },
+              { key: 'header', label: 'Header', defaultOption: true },
+              {
+                key: 'responsivity',
+                label: 'Responsividade',
+                defaultOption: true,
+              },
+              {
+                key: 'embeding',
+                label: 'Incorporação',
+                defaultOption: false,
+              },
             ]}
             customParam={embedCustomParam}
           />

@@ -93,15 +93,12 @@ export function FilteringProvider({ children }) {
     setParamsLoaded(true);
   }, []);
 
-  /**
-   * This useEffect puts the current selection into the route.
-   */
-  useEffect(() => {
+  function generateRoute(start) {
     if (paramsLoaded) {
       let newQuery = `${window.location.pathname}?`;
 
       if (window.location.pathname === '/') {
-        newQuery = `/filter?`;
+        newQuery = start;
       }
 
       const initialSize = newQuery.length;
@@ -136,11 +133,20 @@ export function FilteringProvider({ children }) {
       }
 
       if (newQuery.length === initialSize) {
-        window.history.replaceState(null, '', '/');
-      } else {
-        window.history.replaceState(null, '', newQuery);
+        return '/';
       }
+
+      return newQuery;
     }
+
+    return '/';
+  }
+
+  /**
+   * This useEffect puts the current selection into the route.
+   */
+  useEffect(() => {
+    window.history.replaceState(null, '', generateRoute(`/filter?`));
   }, [networkSelection, autocompleteSelection]);
 
   return (
@@ -160,7 +166,9 @@ export function FilteringProvider({ children }) {
           setTimeGrouping,
           setFilters,
         },
-        functions: {},
+        functions: {
+          generateRoute,
+        },
         loaders: {
           paramsLoaded,
         },
