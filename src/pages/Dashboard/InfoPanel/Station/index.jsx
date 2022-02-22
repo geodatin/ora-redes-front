@@ -427,6 +427,9 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
               },
             },
             y1: {
+              ticks: {
+                sampleSize: 2,
+              },
               reverse: true,
               title: {
                 display: true,
@@ -435,6 +438,9 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
               },
             },
             y2: {
+              ticks: {
+                sampleSize: 2,
+              },
               title: {
                 display: true,
                 text:
