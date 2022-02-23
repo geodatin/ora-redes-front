@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles({
+const useStyles = createUseStyles((theme) => ({
   cardHeader: {
     display: 'flex',
     flexFlow: 'column nowrap',
@@ -16,10 +16,24 @@ const useStyles = createUseStyles({
   doughnuts: {
     display: 'flex',
     flexFlow: 'row nowrap',
-    justifyContent: 'space-around',
     alignItems: 'center',
-    marginBottom: 20,
+    paddingBottom: 20,
+    marginBottom: 10,
+    overflowX: 'auto',
+    overflowY: 'hidden',
+    scrollSnapType: 'x mandatory',
+
+    '&::-webkit-scrollbar': {
+      height: 10,
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: theme.scrollBar.track,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: theme.scrollBar.thumb,
+      borderRadius: 10,
+    },
   },
-});
+}));
 
 export default useStyles;

@@ -43,7 +43,12 @@ export const dataTypes = {
         'specific.dataType.variable.items.totalSuspensionSolid',
       rain: 'specific.dataType.variable.items.rain',
       flowRate: 'specific.dataType.variable.items.flowRate',
-      adoptedLevel: 'specific.dataType.variable.items.adoptedLevel',
+      level: 'specific.dataType.variable.items.level',
+    },
+    colors: {
+      rain: '#008CB7',
+      flowRate: '#A1BA09',
+      level: '#FA7B00',
     },
   },
 };
@@ -105,7 +110,7 @@ export const notificationsTypes = {
   rain: {
     color: '#00B9F1',
   },
-  adoptedLevel: {
+  level: {
     color: '#FA7B00',
   },
   flowRate: {

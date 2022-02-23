@@ -187,13 +187,13 @@
           "totalSuspensionSolid": "Sólidos suspensos totais",
           "rain": "Precipitação",
           "flowRate": "Vazão",
-          "adoptedLevel": "Nível"
+          "level": "Nível"
         }
       },
       "sufixes": {
         "rain": "mm",
         "flowRate": "m³/s",
-        "adoptedLevel": "cm"
+        "level": "cm"
       }
     },
     "networks": {

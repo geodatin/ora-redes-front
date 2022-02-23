@@ -87,7 +87,9 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       dataChartFetches.forEach(({ dataType, dataSetter }) => {
         api
           .get(
-            `/observation/timeSeries/${station.code}/${dataType}/${timeGrouping}`
+            `/observation/timeSeries/${station.network.toLowerCase()}/${
+              station.code
+            }/${dataType}/${timeGrouping}`
           )
           .then(({ data }) => {
             if (isSubscribed && data) {
@@ -105,7 +107,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
   const csvFetching = (dataType, stationCode) => {
     api
       .get(
-        `/observation/timeSeries/${stationCode}/${dataType}/${timeGrouping}`,
+        `/observation/timeSeries/${station.network.toLowerCase()}/${stationCode}/${dataType}/${timeGrouping}`,
         {
           params: {
             format: 'csv',
@@ -247,8 +249,8 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
               getDatasetObj(
                 'line',
                 levelData.y,
-                t('specific.dataType.variable.items.adoptedLevel'),
-                t('specific.dataType.sufixes.adoptedLevel'),
+                t('specific.dataType.variable.items.level'),
+                t('specific.dataType.sufixes.level'),
                 theme.primary.main
               ),
             ],
@@ -328,9 +330,9 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
             datasets: [
               getDatasetObj(
                 'line',
-                rawData.adoptedLevel,
-                t('specific.dataType.variable.items.adoptedLevel'),
-                t('specific.dataType.sufixes.adoptedLevel'),
+                rawData.level,
+                t('specific.dataType.variable.items.level'),
+                t('specific.dataType.sufixes.level'),
                 theme.primary.main,
                 {
                   yAxisID: 'y2',
