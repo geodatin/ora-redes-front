@@ -125,6 +125,23 @@ export const filterDefaults = {
   networkSelection: networks.ALL.value,
 };
 
+export const embedItems = [
+  { key: 'leftBar', label: 'Esquerda', defaultOption: true },
+  { key: 'rightBar', label: 'Direita', defaultOption: true },
+  { key: 'topBar', label: 'Cima', defaultOption: true },
+  { key: 'header', label: 'Header', defaultOption: true },
+  {
+    key: 'responsivity',
+    label: 'Responsividade',
+    defaultOption: true,
+  },
+  {
+    key: 'embeding',
+    label: 'Incorporação',
+    defaultOption: false,
+  },
+];
+
 export const autocompletePropertyTypes = {
   name: { key: 'name' },
   network: { key: 'network' },

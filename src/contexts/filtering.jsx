@@ -15,14 +15,7 @@ const FilteringContext = createContext({});
 /**
  * The FilteringProvider is a context to provide the dashboard filtering options.
  * */
-export function FilteringProvider({ children }) {
-  FilteringProvider.propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-    ]).isRequired,
-  };
-
+export function FilteringProvider({ embed, children }) {
   const [timeGrouping, setTimeGrouping] = useState(timeGroupingOptions[0].code);
   const [autocompleteSelection, setAutocompleteSelection] = useState(
     filterDefaults.autocompleteSelection
@@ -95,11 +88,7 @@ export function FilteringProvider({ children }) {
 
   function generateRoute(start) {
     if (paramsLoaded) {
-      let newQuery = `${window.location.pathname}?`;
-
-      if (window.location.pathname === '/') {
-        newQuery = start;
-      }
+      let newQuery = start;
 
       const initialSize = newQuery.length;
 
@@ -146,7 +135,14 @@ export function FilteringProvider({ children }) {
    * This useEffect puts the current selection into the route.
    */
   useEffect(() => {
-    window.history.replaceState(null, '', generateRoute(`/filter?`));
+    if (
+      window.location.pathname === '/filter' ||
+      window.location.pathname === '/'
+    ) {
+      window.history.replaceState(null, '', generateRoute(`/filter?`));
+    } else if (embed) {
+      window.history.replaceState(null, '', generateRoute(`/embed?`));
+    }
   }, [networkSelection, autocompleteSelection]);
 
   return (
@@ -158,6 +154,7 @@ export function FilteringProvider({ children }) {
           networkSelection,
           timeGrouping,
           filters,
+          embed,
         },
         setters: {
           setAutocompleteSelection,
@@ -178,5 +175,17 @@ export function FilteringProvider({ children }) {
     </FilteringContext.Provider>
   );
 }
+
+FilteringProvider.defaultProps = {
+  embed: false,
+};
+
+FilteringProvider.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  embed: PropTypes.bool,
+};
 
 export default FilteringContext;

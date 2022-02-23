@@ -21,7 +21,7 @@ import MapWrapper from '../../../components/MapWrapper';
 import MapItem from '../../../components/MapWrapper/Mapitem';
 import ShareDialog from '../../../components/ShareDialog';
 import Typography from '../../../components/Typography';
-import { networks, filterDefaults } from '../../../constants/options';
+import { embedItems, networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
@@ -283,34 +283,13 @@ export default function MonitoringMap() {
     setOpenShare(!openShare);
   }
 
-  const embedCustomParam = useMemo(() => {
-    let customParam = '';
-
-    if (networkSelection !== filterDefaults.networkSelection) {
-      customParam += `networkSelection=${networkSelection}`;
-    }
-
-    const selectionAux = {};
-
-    Object.keys(autocompleteSelection).forEach((key) => {
-      if (autocompleteSelection[key].length > 0) {
-        selectionAux[key] = autocompleteSelection[key];
-      }
-    });
-
-    if (Object.keys(selectionAux).length > 0) {
-      if (customParam.length > 0) customParam += '&';
-
-      const searchValueParams = JSON.stringify(selectionAux);
-      const searchValueEncoded = encodeURI(searchValueParams);
-      customParam += `search=${searchValueEncoded}`;
-    }
-
-    return customParam;
-  }, [networkSelection, autocompleteSelection]);
+  const embedCustomParam = useMemo(
+    () => generateRoute(''),
+    [networkSelection, autocompleteSelection]
+  );
 
   const shareUrl = useMemo(
-    () => window.location.origin + generateRoute(`/embed?`),
+    () => window.location.origin + generateRoute(`/filter?`),
     [networkSelection, autocompleteSelection]
   );
 
@@ -341,22 +320,7 @@ export default function MonitoringMap() {
             url={shareUrl}
             shareMessage={t('specific.share.message')}
             setOpen={setOpenShare}
-            embedItems={[
-              { key: 'leftBar', label: 'Esquerda', defaultOption: true },
-              { key: 'rightBar', label: 'Direita', defaultOption: true },
-              { key: 'topBar', label: 'Cima', defaultOption: true },
-              { key: 'header', label: 'Header', defaultOption: true },
-              {
-                key: 'responsivity',
-                label: 'Responsividade',
-                defaultOption: true,
-              },
-              {
-                key: 'embeding',
-                label: 'Incorporação',
-                defaultOption: false,
-              },
-            ]}
+            embedItems={embedItems}
             customParam={embedCustomParam}
           />
         </>

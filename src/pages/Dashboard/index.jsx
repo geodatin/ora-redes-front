@@ -13,6 +13,7 @@ import { layoutConfigs, networkByValue } from '../../constants/options';
 import FilteringContext from '../../contexts/filtering';
 import MapContext from '../../contexts/mapping';
 import NavigationContext from '../../contexts/navigation';
+import { useQuery } from '../../hooks/useQuery';
 import api from '../../services/api';
 import Filters from './Filters';
 import InfoPanel from './InfoPanel';
@@ -31,7 +32,7 @@ function Dashboard() {
   const [lastUpdateDatabase, setLastUpdateDatabase] = useState();
 
   const {
-    values: { networkSelection },
+    values: { networkSelection, embed },
   } = useContext(FilteringContext);
 
   const {
@@ -42,6 +43,8 @@ function Dashboard() {
     values: { mobileNavValue, isMobile },
     setters: { setMobileNavValue },
   } = useContext(NavigationContext);
+
+  const query = useQuery();
 
   /**
    * This userEffect fetches last database update timestamp.
@@ -73,6 +76,14 @@ function Dashboard() {
       }
     />
   );
+
+  useEffect(() => {
+    if (embed) {
+      const leftBar = query.get('leftBar');
+
+      console.log(leftBar);
+    }
+  }, [embed]);
 
   return isMobile ? (
     <MobileNavbarLayout
