@@ -53,17 +53,19 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
    */
   useEffect(() => {
     let isSubscribed = true;
-    api
-      .post(
-        `/observation/last/${timeGrouping}`,
-        {},
-        { params: { stationCode: station.code } }
-      )
-      .then(({ data }) => {
-        if (isSubscribed && data) {
-          setStationUpdate(data);
-        }
-      });
+    if (station.code) {
+      api
+        .post(
+          `/observation/list/${timeGrouping}`,
+          {},
+          { params: { stationCode: station.code } }
+        )
+        .then(({ data }) => {
+          if (isSubscribed && data) {
+            setStationUpdate(data);
+          }
+        });
+    }
 
     return () => {
       isSubscribed = false;

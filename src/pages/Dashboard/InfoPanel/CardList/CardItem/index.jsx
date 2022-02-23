@@ -41,9 +41,9 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
     functions: { panOnMap },
   } = useContext(MapContext);
 
-  function dataDough(value, sufix, label, color) {
+  function dataDough(key, value, sufix, label, color) {
     return (
-      <div style={{ marginRight: 10, scrollSnapAlign: 'end' }}>
+      <div key={key} style={{ marginRight: 10, scrollSnapAlign: 'end' }}>
         <MiddleDoughnut
           style={{ width: 125 }}
           description={label}
@@ -146,8 +146,9 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
       </div>
 
       <div ref={doughsRef} className={classes.doughnuts}>
-        {item?.values?.map((observation) =>
+        {item?.observations?.map((observation) =>
           dataDough(
+            observation.key,
             observation.value,
             t(`specific.dataType.sufixes.${observation.key}`),
             t(`specific.dataType.variable.items.${observation.key}`),

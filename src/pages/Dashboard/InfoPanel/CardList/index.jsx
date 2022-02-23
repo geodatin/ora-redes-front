@@ -53,7 +53,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
     setIsFirstLoading(true);
     api
       .post(
-        `/observation/last/${timeGrouping}`,
+        `/observation/list/${timeGrouping}`,
         {
           filters,
         },
@@ -87,7 +87,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
       setIsLoadingPage(true);
       api
         .post(
-          `/observation/last/${timeGrouping}`,
+          `/observation/list/${timeGrouping}`,
           {
             filters,
           },
