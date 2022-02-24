@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
@@ -37,6 +38,7 @@ function Dashboard() {
 
   const {
     values: { layoutConfig },
+    setters: { setLayoutConfig },
   } = useContext(MapContext);
 
   const {
@@ -79,9 +81,18 @@ function Dashboard() {
 
   useEffect(() => {
     if (embed) {
-      const leftBar = query.get('leftBar');
+      const leftBar = query.get('leftBar') === 'true';
+      const rightBar = query.get('rightBar') === 'true';
 
-      console.log(leftBar);
+      if (leftBar && rightBar) {
+        setLayoutConfig(0);
+      } else if (rightBar) {
+        setLayoutConfig(1);
+      } else if (leftBar) {
+        setLayoutConfig(3);
+      } else {
+        setLayoutConfig(2);
+      }
     }
   }, [embed]);
 

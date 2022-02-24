@@ -87,61 +87,57 @@ export function FilteringProvider({ embed, children }) {
   }, []);
 
   function generateRoute(start) {
-    if (paramsLoaded) {
-      let newQuery = start;
+    let newQuery = start;
 
-      const initialSize = newQuery.length;
+    const initialSize = newQuery.length;
 
-      /**
-       * This function verifies if there is a need to add a separator between the query params.
-       */
-      const trySeparator = () => {
-        if (newQuery.length > initialSize) {
-          newQuery += '&';
-        }
-      };
-
-      if (networkSelection !== filterDefaults.networkSelection) {
-        trySeparator();
-        newQuery += `networkSelection=${networkSelection}`;
+    /**
+     * This function verifies if there is a need to add a separator between the query params.
+     */
+    const trySeparator = () => {
+      if (newQuery.length > initialSize) {
+        newQuery += '&';
       }
+    };
 
-      const selectionAux = {};
-
-      Object.keys(autocompleteSelection).forEach((key) => {
-        if (autocompleteSelection[key].length > 0) {
-          selectionAux[key] = autocompleteSelection[key];
-        }
-      });
-
-      if (Object.keys(selectionAux).length > 0) {
-        trySeparator();
-        const searchValueParams = JSON.stringify(selectionAux);
-        const searchValueEncoded = encodeURI(searchValueParams);
-        newQuery += `search=${searchValueEncoded}`;
-      }
-
-      if (newQuery.length === initialSize) {
-        return '/';
-      }
-
-      return newQuery;
+    if (networkSelection !== filterDefaults.networkSelection) {
+      trySeparator();
+      newQuery += `networkSelection=${networkSelection}`;
     }
 
-    return '/';
+    const selectionAux = {};
+
+    Object.keys(autocompleteSelection).forEach((key) => {
+      if (autocompleteSelection[key].length > 0) {
+        selectionAux[key] = autocompleteSelection[key];
+      }
+    });
+
+    if (Object.keys(selectionAux).length > 0) {
+      trySeparator();
+      const searchValueParams = JSON.stringify(selectionAux);
+      const searchValueEncoded = encodeURI(searchValueParams);
+      newQuery += `search=${searchValueEncoded}`;
+    }
+
+    if (newQuery.length === initialSize) {
+      return '/';
+    }
+
+    return newQuery;
   }
 
   /**
    * This useEffect puts the current selection into the route.
    */
   useEffect(() => {
-    if (
-      window.location.pathname === '/filter' ||
-      window.location.pathname === '/'
-    ) {
-      window.history.replaceState(null, '', generateRoute(`/filter?`));
-    } else if (embed) {
-      window.history.replaceState(null, '', generateRoute(`/embed?`));
+    if (paramsLoaded) {
+      if (
+        window.location.pathname === '/filter' ||
+        window.location.pathname === '/'
+      ) {
+        window.history.replaceState(null, '', generateRoute(`/filter?`));
+      }
     }
   }, [networkSelection, autocompleteSelection]);
 

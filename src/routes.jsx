@@ -30,9 +30,9 @@ function FilteringWrapper({ redirect, children }) {
 function DefaultPage({ embed }) {
   return (
     <NavigationProvider>
-      <FilteringProvider>
+      <FilteringProvider embed={embed}>
         <MappingProvider>
-          <Dashboard embed={embed} />
+          <Dashboard />
         </MappingProvider>
       </FilteringProvider>
     </NavigationProvider>
@@ -63,15 +63,7 @@ function Routes() {
             </FilteringWrapper>
           }
         />
-        <Route
-          exact
-          path="/embed"
-          element={
-            <FilteringWrapper redirect="/">
-              <DefaultPage embed />
-            </FilteringWrapper>
-          }
-        />
+        <Route exact path="/embed" element={<DefaultPage embed />} />
         <Route exact path="/api" element={<ApiMethods />} />
         <Route exact path="/library" element={<DataLibrary />} />
         <Route path="*" element={<Navigate replace to="/" />} />
