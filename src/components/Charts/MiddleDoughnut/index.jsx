@@ -39,15 +39,21 @@ export default function MiddleDoughnut({
         <div className={classes.doughnutMiddle}>{children}</div>
       </div>
       {description && (
-        <Typography
-          style={{
-            color: theme.neutral.gray.main,
-            marginTop: 10,
-          }}
-          variant="body"
-        >
-          {description}
-        </Typography>
+        <div className={classes.doughnutDescription}>
+          <Typography
+            style={{
+              color: theme.neutral.gray.main,
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+            }}
+            variant="body"
+          >
+            {description}
+          </Typography>
+        </div>
       )}
     </div>
   );
