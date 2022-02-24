@@ -61,14 +61,19 @@ export default function ShareDialog({
   }
 
   const code = useMemo(() => {
-    let embedQuery = `/embed?${customParam}`;
+    let embedQuery = `/embed?`;
+
+    if (customParam.length > 1) {
+      embedQuery += customParam;
+    }
+
     const initialSize = embedQuery.length;
 
     /**
      * This function verifies if there is a need to add a separator between the query params.
      */
     function trySeparator() {
-      if (embedQuery.length > initialSize || customParam.length > 0) {
+      if (embedQuery.length > initialSize || customParam.length > 1) {
         embedQuery += '&';
       }
     }
@@ -79,7 +84,7 @@ export default function ShareDialog({
     });
 
     return `<iframe src="${window.location.origin}${embedQuery}" width="900" height="700"></iframe>`;
-  }, [embedValues]);
+  }, [embedValues, customParam]);
 
   useEffect(() => {
     if (embedItems) {
