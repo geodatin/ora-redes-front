@@ -191,6 +191,15 @@
         }
       },
       "sufixes": {
+        "ph": "",
+        "OD": "",
+        "electricConductivity": "",
+        "turbidity": "",
+        "sampleTemperature": "C",
+        "totalDissolvedSolid": "",
+        "totalNitrogen": "",
+        "totalOrtophosphate": "",
+        "totalSuspensionSolid": "",
         "rain": "mm",
         "flowRate": "m³/s",
         "level": "cm"
