@@ -111,6 +111,7 @@ function CardItemComponent({ item, disableMoreStatisticsButton }) {
         current.style.justifyContent = 'flex-start';
       }
     };
+    onWindowResize();
 
     window.addEventListener('resize', onWindowResize);
   }, []);
