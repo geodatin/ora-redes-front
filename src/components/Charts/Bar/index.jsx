@@ -59,7 +59,7 @@ export default function BarChart({
       info={info}
       csvCallback={csvCallback}
       fullScreenEnabled={fullScreenEnabled}
-      isLoaded={data != null}
+      isLoaded={!!data}
     >
       <Bar options={merge(options, mergeOptions)} data={data} />
     </ChartContainer>

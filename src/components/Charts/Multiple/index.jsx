@@ -85,7 +85,7 @@ export default function Multiple({
       title={title}
       info={info}
       csvCallback={csvCallback}
-      isLoaded={data != null}
+      isLoaded={!!data}
       fullScreenEnabled={fullScreenEnabled}
     >
       <Chart options={merge(options, mergeOptions)} data={data} type="bar" />
