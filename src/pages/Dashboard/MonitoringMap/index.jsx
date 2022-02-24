@@ -255,7 +255,9 @@ export default function MonitoringMap() {
                       api
                         .post(
                           `/observation/list/${timeGrouping}`,
-                          {},
+                          {
+                            filters,
+                          },
                           { params: { stationCode: point.properties.code } }
                         )
                         .then(({ data }) => {
