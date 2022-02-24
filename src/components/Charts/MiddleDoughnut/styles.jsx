@@ -1,5 +1,7 @@
 import { createUseStyles } from 'react-jss';
 
+const doughnutSquareSide = '130px';
+
 const useStyles = createUseStyles({
   wrapper: {
     display: 'flex',
@@ -7,8 +9,8 @@ const useStyles = createUseStyles({
     alignItems: 'center',
   },
   doughnutWrapper: {
-    height: '130px',
-    width: '130px',
+    height: doughnutSquareSide,
+    width: doughnutSquareSide,
     position: 'relative',
     display: 'flex',
     flexFlow: 'column nowrap',
@@ -26,6 +28,13 @@ const useStyles = createUseStyles({
     bottom: 0,
     pointerEvents: 'none',
     userSelect: 'none',
+  },
+  doughnutDescription: {
+    display: 'flex',
+    flexFlow: 'row wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: doughnutSquareSide,
   },
 });
 
