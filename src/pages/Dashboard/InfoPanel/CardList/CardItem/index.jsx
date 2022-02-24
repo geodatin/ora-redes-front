@@ -19,13 +19,13 @@ import useStyles from './styles';
  * This component provides a station card item
  * @returns station card item
  */
-export default function CardItem({ item, disableMoreStatisticsButton }) {
-  CardItem.propTypes = {
+function CardItemComponent({ item, disableMoreStatisticsButton }) {
+  CardItemComponent.propTypes = {
     item: PropTypes.shape().isRequired,
     disableMoreStatisticsButton: PropTypes.bool,
   };
 
-  CardItem.defaultProps = {
+  CardItemComponent.defaultProps = {
     disableMoreStatisticsButton: false,
   };
 
@@ -175,3 +175,5 @@ export default function CardItem({ item, disableMoreStatisticsButton }) {
     </ListItemContainer>
   );
 }
+
+export const CardItem = React.memo(CardItemComponent);

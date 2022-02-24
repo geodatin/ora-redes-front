@@ -11,10 +11,11 @@ import BarChart from '../../../../components/Charts/Bar';
 import LineChart from '../../../../components/Charts/Line';
 import Multiple from '../../../../components/Charts/Multiple';
 import CustomButton from '../../../../components/CustomButton';
+import FilteringContext from '../../../../contexts/filtering';
 import NavigationContext from '../../../../contexts/navigation';
 import api from '../../../../services/api';
 import { downloadCSV } from '../../../../utils/helpers';
-import CardItem from '../CardList/CardItem';
+import { CardItem } from '../CardList/CardItem';
 
 /**
  * This function provides a station panel
@@ -32,15 +33,16 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
     tabpanelref: undefined,
   };
 
-  if (!station) {
-    return null;
-  }
-
   const theme = useTheme();
   const { t } = useTranslation();
+
   const {
     functions: { closeStation },
   } = useContext(NavigationContext);
+
+  const {
+    values: { filters },
+  } = useContext(FilteringContext);
 
   const [stationUpdate, setStationUpdate] = useState();
   const [rainData, setRainData] = useState();
@@ -57,7 +59,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       api
         .post(
           `/observation/list/${timeGrouping}`,
-          {},
+          { filters },
           { params: { stationCode: station.code } }
         )
         .then(({ data }) => {

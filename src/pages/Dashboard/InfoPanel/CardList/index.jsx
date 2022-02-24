@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import InfiniteScroll from '../../../../components/InfiniteScroll';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
-import CardItem from './CardItem';
+import { CardItem } from './CardItem';
 import useStyles from './styles';
 
 /**
