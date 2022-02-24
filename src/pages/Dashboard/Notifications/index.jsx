@@ -7,7 +7,7 @@ import Typography from '../../../components/Typography';
 import { networks } from '../../../constants/options';
 import FilteringContext from '../../../contexts/filtering';
 import api from '../../../services/api';
-import NotificationCard from './NotificationCard';
+import { NotificationCard } from './NotificationCard';
 import useStyles from './styles';
 
 export default function Notifications() {
@@ -19,7 +19,6 @@ export default function Notifications() {
   } = useContext(FilteringContext);
 
   const [notifications, setNotifications] = useState([]);
-
   const [resultsAmount, setResultsAmount] = useState();
   const [isFirstLoading, setIsFirstLoading] = useState(false);
   const pageSize = 10;

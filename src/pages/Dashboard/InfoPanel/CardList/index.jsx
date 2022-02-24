@@ -119,7 +119,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
         noResultsText={t('specific.list.noResults')}
       >
         {list.map((item) => (
-          <CardItem key={item.code} item={item} />
+          <CardItem key={item.id} item={item} />
         ))}
       </InfiniteScroll>
     </ul>

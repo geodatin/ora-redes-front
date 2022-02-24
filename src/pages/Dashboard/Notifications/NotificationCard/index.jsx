@@ -8,8 +8,8 @@ import Typography from '../../../../components/Typography';
 import MapContext from '../../../../contexts/mapping';
 import useStyles from './styles';
 
-export default function NotificationCard({ circleColor, notification }) {
-  NotificationCard.propTypes = {
+function NotificationCardComponent({ circleColor, notification }) {
+  NotificationCardComponent.propTypes = {
     notification: PropTypes.shape().isRequired,
     circleColor: PropTypes.string.isRequired,
   };
@@ -83,3 +83,5 @@ export default function NotificationCard({ circleColor, notification }) {
     </li>
   );
 }
+
+export const NotificationCard = React.memo(NotificationCardComponent);
