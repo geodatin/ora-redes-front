@@ -116,9 +116,11 @@ export default function InfoPanel({ title, subtitle }) {
             <TabPanel value={panelIndexValue} index={panels.list.index}>
               <CardList timeGrouping={timeGrouping} />
             </TabPanel>
-            <TabPanel value={panelIndexValue} index={panels.station.index}>
-              <Station station={station} timeGrouping={timeGrouping} />
-            </TabPanel>
+            {station && (
+              <TabPanel value={panelIndexValue} index={panels.station.index}>
+                <Station station={station} timeGrouping={timeGrouping} />
+              </TabPanel>
+            )}
           </>
         ),
       }}

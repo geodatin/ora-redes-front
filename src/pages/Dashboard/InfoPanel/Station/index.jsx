@@ -11,10 +11,11 @@ import BarChart from '../../../../components/Charts/Bar';
 import LineChart from '../../../../components/Charts/Line';
 import Multiple from '../../../../components/Charts/Multiple';
 import CustomButton from '../../../../components/CustomButton';
+import FilteringContext from '../../../../contexts/filtering';
 import NavigationContext from '../../../../contexts/navigation';
 import api from '../../../../services/api';
 import { downloadCSV } from '../../../../utils/helpers';
-import CardItem from '../CardList/CardItem';
+import { CardItem } from '../CardList/CardItem';
 
 /**
  * This function provides a station panel
@@ -32,16 +33,18 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
     tabpanelref: undefined,
   };
 
-  if (!station) {
-    return null;
-  }
-
   const theme = useTheme();
   const { t } = useTranslation();
+
   const {
     functions: { closeStation },
   } = useContext(NavigationContext);
 
+  const {
+    values: { filters },
+  } = useContext(FilteringContext);
+
+  const [selectedDatasetOnMultiple, setSelectedDatasetOnMultiple] = useState(1);
   const [stationUpdate, setStationUpdate] = useState();
   const [rainData, setRainData] = useState();
   const [levelData, setLevelData] = useState();
@@ -53,17 +56,19 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
    */
   useEffect(() => {
     let isSubscribed = true;
-    api
-      .post(
-        `/observation/last/${timeGrouping}`,
-        {},
-        { params: { stationCode: station.code } }
-      )
-      .then(({ data }) => {
-        if (isSubscribed && data) {
-          setStationUpdate(data);
-        }
-      });
+    if (station.code) {
+      api
+        .post(
+          `/observation/list/${timeGrouping}`,
+          { filters },
+          { params: { stationCode: station.code } }
+        )
+        .then(({ data }) => {
+          if (isSubscribed && data) {
+            setStationUpdate(data);
+          }
+        });
+    }
 
     return () => {
       isSubscribed = false;
@@ -87,7 +92,9 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       dataChartFetches.forEach(({ dataType, dataSetter }) => {
         api
           .get(
-            `/observation/timeSeries/${station.code}/${dataType}/${timeGrouping}`
+            `/observation/timeSeries/${station.network.toLowerCase()}/${
+              station.code
+            }/${dataType}/${timeGrouping}`
           )
           .then(({ data }) => {
             if (isSubscribed && data) {
@@ -105,7 +112,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
   const csvFetching = (dataType, stationCode) => {
     api
       .get(
-        `/observation/timeSeries/${stationCode}/${dataType}/${timeGrouping}`,
+        `/observation/timeSeries/${station.network.toLowerCase()}/${stationCode}/${dataType}/${timeGrouping}`,
         {
           params: {
             format: 'csv',
@@ -168,8 +175,6 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       });
     },
   };
-
-  const [selectedDatasetOnMultiple, setSelectedDatasetOnMultiple] = useState(1);
 
   return (
     <ul>
@@ -247,8 +252,8 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
               getDatasetObj(
                 'line',
                 levelData.y,
-                t('specific.dataType.variable.items.adoptedLevel'),
-                t('specific.dataType.sufixes.adoptedLevel'),
+                t('specific.dataType.variable.items.level'),
+                t('specific.dataType.sufixes.level'),
                 theme.primary.main
               ),
             ],
@@ -328,15 +333,15 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
             datasets: [
               getDatasetObj(
                 'line',
-                rawData.adoptedLevel,
-                t('specific.dataType.variable.items.adoptedLevel'),
-                t('specific.dataType.sufixes.adoptedLevel'),
+                rawData.level,
+                t('specific.dataType.variable.items.level'),
+                t('specific.dataType.sufixes.level'),
                 theme.primary.main,
                 {
                   yAxisID: 'y2',
                   borderWidth: 0.5,
                   pointRadius: 0.5,
-                  hidden: true,
+                  hidden: selectedDatasetOnMultiple !== 0,
                   normalized: true,
                 }
               ),
@@ -427,6 +432,9 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
               },
             },
             y1: {
+              ticks: {
+                sampleSize: 2,
+              },
               reverse: true,
               title: {
                 display: true,
@@ -435,6 +443,9 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
               },
             },
             y2: {
+              ticks: {
+                sampleSize: 2,
+              },
               title: {
                 display: true,
                 text:

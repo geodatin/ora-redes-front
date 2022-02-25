@@ -187,13 +187,22 @@
           "totalSuspensionSolid": "Sólidos suspensos totais",
           "rain": "Precipitação",
           "flowRate": "Vazão",
-          "adoptedLevel": "Nível"
+          "level": "Nível"
         }
       },
       "sufixes": {
+        "ph": "",
+        "OD": "",
+        "electricConductivity": "",
+        "turbidity": "",
+        "sampleTemperature": "C",
+        "totalDissolvedSolid": "",
+        "totalNitrogen": "",
+        "totalOrtophosphate": "",
+        "totalSuspensionSolid": "",
         "rain": "mm",
         "flowRate": "m³/s",
-        "adoptedLevel": "cm"
+        "level": "cm"
       }
     },
     "networks": {

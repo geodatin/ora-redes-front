@@ -255,8 +255,10 @@ export default function MonitoringMap() {
                     onClick={() => {
                       api
                         .post(
-                          `/observation/last/${timeGrouping}`,
-                          {},
+                          `/observation/list/${timeGrouping}`,
+                          {
+                            filters,
+                          },
                           { params: { stationCode: point.properties.code } }
                         )
                         .then(({ data }) => {

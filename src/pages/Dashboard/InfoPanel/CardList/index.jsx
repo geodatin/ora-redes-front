@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -5,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import InfiniteScroll from '../../../../components/InfiniteScroll';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
-import CardItem from './CardItem';
+import { CardItem } from './CardItem';
 import useStyles from './styles';
 
 /**
@@ -52,7 +53,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
     setIsFirstLoading(true);
     api
       .post(
-        `/observation/last/${timeGrouping}`,
+        `/observation/list/${timeGrouping}`,
         {
           filters,
         },
@@ -86,7 +87,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
       setIsLoadingPage(true);
       api
         .post(
-          `/observation/last/${timeGrouping}`,
+          `/observation/list/${timeGrouping}`,
           {
             filters,
           },
@@ -118,7 +119,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
         noResultsText={t('specific.list.noResults')}
       >
         {list.map((item) => (
-          <CardItem key={item.code} item={item} />
+          <CardItem key={item.id} item={item} />
         ))}
       </InfiniteScroll>
     </ul>
