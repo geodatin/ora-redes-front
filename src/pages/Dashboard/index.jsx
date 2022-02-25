@@ -47,6 +47,7 @@ function Dashboard() {
   } = useContext(NavigationContext);
 
   const query = useQuery();
+  const [mainTopSection, setMainTopSection] = useState(true);
 
   /**
    * This userEffect fetches last database update timestamp.
@@ -83,6 +84,7 @@ function Dashboard() {
     if (embed) {
       const leftBar = query.get('leftBar') === 'true';
       const rightBar = query.get('rightBar') === 'true';
+      const topBar = query.get('topBar') === 'true';
 
       if (leftBar && rightBar) {
         setLayoutConfig(0);
@@ -93,6 +95,8 @@ function Dashboard() {
       } else {
         setLayoutConfig(2);
       }
+
+      setMainTopSection(topBar);
     }
   }, [embed]);
 
@@ -138,18 +142,22 @@ function Dashboard() {
         className: classes.breadMapWrapper,
         children: (
           <VLayout
-            upRow={{
-              className: classes.breadBarWrapper,
-              children: (
-                <Breadcrumb
-                  items={[
-                    t('specific.breadcrumbs.monitoring'),
-                    t(networkByValue[networkSelection].translation),
-                  ]}
-                  onClickItem={() => {}}
-                />
-              ),
-            }}
+            upRow={
+              mainTopSection
+                ? {
+                    className: classes.breadBarWrapper,
+                    children: (
+                      <Breadcrumb
+                        items={[
+                          t('specific.breadcrumbs.monitoring'),
+                          t(networkByValue[networkSelection].translation),
+                        ]}
+                        onClickItem={() => {}}
+                      />
+                    ),
+                  }
+                : undefined
+            }
             mainContainer={{
               className: classes.map,
               children: <MonitoringMap />,

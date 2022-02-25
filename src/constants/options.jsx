@@ -126,18 +126,12 @@ export const filterDefaults = {
 };
 
 export const embedItems = [
-  { key: 'leftBar', label: 'Esquerda', defaultOption: true },
-  { key: 'rightBar', label: 'Direita', defaultOption: true },
-  { key: 'topBar', label: 'Cima', defaultOption: true },
-  { key: 'header', label: 'Header', defaultOption: true },
-  {
-    key: 'responsivity',
-    label: 'Responsividade',
-    defaultOption: true,
-  },
+  { key: 'leftBar', translation: 'Esquerda', defaultOption: true },
+  { key: 'rightBar', translation: 'Direita', defaultOption: true },
+  { key: 'topBar', translation: 'Cima', defaultOption: true },
   {
     key: 'embeding',
-    label: 'Incorporação',
+    translation: 'Incorporação',
     defaultOption: false,
   },
 ];
