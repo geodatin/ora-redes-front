@@ -44,6 +44,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
     values: { filters },
   } = useContext(FilteringContext);
 
+  const [selectedDatasetOnMultiple, setSelectedDatasetOnMultiple] = useState(1);
   const [stationUpdate, setStationUpdate] = useState();
   const [rainData, setRainData] = useState();
   const [levelData, setLevelData] = useState();
@@ -174,8 +175,6 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       });
     },
   };
-
-  const [selectedDatasetOnMultiple, setSelectedDatasetOnMultiple] = useState(1);
 
   return (
     <ul>
@@ -342,7 +341,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
                   yAxisID: 'y2',
                   borderWidth: 0.5,
                   pointRadius: 0.5,
-                  hidden: true,
+                  hidden: selectedDatasetOnMultiple !== 0,
                   normalized: true,
                 }
               ),
