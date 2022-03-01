@@ -208,7 +208,7 @@ export default function ShareDialog({
                   control={
                     <Checkbox size="medium" checked={embedValues[item.key]} />
                   }
-                  label={item.translation}
+                  label={t(item.translation)}
                   onChange={(e, newValue) => {
                     setEmbedValues((old) => ({ ...old, [item.key]: newValue }));
                   }}
