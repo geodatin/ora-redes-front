@@ -131,12 +131,20 @@ export const filterDefaults = {
 };
 
 export const embedItems = [
-  { key: 'leftBar', translation: 'Esquerda', defaultOption: true },
-  { key: 'rightBar', translation: 'Direita', defaultOption: true },
-  { key: 'topBar', translation: 'Cima', defaultOption: true },
+  {
+    key: 'leftBar',
+    translation: 'specific.embed.leftBar',
+    defaultOption: true,
+  },
+  {
+    key: 'rightBar',
+    translation: 'specific.embed.rightBar',
+    defaultOption: true,
+  },
+  { key: 'topBar', translation: 'specific.embed.topBar', defaultOption: true },
   {
     key: 'embeding',
-    translation: 'Incorporação',
+    translation: 'specific.embed.embeding',
     defaultOption: false,
   },
 ];

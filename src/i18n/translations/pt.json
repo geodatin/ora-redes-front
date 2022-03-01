@@ -273,6 +273,12 @@
     },
     "share": {
       "message": "Acompanhe os dados de monitoramento das redes amazônicas"
+    },
+    "embed": {
+      "leftBar": "Barra esquerda",
+      "topBar": "Barra superior",
+      "rightBar": "Barra direita",
+      "embeding": "Incorporação"
     }
   }
 }
