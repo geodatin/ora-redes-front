@@ -13,9 +13,9 @@ import Header from './components/Header';
 import { FilteringProvider } from './contexts/filtering';
 import { MappingProvider } from './contexts/mapping';
 import { NavigationProvider } from './contexts/navigation';
-import ApiMethods from './pages/ApiMethods';
+// import ApiMethods from './pages/ApiMethods';
 import Dashboard from './pages/Dashboard';
-import DataLibrary from './pages/DataLibrary';
+// import DataLibrary from './pages/DataLibrary';
 
 function FilteringWrapper({ redirect, children }) {
   const [searchParams] = useSearchParams();
@@ -48,8 +48,8 @@ function Routes() {
         projectName={t('general.projectName')}
         items={[
           { title: t('header.buttons.dashboard'), to: '/' },
-          { title: t('header.buttons.dataLibrary'), to: '/library' },
-          { title: t('header.buttons.api'), to: '/api' },
+          /* { title: t('header.buttons.dataLibrary'), to: '/library' },
+          { title: t('header.buttons.api'), to: '/api' }, */
         ]}
       />
       <BaseRoutes>
@@ -64,8 +64,8 @@ function Routes() {
           }
         />
         <Route exact path="/embed" element={<DefaultPage embed />} />
-        <Route exact path="/api" element={<ApiMethods />} />
-        <Route exact path="/library" element={<DataLibrary />} />
+        {/* <Route exact path="/api" element={<ApiMethods />} />
+        <Route exact path="/library" element={<DataLibrary />} /> */}
         <Route path="*" element={<Navigate replace to="/" />} />
       </BaseRoutes>
     </BrowserRouter>
