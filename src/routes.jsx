@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Routes as BaseRoutes,
@@ -27,21 +27,20 @@ function FilteringWrapper({ redirect, children }) {
   return children;
 }
 
+function DefaultPage({ embed }) {
+  return (
+    <NavigationProvider>
+      <FilteringProvider embed={embed}>
+        <MappingProvider>
+          <Dashboard />
+        </MappingProvider>
+      </FilteringProvider>
+    </NavigationProvider>
+  );
+}
+
 function Routes() {
   const { t } = useTranslation();
-
-  const defaultPage = useMemo(
-    () => (
-      <NavigationProvider>
-        <FilteringProvider>
-          <MappingProvider>
-            <Dashboard />
-          </MappingProvider>
-        </FilteringProvider>
-      </NavigationProvider>
-    ),
-    []
-  );
 
   return (
     <BrowserRouter>
@@ -54,14 +53,17 @@ function Routes() {
         ]}
       />
       <BaseRoutes>
-        <Route exact path="/" element={defaultPage} />
+        <Route exact path="/" element={<DefaultPage />} />
         <Route
           exact
           path="/filter"
           element={
-            <FilteringWrapper redirect="/">{defaultPage}</FilteringWrapper>
+            <FilteringWrapper redirect="/">
+              <DefaultPage />
+            </FilteringWrapper>
           }
         />
+        <Route exact path="/embed" element={<DefaultPage embed />} />
         <Route exact path="/api" element={<ApiMethods />} />
         <Route exact path="/library" element={<DataLibrary />} />
         <Route path="*" element={<Navigate replace to="/" />} />

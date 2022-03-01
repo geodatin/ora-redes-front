@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
@@ -13,6 +14,7 @@ import { layoutConfigs, networkByValue } from '../../constants/options';
 import FilteringContext from '../../contexts/filtering';
 import MapContext from '../../contexts/mapping';
 import NavigationContext from '../../contexts/navigation';
+import { useQuery } from '../../hooks/useQuery';
 import api from '../../services/api';
 import Filters from './Filters';
 import InfoPanel from './InfoPanel';
@@ -31,17 +33,21 @@ function Dashboard() {
   const [lastUpdateDatabase, setLastUpdateDatabase] = useState();
 
   const {
-    values: { networkSelection },
+    values: { networkSelection, embed },
   } = useContext(FilteringContext);
 
   const {
     values: { layoutConfig },
+    setters: { setLayoutConfig },
   } = useContext(MapContext);
 
   const {
     values: { mobileNavValue, isMobile },
     setters: { setMobileNavValue },
   } = useContext(NavigationContext);
+
+  const query = useQuery();
+  const [mainTopSection, setMainTopSection] = useState(true);
 
   /**
    * This userEffect fetches last database update timestamp.
@@ -73,6 +79,26 @@ function Dashboard() {
       }
     />
   );
+
+  useEffect(() => {
+    if (embed) {
+      const leftBar = query.get('leftBar') === 'true';
+      const rightBar = query.get('rightBar') === 'true';
+      const topBar = query.get('topBar') === 'true';
+
+      if (leftBar && rightBar) {
+        setLayoutConfig(0);
+      } else if (rightBar) {
+        setLayoutConfig(1);
+      } else if (leftBar) {
+        setLayoutConfig(3);
+      } else {
+        setLayoutConfig(2);
+      }
+
+      setMainTopSection(topBar);
+    }
+  }, [embed]);
 
   return isMobile ? (
     <MobileNavbarLayout
@@ -116,18 +142,22 @@ function Dashboard() {
         className: classes.breadMapWrapper,
         children: (
           <VLayout
-            upRow={{
-              className: classes.breadBarWrapper,
-              children: (
-                <Breadcrumb
-                  items={[
-                    t('specific.breadcrumbs.monitoring'),
-                    t(networkByValue[networkSelection].translation),
-                  ]}
-                  onClickItem={() => {}}
-                />
-              ),
-            }}
+            upRow={
+              mainTopSection
+                ? {
+                    className: classes.breadBarWrapper,
+                    children: (
+                      <Breadcrumb
+                        items={[
+                          t('specific.breadcrumbs.monitoring'),
+                          t(networkByValue[networkSelection].translation),
+                        ]}
+                        onClickItem={() => {}}
+                      />
+                    ),
+                  }
+                : undefined
+            }
             mainContainer={{
               className: classes.map,
               children: <MonitoringMap />,

@@ -21,7 +21,7 @@ import MapWrapper from '../../../components/MapWrapper';
 import MapItem from '../../../components/MapWrapper/Mapitem';
 import ShareDialog from '../../../components/ShareDialog';
 import Typography from '../../../components/Typography';
-import { networks } from '../../../constants/options';
+import { embedItems, networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
@@ -35,7 +35,8 @@ import useStyles from './styles';
  */
 export default function MonitoringMap() {
   const {
-    values: { filters, timeGrouping },
+    values: { filters, timeGrouping, autocompleteSelection, networkSelection },
+    functions: { generateRoute },
   } = useContext(FilteringContext);
 
   const {
@@ -284,6 +285,16 @@ export default function MonitoringMap() {
     setOpenShare(!openShare);
   }
 
+  const embedCustomParam = useMemo(
+    () => generateRoute(''),
+    [networkSelection, autocompleteSelection]
+  );
+
+  const shareUrl = useMemo(
+    () => window.location.origin + generateRoute(`/filter?`),
+    [networkSelection, autocompleteSelection]
+  );
+
   return (
     <MapWrapper
       getMapRef={(ref) => setMapRef(ref)}
@@ -308,8 +319,11 @@ export default function MonitoringMap() {
           <ShareDialog
             open={openShare}
             onClose={() => setOpenShare(false)}
-            url={window.location.href}
+            url={shareUrl}
             shareMessage={t('specific.share.message')}
+            setOpen={setOpenShare}
+            embedItems={embedItems}
+            customParam={embedCustomParam}
           />
         </>
       }

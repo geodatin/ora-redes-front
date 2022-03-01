@@ -15,14 +15,7 @@ const FilteringContext = createContext({});
 /**
  * The FilteringProvider is a context to provide the dashboard filtering options.
  * */
-export function FilteringProvider({ children }) {
-  FilteringProvider.propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-    ]).isRequired,
-  };
-
+export function FilteringProvider({ embed, children }) {
   const [timeGrouping, setTimeGrouping] = useState(timeGroupingOptions[0].code);
   const [autocompleteSelection, setAutocompleteSelection] = useState(
     filterDefaults.autocompleteSelection
@@ -93,52 +86,57 @@ export function FilteringProvider({ children }) {
     setParamsLoaded(true);
   }, []);
 
+  function generateRoute(start) {
+    let newQuery = start;
+
+    const initialSize = newQuery.length;
+
+    /**
+     * This function verifies if there is a need to add a separator between the query params.
+     */
+    const trySeparator = () => {
+      if (newQuery.length > initialSize) {
+        newQuery += '&';
+      }
+    };
+
+    if (networkSelection !== filterDefaults.networkSelection) {
+      trySeparator();
+      newQuery += `networkSelection=${networkSelection}`;
+    }
+
+    const selectionAux = {};
+
+    Object.keys(autocompleteSelection).forEach((key) => {
+      if (autocompleteSelection[key].length > 0) {
+        selectionAux[key] = autocompleteSelection[key];
+      }
+    });
+
+    if (Object.keys(selectionAux).length > 0) {
+      trySeparator();
+      const searchValueParams = JSON.stringify(selectionAux);
+      const searchValueEncoded = encodeURI(searchValueParams);
+      newQuery += `search=${searchValueEncoded}`;
+    }
+
+    if (newQuery.length === initialSize) {
+      return '/';
+    }
+
+    return newQuery;
+  }
+
   /**
    * This useEffect puts the current selection into the route.
    */
   useEffect(() => {
     if (paramsLoaded) {
-      let newQuery = `${window.location.pathname}?`;
-
-      if (window.location.pathname === '/') {
-        newQuery = `/filter?`;
-      }
-
-      const initialSize = newQuery.length;
-
-      /**
-       * This function verifies if there is a need to add a separator between the query params.
-       */
-      const trySeparator = () => {
-        if (newQuery.length > initialSize) {
-          newQuery += '&';
-        }
-      };
-
-      if (networkSelection !== filterDefaults.networkSelection) {
-        trySeparator();
-        newQuery += `networkSelection=${networkSelection}`;
-      }
-
-      const selectionAux = {};
-
-      Object.keys(autocompleteSelection).forEach((key) => {
-        if (autocompleteSelection[key].length > 0) {
-          selectionAux[key] = autocompleteSelection[key];
-        }
-      });
-
-      if (Object.keys(selectionAux).length > 0) {
-        trySeparator();
-        const searchValueParams = JSON.stringify(selectionAux);
-        const searchValueEncoded = encodeURI(searchValueParams);
-        newQuery += `search=${searchValueEncoded}`;
-      }
-
-      if (newQuery.length === initialSize) {
-        window.history.replaceState(null, '', '/');
-      } else {
-        window.history.replaceState(null, '', newQuery);
+      if (
+        window.location.pathname === '/filter' ||
+        window.location.pathname === '/'
+      ) {
+        window.history.replaceState(null, '', generateRoute(`/filter?`));
       }
     }
   }, [networkSelection, autocompleteSelection]);
@@ -152,6 +150,7 @@ export function FilteringProvider({ children }) {
           networkSelection,
           timeGrouping,
           filters,
+          embed,
         },
         setters: {
           setAutocompleteSelection,
@@ -160,7 +159,9 @@ export function FilteringProvider({ children }) {
           setTimeGrouping,
           setFilters,
         },
-        functions: {},
+        functions: {
+          generateRoute,
+        },
         loaders: {
           paramsLoaded,
         },
@@ -170,5 +171,17 @@ export function FilteringProvider({ children }) {
     </FilteringContext.Provider>
   );
 }
+
+FilteringProvider.defaultProps = {
+  embed: false,
+};
+
+FilteringProvider.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  embed: PropTypes.bool,
+};
 
 export default FilteringContext;
