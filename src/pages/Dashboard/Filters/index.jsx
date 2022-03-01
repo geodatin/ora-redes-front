@@ -14,6 +14,7 @@ import {
   networks,
 } from '../../../constants/options';
 import FilteringContext from '../../../contexts/filtering';
+import NavigationContext from '../../../contexts/navigation';
 import api from '../../../services/api';
 import useStyles from './styles';
 
@@ -39,6 +40,11 @@ export default function Filters() {
     },
     loaders: { paramsLoaded },
   } = useContext(FilteringContext);
+
+  const {
+    functions: { closeStation },
+  } = useContext(NavigationContext);
+
   const { t } = useTranslation();
   const [auxAutocompleteSelection, setAuxAutocompleteSelection] = useState(
     autocompleteSelection
@@ -55,6 +61,7 @@ export default function Filters() {
    * Set the selection to context.
    */
   function applySelection() {
+    closeStation();
     setAutocompleteSelection(auxAutocompleteSelection);
     setNetworkSelection(auxNetworkSelection);
     setAutocompleteStraightSelection(auxStraightSelection);

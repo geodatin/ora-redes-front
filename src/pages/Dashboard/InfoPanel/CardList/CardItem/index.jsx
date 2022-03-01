@@ -76,7 +76,10 @@ function CardItemComponent({ item, disableMoreStatisticsButton }) {
                     value,
                     sufix,
                     data: [100, 0],
-                    backgroundColor: [color, theme.toggleButton.unabled],
+                    backgroundColor: [
+                      color ?? theme.secondary.light,
+                      theme.toggleButton.unabled,
+                    ],
                     borderColor: 'transparent',
                   },
                 ],
