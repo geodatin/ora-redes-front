@@ -53,7 +53,7 @@ export default function CustomDialog({ children, title, open, onClose }) {
 CustomDialog.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.shape(),
-    PropTypes.arrayOf(PropTypes.shape()),
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool])),
   ]).isRequired,
   title: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
