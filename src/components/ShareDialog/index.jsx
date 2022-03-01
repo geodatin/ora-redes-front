@@ -33,6 +33,7 @@ export default function ShareDialog({
   onClose,
   embedItems,
   customParam,
+  embedEnabled,
 }) {
   const classes = useStyles();
   const { t } = useTranslation();
@@ -164,7 +165,7 @@ export default function ShareDialog({
             {copied ? t('share.copiedButton') : t('share.copyButton')}
           </Button>
         </div>
-        {window.location.pathname !== '/embed' && (
+        {embedEnabled && (
           <div
             style={{
               display: 'flex',
@@ -278,6 +279,7 @@ export default function ShareDialog({
 ShareDialog.defaultProps = {
   embedItems: undefined,
   customParam: '',
+  embedEnabled: true,
 };
 
 ShareDialog.propTypes = {
@@ -288,4 +290,5 @@ ShareDialog.propTypes = {
   setOpen: PropTypes.func.isRequired,
   embedItems: PropTypes.arrayOf(PropTypes.shape()),
   customParam: PropTypes.string,
+  embedEnabled: PropTypes.bool,
 };
