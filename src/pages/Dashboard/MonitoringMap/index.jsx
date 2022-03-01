@@ -26,6 +26,7 @@ import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
 import NavigationContext from '../../../contexts/navigation';
+import { useQuery } from '../../../hooks/useQuery';
 import api from '../../../services/api';
 import useStyles from './styles';
 
@@ -54,6 +55,7 @@ export default function MonitoringMap() {
   const classes = useStyles();
   const { t } = useTranslation();
   const [openShare, setOpenShare] = useState(false);
+  const query = useQuery();
 
   useEffect(() => {
     let isSubscribed = true;
@@ -295,6 +297,20 @@ export default function MonitoringMap() {
     [networkSelection, autocompleteSelection]
   );
 
+  const embedEnabled = useMemo(() => {
+    if (window.location.pathname === '/embed') {
+      const embedingParam = query.get('embeding');
+
+      if (embedingParam === 'false') {
+        return false;
+      }
+
+      return true;
+    }
+
+    return true;
+  }, []);
+
   return (
     <MapWrapper
       getMapRef={(ref) => setMapRef(ref)}
@@ -324,6 +340,7 @@ export default function MonitoringMap() {
             setOpen={setOpenShare}
             embedItems={embedItems}
             customParam={embedCustomParam}
+            embedEnabled={embedEnabled}
           />
         </>
       }
