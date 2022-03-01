@@ -114,24 +114,71 @@
           "title": "Ranking de rios por números de estações",
           "info": "Este gráfico apresenta um ranking de rios por números de estações"
         },
-        "rainTimeSeries": {
-          "title": "Histórico de precipitação",
-          "info": "Este gráfico apresenta um histórico de precipitação",
-          "yAxisLabel": "milímetros"
-        },
-        "levelTimeSeries": {
-          "title": "Histórico do nível médio",
-          "info": "Este gráfico apresenta o histórico do nível médio",
-          "yAxisLabel": "centímetros"
-        },
-        "flowRateTimeSeries": {
-          "title": "Histórico da vazão",
-          "info": "Este gráfico apresenta o histórico da vazão",
-          "yAxisLabel": "m³ por segundo"
-        },
-        "rawTimeSeries": {
-          "title": "Histórico de dados brutos",
-          "info": "Este gráfico apresenta o histórico de dados brutos para precipitação, vazão e nível."
+        "timeSeries": {
+          "rain": {
+            "title": "Histórico de precipitação",
+            "info": "Este gráfico apresenta um histórico de precipitação",
+            "yAxisLabel": "milímetros"
+          },
+          "level": {
+            "title": "Histórico do nível médio",
+            "info": "Este gráfico apresenta o histórico do nível médio",
+            "yAxisLabel": "centímetros"
+          },
+          "flowRate": {
+            "title": "Histórico da vazão",
+            "info": "Este gráfico apresenta o histórico da vazão",
+            "yAxisLabel": "m³ por segundo"
+          },
+          "turbidity": {
+            "title": "Histórico da turbidez",
+            "info": "Este gráfico apresenta o histórico de turbidez",
+            "yAxisLabel": "NTU"
+          },
+          "ph": {
+            "title": "Histórico do pH",
+            "info": "Este gráfico apresenta o histórico do pH",
+            "yAxisLabel": "pH"
+          },
+          "OD": {
+            "title": "Histórico do oxigênio dissolvido",
+            "info": "Este gráfico apresenta o histórico do oxigênio dissolvido",
+            "yAxisLabel": "miligramas por litro"
+          },
+          "electricConductivity": {
+            "title": "Histórico de condutividade elétrica",
+            "info": "Este gráfico apresenta o histórico de condutividade elétrica",
+            "yAxisLabel": "micro siemens por centímetro"
+          },
+          "sampleTemperature": {
+            "title": "Histórico de temperatura",
+            "info": "Este gráfico apresenta o histórico de temperatura",
+            "yAxisLabel": "graus celsius"
+          },
+          "totalDissolvedSolid": {
+            "title": "Histórico de sólidos dissolvidos totais",
+            "info": "Este gráfico apresenta o histórico de sólidos dissolvidos totais",
+            "yAxisLabel": "miligramas por litro"
+          },
+          "totalNitrogen": {
+            "title": "Histórico do nitrogênio total",
+            "info": "Este gráfico apresenta o histórico do nitrogênio total",
+            "yAxisLabel": "miligramas por litro"
+          },
+          "totalOrtophosphate": {
+            "title": "Histórico do ortofosfato total",
+            "info": "Este gráfico apresenta o histórico do ortofosfato total",
+            "yAxisLabel": "miligramas por litro"
+          },
+          "totalSuspensionSolid": {
+            "title": "Histórico de sólidos suspensos totais",
+            "info": "Este gráfico apresenta o histórico de sólidos suspensos totais",
+            "yAxisLabel": "miligramas por litro"
+          },
+          "raw": {
+            "title": "Histórico de dados brutos",
+            "info": "Este gráfico apresenta o histórico de dados brutos para precipitação, vazão e nível."
+          }
         },
         "stationsPerVariableTreemap": {
           "title": "Estações por variáveis em cada rede",
@@ -192,14 +239,14 @@
       },
       "sufixes": {
         "ph": "",
-        "OD": "",
-        "electricConductivity": "",
-        "turbidity": "",
-        "sampleTemperature": "C",
-        "totalDissolvedSolid": "",
-        "totalNitrogen": "",
-        "totalOrtophosphate": "",
-        "totalSuspensionSolid": "",
+        "OD": "mg/L",
+        "electricConductivity": "µS/cm",
+        "turbidity": "NTU",
+        "sampleTemperature": "°C",
+        "totalDissolvedSolid": "mg/L",
+        "totalNitrogen": "mg/L",
+        "totalOrtophosphate": "mg/L",
+        "totalSuspensionSolid": "mg/L",
         "rain": "mm",
         "flowRate": "m³/s",
         "level": "cm"

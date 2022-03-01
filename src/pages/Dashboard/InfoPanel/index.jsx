@@ -7,7 +7,11 @@ import CustomToggleButton from '../../../components/CustomToggleButton';
 import VLayout from '../../../components/Layout/Vertical';
 import TabPanel from '../../../components/TabPanel';
 import Typography from '../../../components/Typography';
-import { panels, timeGroupingOptions } from '../../../constants/options';
+import {
+  networkByValue,
+  panels,
+  timeGroupingOptions,
+} from '../../../constants/options';
 import FilteringContext from '../../../contexts/filtering';
 import NavigationContext from '../../../contexts/navigation';
 import CardList from './CardList';
@@ -34,7 +38,7 @@ export default function InfoPanel({ title, subtitle }) {
   const { t } = useTranslation();
 
   const {
-    values: { timeGrouping },
+    values: { timeGrouping, networkSelection },
     setters: { setTimeGrouping },
   } = useContext(FilteringContext);
 
@@ -59,8 +63,10 @@ export default function InfoPanel({ title, subtitle }) {
   };
 
   const timeGroupingVisibility =
-    panelIndexValue === panels.list.index ||
-    panelIndexValue === panels.station.index;
+    ((panelIndexValue === panels.list.index ||
+      panelIndexValue === panels.station.index) &&
+      networkByValue[networkSelection]?.code === 'RHA') ||
+    station?.network === 'RHA';
 
   return (
     <VLayout
