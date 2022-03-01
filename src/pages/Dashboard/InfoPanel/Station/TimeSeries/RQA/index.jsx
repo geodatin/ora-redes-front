@@ -6,6 +6,7 @@ import { useTheme } from 'react-jss';
 
 import LineChart from '../../../../../../components/Charts/Line';
 import Multiple from '../../../../../../components/Charts/Multiple';
+import { dataTypes } from '../../../../../../constants/options';
 import api from '../../../../../../services/api';
 import { downloadCSV } from '../../../../../../utils/helpers';
 
@@ -161,7 +162,7 @@ export default function RQATimeSeries({ station, timeGrouping }) {
               data.y,
               t(`specific.dataType.variable.items.${dataType}`),
               t(`specific.dataType.sufixes.${dataType}`),
-              theme.secondary.light
+              dataTypes.variable?.colors[dataType]
             ),
           ],
         }
