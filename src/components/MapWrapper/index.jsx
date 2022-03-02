@@ -19,6 +19,7 @@ import ZoomButton from './ZoomButton';
 export default function MapWrapper({
   children,
   itemChildren,
+  itemAbout,
   itemTopChildren,
   itemBottomChildren,
   getMapRef,
@@ -84,6 +85,7 @@ export default function MapWrapper({
       />
       <div ref={itemsRef} className={classes.itemContainer}>
         {itemTopChildren}
+        {itemAbout}
         {itemChildren}
         <ZoomButton />
         {itemBottomChildren}
@@ -114,6 +116,7 @@ MapWrapper.defaultProps = {
   children: undefined,
   itemChildren: undefined,
   itemTopChildren: undefined,
+  itemAbout: undefined,
   itemBottomChildren: undefined,
   getMapRef: undefined,
 };
@@ -122,6 +125,7 @@ MapWrapper.propTypes = {
   children: PropTypes.node,
   itemChildren: PropTypes.node,
   itemTopChildren: PropTypes.node,
+  itemAbout: PropTypes.node,
   itemBottomChildren: PropTypes.node,
   getMapRef: PropTypes.func,
 };

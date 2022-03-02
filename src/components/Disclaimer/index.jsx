@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import NavigationContext from '../../contexts/navigation';
 import CustomDialog from '../CustomDialog';
@@ -13,12 +14,14 @@ export default function Disclaimer() {
     functions: { closeDisclaimer },
   } = useContext(NavigationContext);
 
+  const { t } = useTranslation();
+
   return (
     <CustomDialog
       open={isDisclaimerOpened}
       title="About ORA Redes"
       onClose={closeDisclaimer}
-      button={{ isEnabled: true, text: 'Close' }}
+      button={{ isEnabled: true, text: t('specific.disclaimer.button.text') }}
     >
       <Typography variant="body">
         Contrary to popular belief, Lorem Ipsum is not simply random text. It

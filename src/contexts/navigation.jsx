@@ -30,6 +30,10 @@ export function NavigationProvider({ children }) {
     setIsDisclaimerOpened(false);
   }
 
+  function openDisclaimer() {
+    setIsDisclaimerOpened(true);
+  }
+
   const [mobileNavValue, setMobileNavValue] = useState(mobileNavs.map.value);
 
   const openStation = (item) => {
@@ -59,6 +63,7 @@ export function NavigationProvider({ children }) {
           openStation,
           closeStation,
           closeDisclaimer,
+          openDisclaimer,
         },
         loaders: {},
       }}

@@ -271,6 +271,11 @@
       "riverLine": "Linhas de drenagem",
       "alertStation": "Estação em alerta"
     },
+    "disclaimer": {
+      "button": {
+        "text": "Fechar"
+      }
+    },
     "share": {
       "message": "Acompanhe os dados de monitoramento das redes amazônicas"
     },
