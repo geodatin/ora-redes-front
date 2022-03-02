@@ -14,10 +14,9 @@ import { downloadCSV } from '../../../../../../utils/helpers';
  * This function provides time series of RQA network
  * @returns RQATimeSeries
  */
-export default function RQATimeSeries({ station, timeGrouping }) {
+export default function RQATimeSeries({ station }) {
   RQATimeSeries.propTypes = {
     station: PropTypes.shape(),
-    timeGrouping: PropTypes.string.isRequired,
   };
 
   RQATimeSeries.defaultProps = {
@@ -67,7 +66,7 @@ export default function RQATimeSeries({ station, timeGrouping }) {
           .get(
             `/observation/timeSeries/${station.network.toLowerCase()}/${
               station.code
-            }/${dataType}/${timeGrouping}`
+            }/${dataType}/hour`
           )
           .then(({ data }) => {
             if (isSubscribed && data) {
@@ -80,12 +79,12 @@ export default function RQATimeSeries({ station, timeGrouping }) {
     return () => {
       isSubscribed = false;
     };
-  }, [station, timeGrouping]);
+  }, [station]);
 
   const csvFetching = (dataType, stationCode) => {
     api
       .get(
-        `/observation/timeSeries/${station.network.toLowerCase()}/${stationCode}/${dataType}/${timeGrouping}`,
+        `/observation/timeSeries/${station.network.toLowerCase()}/${stationCode}/${dataType}/hour`,
         {
           params: {
             format: 'csv',

@@ -73,7 +73,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       return <RHATimeSeries station={station} timeGrouping={timeGrouping} />;
     }
     if (network === 'RQA') {
-      return <RQATimeSeries station={station} timeGrouping={timeGrouping} />;
+      return <RQATimeSeries station={station} />;
     }
     return <> </>;
   }
