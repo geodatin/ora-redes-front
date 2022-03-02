@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Routes as BaseRoutes,
@@ -7,6 +7,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 
+import Disclaimer from './components/Disclaimer';
 import Header from './components/Header';
 import ApiMethods from './pages/ApiMethods';
 import Dashboard from './pages/Dashboard';
@@ -14,6 +15,9 @@ import DataLibrary from './pages/DataLibrary';
 
 function Routes() {
   const { t } = useTranslation();
+
+  const [openDisclaimer, setOpenDisclaimer] = useState(true);
+
   return (
     <BrowserRouter>
       <Header
@@ -25,7 +29,19 @@ function Routes() {
         ]}
       />
       <BaseRoutes>
-        <Route exact path="/" element={<Dashboard />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <>
+              <Disclaimer
+                open={openDisclaimer}
+                handleDisclaimerClose={() => setOpenDisclaimer(false)}
+              />
+              <Dashboard />
+            </>
+          }
+        />
         <Route exact path="/api" element={<ApiMethods />} />
         <Route exact path="/library" element={<DataLibrary />} />
         <Route path="*" element={<Navigate to="/" />} />
