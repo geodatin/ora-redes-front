@@ -9,6 +9,7 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 
+import Disclaimer from './components/Disclaimer';
 import Header from './components/Header';
 import { FilteringProvider } from './contexts/filtering';
 import { MappingProvider } from './contexts/mapping';
@@ -32,6 +33,7 @@ function DefaultPage({ embed }) {
     <NavigationProvider>
       <FilteringProvider embed={embed}>
         <MappingProvider>
+          <Disclaimer />
           <Dashboard />
         </MappingProvider>
       </FilteringProvider>

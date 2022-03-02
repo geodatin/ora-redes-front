@@ -1,4 +1,5 @@
 import AspectRatioRoundedIcon from '@mui/icons-material/AspectRatioRounded';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import ShareIcon from '@mui/icons-material/Share';
 import L from 'leaflet';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
@@ -47,7 +48,7 @@ export default function MonitoringMap() {
 
   const {
     values: { isMobile },
-    functions: { openStation },
+    functions: { openStation, openDisclaimer },
   } = useContext(NavigationContext);
 
   const [points, setPoints] = useState();
@@ -325,6 +326,11 @@ export default function MonitoringMap() {
             <AspectRatioRoundedIcon style={{ fontSize: 20 }} />
           </MapItem>
         ) : undefined
+      }
+      itemAbout={
+        <MapItem onClick={() => openDisclaimer()}>
+          <InfoOutlinedIcon style={{ fontSize: 20 }} />
+        </MapItem>
       }
       itemChildren={
         <>
