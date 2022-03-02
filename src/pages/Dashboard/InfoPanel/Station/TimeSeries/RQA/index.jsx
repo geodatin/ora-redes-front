@@ -131,66 +131,61 @@ export default function RQATimeSeries({ station, timeGrouping }) {
     callback(value, index, ticks) {
       const timestamp = this.getLabelForValue(value);
 
-      if (timeGrouping === 'year') {
-        return t('general.date.year', {
-          date: new Date(timestamp),
-        });
-      }
-
-      if (timeGrouping === 'quarter' || timeGrouping === 'month') {
-        return t('general.date.monthYear', {
-          date: new Date(timestamp),
-        });
-      }
-
       return t('general.date.dayMonthYear', {
         date: new Date(timestamp),
       });
     },
   };
 
-  const getLineChart = (data, dataType) => (
-    <LineChart
-      title={t(`specific.statistics.charts.timeSeries.${dataType}.title`)}
-      info={t(`specific.statistics.charts.timeSeries.${dataType}.info`)}
-      data={
-        data && {
-          labels: data.x,
-          datasets: [
-            getDatasetObj(
-              'line',
-              data.y,
-              t(`specific.dataType.variable.items.${dataType}`),
-              t(`specific.dataType.sufixes.${dataType}`),
-              dataTypes.variable?.colors[dataType]
-            ),
-          ],
-        }
-      }
-      fullScreenEnabled
-      csvCallback={() => csvFetching(dataType, station.code)}
-      options={{
-        plugins: {
-          tooltip: customTooltip,
-          legend: false,
-        },
-        scales: {
-          x: {
-            ticks: xTicksByTimeGrouping,
-          },
-          y: {
-            title: {
-              display: true,
-              text: t(
-                `specific.statistics.charts.timeSeries.${dataType}.yAxisLabel`
-              ),
-              color: theme.neutral.gray.main,
+  const getLineChart = (data, dataType) => {
+    const hasDataOnY = data?.y?.some((y) => y !== null);
+
+    if (hasDataOnY) {
+      return (
+        <LineChart
+          title={t(`specific.statistics.charts.timeSeries.${dataType}.title`)}
+          info={t(`specific.statistics.charts.timeSeries.${dataType}.info`)}
+          data={
+            data && {
+              labels: data.x,
+              datasets: [
+                getDatasetObj(
+                  'line',
+                  data.y,
+                  t(`specific.dataType.variable.items.${dataType}`),
+                  t(`specific.dataType.sufixes.${dataType}`),
+                  dataTypes.variable?.colors[dataType]
+                ),
+              ],
+            }
+          }
+          fullScreenEnabled
+          csvCallback={() => csvFetching(dataType, station.code)}
+          options={{
+            plugins: {
+              tooltip: customTooltip,
+              legend: false,
             },
-          },
-        },
-      }}
-    />
-  );
+            scales: {
+              x: {
+                ticks: xTicksByTimeGrouping,
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: t(
+                    `specific.statistics.charts.timeSeries.${dataType}.yAxisLabel`
+                  ),
+                  color: theme.neutral.gray.main,
+                },
+              },
+            },
+          }}
+        />
+      );
+    }
+    return null;
+  };
 
   return (
     <>
