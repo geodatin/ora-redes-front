@@ -25,6 +25,10 @@ export function NavigationProvider({ children }) {
   const [panelIndexValue, setPanelIndexValue] = useState(
     panels.statistics.index
   );
+  const [isDisclaimerOpened, setIsDisclaimerOpened] = useState(true);
+  function closeDisclaimer() {
+    setIsDisclaimerOpened(false);
+  }
 
   const [mobileNavValue, setMobileNavValue] = useState(mobileNavs.map.value);
 
@@ -43,9 +47,19 @@ export function NavigationProvider({ children }) {
   return (
     <NavigationContext.Provider
       value={{
-        values: { mobileNavValue, panelIndexValue, station, isMobile },
+        values: {
+          mobileNavValue,
+          panelIndexValue,
+          station,
+          isMobile,
+          isDisclaimerOpened,
+        },
         setters: { setMobileNavValue, setPanelIndexValue },
-        functions: { openStation, closeStation },
+        functions: {
+          openStation,
+          closeStation,
+          closeDisclaimer,
+        },
         loaders: {},
       }}
     >

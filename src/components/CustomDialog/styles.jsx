@@ -6,6 +6,7 @@ const useStyles = createUseStyles((theme) => ({
       backgroundColor: theme.background.main,
       width: '100%',
       maxWidth: 450,
+      maxHeight: 600,
     },
   },
   header: {
@@ -26,6 +27,19 @@ const useStyles = createUseStyles((theme) => ({
   },
   content: {
     padding: 15,
+    overflow: 'auto',
+  },
+  button: {
+    '&.MuiButton-root': {
+      width: '100%',
+      backgroundColor: theme.primary.main,
+      color: theme.neutral.white,
+      textTransform: 'none',
+
+      '&:hover': {
+        backgroundColor: theme.primary.light,
+      },
+    },
   },
 }));
 
