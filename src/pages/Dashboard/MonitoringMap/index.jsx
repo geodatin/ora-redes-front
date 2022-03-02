@@ -184,7 +184,6 @@ export default function MonitoringMap() {
             key={key}
             position={position}
             icon={icon}
-            riseOnHover
             zIndexOffset={point.properties.situation === 'alert' ? 10 : 2}
           >
             <Popup
