@@ -272,6 +272,7 @@
       "alertStation": "Estação em alerta"
     },
     "disclaimer": {
+      "title": "Sobre o ORA Redes",
       "button": {
         "text": "Fechar"
       }

@@ -19,7 +19,7 @@ export default function Disclaimer() {
   return (
     <CustomDialog
       open={isDisclaimerOpened}
-      title="About ORA Redes"
+      title={t('specific.disclaimer.title')}
       onClose={closeDisclaimer}
       button={{ isEnabled: true, text: t('specific.disclaimer.button.text') }}
     >
