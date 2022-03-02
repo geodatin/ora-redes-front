@@ -28,6 +28,17 @@ const useStyles = createUseStyles((theme) => ({
   content: {
     padding: 15,
     overflow: 'auto',
+
+    '&::-webkit-scrollbar': {
+      width: 8,
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: theme.scrollBar.track,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: theme.scrollBar.thumb,
+      borderRadius: 10,
+    },
   },
   button: {
     '&.MuiButton-root': {
