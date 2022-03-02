@@ -168,7 +168,7 @@ function CardItemComponent({ item, disableMoreStatisticsButton }) {
             height: 30,
             backgroundColor: theme.toggleButton.unabled,
             textTransform: 'none',
-            color: theme.neutral.gray.dark,
+            color: theme.secondary.dark,
           }}
           disabled={false}
           onClick={() => openStation(item)}
