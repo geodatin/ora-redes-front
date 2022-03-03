@@ -11,6 +11,7 @@ import CustomButton from '../../../../../components/CustomButton';
 import ListItemContainer from '../../../../../components/ListItemContainer';
 import Typography from '../../../../../components/Typography';
 import { dataTypes } from '../../../../../constants/options';
+import FilteringContext from '../../../../../contexts/filtering';
 import MapContext from '../../../../../contexts/mapping';
 import NavigationContext from '../../../../../contexts/navigation';
 import useStyles from './styles';
@@ -40,6 +41,10 @@ function CardItemComponent({ item, disableMoreStatisticsButton }) {
   const {
     functions: { panOnMap },
   } = useContext(MapContext);
+
+  const {
+    values: { timeGrouping },
+  } = useContext(FilteringContext);
 
   function dataDough(key, value, sufix, label, color) {
     return (
@@ -142,7 +147,8 @@ function CardItemComponent({ item, disableMoreStatisticsButton }) {
         </div>
 
         <Typography style={{ color: theme.secondary.dark }} variant="caption">
-          {t('specific.infoPanel.lastUpdate')}{' '}
+          {t('specific.infoPanel.lastUpdate')}
+          {''}
           {t('general.date.dayMonthYearHour', {
             date: new Date(item.lastUpdate),
           })}
@@ -150,15 +156,22 @@ function CardItemComponent({ item, disableMoreStatisticsButton }) {
       </div>
 
       <div ref={doughsRef} className={classes.doughnuts}>
-        {item?.observations?.map((observation) =>
-          dataDough(
+        {item?.observations?.map((observation) => {
+          const sufix =
+            observation?.mode === 'sum'
+              ? `${t(`specific.dataType.sufixes.${observation.key}`)}/${t(
+                  `specific.infoPanel.timeGrouping.${timeGrouping}`
+                ).toLowerCase()}`
+              : t(`specific.dataType.sufixes.${observation.key}`);
+
+          return dataDough(
             observation.key,
             observation.value,
-            t(`specific.dataType.sufixes.${observation.key}`),
+            sufix,
             t(`specific.dataType.variable.items.${observation.key}`),
             dataTypes.variable.colors[observation.key]
-          )
-        )}
+          );
+        })}
       </div>
 
       {!disableMoreStatisticsButton && (

@@ -13,10 +13,9 @@ import useStyles from './styles';
  * This function provides a card list
  * @returns card list
  */
-export default function CardList({ tabpanelref, timeGrouping }) {
+export default function CardList({ tabpanelref }) {
   CardList.propTypes = {
     tabpanelref: PropTypes.shape(),
-    timeGrouping: PropTypes.string.isRequired,
   };
 
   CardList.defaultProps = {
@@ -53,7 +52,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
     setIsFirstLoading(true);
     api
       .post(
-        `/observation/list/${timeGrouping}`,
+        `/observation/list/last`,
         {
           filters,
         },
@@ -75,7 +74,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
     return () => {
       isSubscribed = false;
     };
-  }, [filters, timeGrouping]);
+  }, [filters]);
 
   /**
    * This function fetch more stations.
@@ -87,7 +86,7 @@ export default function CardList({ tabpanelref, timeGrouping }) {
       setIsLoadingPage(true);
       api
         .post(
-          `/observation/list/${timeGrouping}`,
+          `/observation/list/last`,
           {
             filters,
           },
