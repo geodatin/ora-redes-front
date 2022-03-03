@@ -13,6 +13,9 @@ const useStyles = createUseStyles((theme) => ({
     borderRadius: 5,
     border: `1px solid ${theme.stroke.dark}`,
     cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   button: {
     '&.MuiButtonBase-root': {
