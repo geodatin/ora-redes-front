@@ -12,6 +12,7 @@ import FilteringContext from '../../../../contexts/filtering';
 import NavigationContext from '../../../../contexts/navigation';
 import api from '../../../../services/api';
 import { CardItem } from '../CardList/CardItem';
+import HYBAMTimeSeries from './TimeSeries/HYBAM';
 import RHATimeSeries from './TimeSeries/RHA';
 import RQATimeSeries from './TimeSeries/RQA';
 
@@ -74,6 +75,9 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
     }
     if (network === 'RQA') {
       return <RQATimeSeries station={station} />;
+    }
+    if (network === 'HYBAM') {
+      return <HYBAMTimeSeries station={station} />;
     }
     return <> </>;
   }
