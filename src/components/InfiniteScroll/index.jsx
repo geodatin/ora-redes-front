@@ -44,7 +44,7 @@ export default function InfiniteScroll({
     onChange(isBottom);
   }, [isBottom]);
 
-  if (resultsAmount === 0) {
+  if (!isFirstLoading && resultsAmount === 0) {
     return (
       <li className={classes.noResults}>
         <Typography style={{ color: theme.neutral.gray.main }} variant="body">

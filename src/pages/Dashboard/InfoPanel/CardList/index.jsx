@@ -44,6 +44,8 @@ export default function CardList({ tabpanelref }) {
   const { t } = useTranslation();
   const classes = useStyles();
 
+  console.log(isFirstLoading);
+
   /**
    * This userEffect fetch station list.
    */

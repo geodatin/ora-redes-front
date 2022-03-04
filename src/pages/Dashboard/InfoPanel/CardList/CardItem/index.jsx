@@ -147,8 +147,7 @@ function CardItemComponent({ item, disableMoreStatisticsButton }) {
         </div>
 
         <Typography style={{ color: theme.secondary.dark }} variant="caption">
-          {t('specific.infoPanel.lastUpdate')}
-          {''}
+          {t('specific.infoPanel.lastUpdate')}{' '}
           {t('general.date.dayMonthYearHour', {
             date: new Date(item.lastUpdate),
           })}
