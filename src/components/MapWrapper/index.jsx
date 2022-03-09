@@ -20,6 +20,7 @@ export default function MapWrapper({
   children,
   itemChildren,
   itemAbout,
+  itemLayers,
   itemTopChildren,
   itemBottomChildren,
   getMapRef,
@@ -87,6 +88,7 @@ export default function MapWrapper({
         {itemTopChildren}
         {itemAbout}
         {itemChildren}
+        {itemLayers}
         <ZoomButton />
         {itemBottomChildren}
       </div>
@@ -119,6 +121,7 @@ MapWrapper.defaultProps = {
   itemAbout: undefined,
   itemBottomChildren: undefined,
   getMapRef: undefined,
+  itemLayers: undefined,
 };
 
 MapWrapper.propTypes = {
@@ -126,6 +129,7 @@ MapWrapper.propTypes = {
   itemChildren: PropTypes.node,
   itemTopChildren: PropTypes.node,
   itemAbout: PropTypes.node,
+  itemLayers: PropTypes.node,
   itemBottomChildren: PropTypes.node,
   getMapRef: PropTypes.func,
 };

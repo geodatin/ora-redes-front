@@ -33,6 +33,11 @@ export function FilteringProvider({ embed, children }) {
   const [filters, setFilters] = useState(filterDefaults.autocompleteSelection);
   const [paramsLoaded, setParamsLoaded] = useState(false);
 
+  const [viewProjectedStations, setViewProjectedStations] = useState(false);
+  const handleViewProjectedStations = (event) => {
+    setViewProjectedStations(event.target.checked);
+  };
+
   /**
    * Merge the autocomplete and network selection.
    */
@@ -148,6 +153,7 @@ export function FilteringProvider({ embed, children }) {
           autocompleteSelection,
           autocompleteStraightSelection,
           networkSelection,
+          viewProjectedStations,
           timeGrouping,
           filters,
           embed,
@@ -161,6 +167,7 @@ export function FilteringProvider({ embed, children }) {
         },
         functions: {
           generateRoute,
+          handleViewProjectedStations,
         },
         loaders: {
           paramsLoaded,

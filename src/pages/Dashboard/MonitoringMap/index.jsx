@@ -1,6 +1,8 @@
 import AspectRatioRoundedIcon from '@mui/icons-material/AspectRatioRounded';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import LayersRoundedIcon from '@mui/icons-material/LayersRounded';
 import ShareIcon from '@mui/icons-material/Share';
+import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import L from 'leaflet';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -22,7 +24,11 @@ import MapWrapper from '../../../components/MapWrapper';
 import MapItem from '../../../components/MapWrapper/Mapitem';
 import ShareDialog from '../../../components/ShareDialog';
 import Typography from '../../../components/Typography';
-import { embedItems, networks } from '../../../constants/options';
+import {
+  embedItems,
+  networkByValue,
+  networks,
+} from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
@@ -37,8 +43,14 @@ import useStyles from './styles';
  */
 export default function MonitoringMap() {
   const {
-    values: { filters, timeGrouping, autocompleteSelection, networkSelection },
-    functions: { generateRoute },
+    values: {
+      filters,
+      timeGrouping,
+      autocompleteSelection,
+      networkSelection,
+      viewProjectedStations,
+    },
+    functions: { generateRoute, handleViewProjectedStations },
   } = useContext(FilteringContext);
 
   const {
@@ -52,6 +64,8 @@ export default function MonitoringMap() {
   } = useContext(NavigationContext);
 
   const [points, setPoints] = useState();
+  const [projectedStations, setProjectedStations] = useState();
+
   const theme = useTheme();
   const classes = useStyles();
   const { t } = useTranslation();
@@ -71,6 +85,20 @@ export default function MonitoringMap() {
       isSubscribed = false;
     };
   }, [filters]);
+
+  useEffect(() => {
+    let isSubscribed = true;
+
+    api.get(`/station/projected/location`).then(({ data }) => {
+      if (isSubscribed) {
+        setProjectedStations(data.features);
+      }
+    });
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
 
   const blueStation = useMemo(
     () =>
@@ -154,7 +182,12 @@ export default function MonitoringMap() {
 
   const markers = useMemo(() => {
     if (points) {
-      return points.map((point, index) => {
+      let newPoints = [...points];
+      if (projectedStations && viewProjectedStations) {
+        newPoints = [...points, ...projectedStations];
+      }
+
+      return newPoints.map((point, index) => {
         const key = `${point?.properties.code}-${index}`;
         const position = [...point.geometry.coordinates];
         position.reverse();
@@ -281,7 +314,7 @@ export default function MonitoringMap() {
     }
 
     return null;
-  }, [points, theme]);
+  }, [points, theme, projectedStations, viewProjectedStations]);
 
   function handleShareDialog() {
     setOpenShare(!openShare);
@@ -326,6 +359,42 @@ export default function MonitoringMap() {
             <AspectRatioRoundedIcon style={{ fontSize: 20 }} />
           </MapItem>
         ) : undefined
+      }
+      itemLayers={
+        (networkByValue[networkSelection].code === 'RQA' ||
+          networkByValue[networkSelection].code === 'RHA') && (
+          <MapItem
+            popupContent={
+              <div style={{ paddingLeft: 10 }}>
+                <div className={classes.legendItem}>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          sx={{
+                            '& .MuiSvgIcon-root': {
+                              fontSize: 18,
+                            },
+                          }}
+                          checked={viewProjectedStations}
+                          onChange={handleViewProjectedStations}
+                        />
+                      }
+                      label={
+                        <Typography variant="caption">
+                          Estações projetadas
+                        </Typography>
+                      }
+                    />
+                  </FormGroup>
+                </div>
+              </div>
+            }
+            onClick={() => {}}
+          >
+            <LayersRoundedIcon style={{ fontSize: 20 }} />
+          </MapItem>
+        )
       }
       itemAbout={
         <MapItem onClick={() => openDisclaimer()}>
