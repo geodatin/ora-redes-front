@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
 import LineChart from '../../../../../../components/Charts/Line';
-import Multiple from '../../../../../../components/Charts/Multiple';
 import { dataTypes } from '../../../../../../constants/options';
 import api from '../../../../../../services/api';
 import { downloadCSV } from '../../../../../../utils/helpers';

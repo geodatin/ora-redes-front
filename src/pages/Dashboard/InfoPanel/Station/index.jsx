@@ -54,7 +54,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       api
         .post(
           `/observation/list/${timeGrouping}`,
-          { filters },
+          { filters: { ...filters, network: [station.network] } },
           { params: { stationCode: station.code } }
         )
         .then(({ data }) => {
@@ -67,7 +67,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
     return () => {
       isSubscribed = false;
     };
-  }, [station.code, timeGrouping]);
+  }, [station.code, station.network, timeGrouping]);
 
   function getTimeSeries(network) {
     if (network === 'RHA') {
