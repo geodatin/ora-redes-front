@@ -12,9 +12,8 @@ import FilteringContext from '../../../../contexts/filtering';
 import NavigationContext from '../../../../contexts/navigation';
 import api from '../../../../services/api';
 import { CardItem } from '../CardList/CardItem';
-import HYBAMTimeSeries from './TimeSeries/HYBAM';
-import RHATimeSeries from './TimeSeries/RHA';
-import RQATimeSeries from './TimeSeries/RQA';
+import HistoricTimeSeries from './HistoricTimeSeries';
+import RHATimeSeries from './HistoricTimeSeries/RHA';
 
 /**
  * This function provides a station panel
@@ -74,10 +73,43 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
       return <RHATimeSeries station={station} timeGrouping={timeGrouping} />;
     }
     if (network === 'RQA') {
-      return <RQATimeSeries station={station} />;
+      return (
+        <HistoricTimeSeries
+          station={station}
+          chartFetches={[
+            { dataType: 'turbidity' },
+            { dataType: 'ph' },
+            { dataType: 'OD' },
+            {
+              dataType: 'electricConductivity',
+            },
+            { dataType: 'sampleTemperature' },
+            { dataType: 'totalDissolvedSolid' },
+            { dataType: 'totalNitrogen' },
+            { dataType: 'totalOrtophosphate' },
+            {
+              dataType: 'totalSuspensionSolid',
+            },
+          ]}
+        />
+      );
     }
     if (network === 'HYBAM') {
-      return <HYBAMTimeSeries station={station} />;
+      return (
+        <HistoricTimeSeries
+          station={station}
+          chartFetches={[
+            { dataType: 'level' },
+            { dataType: 'flowRate' },
+            { dataType: 'ph' },
+            {
+              dataType: 'electricConductivity',
+            },
+            { dataType: 'sampleTemperature' },
+            { dataType: 'totalOrtophosphate' },
+          ]}
+        />
+      );
     }
     return <> </>;
   }
