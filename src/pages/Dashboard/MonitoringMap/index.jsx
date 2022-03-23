@@ -24,11 +24,7 @@ import MapWrapper from '../../../components/MapWrapper';
 import MapItem from '../../../components/MapWrapper/Mapitem';
 import ShareDialog from '../../../components/ShareDialog';
 import Typography from '../../../components/Typography';
-import {
-  embedItems,
-  networkByValue,
-  networks,
-} from '../../../constants/options';
+import { embedItems, networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
@@ -367,40 +363,37 @@ export default function MonitoringMap() {
         ) : undefined
       }
       itemLayers={
-        (networkByValue[networkSelection].code === 'RQA' ||
-          networkByValue[networkSelection].code === 'RHA') && (
-          <MapItem
-            popupContent={
-              <div style={{ paddingLeft: 10 }}>
-                <div className={classes.legendItem}>
-                  <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          sx={{
-                            '& .MuiSvgIcon-root': {
-                              fontSize: 18,
-                            },
-                          }}
-                          checked={viewProjectedStations}
-                          onChange={handleViewProjectedStations}
-                        />
-                      }
-                      label={
-                        <Typography variant="caption">
-                          Estações projetadas
-                        </Typography>
-                      }
-                    />
-                  </FormGroup>
-                </div>
+        <MapItem
+          popupContent={
+            <div style={{ paddingLeft: 10 }}>
+              <div className={classes.legendItem}>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        sx={{
+                          '& .MuiSvgIcon-root': {
+                            fontSize: 18,
+                          },
+                        }}
+                        checked={viewProjectedStations}
+                        onChange={handleViewProjectedStations}
+                      />
+                    }
+                    label={
+                      <Typography variant="caption">
+                        Estações projetadas
+                      </Typography>
+                    }
+                  />
+                </FormGroup>
               </div>
-            }
-            onClick={() => {}}
-          >
-            <LayersRoundedIcon style={{ fontSize: 20 }} />
-          </MapItem>
-        )
+            </div>
+          }
+          onClick={() => {}}
+        >
+          <LayersRoundedIcon style={{ fontSize: 20 }} />
+        </MapItem>
       }
       itemAbout={
         <MapItem onClick={() => openDisclaimer()}>
