@@ -91,7 +91,11 @@ export default function MonitoringMap() {
 
     api.get(`/station/projected/location`).then(({ data }) => {
       if (isSubscribed) {
-        setProjectedStations(data.features);
+        const projected = data.features.map((feature) => ({
+          ...feature,
+          properties: { ...feature.properties, isProjected: true },
+        }));
+        setProjectedStations(projected);
       }
     });
 
@@ -212,6 +216,8 @@ export default function MonitoringMap() {
         } else {
           icon = grayStation;
         }
+
+        if (point.properties.isProjected) icon = grayStation;
 
         return (
           <Marker
