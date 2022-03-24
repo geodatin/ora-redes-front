@@ -8,6 +8,7 @@ import ItemsChart from '../../../../components/Charts/Items';
 import LegendDoughnutChart from '../../../../components/Charts/LegendDoughnut';
 import LineChart from '../../../../components/Charts/Line';
 import RankingChart from '../../../../components/Charts/Ranking';
+import { getYLineAnnotation } from '../../../../utils/helpers';
 
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
@@ -146,7 +147,34 @@ export default function Statistics() {
         setParams={setRankingParams}
       />
 
-      <LineChart title="Line chart" info="This is a line chart" data={data} />
+      <LineChart
+        title="Line chart"
+        info="This is a line chart"
+        data={data}
+        options={{
+          plugins: {
+            autocolors: false,
+            annotation: {
+              annotations: {
+                line1: getYLineAnnotation({
+                  y: 1000,
+                  color: 'green',
+                  bgColor: theme.background.main,
+                  label: 'max',
+                  display: true,
+                }),
+                line2: getYLineAnnotation({
+                  y: 200,
+                  color: 'red',
+                  bgColor: theme.background.main,
+                  label: 'min',
+                  display: true,
+                }),
+              },
+            },
+          },
+        }}
+      />
 
       <BarChart
         title="Horizontal bar chart"
