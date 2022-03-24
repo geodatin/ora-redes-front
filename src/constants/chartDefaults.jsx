@@ -12,6 +12,7 @@ import {
   ArcElement,
 } from 'chart.js';
 import { TreemapController, TreemapElement } from 'chartjs-chart-treemap';
+import annotationPlugin from 'chartjs-plugin-annotation';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useTheme } from 'react-jss';
 
@@ -27,7 +28,8 @@ ChartJS.register(
   Legend,
   ChartDataLabels,
   TreemapController,
-  TreemapElement
+  TreemapElement,
+  annotationPlugin
 );
 
 ChartJS.defaults.font.family = `"Roboto", "Helvetica", "Arial", sans-serif`;

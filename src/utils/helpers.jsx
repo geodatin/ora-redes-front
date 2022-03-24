@@ -17,4 +17,31 @@ function downloadCSV(data, title) {
   linkCSV.click();
 }
 
-export { getTextWidth, downloadCSV };
+function getYLineAnnotation({ y, color, bgColor, label, display }) {
+  let labelEnabled = false;
+  if (label) {
+    labelEnabled = true;
+  }
+
+  return {
+    display,
+    type: 'line',
+    yMin: y,
+    yMax: y,
+    backgroundColor: color,
+    borderColor: color,
+    borderDash: [7],
+    label: {
+      enabled: labelEnabled,
+      content: label,
+      color,
+      padding: 0,
+      backgroundColor: bgColor,
+      font: {
+        size: 12,
+      },
+    },
+  };
+}
+
+export { getTextWidth, downloadCSV, getYLineAnnotation };
