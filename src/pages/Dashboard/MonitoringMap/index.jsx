@@ -87,11 +87,7 @@ export default function MonitoringMap() {
 
     api.get(`/station/projected/location`).then(({ data }) => {
       if (isSubscribed) {
-        const projected = data.features.map((feature) => ({
-          ...feature,
-          properties: { ...feature.properties, isProjected: true },
-        }));
-        setProjectedStations(projected);
+        setProjectedStations(data.features);
       }
     });
 
