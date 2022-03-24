@@ -123,12 +123,16 @@
           "level": {
             "title": "Histórico do nível médio",
             "info": "Este gráfico apresenta o histórico do nível médio",
-            "yAxisLabel": "centímetros"
+            "yAxisLabel": "centímetros",
+            "superiorLimit": "enchente",
+            "inferiorLimit": "seca"
           },
           "flowRate": {
             "title": "Histórico da vazão",
             "info": "Este gráfico apresenta o histórico da vazão",
-            "yAxisLabel": "m³ por segundo"
+            "yAxisLabel": "m³ por segundo",
+            "superiorLimit": "enchente",
+            "inferiorLimit": "seca"
           },
           "turbidity": {
             "title": "Histórico da turbidez",

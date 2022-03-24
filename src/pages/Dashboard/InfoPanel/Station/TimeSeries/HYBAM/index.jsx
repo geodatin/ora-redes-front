@@ -8,7 +8,10 @@ import LineChart from '../../../../../../components/Charts/Line';
 import Multiple from '../../../../../../components/Charts/Multiple';
 import { dataTypes } from '../../../../../../constants/options';
 import api from '../../../../../../services/api';
-import { downloadCSV } from '../../../../../../utils/helpers';
+import {
+  downloadCSV,
+  getYLineAnnotation,
+} from '../../../../../../utils/helpers';
 
 /**
  * This function provides time series of HYBAM network
@@ -127,6 +130,35 @@ export default function HYBAMTimeSeries({ station }) {
     },
   };
 
+  const getLimits = (data) => ({
+    line1: () => {
+      const superiorLimit = data?.limits?.superiorLimit;
+      if (superiorLimit) {
+        return getYLineAnnotation({
+          y: superiorLimit,
+          color: 'green',
+          bgColor: theme.background.main,
+          label: 'max',
+          display: true,
+        });
+      }
+      return { display: false };
+    },
+    line2: () => {
+      const inferiorLimit = data?.limits?.inferiorLimit;
+      if (inferiorLimit) {
+        return getYLineAnnotation({
+          y: inferiorLimit,
+          color: 'red',
+          bgColor: theme.background.main,
+          label: 'min',
+          display: true,
+        });
+      }
+      return { display: false };
+    },
+  });
+
   const getLineChart = (data, dataType) => {
     const hasDataOnY = data?.y?.some((y) => y !== null);
 
@@ -155,6 +187,9 @@ export default function HYBAMTimeSeries({ station }) {
             plugins: {
               tooltip: customTooltip,
               legend: false,
+              annotation: {
+                annotations: getLimits(data),
+              },
             },
             scales: {
               x: {

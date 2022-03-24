@@ -9,7 +9,10 @@ import BarChart from '../../../../../../components/Charts/Bar';
 import LineChart from '../../../../../../components/Charts/Line';
 import Multiple from '../../../../../../components/Charts/Multiple';
 import api from '../../../../../../services/api';
-import { downloadCSV } from '../../../../../../utils/helpers';
+import {
+  downloadCSV,
+  getYLineAnnotation,
+} from '../../../../../../utils/helpers';
 
 /**
  * This function provides time series of RHA network
@@ -34,6 +37,8 @@ export default function RHATimeSeries({ station, timeGrouping }) {
 
   const [selectedDatasetOnMultiple, setSelectedDatasetOnMultiple] = useState(1);
   const [rawData, setRawData] = useState();
+
+  console.log(flowRateData);
 
   const chartFetches = [
     { dataType: 'rain', dataSetter: setRainData },
@@ -136,6 +141,39 @@ export default function RHATimeSeries({ station, timeGrouping }) {
     },
   };
 
+  const getLimits = (dataType, data) => ({
+    line1: () => {
+      const superiorLimit = data?.limits?.superiorLimit;
+      if (superiorLimit) {
+        return getYLineAnnotation({
+          y: superiorLimit,
+          color: 'green',
+          bgColor: theme.background.main,
+          label: ` ${t(
+            `specific.statistics.charts.timeSeries.${dataType}.superiorLimit`
+          )} `,
+          display: true,
+        });
+      }
+      return { display: false };
+    },
+    line2: () => {
+      const inferiorLimit = data?.limits?.inferiorLimit;
+      if (inferiorLimit) {
+        return getYLineAnnotation({
+          y: inferiorLimit,
+          color: 'red',
+          bgColor: theme.background.main,
+          label: ` ${t(
+            `specific.statistics.charts.timeSeries.${dataType}.inferiorLimit`
+          )} `,
+          display: true,
+        });
+      }
+      return { display: false };
+    },
+  });
+
   return (
     <>
       <BarChart
@@ -203,6 +241,10 @@ export default function RHATimeSeries({ station, timeGrouping }) {
           plugins: {
             tooltip: customTooltip,
             legend: false,
+            autocolors: false,
+            annotation: {
+              annotations: getLimits('level', levelData),
+            },
           },
           scales: {
             x: {
@@ -244,6 +286,10 @@ export default function RHATimeSeries({ station, timeGrouping }) {
           plugins: {
             tooltip: customTooltip,
             legend: false,
+            autocolors: false,
+            annotation: {
+              annotations: getLimits('flowRate', flowRateData),
+            },
           },
           scales: {
             x: {
