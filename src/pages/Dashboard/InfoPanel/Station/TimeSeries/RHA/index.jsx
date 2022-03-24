@@ -38,8 +38,6 @@ export default function RHATimeSeries({ station, timeGrouping }) {
   const [selectedDatasetOnMultiple, setSelectedDatasetOnMultiple] = useState(1);
   const [rawData, setRawData] = useState();
 
-  console.log(flowRateData);
-
   const chartFetches = [
     { dataType: 'rain', dataSetter: setRainData },
     { dataType: 'level', dataSetter: setLevelData },
@@ -141,9 +139,9 @@ export default function RHATimeSeries({ station, timeGrouping }) {
     },
   };
 
-  const getLimits = (dataType, data) => ({
+  const getLimits = (dataType, data, yScaleID) => ({
     line1: () => {
-      const superiorLimit = data?.limits?.superiorLimit;
+      const superiorLimit = data?.limits?.[dataType]?.superiorLimit;
       if (superiorLimit) {
         return getYLineAnnotation({
           y: superiorLimit,
@@ -152,13 +150,14 @@ export default function RHATimeSeries({ station, timeGrouping }) {
           label: ` ${t(
             `specific.statistics.charts.timeSeries.${dataType}.superiorLimit`
           )} `,
+          yScaleID,
           display: true,
         });
       }
       return { display: false };
     },
     line2: () => {
-      const inferiorLimit = data?.limits?.inferiorLimit;
+      const inferiorLimit = data?.limits?.[dataType]?.inferiorLimit;
       if (inferiorLimit) {
         return getYLineAnnotation({
           y: inferiorLimit,
@@ -167,6 +166,7 @@ export default function RHATimeSeries({ station, timeGrouping }) {
           label: ` ${t(
             `specific.statistics.charts.timeSeries.${dataType}.inferiorLimit`
           )} `,
+          yScaleID,
           display: true,
         });
       }
@@ -363,6 +363,13 @@ export default function RHATimeSeries({ station, timeGrouping }) {
           animation: false,
           plugins: {
             tooltip: customTooltip,
+            autocolors: false,
+            annotation: {
+              annotations:
+                selectedDatasetOnMultiple === 1
+                  ? getLimits('flowRate', rawData, 'y2')
+                  : getLimits('level', rawData, 'y2'),
+            },
             legend: {
               display: true,
               reverse: true,

@@ -130,28 +130,34 @@ export default function HYBAMTimeSeries({ station }) {
     },
   };
 
-  const getLimits = (data) => ({
+  const getLimits = (dataType, data, yScaleID) => ({
     line1: () => {
-      const superiorLimit = data?.limits?.superiorLimit;
+      const superiorLimit = data?.limits?.[dataType]?.superiorLimit;
       if (superiorLimit) {
         return getYLineAnnotation({
           y: superiorLimit,
           color: 'green',
           bgColor: theme.background.main,
-          label: 'max',
+          label: ` ${t(
+            `specific.statistics.charts.timeSeries.${dataType}.superiorLimit`
+          )} `,
+          yScaleID,
           display: true,
         });
       }
       return { display: false };
     },
     line2: () => {
-      const inferiorLimit = data?.limits?.inferiorLimit;
+      const inferiorLimit = data?.limits?.[dataType]?.inferiorLimit;
       if (inferiorLimit) {
         return getYLineAnnotation({
           y: inferiorLimit,
           color: 'red',
           bgColor: theme.background.main,
-          label: 'min',
+          label: ` ${t(
+            `specific.statistics.charts.timeSeries.${dataType}.inferiorLimit`
+          )} `,
+          yScaleID,
           display: true,
         });
       }
@@ -188,7 +194,7 @@ export default function HYBAMTimeSeries({ station }) {
               tooltip: customTooltip,
               legend: false,
               annotation: {
-                annotations: getLimits(data),
+                annotations: getLimits(dataType, data),
               },
             },
             scales: {

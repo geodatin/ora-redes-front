@@ -17,7 +17,7 @@ function downloadCSV(data, title) {
   linkCSV.click();
 }
 
-function getYLineAnnotation({ y, color, bgColor, label, display }) {
+function getYLineAnnotation({ y, color, bgColor, label, yScaleID, display }) {
   let labelEnabled = false;
   if (label) {
     labelEnabled = true;
@@ -26,6 +26,7 @@ function getYLineAnnotation({ y, color, bgColor, label, display }) {
   return {
     display,
     type: 'line',
+    yScaleID: yScaleID ?? 'y',
     yMin: y,
     yMax: y,
     backgroundColor: color,
