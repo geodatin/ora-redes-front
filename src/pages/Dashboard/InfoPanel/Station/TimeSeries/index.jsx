@@ -29,7 +29,6 @@ export default function TimeSeriesCharts({ station, timeGrouping }) {
   const { t } = useTranslation();
 
   const [selectedDatasetOnMultiple, setSelectedDatasetOnMultiple] = useState(1);
-
   const [availableCharts, setAvailableCharts] = useState([]);
 
   useEffect(() => {
@@ -214,7 +213,7 @@ export default function TimeSeriesCharts({ station, timeGrouping }) {
 
     if (!chart.isLoaded) {
       return (
-        <div style={{ padding: 15, marginBottom: 10 }}>
+        <div key={chart.dataType} style={{ padding: 15, marginBottom: 10 }}>
           <ChartSkeleton />
         </div>
       );
