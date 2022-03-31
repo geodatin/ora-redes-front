@@ -40,16 +40,10 @@ export default function InfoPanel({ title, subtitle }) {
 
   const {
     values: { panelIndexValue, station },
-    setters: { setPanelIndexValue },
+    functions: { handleOnChangePanel },
   } = useContext(NavigationContext);
 
   const [timeGroupingIndexValue, setTimeGroupingIndexValue] = useState(0);
-
-  const handleChangePanel = (event, newPanel) => {
-    if (newPanel !== null) {
-      setPanelIndexValue(newPanel);
-    }
-  };
 
   const handleChangeTimeGrouping = (event, newTimeGrouping) => {
     if (newTimeGrouping !== null) {
@@ -90,7 +84,7 @@ export default function InfoPanel({ title, subtitle }) {
                   ? panels.list.index
                   : panelIndexValue
               }
-              handleChange={handleChangePanel}
+              handleChange={handleOnChangePanel}
               style={{ marginTop: 10 }}
             />
             {timeGroupingVisibility && (

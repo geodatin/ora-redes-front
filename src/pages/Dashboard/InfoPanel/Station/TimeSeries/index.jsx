@@ -17,13 +17,13 @@ import { downloadCSV, getYLineAnnotation } from '../../../../../utils/helpers';
  */
 export default function TimeSeriesCharts({ station, timeGrouping }) {
   TimeSeriesCharts.propTypes = {
-    station: PropTypes.shape(),
+    station: PropTypes.shape().isRequired,
     timeGrouping: PropTypes.string.isRequired,
   };
 
-  TimeSeriesCharts.defaultProps = {
-    station: {},
-  };
+  if (Object.keys(station).length === 0) {
+    return null;
+  }
 
   const theme = useTheme();
   const { t } = useTranslation();

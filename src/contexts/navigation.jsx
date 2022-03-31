@@ -36,6 +36,12 @@ export function NavigationProvider({ children }) {
 
   const [mobileNavValue, setMobileNavValue] = useState(mobileNavs.map.value);
 
+  const handleOnChangePanel = (event, newPanel) => {
+    if (newPanel !== null) {
+      setPanelIndexValue(newPanel);
+    }
+  };
+
   const openStation = (item) => {
     setStation(item);
     setPanelIndexValue(panels.station.index);
@@ -46,6 +52,17 @@ export function NavigationProvider({ children }) {
     setPanelIndexValue(panels.list.index);
     panelRef?.current.scrollTo(0, 0);
     setStation(undefined);
+  };
+
+  const handleOnFilterApplied = () => {
+    if (station) closeStation();
+  };
+
+  const refreshCurrentStation = () => {
+    setStation((prev) => {
+      const refreshed = { ...prev };
+      return refreshed;
+    });
   };
 
   return (
@@ -60,8 +77,11 @@ export function NavigationProvider({ children }) {
         },
         setters: { setMobileNavValue, setPanelIndexValue },
         functions: {
+          handleOnChangePanel,
+          handleOnFilterApplied,
           openStation,
           closeStation,
+          refreshCurrentStation,
           closeDisclaimer,
           openDisclaimer,
         },
