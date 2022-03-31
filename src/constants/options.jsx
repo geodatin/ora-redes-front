@@ -83,6 +83,16 @@ export const networks = {
     translation: 'specific.networks.type.hydrologic',
     color: '#00B9F1',
     value: 2,
+    charts: [
+      { dataType: 'rain', type: 'bar', enableTimeGrouping: true },
+      { dataType: 'level', type: 'line', enableTimeGrouping: true },
+      { dataType: 'flowRate', type: 'line', enableTimeGrouping: true },
+      {
+        dataType: 'raw',
+        type: 'multiple',
+        enableTimeGrouping: true,
+      },
+    ],
   },
   RQA: {
     name: 'quality',
@@ -90,6 +100,26 @@ export const networks = {
     translation: 'specific.networks.type.quality',
     color: '#FA7B00',
     value: 3,
+    charts: [
+      { dataType: 'turbidity', type: 'line' },
+      { dataType: 'ph', type: 'line' },
+      { dataType: 'OD', type: 'line' },
+      {
+        dataType: 'electricConductivity',
+        type: 'line',
+      },
+      { dataType: 'sampleTemperature', type: 'line' },
+      {
+        dataType: 'totalDissolvedSolid',
+        type: 'line',
+      },
+      { dataType: 'totalNitrogen', type: 'line' },
+      { dataType: 'totalOrtophosphate', type: 'line' },
+      {
+        dataType: 'totalSuspensionSolid',
+        type: 'line',
+      },
+    ],
   },
   HYBAM: {
     name: 'hybam',
@@ -97,6 +127,17 @@ export const networks = {
     translation: 'specific.networks.type.hybam',
     color: '#A1BA09',
     value: 4,
+    charts: [
+      { dataType: 'level', type: 'line' },
+      { dataType: 'flowRate', type: 'line' },
+      { dataType: 'ph', type: 'line' },
+      {
+        dataType: 'electricConductivity',
+        type: 'line',
+      },
+      { dataType: 'sampleTemperature', type: 'line' },
+      { dataType: 'totalOrtophosphate', type: 'line' },
+    ],
   },
 };
 

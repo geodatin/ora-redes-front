@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ListSubheader, MenuItem } from '@mui/material';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -42,7 +43,7 @@ export default function Filters() {
   } = useContext(FilteringContext);
 
   const {
-    functions: { closeStation },
+    functions: { handleOnFilterApplied },
   } = useContext(NavigationContext);
 
   const { t } = useTranslation();
@@ -61,7 +62,7 @@ export default function Filters() {
    * Set the selection to context.
    */
   function applySelection() {
-    closeStation();
+    handleOnFilterApplied();
     setAutocompleteSelection(auxAutocompleteSelection);
     setNetworkSelection(auxNetworkSelection);
     setAutocompleteStraightSelection(auxStraightSelection);

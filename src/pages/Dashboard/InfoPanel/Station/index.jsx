@@ -12,9 +12,7 @@ import FilteringContext from '../../../../contexts/filtering';
 import NavigationContext from '../../../../contexts/navigation';
 import api from '../../../../services/api';
 import { CardItem } from '../CardList/CardItem';
-import HYBAMTimeSeries from './TimeSeries/HYBAM';
-import RHATimeSeries from './TimeSeries/RHA';
-import RQATimeSeries from './TimeSeries/RQA';
+import TimeSeriesCharts from './TimeSeries';
 
 /**
  * This function provides a station panel
@@ -69,19 +67,6 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
     };
   }, [station.code, station.network, timeGrouping]);
 
-  function getTimeSeries(network) {
-    if (network === 'RHA') {
-      return <RHATimeSeries station={station} timeGrouping={timeGrouping} />;
-    }
-    if (network === 'RQA') {
-      return <RQATimeSeries station={station} />;
-    }
-    if (network === 'HYBAM') {
-      return <HYBAMTimeSeries station={station} />;
-    }
-    return <> </>;
-  }
-
   return (
     <ul>
       <li
@@ -108,7 +93,7 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
         disableMoreStatisticsButton
       />
 
-      {getTimeSeries(station.network)}
+      <TimeSeriesCharts station={station} timeGrouping={timeGrouping} />
 
       <li style={{ margin: 15 }}>
         <CustomButton

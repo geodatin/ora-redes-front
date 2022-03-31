@@ -290,7 +290,10 @@ export default function MonitoringMap() {
                         .post(
                           `/observation/list/${timeGrouping}`,
                           {
-                            filters,
+                            filters: {
+                              ...filters,
+                              network: [point.properties.network],
+                            },
                           },
                           { params: { stationCode: point.properties.code } }
                         )
