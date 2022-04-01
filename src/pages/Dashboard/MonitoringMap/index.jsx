@@ -28,8 +28,10 @@ import { embedItems, networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
-import NavigationContext from '../../../contexts/navigation';
+import { useDisclaimer } from '../../../hooks/useDisclaimer';
+import { useMobile } from '../../../hooks/useMobile';
 import { useQuery } from '../../../hooks/useQuery';
+import { useStation } from '../../../hooks/useStation';
 import api from '../../../services/api';
 import useStyles from './styles';
 
@@ -54,10 +56,10 @@ export default function MonitoringMap() {
     functions: { nextLayoutConfig },
   } = useContext(MapContext);
 
-  const {
-    values: { isMobile },
-    functions: { openStation, openDisclaimer },
-  } = useContext(NavigationContext);
+  const { isMobile } = useMobile();
+  const { openDisclaimer } = useDisclaimer();
+
+  const { openStation } = useStation();
 
   const [points, setPoints] = useState();
   const [projectedStations, setProjectedStations] = useState();

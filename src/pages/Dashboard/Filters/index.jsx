@@ -2,6 +2,7 @@
 import { ListSubheader, MenuItem } from '@mui/material';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useContextSelector } from 'use-context-selector';
 
 import AdvancedFilter from '../../../components/AdvancedFilter';
 import CustomButton from '../../../components/CustomButton';
@@ -42,9 +43,10 @@ export default function Filters() {
     loaders: { paramsLoaded },
   } = useContext(FilteringContext);
 
-  const {
-    functions: { handleOnFilterApplied },
-  } = useContext(NavigationContext);
+  const handleOnFilterApplied = useContextSelector(
+    NavigationContext,
+    (navigation) => navigation.functions.handleOnFilterApplied
+  );
 
   const { t } = useTranslation();
   const [auxAutocompleteSelection, setAuxAutocompleteSelection] = useState(

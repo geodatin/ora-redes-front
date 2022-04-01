@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { createContext, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { createContext } from 'use-context-selector';
 
 import { breakpoints } from '../constants/constraints';
 import { mobileNavs, panels } from '../constants/options';
@@ -20,50 +21,51 @@ export function NavigationProvider({ children }) {
   };
 
   const isMobile = useMediaQuery(breakpoints.max.lg);
+  const [mobileNavValue, setMobileNavValue] = useState(mobileNavs.map.value);
 
-  const [station, setStation] = useState();
+  const [isDisclaimerOpened, setIsDisclaimerOpened] = useState(true);
+  const openDisclaimer = useCallback(() => {
+    setIsDisclaimerOpened(true);
+  }, []);
+  const closeDisclaimer = useCallback(() => {
+    setIsDisclaimerOpened(false);
+  }, []);
+
   const [panelIndexValue, setPanelIndexValue] = useState(
     panels.statistics.index
   );
-  const [isDisclaimerOpened, setIsDisclaimerOpened] = useState(true);
-  function closeDisclaimer() {
-    setIsDisclaimerOpened(false);
-  }
-
-  function openDisclaimer() {
-    setIsDisclaimerOpened(true);
-  }
-
-  const [mobileNavValue, setMobileNavValue] = useState(mobileNavs.map.value);
-
-  const handleOnChangePanel = (event, newPanel) => {
+  const handleOnChangePanel = useCallback((event, newPanel) => {
     if (newPanel !== null) {
       setPanelIndexValue(newPanel);
     }
-  };
+  }, []);
 
-  const openStation = (item) => {
-    setStation(item);
-    setPanelIndexValue(panels.station.index);
-    if (isMobile) setMobileNavValue(mobileNavs.panel.value);
-  };
+  const [station, setStation] = useState();
+  const openStation = useCallback(
+    (item) => {
+      setStation(item);
+      setPanelIndexValue(panels.station.index);
+      if (isMobile) setMobileNavValue(mobileNavs.panel.value);
+    },
+    [isMobile]
+  );
 
-  const closeStation = (panelRef) => {
+  const closeStation = useCallback((panelRef) => {
     setPanelIndexValue(panels.list.index);
     panelRef?.current.scrollTo(0, 0);
     setStation(undefined);
-  };
+  }, []);
 
-  const handleOnFilterApplied = () => {
-    if (station) closeStation();
-  };
-
-  const refreshCurrentStation = () => {
+  const refreshStation = useCallback(() => {
     setStation((prev) => {
       const refreshed = { ...prev };
       return refreshed;
     });
-  };
+  }, []);
+
+  const handleOnFilterApplied = useCallback(() => {
+    if (station) closeStation();
+  }, [station]);
 
   return (
     <NavigationContext.Provider
@@ -81,7 +83,7 @@ export function NavigationProvider({ children }) {
           handleOnFilterApplied,
           openStation,
           closeStation,
-          refreshCurrentStation,
+          refreshStation,
           closeDisclaimer,
           openDisclaimer,
         },

@@ -13,7 +13,7 @@ import Typography from '../../../../../components/Typography';
 import { dataTypes } from '../../../../../constants/options';
 import FilteringContext from '../../../../../contexts/filtering';
 import MapContext from '../../../../../contexts/mapping';
-import NavigationContext from '../../../../../contexts/navigation';
+import { useStation } from '../../../../../hooks/useStation';
 import useStyles from './styles';
 
 /**
@@ -34,9 +34,7 @@ function CardItemComponent({ item, disableMoreStatisticsButton }) {
   const classes = useStyles();
   const { t } = useTranslation();
 
-  const {
-    functions: { openStation },
-  } = useContext(NavigationContext);
+  const { openStation } = useStation();
 
   const {
     functions: { panOnMap },

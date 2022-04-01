@@ -9,7 +9,8 @@ import TabPanel from '../../../components/TabPanel';
 import Typography from '../../../components/Typography';
 import { panels, timeGroupingOptions } from '../../../constants/options';
 import FilteringContext from '../../../contexts/filtering';
-import NavigationContext from '../../../contexts/navigation';
+import { usePanel } from '../../../hooks/usePanel';
+import { useStation } from '../../../hooks/useStation';
 import CardList from './CardList';
 import Station from './Station';
 import Statistics from './Statistics';
@@ -38,10 +39,8 @@ export default function InfoPanel({ title, subtitle }) {
     setters: { setTimeGrouping },
   } = useContext(FilteringContext);
 
-  const {
-    values: { panelIndexValue, station },
-    functions: { handleOnChangePanel },
-  } = useContext(NavigationContext);
+  const { station } = useStation();
+  const { panelIndexValue, handleOnChangePanel } = usePanel();
 
   const [timeGroupingIndexValue, setTimeGroupingIndexValue] = useState(0);
 

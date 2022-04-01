@@ -5,6 +5,7 @@ import MapRoundedIcon from '@mui/icons-material/MapRounded';
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useContextSelector } from 'use-context-selector';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import HLayout from '../../components/Layout/Horizontal';
@@ -14,6 +15,7 @@ import { layoutConfigs, networkByValue } from '../../constants/options';
 import FilteringContext from '../../contexts/filtering';
 import MapContext from '../../contexts/mapping';
 import NavigationContext from '../../contexts/navigation';
+import { useMobile } from '../../hooks/useMobile';
 import { useQuery } from '../../hooks/useQuery';
 import api from '../../services/api';
 import Filters from './Filters';
@@ -41,10 +43,7 @@ function Dashboard() {
     setters: { setLayoutConfig },
   } = useContext(MapContext);
 
-  const {
-    values: { mobileNavValue, isMobile },
-    setters: { setMobileNavValue },
-  } = useContext(NavigationContext);
+  const { isMobile, mobileNavValue, setMobileNavValue } = useMobile();
 
   const query = useQuery();
   const [mainTopSection, setMainTopSection] = useState(true);

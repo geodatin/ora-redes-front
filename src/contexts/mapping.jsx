@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import PropTypes from 'prop-types';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
 import { layoutConfigs, mobileNavs } from '../constants/options';
-import NavigationContext from './navigation';
+import { useMobile } from '../hooks/useMobile';
 
 const MapContext = createContext({});
 
@@ -18,10 +18,7 @@ export function MappingProvider({ children }) {
     ]).isRequired,
   };
 
-  const {
-    values: { isMobile },
-    setters: { setMobileNavValue },
-  } = useContext(NavigationContext);
+  const { isMobile, setMobileNavValue } = useMobile();
 
   const [mapRef, setMapRef] = useState();
   const [layoutConfig, setLayoutConfig] = useState(0);
