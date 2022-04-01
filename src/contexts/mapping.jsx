@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import PropTypes from 'prop-types';
-import React, { createContext, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { createContext } from 'use-context-selector';
 
 import { layoutConfigs, mobileNavs } from '../constants/options';
 import { useMobile } from '../hooks/useMobile';
@@ -21,19 +22,21 @@ export function MappingProvider({ children }) {
   const { isMobile, setMobileNavValue } = useMobile();
 
   const [mapRef, setMapRef] = useState();
+  const panOnMap = useCallback(
+    (coordinates) => {
+      if (isMobile) setMobileNavValue(mobileNavs.map.value);
+      mapRef?.setView(coordinates, 10, {
+        animate: true,
+        pan: {
+          duration: 0.5,
+        },
+      });
+    },
+    [isMobile, mapRef]
+  );
+
   const [layoutConfig, setLayoutConfig] = useState(0);
-
-  function panOnMap(coordinates) {
-    if (isMobile) setMobileNavValue(mobileNavs.map.value);
-    mapRef?.setView(coordinates, 10, {
-      animate: true,
-      pan: {
-        duration: 0.5,
-      },
-    });
-  }
-
-  function nextLayoutConfig() {
+  const nextLayoutConfig = useCallback(() => {
     setLayoutConfig((current) => {
       const next = current + 1;
       return next > layoutConfigs.isRightHidden.length - 1 ? 0 : next;
@@ -41,7 +44,7 @@ export function MappingProvider({ children }) {
     setTimeout(() => {
       mapRef?.invalidateSize();
     }, [1000]);
-  }
+  }, [mapRef]);
 
   return (
     <MapContext.Provider
@@ -49,7 +52,6 @@ export function MappingProvider({ children }) {
         values: { mapRef, layoutConfig },
         setters: { setMapRef, setLayoutConfig },
         functions: { panOnMap, nextLayoutConfig },
-        loaders: {},
       }}
     >
       {children}

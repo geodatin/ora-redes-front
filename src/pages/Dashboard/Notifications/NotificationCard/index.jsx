@@ -1,11 +1,11 @@
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
 import Typography from '../../../../components/Typography';
-import MapContext from '../../../../contexts/mapping';
+import { useMap } from '../../../../hooks/useMap';
 import useStyles from './styles';
 
 function NotificationCardComponent({ circleColor, notification }) {
@@ -18,9 +18,7 @@ function NotificationCardComponent({ circleColor, notification }) {
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const {
-    functions: { panOnMap },
-  } = useContext(MapContext);
+  const { panOnMap } = useMap();
 
   const handleOnClickLocation = () => {
     panOnMap([

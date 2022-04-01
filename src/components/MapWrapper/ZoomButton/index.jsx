@@ -3,8 +3,8 @@ import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { Button } from '@mui/material';
 import L from 'leaflet';
 import React, { useEffect, useRef } from 'react';
-import { useMap } from 'react-leaflet';
 
+import { useMap } from '../../../hooks/useMap';
 import useStyles from './styles';
 
 /**

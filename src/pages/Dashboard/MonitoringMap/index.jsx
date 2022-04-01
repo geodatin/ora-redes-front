@@ -27,8 +27,9 @@ import Typography from '../../../components/Typography';
 import { embedItems, networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
-import MapContext from '../../../contexts/mapping';
 import { useDisclaimer } from '../../../hooks/useDisclaimer';
+import { useLayoutConfig } from '../../../hooks/useLayoutConfig';
+import { useMap } from '../../../hooks/useMap';
 import { useMobile } from '../../../hooks/useMobile';
 import { useQuery } from '../../../hooks/useQuery';
 import { useStation } from '../../../hooks/useStation';
@@ -51,14 +52,10 @@ export default function MonitoringMap() {
     functions: { generateRoute, handleViewProjectedStations },
   } = useContext(FilteringContext);
 
-  const {
-    setters: { setMapRef },
-    functions: { nextLayoutConfig },
-  } = useContext(MapContext);
-
+  const { setMapRef } = useMap();
+  const { nextLayoutConfig } = useLayoutConfig();
   const { isMobile } = useMobile();
   const { openDisclaimer } = useDisclaimer();
-
   const { openStation } = useStation();
 
   const [points, setPoints] = useState();

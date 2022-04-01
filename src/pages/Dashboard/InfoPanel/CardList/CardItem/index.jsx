@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useRef } from 'react';
@@ -12,7 +11,7 @@ import ListItemContainer from '../../../../../components/ListItemContainer';
 import Typography from '../../../../../components/Typography';
 import { dataTypes } from '../../../../../constants/options';
 import FilteringContext from '../../../../../contexts/filtering';
-import MapContext from '../../../../../contexts/mapping';
+import { useMap } from '../../../../../hooks/useMap';
 import { useStation } from '../../../../../hooks/useStation';
 import useStyles from './styles';
 
@@ -36,10 +35,7 @@ function CardItemComponent({ item, disableMoreStatisticsButton }) {
 
   const { openStation } = useStation();
 
-  const {
-    functions: { panOnMap },
-  } = useContext(MapContext);
-
+  const { panOnMap } = useMap();
   const {
     values: { timeGrouping },
   } = useContext(FilteringContext);
