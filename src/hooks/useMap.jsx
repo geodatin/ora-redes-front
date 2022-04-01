@@ -5,17 +5,17 @@ import MapContext from '../contexts/mapping';
 export function useMap() {
   const mapRef = useContextSelector(
     MapContext,
-    (navigation) => navigation.values.mapRef
+    (mapping) => mapping.values.mapRef
   );
 
   const setMapRef = useContextSelector(
     MapContext,
-    (navigation) => navigation.setters.setMapRef
+    (mapping) => mapping.setters.setMapRef
   );
 
   const panOnMap = useContextSelector(
     MapContext,
-    (navigation) => navigation.functions.panOnMap
+    (mapping) => mapping.functions.panOnMap
   );
 
   return { mapRef, setMapRef, panOnMap };

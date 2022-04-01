@@ -1,6 +1,6 @@
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -10,9 +10,9 @@ import CustomButton from '../../../../../components/CustomButton';
 import ListItemContainer from '../../../../../components/ListItemContainer';
 import Typography from '../../../../../components/Typography';
 import { dataTypes } from '../../../../../constants/options';
-import FilteringContext from '../../../../../contexts/filtering';
 import { useMap } from '../../../../../hooks/useMap';
 import { useStation } from '../../../../../hooks/useStation';
+import { useTimeGrouping } from '../../../../../hooks/useTimeGrouping';
 import useStyles from './styles';
 
 /**
@@ -34,11 +34,8 @@ function CardItemComponent({ item, disableMoreStatisticsButton }) {
   const { t } = useTranslation();
 
   const { openStation } = useStation();
-
   const { panOnMap } = useMap();
-  const {
-    values: { timeGrouping },
-  } = useContext(FilteringContext);
+  const { timeGrouping } = useTimeGrouping();
 
   function dataDough(key, value, sufix, label, color) {
     return (

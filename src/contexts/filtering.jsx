@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import PropTypes from 'prop-types';
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { createContext } from 'use-context-selector';
 
 import {
   autocompletePropertyTypes,
   filterDefaults,
   networkByValue,
-  timeGroupingOptions,
 } from '../constants/options';
 import { useQuery } from '../hooks/useQuery';
 
@@ -16,7 +16,14 @@ const FilteringContext = createContext({});
  * The FilteringProvider is a context to provide the dashboard filtering options.
  * */
 export function FilteringProvider({ embed, children }) {
-  const [timeGrouping, setTimeGrouping] = useState(timeGroupingOptions[0].code);
+  const [timeGroupingIndexValue, setTimeGroupingIndexValue] = useState(0);
+
+  const handleOnChangeTimeGrouping = useCallback((event, newTimeGrouping) => {
+    if (newTimeGrouping !== null) {
+      setTimeGroupingIndexValue(newTimeGrouping);
+    }
+  }, []);
+
   const [autocompleteSelection, setAutocompleteSelection] = useState(
     filterDefaults.autocompleteSelection
   );
@@ -26,6 +33,7 @@ export function FilteringProvider({ embed, children }) {
         autocompleteSelection[type].map((value) => ({ value, type }))
       )
     );
+
   const [networkSelection, setNetworkSelection] = useState(
     filterDefaults.networkSelection
   );
@@ -34,9 +42,9 @@ export function FilteringProvider({ embed, children }) {
   const [paramsLoaded, setParamsLoaded] = useState(false);
 
   const [viewProjectedStations, setViewProjectedStations] = useState(false);
-  const handleViewProjectedStations = (event) => {
+  const handleOnViewProjectedStations = useCallback((event) => {
     setViewProjectedStations(event.target.checked);
-  };
+  }, []);
 
   /**
    * Merge the autocomplete and network selection.
@@ -91,46 +99,49 @@ export function FilteringProvider({ embed, children }) {
     setParamsLoaded(true);
   }, []);
 
-  function generateRoute(start) {
-    let newQuery = start;
+  const generateRoute = useCallback(
+    (start) => {
+      let newQuery = start;
 
-    const initialSize = newQuery.length;
+      const initialSize = newQuery.length;
 
-    /**
-     * This function verifies if there is a need to add a separator between the query params.
-     */
-    const trySeparator = () => {
-      if (newQuery.length > initialSize) {
-        newQuery += '&';
+      /**
+       * This function verifies if there is a need to add a separator between the query params.
+       */
+      const trySeparator = () => {
+        if (newQuery.length > initialSize) {
+          newQuery += '&';
+        }
+      };
+
+      if (networkSelection !== filterDefaults.networkSelection) {
+        trySeparator();
+        newQuery += `networkSelection=${networkSelection}`;
       }
-    };
 
-    if (networkSelection !== filterDefaults.networkSelection) {
-      trySeparator();
-      newQuery += `networkSelection=${networkSelection}`;
-    }
+      const selectionAux = {};
 
-    const selectionAux = {};
+      Object.keys(autocompleteSelection).forEach((key) => {
+        if (autocompleteSelection[key].length > 0) {
+          selectionAux[key] = autocompleteSelection[key];
+        }
+      });
 
-    Object.keys(autocompleteSelection).forEach((key) => {
-      if (autocompleteSelection[key].length > 0) {
-        selectionAux[key] = autocompleteSelection[key];
+      if (Object.keys(selectionAux).length > 0) {
+        trySeparator();
+        const searchValueParams = JSON.stringify(selectionAux);
+        const searchValueEncoded = encodeURI(searchValueParams);
+        newQuery += `search=${searchValueEncoded}`;
       }
-    });
 
-    if (Object.keys(selectionAux).length > 0) {
-      trySeparator();
-      const searchValueParams = JSON.stringify(selectionAux);
-      const searchValueEncoded = encodeURI(searchValueParams);
-      newQuery += `search=${searchValueEncoded}`;
-    }
+      if (newQuery.length === initialSize) {
+        return '/';
+      }
 
-    if (newQuery.length === initialSize) {
-      return '/';
-    }
-
-    return newQuery;
-  }
+      return newQuery;
+    },
+    [networkSelection, autocompleteSelection]
+  );
 
   /**
    * This useEffect puts the current selection into the route.
@@ -154,7 +165,7 @@ export function FilteringProvider({ embed, children }) {
           autocompleteStraightSelection,
           networkSelection,
           viewProjectedStations,
-          timeGrouping,
+          timeGroupingIndexValue,
           filters,
           embed,
         },
@@ -162,12 +173,12 @@ export function FilteringProvider({ embed, children }) {
           setAutocompleteSelection,
           setAutocompleteStraightSelection,
           setNetworkSelection,
-          setTimeGrouping,
           setFilters,
         },
         functions: {
           generateRoute,
-          handleViewProjectedStations,
+          handleOnViewProjectedStations,
+          handleOnChangeTimeGrouping,
         },
         loaders: {
           paramsLoaded,

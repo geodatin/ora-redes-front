@@ -2,8 +2,9 @@ import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useContextSelector } from 'use-context-selector';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import HLayout from '../../components/Layout/Horizontal';
@@ -31,9 +32,15 @@ function Dashboard() {
 
   const [lastUpdateDatabase, setLastUpdateDatabase] = useState();
 
-  const {
-    values: { networkSelection, embed },
-  } = useContext(FilteringContext);
+  const networkSelection = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.networkSelection
+  );
+
+  const embed = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.embed
+  );
 
   const { layoutConfig, setLayoutConfig } = useLayoutConfig();
   const { isMobile, mobileNavValue, setMobileNavValue } = useMobile();

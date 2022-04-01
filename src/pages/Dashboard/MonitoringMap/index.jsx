@@ -4,10 +4,11 @@ import LayersRoundedIcon from '@mui/icons-material/LayersRounded';
 import ShareIcon from '@mui/icons-material/Share';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import L from 'leaflet';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 import { Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
+import { useContextSelector } from 'use-context-selector';
 
 import BluesStationDark from '../../../assets/icons/map/blue-station-dark.png';
 import BluesStationLight from '../../../assets/icons/map/blue-station-light.png';
@@ -31,8 +32,10 @@ import { useDisclaimer } from '../../../hooks/useDisclaimer';
 import { useLayoutConfig } from '../../../hooks/useLayoutConfig';
 import { useMap } from '../../../hooks/useMap';
 import { useMobile } from '../../../hooks/useMobile';
+import { useProjectedStations } from '../../../hooks/useProjectedStations';
 import { useQuery } from '../../../hooks/useQuery';
 import { useStation } from '../../../hooks/useStation';
+import { useTimeGrouping } from '../../../hooks/useTimeGrouping';
 import api from '../../../services/api';
 import useStyles from './styles';
 
@@ -41,16 +44,29 @@ import useStyles from './styles';
  * @returns Monitoring Map
  */
 export default function MonitoringMap() {
-  const {
-    values: {
-      filters,
-      timeGrouping,
-      autocompleteSelection,
-      networkSelection,
-      viewProjectedStations,
-    },
-    functions: { generateRoute, handleViewProjectedStations },
-  } = useContext(FilteringContext);
+  const autocompleteSelection = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.autocompleteSelection
+  );
+
+  const networkSelection = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.networkSelection
+  );
+
+  const filters = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.filters
+  );
+
+  const generateRoute = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.functions.generateRoute
+  );
+
+  const { timeGrouping } = useTimeGrouping();
+  const { viewProjectedStations, handleOnViewProjectedStations } =
+    useProjectedStations();
 
   const { setMapRef } = useMap();
   const { nextLayoutConfig } = useLayoutConfig();
@@ -375,7 +391,7 @@ export default function MonitoringMap() {
                           },
                         }}
                         checked={viewProjectedStations}
-                        onChange={handleViewProjectedStations}
+                        onChange={handleOnViewProjectedStations}
                       />
                     }
                     label={

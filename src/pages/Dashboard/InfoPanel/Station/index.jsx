@@ -2,9 +2,10 @@
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
+import { useContextSelector } from 'use-context-selector';
 
 import Breadcrumb from '../../../../components/Breadcrumb';
 import CustomButton from '../../../../components/CustomButton';
@@ -35,9 +36,10 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
 
   const { closeStation } = useStation();
 
-  const {
-    values: { filters },
-  } = useContext(FilteringContext);
+  const filters = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.filters
+  );
 
   const [stationUpdate, setStationUpdate] = useState();
 

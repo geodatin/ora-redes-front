@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useContextSelector } from 'use-context-selector';
 
 import InfiniteScroll from '../../../components/InfiniteScroll';
 import VLayout from '../../../components/Layout/Vertical';
@@ -14,9 +15,10 @@ export default function Notifications() {
   const classes = useStyles();
   const { t } = useTranslation();
 
-  const {
-    values: { filters },
-  } = useContext(FilteringContext);
+  const filters = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.filters
+  );
 
   const [notifications, setNotifications] = useState([]);
   const [resultsAmount, setResultsAmount] = useState();
