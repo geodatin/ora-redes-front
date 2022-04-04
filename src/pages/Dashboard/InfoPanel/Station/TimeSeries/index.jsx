@@ -38,6 +38,7 @@ export default function TimeSeriesCharts({ station, timeGrouping }) {
         isLoaded: false,
       }))
     );
+    setSelectedDatasetOnMultiple(1);
   }, [station, timeGrouping]);
 
   /**
@@ -219,289 +220,275 @@ export default function TimeSeriesCharts({ station, timeGrouping }) {
       );
     }
 
-    if (chart.isLoaded) {
-      if (chart.type === 'line') {
-        return (
-          <LineChart
-            key={chart.dataType}
-            title={t(
-              `specific.statistics.charts.timeSeries.${chart.dataType}.title`
-            )}
-            info={t(
-              `specific.statistics.charts.timeSeries.${chart.dataType}.info`
-            )}
-            data={
-              chart.data && {
-                labels: chart.data.x,
-                datasets: [
-                  getDatasetObj(
-                    'line',
-                    chart.data.y,
-                    t(`specific.dataType.variable.items.${chart.dataType}`),
-                    t(`specific.dataType.sufixes.${chart.dataType}`),
-                    dataTypes.variable?.colors[chart.dataType]
-                  ),
-                ],
-              }
+    if (chart.type === 'line') {
+      return (
+        <LineChart
+          key={chart.dataType}
+          title={t(
+            `specific.statistics.charts.timeSeries.${chart.dataType}.title`
+          )}
+          info={t(
+            `specific.statistics.charts.timeSeries.${chart.dataType}.info`
+          )}
+          data={
+            chart.data && {
+              labels: chart.data.x,
+              datasets: [
+                getDatasetObj(
+                  'line',
+                  chart.data.y,
+                  t(`specific.dataType.variable.items.${chart.dataType}`),
+                  t(`specific.dataType.sufixes.${chart.dataType}`),
+                  dataTypes.variable?.colors[chart.dataType]
+                ),
+              ],
             }
-            fullScreenEnabled
-            csvCallback={() =>
-              csvFetching(
-                chart.dataType,
-                station.code,
-                chart.enableTimeGrouping
-              )
-            }
-            options={{
-              plugins: {
-                tooltip: customTooltip,
-                legend: false,
-                autocolors: false,
-                annotation: {
-                  annotations: getLimits(chart.dataType, chart.data),
-                },
+          }
+          fullScreenEnabled
+          csvCallback={() =>
+            csvFetching(chart.dataType, station.code, chart.enableTimeGrouping)
+          }
+          options={{
+            plugins: {
+              tooltip: customTooltip,
+              legend: false,
+              autocolors: false,
+              annotation: {
+                annotations: getLimits(chart.dataType, chart.data),
               },
-              scales: {
-                x: {
-                  ticks: chart.enableTimeGrouping
-                    ? xTicksByTimeGrouping
-                    : xTicksDefault,
-                },
-                y: {
-                  title: {
-                    display: true,
-                    text: t(
-                      `specific.statistics.charts.timeSeries.${chart.dataType}.yAxisLabel`
-                    ),
-                    color: theme.neutral.gray.main,
-                  },
-                },
+            },
+            scales: {
+              x: {
+                ticks: chart.enableTimeGrouping
+                  ? xTicksByTimeGrouping
+                  : xTicksDefault,
               },
-            }}
-          />
-        );
-      }
-      if (chart.type === 'bar') {
-        return (
-          <BarChart
-            key={chart.dataType}
-            title={t(
-              `specific.statistics.charts.timeSeries.${chart.dataType}.title`
-            )}
-            info={t(
-              `specific.statistics.charts.timeSeries.${chart.dataType}.info`
-            )}
-            data={
-              chart.data && {
-                labels: chart.data.x,
-                datasets: [
-                  getDatasetObj(
-                    'bar',
-                    chart.data.y,
-                    t(`specific.dataType.variable.items.${chart.dataType}`),
-                    t(`specific.dataType.sufixes.${chart.dataType}`),
-                    dataTypes.variable?.colors[chart.dataType]
-                  ),
-                ],
-              }
-            }
-            fullScreenEnabled
-            csvCallback={() =>
-              csvFetching(
-                chart.dataType,
-                station.code,
-                chart.enableTimeGrouping
-              )
-            }
-            options={{
-              indexAxis: 'x',
-              plugins: {
-                tooltip: customTooltip,
-                legend: false,
-              },
-              scales: {
-                x: {
-                  ticks: chart.enableTimeGrouping
-                    ? xTicksByTimeGrouping
-                    : xTicksDefault,
-                },
-                y: {
-                  title: {
-                    display: true,
-                    text: t(
-                      'specific.statistics.charts.timeSeries.rain.yAxisLabel'
-                    ),
-                    color: theme.neutral.gray.main,
-                  },
-                },
-              },
-            }}
-          />
-        );
-      }
-      if (chart.type === 'multiple') {
-        return (
-          <Multiple
-            key={chart.dataType}
-            title={t(
-              `specific.statistics.charts.timeSeries.${chart.dataType}.title`
-            )}
-            info={t(
-              `specific.statistics.charts.timeSeries.${chart.dataType}.info`
-            )}
-            data={
-              chart.data && {
-                labels: chart.data.x,
-                datasets: [
-                  getDatasetObj(
-                    'line',
-                    chart.data.level,
-                    t('specific.dataType.variable.items.level'),
-                    t('specific.dataType.sufixes.level'),
-                    theme.primary.main,
-                    {
-                      yAxisID: 'y2',
-                      borderWidth: 0.5,
-                      pointRadius: 0.5,
-                      hidden: selectedDatasetOnMultiple !== 0,
-                      normalized: true,
-                    }
-                  ),
-                  getDatasetObj(
-                    'line',
-                    chart.data.flowRate,
-                    t('specific.dataType.variable.items.flowRate'),
-                    t('specific.dataType.sufixes.flowRate'),
-                    theme.green.dark,
-                    {
-                      yAxisID: 'y2',
-                      borderWidth: 0.5,
-                      pointRadius: 0.5,
-                      normalized: true,
-                    }
-                  ),
-                  getDatasetObj(
-                    'bar',
-                    chart.data.rain,
-                    t('specific.dataType.variable.items.rain'),
-                    t('specific.dataType.sufixes.rain'),
-                    theme.blue.main,
-                    {
-                      yAxisID: 'y1',
-                      barThickness: 1,
-                    }
-                  ),
-                ],
-              }
-            }
-            fullScreenEnabled
-            csvCallback={() =>
-              csvFetching(
-                chart.dataType,
-                station.code,
-                chart.enableTimeGrouping
-              )
-            }
-            options={{
-              showLine: false,
-              animation: false,
-              plugins: {
-                tooltip: customTooltip,
-                autocolors: false,
-                annotation: {
-                  annotations: getLimits(
-                    selectedDatasetOnMultiple === 1 ? 'flowRate' : 'level',
-                    chart.data,
-                    'y2'
-                  ),
-                },
-                legend: {
+              y: {
+                title: {
                   display: true,
-                  reverse: true,
+                  text: t(
+                    `specific.statistics.charts.timeSeries.${chart.dataType}.yAxisLabel`
+                  ),
+                  color: theme.neutral.gray.main,
+                },
+              },
+            },
+          }}
+        />
+      );
+    }
+    if (chart.type === 'bar') {
+      return (
+        <BarChart
+          key={chart.dataType}
+          title={t(
+            `specific.statistics.charts.timeSeries.${chart.dataType}.title`
+          )}
+          info={t(
+            `specific.statistics.charts.timeSeries.${chart.dataType}.info`
+          )}
+          data={
+            chart.data && {
+              labels: chart.data.x,
+              datasets: [
+                getDatasetObj(
+                  'bar',
+                  chart.data.y,
+                  t(`specific.dataType.variable.items.${chart.dataType}`),
+                  t(`specific.dataType.sufixes.${chart.dataType}`),
+                  dataTypes.variable?.colors[chart.dataType]
+                ),
+              ],
+            }
+          }
+          fullScreenEnabled
+          csvCallback={() =>
+            csvFetching(chart.dataType, station.code, chart.enableTimeGrouping)
+          }
+          options={{
+            indexAxis: 'x',
+            plugins: {
+              tooltip: customTooltip,
+              legend: false,
+            },
+            scales: {
+              x: {
+                ticks: chart.enableTimeGrouping
+                  ? xTicksByTimeGrouping
+                  : xTicksDefault,
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: t(
+                    'specific.statistics.charts.timeSeries.rain.yAxisLabel'
+                  ),
+                  color: theme.neutral.gray.main,
+                },
+              },
+            },
+          }}
+        />
+      );
+    }
+    if (chart.type === 'multiple') {
+      return (
+        <Multiple
+          key={chart.dataType}
+          title={t(
+            `specific.statistics.charts.timeSeries.${chart.dataType}.title`
+          )}
+          info={t(
+            `specific.statistics.charts.timeSeries.${chart.dataType}.info`
+          )}
+          data={
+            chart.data && {
+              labels: chart.data.x,
+              datasets: [
+                getDatasetObj(
+                  'line',
+                  chart.data.level,
+                  t('specific.dataType.variable.items.level'),
+                  t('specific.dataType.sufixes.level'),
+                  theme.primary.main,
+                  {
+                    yAxisID: 'y2',
+                    borderWidth: 0.5,
+                    pointRadius: 0.5,
+                    hidden: selectedDatasetOnMultiple !== 0,
+                    normalized: true,
+                  }
+                ),
+                getDatasetObj(
+                  'line',
+                  chart.data.flowRate,
+                  t('specific.dataType.variable.items.flowRate'),
+                  t('specific.dataType.sufixes.flowRate'),
+                  theme.green.dark,
+                  {
+                    yAxisID: 'y2',
+                    borderWidth: 0.5,
+                    pointRadius: 0.5,
+                    normalized: true,
+                  }
+                ),
+                getDatasetObj(
+                  'bar',
+                  chart.data.rain,
+                  t('specific.dataType.variable.items.rain'),
+                  t('specific.dataType.sufixes.rain'),
+                  theme.blue.main,
+                  {
+                    yAxisID: 'y1',
+                    barThickness: 1,
+                  }
+                ),
+              ],
+            }
+          }
+          fullScreenEnabled
+          csvCallback={() =>
+            csvFetching(chart.dataType, station.code, chart.enableTimeGrouping)
+          }
+          options={{
+            showLine: false,
+            animation: false,
+            plugins: {
+              tooltip: customTooltip,
+              autocolors: false,
+              annotation: {
+                annotations: getLimits(
+                  selectedDatasetOnMultiple === 1 ? 'flowRate' : 'level',
+                  chart.data,
+                  'y2'
+                ),
+              },
+              legend: {
+                display: true,
+                reverse: true,
+                borderRadius: 10,
+                labels: {
+                  usePointStyle: true,
+                  boxWidth: 10,
                   borderRadius: 10,
-                  labels: {
-                    usePointStyle: true,
-                    boxWidth: 10,
-                    borderRadius: 10,
-                  },
-                  onClick: (e, legendItem, legend) => {
-                    const index = legendItem.datasetIndex;
-                    if (index !== 2) {
-                      const ci = legend.chart;
-                      if (!ci.isDatasetVisible(index)) {
-                        if (index === 1) {
-                          ci.hide(0);
-                          setSelectedDatasetOnMultiple(index);
-                          ci.show(index);
-                          ci.update();
-                        } else {
-                          ci.hide(1);
-                          setSelectedDatasetOnMultiple(index);
-                          ci.show(index);
-                          ci.update();
-                        }
+                },
+                onClick: (e, legendItem, legend) => {
+                  const index = legendItem.datasetIndex;
+                  if (index !== 2) {
+                    const ci = legend.chart;
+                    if (!ci.isDatasetVisible(index)) {
+                      if (index === 1) {
+                        ci.hide(0);
+                        setSelectedDatasetOnMultiple(index);
+                        ci.show(index);
+                        ci.update();
+                      } else {
+                        ci.hide(1);
+                        setSelectedDatasetOnMultiple(index);
+                        ci.show(index);
+                        ci.update();
                       }
                     }
+                  }
+                },
+              },
+            },
+            scales: {
+              x: {
+                ticks: {
+                  autoSkip: false,
+                  maxRotation: 0,
+                  callback(value, index) {
+                    const arrayLength = chart.data.x.length;
+                    const middleIndex = Math.round((arrayLength - 1) / 2);
+                    const lastIndex = arrayLength - 1;
+                    if (
+                      index === 0 ||
+                      index === middleIndex ||
+                      index === lastIndex
+                    ) {
+                      return t('general.date.dayMonthYear', {
+                        date: new Date(this.getLabelForValue(value)),
+                      });
+                    }
+                    return null;
                   },
                 },
               },
-              scales: {
-                x: {
-                  ticks: {
-                    autoSkip: false,
-                    maxRotation: 0,
-                    callback(value, index) {
-                      const arrayLength = chart.data.x.length;
-                      const middleIndex = Math.round((arrayLength - 1) / 2);
-                      const lastIndex = arrayLength - 1;
-                      if (
-                        index === 0 ||
-                        index === middleIndex ||
-                        index === lastIndex
-                      ) {
-                        return t('general.date.dayMonthYear', {
-                          date: new Date(this.getLabelForValue(value)),
-                        });
-                      }
-                      return null;
-                    },
-                  },
+              y1: {
+                ticks: {
+                  sampleSize: 2,
                 },
-                y1: {
-                  ticks: {
-                    sampleSize: 2,
-                  },
-                  reverse: true,
-                  title: {
-                    display: true,
-                    text: t(
-                      'specific.statistics.charts.timeSeries.rain.yAxisLabel'
-                    ),
-                    color: theme.neutral.gray.main,
-                  },
-                },
-                y2: {
-                  ticks: {
-                    sampleSize: 2,
-                  },
-                  title: {
-                    display: true,
-                    text:
-                      selectedDatasetOnMultiple === 1
-                        ? t(
-                            'specific.statistics.charts.timeSeries.flowRate.yAxisLabel'
-                          )
-                        : t(
-                            'specific.statistics.charts.timeSeries.level.yAxisLabel'
-                          ),
-                    color: theme.neutral.gray.main,
-                  },
+                reverse: true,
+                title: {
+                  display: true,
+                  text: t(
+                    'specific.statistics.charts.timeSeries.rain.yAxisLabel'
+                  ),
+                  color: theme.neutral.gray.main,
                 },
               },
-            }}
-          />
-        );
-      }
+              y2: {
+                ticks: {
+                  sampleSize: 2,
+                },
+                title: {
+                  display: true,
+                  text:
+                    selectedDatasetOnMultiple === 1
+                      ? t(
+                          'specific.statistics.charts.timeSeries.flowRate.yAxisLabel'
+                        )
+                      : t(
+                          'specific.statistics.charts.timeSeries.level.yAxisLabel'
+                        ),
+                  color: theme.neutral.gray.main,
+                },
+              },
+            },
+          }}
+        />
+      );
     }
     return null;
   });
