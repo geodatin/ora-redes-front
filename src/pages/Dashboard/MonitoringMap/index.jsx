@@ -280,6 +280,7 @@ export default function MonitoringMap() {
                   </Typography>
                 </div>
               )}
+
               {point.properties.river && (
                 <div className={classes.popupItem}>
                   <Typography
@@ -292,6 +293,56 @@ export default function MonitoringMap() {
                     {point.properties.river}
                   </Typography>
                 </div>
+              )}
+
+              {point.properties.network === 'RHA' && (
+                <>
+                  <div className={classes.popupItem}>
+                    <Typography
+                      variant="caption"
+                      className={classes.popupItemTitle}
+                    >
+                      {t('specific.dataType.variable.items.rain')}
+                    </Typography>
+                    <Typography variant="caption">
+                      {point.properties.rain != null
+                        ? `${t('general.number', {
+                            value: point.properties.rain,
+                          })} ${t(`specific.dataType.sufixes.rain`)}`
+                        : '-'}
+                    </Typography>
+                  </div>
+                  <div className={classes.popupItem}>
+                    <Typography
+                      variant="caption"
+                      className={classes.popupItemTitle}
+                    >
+                      {t('specific.dataType.variable.items.level')}
+                    </Typography>
+                    <Typography variant="caption">
+                      {point.properties.level != null
+                        ? `${t('general.number', {
+                            value: point.properties.level,
+                          })} ${t(`specific.dataType.sufixes.level`)}`
+                        : '-'}
+                    </Typography>
+                  </div>
+                  <div className={classes.popupItem}>
+                    <Typography
+                      variant="caption"
+                      className={classes.popupItemTitle}
+                    >
+                      {t('specific.dataType.variable.items.flowRate')}
+                    </Typography>
+                    <Typography variant="caption">
+                      {point.properties.flowRate != null
+                        ? `${t('general.number', {
+                            value: point.properties.flowRate,
+                          })} ${t(`specific.dataType.sufixes.flowRate`)}`
+                        : '-'}
+                    </Typography>
+                  </div>
+                </>
               )}
 
               {point.properties.hasData && (
