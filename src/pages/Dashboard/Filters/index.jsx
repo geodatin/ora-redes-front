@@ -2,6 +2,7 @@
 import { ListSubheader, MenuItem } from '@mui/material';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useContextSelector } from 'use-context-selector';
 
 import AdvancedFilter from '../../../components/AdvancedFilter';
 import CustomButton from '../../../components/CustomButton';
@@ -16,6 +17,7 @@ import {
 } from '../../../constants/options';
 import FilteringContext from '../../../contexts/filtering';
 import NavigationContext from '../../../contexts/navigation';
+import { useAutocomplete } from '../../../hooks/useAutocomplete';
 import api from '../../../services/api';
 import useStyles from './styles';
 
@@ -28,23 +30,33 @@ export default function Filters() {
   const [autocompleteOptions, setAutocompleteOptions] = useState([]);
   const [autocompleteLoading, setAutocompleteLoading] = useState(false);
   const [noOptionsTextSelector, setNoOptionsTextSelector] = useState(false);
-  const {
-    values: {
-      autocompleteSelection,
-      autocompleteStraightSelection,
-      networkSelection,
-    },
-    setters: {
-      setAutocompleteSelection,
-      setAutocompleteStraightSelection,
-      setNetworkSelection,
-    },
-    loaders: { paramsLoaded },
-  } = useContext(FilteringContext);
 
   const {
-    functions: { handleOnFilterApplied },
-  } = useContext(NavigationContext);
+    autocompleteSelection,
+    setAutocompleteSelection,
+    autocompleteStraightSelection,
+    setAutocompleteStraightSelection,
+  } = useAutocomplete();
+
+  const networkSelection = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.networkSelection
+  );
+
+  const setNetworkSelection = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.setters.setNetworkSelection
+  );
+
+  const handleOnFilterApplied = useContextSelector(
+    NavigationContext,
+    (navigation) => navigation.functions.handleOnFilterApplied
+  );
+
+  const paramsLoaded = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.loaders.paramsLoaded
+  );
 
   const { t } = useTranslation();
   const [auxAutocompleteSelection, setAuxAutocompleteSelection] = useState(

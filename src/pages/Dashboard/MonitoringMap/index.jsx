@@ -4,10 +4,11 @@ import LayersRoundedIcon from '@mui/icons-material/LayersRounded';
 import ShareIcon from '@mui/icons-material/Share';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import L from 'leaflet';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 import { Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
+import { useContextSelector } from 'use-context-selector';
 
 import BluesStationDark from '../../../assets/icons/map/blue-station-dark.png';
 import BluesStationLight from '../../../assets/icons/map/blue-station-light.png';
@@ -27,9 +28,14 @@ import Typography from '../../../components/Typography';
 import { embedItems, networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
-import MapContext from '../../../contexts/mapping';
-import NavigationContext from '../../../contexts/navigation';
+import { useDisclaimer } from '../../../hooks/useDisclaimer';
+import { useLayoutConfig } from '../../../hooks/useLayoutConfig';
+import { useMap } from '../../../hooks/useMap';
+import { useMobile } from '../../../hooks/useMobile';
+import { useProjectedStations } from '../../../hooks/useProjectedStations';
 import { useQuery } from '../../../hooks/useQuery';
+import { useStation } from '../../../hooks/useStation';
+import { useTimeGrouping } from '../../../hooks/useTimeGrouping';
 import api from '../../../services/api';
 import useStyles from './styles';
 
@@ -38,26 +44,35 @@ import useStyles from './styles';
  * @returns Monitoring Map
  */
 export default function MonitoringMap() {
-  const {
-    values: {
-      filters,
-      timeGrouping,
-      autocompleteSelection,
-      networkSelection,
-      viewProjectedStations,
-    },
-    functions: { generateRoute, handleViewProjectedStations },
-  } = useContext(FilteringContext);
+  const autocompleteSelection = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.autocompleteSelection
+  );
 
-  const {
-    setters: { setMapRef },
-    functions: { nextLayoutConfig },
-  } = useContext(MapContext);
+  const networkSelection = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.networkSelection
+  );
 
-  const {
-    values: { isMobile },
-    functions: { openStation, openDisclaimer },
-  } = useContext(NavigationContext);
+  const filters = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.filters
+  );
+
+  const generateRoute = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.functions.generateRoute
+  );
+
+  const { timeGrouping } = useTimeGrouping();
+  const { viewProjectedStations, handleOnViewProjectedStations } =
+    useProjectedStations();
+
+  const { setMapRef } = useMap();
+  const { nextLayoutConfig } = useLayoutConfig();
+  const { isMobile } = useMobile();
+  const { openDisclaimer } = useDisclaimer();
+  const { openStation } = useStation();
 
   const [points, setPoints] = useState();
   const [projectedStations, setProjectedStations] = useState();
@@ -265,6 +280,7 @@ export default function MonitoringMap() {
                   </Typography>
                 </div>
               )}
+
               {point.properties.river && (
                 <div className={classes.popupItem}>
                   <Typography
@@ -277,6 +293,56 @@ export default function MonitoringMap() {
                     {point.properties.river}
                   </Typography>
                 </div>
+              )}
+
+              {point.properties.network === 'RHA' && (
+                <>
+                  <div className={classes.popupItem}>
+                    <Typography
+                      variant="caption"
+                      className={classes.popupItemTitle}
+                    >
+                      {t('specific.dataType.variable.items.rain')}
+                    </Typography>
+                    <Typography variant="caption">
+                      {point.properties.rain != null
+                        ? `${t('general.number', {
+                            value: point.properties.rain,
+                          })} ${t(`specific.dataType.sufixes.rain`)}`
+                        : '-'}
+                    </Typography>
+                  </div>
+                  <div className={classes.popupItem}>
+                    <Typography
+                      variant="caption"
+                      className={classes.popupItemTitle}
+                    >
+                      {t('specific.dataType.variable.items.level')}
+                    </Typography>
+                    <Typography variant="caption">
+                      {point.properties.level != null
+                        ? `${t('general.number', {
+                            value: point.properties.level,
+                          })} ${t(`specific.dataType.sufixes.level`)}`
+                        : '-'}
+                    </Typography>
+                  </div>
+                  <div className={classes.popupItem}>
+                    <Typography
+                      variant="caption"
+                      className={classes.popupItemTitle}
+                    >
+                      {t('specific.dataType.variable.items.flowRate')}
+                    </Typography>
+                    <Typography variant="caption">
+                      {point.properties.flowRate != null
+                        ? `${t('general.number', {
+                            value: point.properties.flowRate,
+                          })} ${t(`specific.dataType.sufixes.flowRate`)}`
+                        : '-'}
+                    </Typography>
+                  </div>
+                </>
               )}
 
               {point.properties.hasData && (
@@ -376,7 +442,7 @@ export default function MonitoringMap() {
                           },
                         }}
                         checked={viewProjectedStations}
-                        onChange={handleViewProjectedStations}
+                        onChange={handleOnViewProjectedStations}
                       />
                     }
                     label={

@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useContextSelector } from 'use-context-selector';
 
 import InfiniteScroll from '../../../../components/InfiniteScroll';
 import FilteringContext from '../../../../contexts/filtering';
@@ -22,9 +23,10 @@ export default function CardList({ tabpanelref }) {
     tabpanelref: undefined,
   };
 
-  const {
-    values: { filters },
-  } = useContext(FilteringContext);
+  const filters = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.filters
+  );
 
   const [isFirstLoading, setIsFirstLoading] = useState(false);
 

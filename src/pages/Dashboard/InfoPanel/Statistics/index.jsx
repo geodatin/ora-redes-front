@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ReactCountryFlag from 'react-country-flag';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
+import { useContextSelector } from 'use-context-selector';
 
 import ItemsChart from '../../../../components/Charts/Items';
 import LegendDoughnutChart from '../../../../components/Charts/LegendDoughnut';
@@ -31,9 +32,10 @@ export default function Statistics() {
   const [legendDoughnutData, setLegendDoughnutData] = useState();
   const [treemapData, setTreemapData] = useState();
 
-  const {
-    values: { filters },
-  } = useContext(FilteringContext);
+  const filters = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.filters
+  );
 
   /**
    * This userEffect fetch station count per network.

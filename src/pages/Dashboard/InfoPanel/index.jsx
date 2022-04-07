@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
@@ -8,8 +8,9 @@ import VLayout from '../../../components/Layout/Vertical';
 import TabPanel from '../../../components/TabPanel';
 import Typography from '../../../components/Typography';
 import { panels, timeGroupingOptions } from '../../../constants/options';
-import FilteringContext from '../../../contexts/filtering';
-import NavigationContext from '../../../contexts/navigation';
+import { usePanel } from '../../../hooks/usePanel';
+import { useStation } from '../../../hooks/useStation';
+import { useTimeGrouping } from '../../../hooks/useTimeGrouping';
 import CardList from './CardList';
 import Station from './Station';
 import Statistics from './Statistics';
@@ -33,24 +34,11 @@ export default function InfoPanel({ title, subtitle }) {
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const {
-    values: { timeGrouping },
-    setters: { setTimeGrouping },
-  } = useContext(FilteringContext);
+  const { station } = useStation();
+  const { panelIndexValue, handleOnChangePanel } = usePanel();
 
-  const {
-    values: { panelIndexValue, station },
-    functions: { handleOnChangePanel },
-  } = useContext(NavigationContext);
-
-  const [timeGroupingIndexValue, setTimeGroupingIndexValue] = useState(0);
-
-  const handleChangeTimeGrouping = (event, newTimeGrouping) => {
-    if (newTimeGrouping !== null) {
-      setTimeGroupingIndexValue(newTimeGrouping);
-      setTimeGrouping(timeGroupingOptions[newTimeGrouping].code);
-    }
-  };
+  const { timeGrouping, timeGroupingIndexValue, handleOnChangeTimeGrouping } =
+    useTimeGrouping();
 
   const timeGroupingVisibility =
     (panelIndexValue === panels.list.index ||
@@ -93,7 +81,7 @@ export default function InfoPanel({ title, subtitle }) {
                   t(option.translation)
                 )}
                 value={timeGroupingIndexValue}
-                handleChange={handleChangeTimeGrouping}
+                handleChange={handleOnChangeTimeGrouping}
                 style={{ marginTop: 20 }}
                 typographyVariant="caption"
               />

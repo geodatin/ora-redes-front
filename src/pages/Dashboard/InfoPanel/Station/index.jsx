@@ -2,14 +2,15 @@
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
+import { useContextSelector } from 'use-context-selector';
 
 import Breadcrumb from '../../../../components/Breadcrumb';
 import CustomButton from '../../../../components/CustomButton';
 import FilteringContext from '../../../../contexts/filtering';
-import NavigationContext from '../../../../contexts/navigation';
+import { useStation } from '../../../../hooks/useStation';
 import api from '../../../../services/api';
 import { CardItem } from '../CardList/CardItem';
 import TimeSeriesCharts from './TimeSeries';
@@ -33,13 +34,12 @@ export default function Station({ station, timeGrouping, tabpanelref }) {
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const {
-    functions: { closeStation },
-  } = useContext(NavigationContext);
+  const { closeStation } = useStation();
 
-  const {
-    values: { filters },
-  } = useContext(FilteringContext);
+  const filters = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.filters
+  );
 
   const [stationUpdate, setStationUpdate] = useState();
 

@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
 import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useContextSelector } from 'use-context-selector';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import HLayout from '../../components/Layout/Horizontal';
@@ -12,8 +12,8 @@ import MobileNavbarLayout from '../../components/Layout/Mobile/Navbar';
 import VLayout from '../../components/Layout/Vertical';
 import { layoutConfigs, networkByValue } from '../../constants/options';
 import FilteringContext from '../../contexts/filtering';
-import MapContext from '../../contexts/mapping';
-import NavigationContext from '../../contexts/navigation';
+import { useLayoutConfig } from '../../hooks/useLayoutConfig';
+import { useMobile } from '../../hooks/useMobile';
 import { useQuery } from '../../hooks/useQuery';
 import api from '../../services/api';
 import Filters from './Filters';
@@ -32,19 +32,18 @@ function Dashboard() {
 
   const [lastUpdateDatabase, setLastUpdateDatabase] = useState();
 
-  const {
-    values: { networkSelection, embed },
-  } = useContext(FilteringContext);
+  const networkSelection = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.networkSelection
+  );
 
-  const {
-    values: { layoutConfig },
-    setters: { setLayoutConfig },
-  } = useContext(MapContext);
+  const embed = useContextSelector(
+    FilteringContext,
+    (filtering) => filtering.values.embed
+  );
 
-  const {
-    values: { mobileNavValue, isMobile },
-    setters: { setMobileNavValue },
-  } = useContext(NavigationContext);
+  const { layoutConfig, setLayoutConfig } = useLayoutConfig();
+  const { isMobile, mobileNavValue, setMobileNavValue } = useMobile();
 
   const query = useQuery();
   const [mainTopSection, setMainTopSection] = useState(true);

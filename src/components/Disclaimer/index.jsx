@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import NavigationContext from '../../contexts/navigation';
+import { useDisclaimer } from '../../hooks/useDisclaimer';
 import CustomDialog from '../CustomDialog';
 import Typography from '../Typography';
 
@@ -9,10 +9,7 @@ import Typography from '../Typography';
  * This component renders a disclaimer.
  */
 export default function Disclaimer() {
-  const {
-    values: { isDisclaimerOpened },
-    functions: { closeDisclaimer },
-  } = useContext(NavigationContext);
+  const { isDisclaimerOpened, closeDisclaimer } = useDisclaimer();
 
   const { t } = useTranslation();
 
