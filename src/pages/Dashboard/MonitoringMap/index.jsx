@@ -20,12 +20,13 @@ import OrangeStationDark from '../../../assets/icons/map/orange-station-dark.png
 import OrangeStationLight from '../../../assets/icons/map/orange-station-light.png';
 import BorderGeojson from '../../../assets/shapes/border.json';
 import InverseShape from '../../../assets/shapes/inverseShape.json';
+import DataDough from '../../../components/Charts/DataDough';
 import CustomButton from '../../../components/CustomButton';
 import MapWrapper from '../../../components/MapWrapper';
 import MapItem from '../../../components/MapWrapper/Mapitem';
 import ShareDialog from '../../../components/ShareDialog';
 import Typography from '../../../components/Typography';
-import { embedItems, networks } from '../../../constants/options';
+import { dataTypes, embedItems, networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
 import { useDisclaimer } from '../../../hooks/useDisclaimer';
@@ -296,53 +297,54 @@ export default function MonitoringMap() {
               )}
 
               {point.properties.network === 'RHA' && (
-                <>
-                  <div className={classes.popupItem}>
-                    <Typography
-                      variant="caption"
-                      className={classes.popupItemTitle}
-                    >
-                      {t('specific.dataType.variable.items.rain')}
-                    </Typography>
-                    <Typography variant="caption">
-                      {point.properties.rain != null
+                <div
+                  style={{
+                    marginTop: 20,
+                    marginBottom: 10,
+                    display: 'flex',
+                    flexFlow: 'row nowrap',
+                  }}
+                >
+                  <DataDough
+                    value={
+                      point.properties.rain != null
                         ? `${t('general.number', {
                             value: point.properties.rain,
-                          })} ${t(`specific.dataType.sufixes.rain`)}`
-                        : '-'}
-                    </Typography>
-                  </div>
-                  <div className={classes.popupItem}>
-                    <Typography
-                      variant="caption"
-                      className={classes.popupItemTitle}
-                    >
-                      {t('specific.dataType.variable.items.level')}
-                    </Typography>
-                    <Typography variant="caption">
-                      {point.properties.level != null
+                          })}`
+                        : '-'
+                    }
+                    sufix={t(`specific.dataType.sufixes.rain`)}
+                    label={t(`specific.dataType.variable.items.rain`)}
+                    color={dataTypes.variable.colors.rain}
+                    scale={0.5}
+                  />
+                  <DataDough
+                    value={
+                      point.properties.level != null
                         ? `${t('general.number', {
                             value: point.properties.level,
-                          })} ${t(`specific.dataType.sufixes.level`)}`
-                        : '-'}
-                    </Typography>
-                  </div>
-                  <div className={classes.popupItem}>
-                    <Typography
-                      variant="caption"
-                      className={classes.popupItemTitle}
-                    >
-                      {t('specific.dataType.variable.items.flowRate')}
-                    </Typography>
-                    <Typography variant="caption">
-                      {point.properties.flowRate != null
+                          })}`
+                        : '-'
+                    }
+                    sufix={t(`specific.dataType.sufixes.level`)}
+                    label={t(`specific.dataType.variable.items.level`)}
+                    color={dataTypes.variable.colors.level}
+                    scale={0.5}
+                  />
+                  <DataDough
+                    value={
+                      point.properties.flowRate != null
                         ? `${t('general.number', {
                             value: point.properties.flowRate,
-                          })} ${t(`specific.dataType.sufixes.flowRate`)}`
-                        : '-'}
-                    </Typography>
-                  </div>
-                </>
+                          })}`
+                        : '-'
+                    }
+                    sufix={t(`specific.dataType.sufixes.flowRate`)}
+                    label={t('specific.dataType.variable.items.flowRate')}
+                    color={dataTypes.variable.colors.flowRate}
+                    scale={0.5}
+                  />
+                </div>
               )}
 
               {point.properties.hasData && (
@@ -350,7 +352,7 @@ export default function MonitoringMap() {
                   <div className={classes.separator} />
                   <CustomButton
                     mini
-                    style={{ fontWeigth: 400, marginTop: 3 }}
+                    style={{ fontWeigth: 400, marginTop: 3, width: '100%' }}
                     onClick={() => {
                       api
                         .post(

@@ -35,6 +35,7 @@ const useStyles = createUseStyles({
     alignItems: 'center',
     justifyContent: 'center',
     maxWidth: doughnutSquareSide,
+    marginTop: 10,
   },
 });
 

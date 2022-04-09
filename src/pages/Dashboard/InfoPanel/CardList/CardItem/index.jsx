@@ -1,11 +1,10 @@
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
-import { Doughnut } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
-import MiddleDoughnut from '../../../../../components/Charts/MiddleDoughnut';
+import DataDough from '../../../../../components/Charts/DataDough';
 import CustomButton from '../../../../../components/CustomButton';
 import ListItemContainer from '../../../../../components/ListItemContainer';
 import Typography from '../../../../../components/Typography';
@@ -36,63 +35,6 @@ function CardItemComponent({ item, disableMoreStatisticsButton }) {
   const { openStation } = useStation();
   const { panOnMap } = useMap();
   const { timeGrouping } = useTimeGrouping();
-
-  function dataDough(key, value, sufix, label, color) {
-    return (
-      <div key={key} style={{ marginRight: 10, scrollSnapAlign: 'end' }}>
-        <MiddleDoughnut
-          style={{ width: 125 }}
-          description={label}
-          doughnut={
-            <Doughnut
-              options={{
-                plugins: {
-                  legend: {
-                    display: false,
-                  },
-                  tooltip: {
-                    enabled: false,
-                    callbacks: {
-                      label(context) {
-                        return `${context.dataset.value} ${context.dataset.sufix} (${context.parsed}%)`;
-                      },
-                    },
-                  },
-                },
-                aspectRatio: 1,
-                radius: '100%',
-                cutout: 55,
-                rotation: 180,
-              }}
-              data={{
-                labels: ['', ''],
-                datasets: [
-                  {
-                    label,
-                    value,
-                    sufix,
-                    data: [100, 0],
-                    backgroundColor: [
-                      color ?? theme.secondary.light,
-                      theme.toggleButton.unabled,
-                    ],
-                    borderColor: 'transparent',
-                  },
-                ],
-              }}
-            />
-          }
-        >
-          <Typography format="bold" variant="p">
-            {t('general.number', { value }) || '-'}
-          </Typography>
-          <Typography variant="body" style={{ color: theme.neutral.gray.main }}>
-            {sufix}
-          </Typography>
-        </MiddleDoughnut>
-      </div>
-    );
-  }
 
   const handleOnClickLocation = () => {
     panOnMap([item.location.coordinates[1], item.location.coordinates[0]]);
@@ -154,12 +96,14 @@ function CardItemComponent({ item, disableMoreStatisticsButton }) {
                 ).toLowerCase()}`
               : t(`specific.dataType.sufixes.${observation.key}`);
 
-          return dataDough(
-            observation.key,
-            observation.value,
-            sufix,
-            t(`specific.dataType.variable.items.${observation.key}`),
-            dataTypes.variable.colors[observation.key]
+          return (
+            <DataDough
+              key={observation.key}
+              value={t('general.number', { value: observation.value }) || '-'}
+              sufix={sufix}
+              label={t(`specific.dataType.variable.items.${observation.key}`)}
+              color={dataTypes.variable.colors[observation.key]}
+            />
           );
         })}
       </div>

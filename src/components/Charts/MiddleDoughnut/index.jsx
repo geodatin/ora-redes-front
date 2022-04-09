@@ -14,6 +14,7 @@ import useStyles from './styles';
 export default function MiddleDoughnut({
   doughnut,
   description,
+  descriptionVariant,
   children,
   style,
 }) {
@@ -22,11 +23,13 @@ export default function MiddleDoughnut({
     description: PropTypes.string,
     children: PropTypes.node.isRequired,
     style: PropTypes.shape(),
+    descriptionVariant: PropTypes.string,
   };
 
   MiddleDoughnut.defaultProps = {
     style: {},
     description: undefined,
+    descriptionVariant: 'body',
   };
 
   const classes = useStyles();
@@ -49,7 +52,7 @@ export default function MiddleDoughnut({
               WebkitLineClamp: 3,
               WebkitBoxOrient: 'vertical',
             }}
-            variant="body"
+            variant={descriptionVariant}
           >
             {description}
           </Typography>
