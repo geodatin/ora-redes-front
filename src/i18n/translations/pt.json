@@ -272,6 +272,7 @@
       "viewMoreButton": "Visualizar Estatísticas"
     },
     "legend": {
+      "territoryLine": "Limites da Bacia Amazônica",
       "riverLine": "Linhas de drenagem",
       "alertStation": "Estação em alerta"
     },

@@ -527,7 +527,7 @@ export default function MonitoringMap() {
                   }}
                   className={classes.dashedLine}
                 />
-                {t('specific.networks.type.quality')}
+                {t('specific.legend.territoryLine')}
               </div>
               <div className={classes.legendItem}>
                 <div
