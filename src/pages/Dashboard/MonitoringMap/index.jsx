@@ -296,6 +296,22 @@ export default function MonitoringMap() {
                 </div>
               )}
 
+              {point.properties.lastUpdate && (
+                <div className={classes.popupItem}>
+                  <Typography
+                    variant="caption"
+                    className={classes.popupItemTitle}
+                  >
+                    {t('specific.popup.lastUpdate')}
+                  </Typography>
+                  <Typography variant="caption">
+                    {t('general.date.dayMonthYear', {
+                      date: new Date(point.properties.lastUpdate),
+                    })}
+                  </Typography>
+                </div>
+              )}
+
               {point.properties.network === 'RHA' && (
                 <div
                   style={{
