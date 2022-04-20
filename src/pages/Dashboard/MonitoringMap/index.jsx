@@ -29,6 +29,7 @@ import Typography from '../../../components/Typography';
 import { dataTypes, embedItems, networks } from '../../../constants/options';
 import { darkScheme, lightScheme } from '../../../constants/schemes';
 import FilteringContext from '../../../contexts/filtering';
+import { useAllStations } from '../../../hooks/useAllStations';
 import { useDisclaimer } from '../../../hooks/useDisclaimer';
 import { useLayoutConfig } from '../../../hooks/useLayoutConfig';
 import { useMap } from '../../../hooks/useMap';
@@ -68,6 +69,7 @@ export default function MonitoringMap() {
   const { timeGrouping } = useTimeGrouping();
   const { viewProjectedStations, handleOnViewProjectedStations } =
     useProjectedStations();
+  const { viewAllStations, handleOnViewAllStations } = useAllStations();
 
   const { setMapRef } = useMap();
   const { nextLayoutConfig } = useLayoutConfig();
@@ -200,6 +202,7 @@ export default function MonitoringMap() {
       }
 
       return newPoints.map((point, index) => {
+        if (viewAllStations) return null;
         const key = `${point?.properties.code}-${index}`;
         const position = [...point.geometry.coordinates];
         position.reverse();
@@ -399,7 +402,13 @@ export default function MonitoringMap() {
     }
 
     return null;
-  }, [points, theme, projectedStations, viewProjectedStations]);
+  }, [
+    points,
+    theme,
+    projectedStations,
+    viewProjectedStations,
+    viewAllStations,
+  ]);
 
   function handleShareDialog() {
     setOpenShare(!openShare);
@@ -465,7 +474,25 @@ export default function MonitoringMap() {
                     }
                     label={
                       <Typography variant="caption">
-                        Estações projetadas
+                        {t('specific.layers.projectedStations')}
+                      </Typography>
+                    }
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        sx={{
+                          '& .MuiSvgIcon-root': {
+                            fontSize: 18,
+                          },
+                        }}
+                        checked={viewAllStations}
+                        onChange={handleOnViewAllStations}
+                      />
+                    }
+                    label={
+                      <Typography variant="caption">
+                        {t('specific.layers.allStations')}
                       </Typography>
                     }
                   />

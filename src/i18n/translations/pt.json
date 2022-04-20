@@ -74,6 +74,10 @@
       "noOptionsText": "Nenhuma opção encontrada",
       "emptyText": "Digite para buscar"
     },
+    "layers": {
+      "projectedStations": "Estações projetadas",
+      "allStations": "Todas as estações coletadas"
+    },
     "breadcrumbs": {
       "monitoring": "Monitoramento",
       "allNetworks": "Todas as redes"

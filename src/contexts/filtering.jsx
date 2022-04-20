@@ -45,6 +45,10 @@ export function FilteringProvider({ embed, children }) {
   const handleOnViewProjectedStations = useCallback((event) => {
     setViewProjectedStations(event.target.checked);
   }, []);
+  const [viewAllStations, setViewAllStations] = useState(false);
+  const handleOnViewAllStations = useCallback((event) => {
+    setViewAllStations(event.target.checked);
+  }, []);
 
   /**
    * Merge the autocomplete and network selection.
@@ -165,6 +169,7 @@ export function FilteringProvider({ embed, children }) {
           autocompleteStraightSelection,
           networkSelection,
           viewProjectedStations,
+          viewAllStations,
           timeGroupingIndexValue,
           filters,
           embed,
@@ -179,6 +184,7 @@ export function FilteringProvider({ embed, children }) {
           generateRoute,
           handleOnViewProjectedStations,
           handleOnChangeTimeGrouping,
+          handleOnViewAllStations,
         },
         loaders: {
           paramsLoaded,
