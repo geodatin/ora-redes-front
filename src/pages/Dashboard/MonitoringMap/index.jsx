@@ -632,6 +632,16 @@ export default function MonitoringMap() {
                 {t('specific.networks.type.hybam')}
               </div>
               <div className={classes.legendItem}>
+                <img
+                  alt="gray-station"
+                  src={
+                    theme === darkScheme ? GrayStationDark : GrayStationLight
+                  }
+                  className={classes.legendIcon}
+                />
+                {t('specific.networks.type.projected')}
+              </div>
+              <div className={classes.legendItem}>
                 <div
                   style={{
                     borderColor: theme === darkScheme ? '#accc0c' : '#728740',
