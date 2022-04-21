@@ -8,6 +8,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 import { Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { useContextSelector } from 'use-context-selector';
 
 import BluesStationDark from '../../../assets/icons/map/blue-station-dark.png';
@@ -18,6 +19,8 @@ import GreenStationDark from '../../../assets/icons/map/green-station-dark.png';
 import GreenStationLight from '../../../assets/icons/map/green-station-light.png';
 import OrangeStationDark from '../../../assets/icons/map/orange-station-dark.png';
 import OrangeStationLight from '../../../assets/icons/map/orange-station-light.png';
+import PurpleStationDark from '../../../assets/icons/map/purple-station-dark.png';
+import PurpleStationLight from '../../../assets/icons/map/purple-station-light.png';
 import BorderGeojson from '../../../assets/shapes/border.json';
 import InverseShape from '../../../assets/shapes/inverseShape.json';
 import DataDough from '../../../components/Charts/DataDough';
@@ -85,6 +88,7 @@ export default function MonitoringMap() {
   const { t } = useTranslation();
   const [openShare, setOpenShare] = useState(false);
   const query = useQuery();
+  const [allStationsList, setAllStationsList] = useState();
 
   useEffect(() => {
     let isSubscribed = true;
@@ -193,6 +197,70 @@ export default function MonitoringMap() {
       }),
     [theme]
   );
+
+  const purpleStation = useMemo(
+    () =>
+      L.icon({
+        iconUrl: theme === darkScheme ? PurpleStationDark : PurpleStationLight,
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+      }),
+    [theme]
+  );
+
+  useEffect(() => {
+    api.get('/station/all/location').then(({ data }) => {
+      setAllStationsList(data);
+    });
+  }, []);
+
+  const allStationsMarkers = useMemo(() => {
+    if (allStationsList) {
+      return allStationsList.features.map((point, index) => {
+        if (!point.geometry || !point.properties) return null;
+
+        const key = `${point?.properties.code}-${index}`;
+        const position = [...point.geometry.coordinates];
+        position.reverse();
+        const icon = purpleStation;
+
+        return (
+          <Marker
+            key={key}
+            position={position}
+            icon={icon}
+            zIndexOffset={point.properties.situation === 'alert' ? 10 : 2}
+          >
+            <Popup
+              key={theme === darkScheme ? `${key}-dark` : `${key}-light`}
+              className={classes.popup}
+            >
+              <Typography variant="caption" format="bold">
+                {point.properties.name}
+              </Typography>
+            </Popup>
+          </Marker>
+        );
+      });
+    }
+
+    return null;
+  }, [allStationsList, theme]);
+
+  const allStations = useMemo(() => {
+    if (allStationsMarkers && viewAllStations) {
+      return (
+        <MarkerClusterGroup
+          spiderfyDistanceMultiplier={1}
+          showCoverageOnHover={false}
+        >
+          {allStationsMarkers}
+        </MarkerClusterGroup>
+      );
+    }
+
+    return null;
+  }, [viewAllStations, theme]);
 
   const markers = useMemo(() => {
     if (points) {
@@ -644,6 +712,7 @@ export default function MonitoringMap() {
         zIndex={2}
       />
       {markers}
+      {allStations}
     </MapWrapper>
   );
 }
