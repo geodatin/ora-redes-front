@@ -275,7 +275,9 @@
       "river": "Rio",
       "responsible": "Responsável",
       "viewMoreButton": "Visualizar Estatísticas",
-      "lastUpdate": "Última atualização"
+      "lastUpdate": "Última atualização",
+      "city": "Cidade",
+      "state": "Estado"
     },
     "legend": {
       "territoryLine": "Limites da Bacia Amazônica",

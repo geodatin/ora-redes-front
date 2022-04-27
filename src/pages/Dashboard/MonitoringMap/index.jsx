@@ -383,6 +383,34 @@ export default function MonitoringMap() {
                 </div>
               )}
 
+              {point.properties.state && (
+                <div className={classes.popupItem}>
+                  <Typography
+                    variant="caption"
+                    className={classes.popupItemTitle}
+                  >
+                    {t('specific.popup.state')}
+                  </Typography>
+                  <Typography variant="caption">
+                    {point.properties.state}
+                  </Typography>
+                </div>
+              )}
+
+              {point.properties.city && (
+                <div className={classes.popupItem}>
+                  <Typography
+                    variant="caption"
+                    className={classes.popupItemTitle}
+                  >
+                    {t('specific.popup.city')}
+                  </Typography>
+                  <Typography variant="caption">
+                    {point.properties.city}
+                  </Typography>
+                </div>
+              )}
+
               {point.properties.network === 'RHA' && (
                 <div
                   style={{
