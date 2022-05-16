@@ -1,0 +1,13 @@
+{
+  "helloWorld": "Hola mundo!",
+  "general": {
+    "projectName": "Project",
+    "language": "Espanõl"
+  },
+  "header": {
+    "changeTheme": "Cambiar Tema"
+  },
+  "posts": {
+    "download": "Descargar Archivo"
+  }
+}

@@ -18,14 +18,13 @@ export const lightScheme = {
     gray: {
       light: '#DEDEDE',
       main: '#A4A4A4',
-      dark: '#333333',
       medium: '#464646',
+      dark: '#333333',
     },
   },
   stroke: {
     light: '#F0F1F3',
-    main: '#DFE1E6',
-    dark: '#0B1016',
+    dark: '#DFE1E6',
   },
   blue: {
     light: '#67D9FC',
@@ -36,6 +35,38 @@ export const lightScheme = {
     light: '#EEFAA3',
     main: '#D3F500',
     dark: '#A1BA09',
+  },
+  background: {
+    main: '#FAFBFD',
+  },
+  button: {
+    actived: '#E9EAED',
+    hover: '#E3E4E7',
+    clicked: '#878C92',
+    disabled: '#F0F1F3',
+    disabledLabel: '#ffffff',
+  },
+  popup: {
+    background: '#F0F1F3',
+    actived: '#DDDDDD',
+    hover: '#E3E4E7',
+  },
+  textfield: {
+    background: '#DFE1E6',
+  },
+  toggleButton: {
+    unabled: '#E7E9EE',
+    actived: '#464646',
+    hover: '#DBDBDB',
+  },
+  scrollBar: {
+    thumb: '#A4A4A4 ',
+    track: '#E9EAED',
+  },
+  share: {
+    twitter: '#00acee',
+    whatsapp: '#128c7E',
+    facebook: '#3B5998',
   },
 };
 
@@ -47,7 +78,7 @@ export const darkScheme = {
   },
   secondary: {
     light: '#1B2935',
-    main: '#323F4A',
+    main: '#B6C5D1',
     dark: '#E7EDF2',
   },
   neutral: {
@@ -55,14 +86,13 @@ export const darkScheme = {
     gray: {
       light: '#DEDEDE',
       main: '#A4A4A4',
-      dark: '#333333',
       medium: '#464646',
+      dark: '#333333',
     },
   },
   stroke: {
-    light: '#151C24',
-    main: '#151C24',
-    dark: '#0D1620',
+    light: '#19212B',
+    dark: '#1D2631',
   },
   blue: {
     light: '#67D9FC',
@@ -73,5 +103,37 @@ export const darkScheme = {
     light: '#EEFAA3',
     main: '#D3F500',
     dark: '#A1BA09',
+  },
+  background: {
+    main: '#0D1620',
+  },
+  button: {
+    actived: '#151C24',
+    hover: '#20262E',
+    clicked: '#CDD7DA',
+    disabled: '#161615',
+    disabledLabel: '#1B2935',
+  },
+  popup: {
+    background: '#151C24',
+    hover: '#272C32',
+    actived: '#323941',
+  },
+  textfield: {
+    background: '#212D3C',
+  },
+  toggleButton: {
+    unabled: '#19212B',
+    actived: '#212D3C',
+    hover: '#1C2734',
+  },
+  scrollBar: {
+    thumb: '#323941',
+    track: '#19212B',
+  },
+  share: {
+    twitter: '#00acee',
+    whatsapp: '#128c7E',
+    facebook: '#3B5998',
   },
 };
