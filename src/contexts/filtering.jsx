@@ -139,7 +139,7 @@ export function FilteringProvider({ embed, children }) {
       }
 
       if (newQuery.length === initialSize) {
-        return '/';
+        return `/${process.env.REACT_APP_URL_BASE}`;
       }
 
       return newQuery;
@@ -153,10 +153,16 @@ export function FilteringProvider({ embed, children }) {
   useEffect(() => {
     if (paramsLoaded) {
       if (
-        window.location.pathname === '/filter' ||
-        window.location.pathname === '/'
+        window.location.pathname ===
+          `/${process.env.REACT_APP_URL_BASE}/filter` ||
+        window.location.pathname === `/${process.env.REACT_APP_URL_BASE}` ||
+        window.location.pathname === `/${process.env.REACT_APP_URL_BASE}/`
       ) {
-        window.history.replaceState(null, '', generateRoute(`/filter?`));
+        window.history.replaceState(
+          null,
+          '',
+          generateRoute(`/${process.env.REACT_APP_URL_BASE}/filter?`)
+        );
       }
     }
   }, [networkSelection, autocompleteSelection]);

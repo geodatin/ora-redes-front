@@ -516,12 +516,16 @@ export default function MonitoringMap() {
   );
 
   const shareUrl = useMemo(
-    () => window.location.origin + generateRoute(`/filter?`),
+    () =>
+      window.location.origin +
+      generateRoute(`/${process.env.REACT_APP_URL_BASE}/filter?`),
     [networkSelection, autocompleteSelection]
   );
 
   const embedEnabled = useMemo(() => {
-    if (window.location.pathname === '/embed') {
+    if (
+      window.location.pathname === `/${process.env.REACT_APP_URL_BASE}/embed`
+    ) {
       const embedingParam = query.get('embeding');
 
       if (embedingParam === 'false') {

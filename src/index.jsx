@@ -17,5 +17,5 @@ ReactDOM.render(
       <Routes />
     </ThemeProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root-new')
 );

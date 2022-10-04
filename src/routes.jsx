@@ -49,26 +49,42 @@ function Routes() {
       <Header
         projectName={t('general.projectName')}
         items={[
-          { title: t('header.buttons.dashboard'), to: '/' },
+          {
+            title: t('header.buttons.dashboard'),
+            to: `/${process.env.REACT_APP_URL_BASE}`,
+          },
           /* { title: t('header.buttons.dataLibrary'), to: '/library' },
           { title: t('header.buttons.api'), to: '/api' }, */
         ]}
       />
       <BaseRoutes>
-        <Route exact path="/" element={<DefaultPage />} />
         <Route
           exact
-          path="/filter"
+          path={`/${process.env.REACT_APP_URL_BASE}`}
+          element={<DefaultPage />}
+        />
+        <Route
+          exact
+          path={`/${process.env.REACT_APP_URL_BASE}/filter`}
           element={
-            <FilteringWrapper redirect="/">
+            <FilteringWrapper redirect={`/${process.env.REACT_APP_URL_BASE}`}>
               <DefaultPage />
             </FilteringWrapper>
           }
         />
-        <Route exact path="/embed" element={<DefaultPage embed />} />
+        <Route
+          exact
+          path={`/${process.env.REACT_APP_URL_BASE}/embed`}
+          element={<DefaultPage embed />}
+        />
         {/* <Route exact path="/api" element={<ApiMethods />} />
         <Route exact path="/library" element={<DataLibrary />} /> */}
-        <Route path="*" element={<Navigate replace to="/" />} />
+        <Route
+          path="*"
+          element={
+            <Navigate replace to={`/${process.env.REACT_APP_URL_BASE}`} />
+          }
+        />
       </BaseRoutes>
     </BrowserRouter>
   );

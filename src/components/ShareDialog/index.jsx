@@ -61,7 +61,7 @@ export default function ShareDialog({
   }
 
   const code = useMemo(() => {
-    let embedQuery = `/embed?`;
+    let embedQuery = `/${process.env.REACT_APP_URL_BASE}/embed?`;
 
     if (customParam.length > 1) {
       embedQuery += customParam;
