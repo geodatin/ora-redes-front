@@ -66,7 +66,11 @@ export default function ChartContainer({
         >
           <div className={classes.header}>
             <div className={classes.headerTitle}>
-              <Typography variant="body" format="bold">
+              <Typography
+                variant="body"
+                format="bold"
+                style={{ color: theme.secondary.dark }}
+              >
                 {title}
               </Typography>
               <CustomTooltip title={info} placement="bottom">

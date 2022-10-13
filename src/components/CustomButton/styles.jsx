@@ -9,13 +9,13 @@ const useStyles = createUseStyles((theme) => ({
       paddingTop: 1,
     },
     '&.MuiButtonBase-root': {
-      color: theme.secondary.dark,
+      color: [theme.secondary.dark, '!important'],
 
       '&:hover': {
-        backgroundColor: theme.button.hover,
+        backgroundColor: [theme.button.hover, '!important'],
 
         '&:active': {
-          backgroundColor: `${theme.button.clicked}70`,
+          backgroundColor: `${theme.button.clicked}70 !important`,
         },
       },
     },
@@ -33,13 +33,13 @@ const useStyles = createUseStyles((theme) => ({
       paddingTop: 1,
     },
     '&.MuiButtonBase-root': {
-      color: theme.secondary.dark,
+      color: [theme.secondary.dark, '!important'],
 
       '&:hover': {
-        backgroundColor: theme.button.hover,
+        backgroundColor: [theme.button.hover, '!important'],
 
         '&:active': {
-          backgroundColor: `${theme.button.clicked}70`,
+          backgroundColor: `${theme.button.clicked}70 !important`,
         },
       },
     },

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from 'react-jss';
 import { useContextSelector } from 'use-context-selector';
 
 import InfiniteScroll from '../../../components/InfiniteScroll';
@@ -14,6 +15,7 @@ import useStyles from './styles';
 export default function Notifications() {
   const classes = useStyles();
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const filters = useContextSelector(
     FilteringContext,
@@ -91,7 +93,7 @@ export default function Notifications() {
       upRow={{
         className: classes.notificationsHeader,
         children: (
-          <Typography>
+          <Typography style={{ color: theme.secondary.dark }}>
             {t(`specific.notifications.title`).toUpperCase()}
           </Typography>
         ),

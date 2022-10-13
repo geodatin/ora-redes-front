@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { ListSubheader, MenuItem } from '@mui/material';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from 'react-jss';
 import { useContextSelector } from 'use-context-selector';
 
 import AdvancedFilter from '../../../components/AdvancedFilter';
@@ -278,7 +279,9 @@ export default function Filters() {
         )}
       </div>
       <CustomButton
-        style={{ marginTop: selectionSize > 0 ? 8 : 15 }}
+        style={{
+          marginTop: selectionSize > 0 ? 8 : 15,
+        }}
         disabled={applyDisabled}
         onClick={() => applySelection()}
       >

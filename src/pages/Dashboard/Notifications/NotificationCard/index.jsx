@@ -48,14 +48,18 @@ function NotificationCardComponent({ circleColor, notification }) {
           onKeyDown={() => handleOnClickLocation()}
           className={classes.locationButton}
         >
-          <Typography format="bold" variant="caption">
+          <Typography
+            format="bold"
+            variant="caption"
+            style={{ color: theme.secondary.dark }}
+          >
             {notification.name}
           </Typography>
           <MyLocationIcon style={{ fontSize: 12, marginLeft: 7 }} />
         </div>
 
         <div className={classes.notificationTextContent}>
-          <Typography variant="caption">
+          <Typography variant="caption" style={{ color: theme.secondary.dark }}>
             {t(`specific.notifications.state`)} {t(`specific.notifications.of`)}{' '}
             {t(`specific.notifications.situations.${notification.situation}`)}{' '}
             {t(`specific.notifications.afterReaching`)}{' '}

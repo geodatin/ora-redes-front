@@ -15,7 +15,114 @@ body,
   max-width: 100% !important;
   padding: 0px !important;
   height: 100vh !important;
+  margin-bottom: 6rem !important;
 }
+
+button:not(#btnsearch):not(.slick-dots):not(.swal2-styled):not(.button.is-danger.is-small):not(.buttonb) {
+  display: flex !important;
+  cursor: pointer !important;
+  font-size: 1rem;
+  font-weight: 400 !important; 
+  line-height: 1.4em !important;
+  padding: 13px !important;
+}
+
+.css-16awh2u-MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-endAdornment {
+  right: -1px!important;
+  top: 0!important;
+}
+
+ul li:not(.menu-item):not(.wpmm_mega_menu) {
+  margin-left: 0 !important;
+}
+
+.css-1l6di18 .MuiOutlinedInput-root .MuiAutocomplete-endAdornment {
+  right: -1px !important;
+  top: 0px !important;
+}
+
+
+.css-1l6di18 .MuiOutlinedInput-root.MuiInputBase-sizeSmall {
+  padding: 10px !important;
+} 
+
+.css-igs3ac {
+  inset: -2px 0px 0px !important;
+}
+
+.css-nnbavb {
+  float: left !important;
+}
+
+.mini-0-2-66 {
+  height: 22px;
+  font-size: 12.8px !important;
+  font-weight: 400 !important;
+}
+
+.css-13ntm4o{
+  border-radius: 13px !important; 
+  width: 26px !important;
+  padding: 13px 0 !important;
+}
+
+.css-r121wn {
+  margin: 0 3px !important;
+  border-radius: 13px!important;
+  width: 26px !important;
+}
+
+.wrapper-0-2-111 {
+  overflow-x: hidden !important;
+}
+.listWrapper-0-2-76 {
+  overflow-x: hidden !important;
+}
+
+.list-0-2-77 {
+  padding: 0px 5px 0px 15px !important;
+}
+
+.wrapper-0-2-117 {
+  width: 100% !important;
+  display: flex !important;
+  padding-right: 30px !important;
+  flex-flow: column nowrap !important;
+  margin-bottom: 10px !important;
+}
+
+.css-17nt0wp {
+  font-weight: 500 !important; 
+  padding: 13px 16px !important;
+}
+
+.css-b52kj1 {
+  background: none !important;
+  height: 1.4375em !important;
+}
+ 
+.css-2iz2x6 {
+  position: absolute;
+  right: 9px !important;
+  top: calc(50% - 9px) !important;
+}
+
+input[type="text"]:not(#txtfilename):not(.form-control), input[type="password"], input[type="email"], textarea, select {
+  color: unset !important;
+  border: 0px !important;
+}
+
+.css-17nt0wp.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26) !important;
+  background: #F0F1F3 !important;
+}
+
+.css-1lm1iu3.Mui-disabled {
+  color: rgb(27, 41, 53) !important;
+  background: #161615 !important;
+}
+
+
 
 h1,
 h2,
@@ -31,7 +138,7 @@ li {
   font-style: inherit;
   font-size: 100%;
   font-family: inherit;
-  vertical-align: baseline;
+  vertical-align: baseline; 
 }
 
 a,
@@ -39,17 +146,17 @@ a:link,
 a:visited,
 a:hover,
 a:active {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 ol,
 ul,
 li {
-  list-style: none;
+  list-style: none !important;
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
 }
 
 body {
@@ -62,6 +169,6 @@ body {
 }
 
 .leaflet-container {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
 }

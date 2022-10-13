@@ -78,8 +78,14 @@ export default function LegendDoughnutChart({
       <div key={label} className={classes.legendItem}>
         <div className={classes.circle} style={{ background: color }} />
         <div className={classes.legendNameValue}>
-          <Typography variant="body">{label}</Typography>
-          <Typography style={{ marginRight: 10 }} format="bold" variant="body">
+          <Typography variant="body" style={{ color: theme.secondary.dark }}>
+            {label}
+          </Typography>
+          <Typography
+            style={{ marginRight: 10, color: theme.secondary.dark }}
+            format="bold"
+            variant="body"
+          >
             {value}
           </Typography>
         </div>
@@ -102,7 +108,11 @@ export default function LegendDoughnutChart({
             <Doughnut options={merge(options, mergeOptions)} data={data} />
           }
         >
-          <Typography format="bold" variant="h3">
+          <Typography
+            format="bold"
+            variant="h3"
+            style={{ color: theme.secondary.dark }}
+          >
             {getTotal(data?.datasets[0]?.data)}
           </Typography>
           <Typography variant="body" style={{ color: theme.neutral.gray.main }}>

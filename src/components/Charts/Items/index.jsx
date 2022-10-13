@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTheme } from 'react-jss';
 
 import ChartContainer from '../../ChartContainer';
 import Typography from '../../Typography';
@@ -29,8 +30,8 @@ export default function ItemsChart({
     csvCallback: undefined,
     fullScreenEnabled: false,
   };
-
   const classes = useStyles();
+  const theme = useTheme();
 
   const itemComponent = (icon, label, value, dataType) => (
     <div key={label} className={classes.item}>
@@ -42,13 +43,23 @@ export default function ItemsChart({
         }}
       >
         {icon}
-        <Typography format="bold" variant="body" style={{ fontSize: 15 }}>
+        <Typography
+          format="bold"
+          variant="body"
+          style={{ fontSize: 15, color: theme.secondary.dark }}
+        >
           {label}
         </Typography>
       </div>
       <div>
-        <Typography format="bold"> {value}</Typography>
-        <Typography> {dataType}</Typography>
+        <Typography format="bold" style={{ color: theme.secondary.dark }}>
+          {' '}
+          {value}
+        </Typography>
+        <Typography style={{ color: theme.secondary.dark }}>
+          {' '}
+          {dataType}
+        </Typography>
       </div>
     </div>
   );
