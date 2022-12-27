@@ -1,13 +1,314 @@
 {
-  "helloWorld": "Hello world!",
   "general": {
-    "projectName": "Project",
-    "language": "English"
+    "projectName": "Redes",
+    "language": "English",
+    "number": "{{value, number}}",
+    "roundNumber": "{{value, roundNumber}}",
+    "date": {
+      "year": "{{date, YYYY}}",
+      "monthYear": "{{date, MM/YYYY}}",
+      "monthNameYear": "{{date, MMMM, YYYY}}",
+      "hour": "{{date, HH:mm}}",
+      "dayMonthYear": "{{date, DD/MM/YYYY}}",
+      "dayMonthYearHour": "{{date, DD/MM/YYYY, HH:mm}}"
+    }
   },
   "header": {
-    "changeTheme": "Change Theme"
+    "changeTheme": "Toggle Theme",
+    "buttons": {
+      "dashboard": "Monitoring",
+      "dataLibrary": "Files",
+      "api": "API"
+    }
   },
   "posts": {
-    "download": "Download File"
+    "file": {
+      "download": "Download file"
+    },
+    "api": {
+      "url": "URL",
+      "urlParams": "Parameters in the URL",
+      "bodyParams": "Body parameters",
+      "requisitionExample": "Example of requisition",
+      "answer": "Answer",
+      "key": "Chave",
+      "type": "Type",
+      "description": "Description",
+      "none": "None"
+    }
+  },
+  "share": {
+    "headerTitle": "Share Page",
+    "page1Text1": "Share the map on social networks using the following buttons:",
+    "page1Text2": "Or via the link below:",
+    "copyButton": "Copy",
+    "copiedButton": "Copied",
+    "embedButton": "Embed the dashboard on another page",
+    "linkShareButton": "Back to sharing links",
+    "page2Text1": "Configure embedding:",
+    "page2Text2": "Code:",
+    "embedTitle": "Embed page"
+  },
+  "components": {
+    "advancedFilter": {
+      "placeholder": "Add filter"
+    }
+  },
+  "specific": {
+    "filters": {
+      "title": "Filters",
+      "clearButton": "Clean",
+      "noSelection": "No filter selected",
+      "apply": "To apply"
+    },
+    "countries": {
+      "8": "Venezuela",
+      "5": "Peru",
+      "4": "Ecuador",
+      "7": "Colombia",
+      "9": "Brazil",
+      "6": "Bolivia"
+    },
+    "autocomplete": {
+      "loadingText": "Seeking out...",
+      "noOptionsText": "No option found",
+      "emptyText": "Type to search"
+    },
+    "layers": {
+      "projectedStations": "Projected stations",
+      "allStations": "All seasons collected"
+    },
+    "breadcrumbs": {
+      "monitoring": "Monitoring",
+      "allNetworks": "All networks"
+    },
+    "mobileNavbar": {
+      "map": "Map",
+      "filters": "Filters",
+      "panel": "Panel",
+      "notifications": "Notifications"
+    },
+    "infoPanel": {
+      "title": "All networks",
+      "lastUpdate": "Last update on",
+      "loadingLastUpdate": "Loading last update...",
+      "statistics": "Statistics",
+      "list": "Listing",
+      "timeGrouping": {
+        "year": "Year",
+        "semester": "Semester",
+        "quarter": "Quarter",
+        "month": "Month",
+        "day": "Day",
+        "week": "Week",
+        "hour": "Hour"
+      }
+    },
+    "statistics": {
+      "charts": {
+        "stationsPerNetwork": {
+          "title": "Stations per network",
+          "info": "This chart displays stations by network"
+        },
+        "stationsPerCountry": {
+          "title": "Stations by countries",
+          "info": "This chart displays stations by country"
+        },
+        "riverRanking": {
+          "title": "Ranking of rivers by number of stations",
+          "info": "This chart presents a ranking of rivers by station numbers."
+        },
+        "timeSeries": {
+          "rain": {
+            "title": "Precipitation history",
+            "info": "This graph shows a historical precipitation",
+            "yAxisLabel": "mm"
+          },
+          "level": {
+            "title": "Middle level history",
+            "info": "This graph shows the average level history",
+            "yAxisLabel": "Centimeters",
+            "superiorLimit": "Flood",
+            "inferiorLimit": "Dry"
+          },
+          "flowRate": {
+            "title": "Flow history",
+            "info": "This graph shows the flow history",
+            "yAxisLabel": "m³ per second",
+            "superiorLimit": "Flood",
+            "inferiorLimit": "Dry"
+          },
+          "turbidity": {
+            "title": "Turbidity history",
+            "info": "This graph shows the turbidity history",
+            "yAxisLabel": "NTU"
+          },
+          "ph": {
+            "title": "pH history",
+            "info": "This graph shows the pH history",
+            "yAxisLabel": "pH"
+          },
+          "OD": {
+            "title": "Dissolved oxygen history",
+            "info": "This graph displays the history of dissolved oxygen",
+            "yAxisLabel": "milligrams per liter"
+          },
+          "electricConductivity": {
+            "title": "Electrical conductivity history",
+            "info": "This graph presents the history of electrical conductivity",
+            "yAxisLabel": "micro siemens per centimeter"
+          },
+          "sampleTemperature": {
+            "title": "Temperature history",
+            "info": "This graph shows the temperature history",
+            "yAxisLabel": "degrees celsius"
+          },
+          "totalDissolvedSolid": {
+            "title": "Total dissolved solids history",
+            "info": "This graph shows the history of total dissolved solids",
+            "yAxisLabel": "milligrams per liter"
+          },
+          "totalNitrogen": {
+            "title": "Total nitrogen history",
+            "info": "This graph shows the history of total nitrogen",
+            "yAxisLabel": "milligrams per liter"
+          },
+          "totalOrtophosphate": {
+            "title": "History of total orthophosphate",
+            "info": "This graph presents the history of total orthophosphate",
+            "yAxisLabel": "milligrams per liter"
+          },
+          "totalSuspensionSolid": {
+            "title": "History of total suspended solids",
+            "info": "This chart shows the history of total suspended solids",
+            "yAxisLabel": "milligrams per liter"
+          },
+          "raw": {
+            "title": "Raw data history",
+            "info": "This graph presents raw data history for precipitation, flow, and level."
+          }
+        },
+        "stationsPerVariableTreemap": {
+          "title": "Stations by variables on each network",
+          "info": "This graph displays a count of stations by variables on each network"
+        }
+      }
+    },
+    "list": {
+      "seeMoreStatistics": "View more statistics",
+      "seeMoreStations": "View more stations",
+      "noMoreResults": "There are no more results to display",
+      "noResults": "There are no results for the applied filter"
+    },
+    "notifications": {
+      "title": "Notificações",
+      "noMoreResults": "Não há mais notificações a serem exibidas",
+      "noResults": "Não existem notificações no momento",
+      "afterReaching": "após atingir",
+      "state": "Estado",
+      "of": "de",
+      "situations": {
+        "alert": "alerta",
+        "attention": "atenção",
+        "emergency": "emergência"
+      }
+    },
+    "dataType": {
+      "name": "Name",
+      "network": "Network",
+      "country": "Country",
+      "responsible": "Responsible",
+      "river": "River",
+      "networks": {
+        "RHA": "Amazon hydrological network",
+        "RQA": "Water quality network",
+        "HYBAM": "HYBAM station network"
+      },
+      "station": {
+        "singular": "Station",
+        "plural": "Seasons"
+      },
+      "variable": {
+        "title": "Variable",
+        "items": {
+          "ph": "pH",
+          "OD": "Dissolved Oxygen",
+          "electricConductivity": "Electrical Conductivity",
+          "turbidity": "Turbidity",
+          "sampleTemperature": "Temperature",
+          "totalDissolvedSolid": "Total Dissolved Solids",
+          "totalNitrogen": "Total Nitrogen",
+          "totalOrtophosphate": "Total Orthophosphate",
+          "totalSuspensionSolid": "Total Suspension Solids",
+          "rain": "Rainfall",
+          "flowRate": "Flow",
+          "level": "Level"
+        }
+      },
+      "sufixes": {
+        "ph": "",
+        "OD": "mg/L",
+        "electricConductivity": "µS/cm",
+        "turbidity": "NTU",
+        "sampleTemperature": "°C",
+        "totalDissolvedSolid": "mg/L",
+        "totalNitrogen": "mg/L",
+        "totalOrtophosphate": "mg/L",
+        "totalSuspensionSolid": "mg/L",
+        "rain": "mm",
+        "flowRate": "m³/s",
+        "level": "cm"
+      }
+    },
+    "networks": {
+      "type": {
+        "all": "All Networks",
+        "hydrologic": "Amazon Hydrological Network",
+        "quality": "Water Quality Network",
+        "hybam": "HYBAM Station Network",
+        "projected": "Projected Stations"
+      }
+    },
+    "popup": {
+      "country": "Country",
+      "network": "Network",
+      "river": "River",
+      "responsible": "Responsible",
+      "viewMoreButton": "View Statistics",
+      "lastUpdate": "Last update",
+      "city": "City",
+      "state": "State"
+    },
+    "legend": {
+      "territoryLine": "Limits of the Amazon Basin",
+      "riverLine": "Drain lines",
+      "alertStation": "Station on alert"
+    },
+    "disclaimer": {
+      "title": "About ORA Redes",
+      "content": {
+        "p1": "The Amazon Networks module is an integral tool of the Amazon Regional Observatory (ORA), managed by the Permanent Secretariat of the Amazon Cooperation Treaty Organization (SP/ACTO) and which allows access to telemetry data and conventional stations collected by ACTO member countries , gathering data on rainfall, levels and flows of rivers, as well as information on inflows, effluents, levels and volumes of several reservoirs in the Amazon Basin.",
+        "p2": "It is an important tool for society and public and private institutions, as the data collected by hydrometeorological stations are essential for the management of water resources and in various economic activities, such as power generation, irrigation, navigation and industry, in addition to design, maintenance and operation of small and large hydraulic infrastructure, such as dams, urban storm drainage and even manholes and roofs.",
+        "p3": "Through this information, it is also possible to monitor the occurrence of hydrological events considered critical, floods and droughts, and to plan measures to mitigate the impacts resulting from these events. More than monitoring these phenomena, the data set also allows, in several cases, the simulation and prediction of hydrological events and their impacts in urban or rural areas in several river basins.",
+        "p4": "The data available through the Redes Amazônicas module is collected on Data Collection Platforms (PCDs) whose operation and maintenance in the field is carried out by hydrology technicians and hydrological engineers from the water resources bodies of the member countries, who are responsible for planning, standardization of procedures and equipment, supervision, organization of hydrometeorological data and their publication.",
+        "p5": "DISCLAIMER OF LIABILITY FOR RAW HYDROLOGICAL DATA",
+        "p6": "The data made available through the Amazon Networks module are raw data obtained from various sources, from river level and rainfall data collected automatically through Data Collection Platforms (PCDs) and transmitted by satellites to data collected by local observers and transmitted to SP/ACTO.",
+        "p7": "Such data are classified as raw, that is, they have not yet undergone detailed analysis, when they are reviewed and eventually corrected. Raw data can be inaccurate due to malfunctioning equipment (PCDs and measurement sensors) or because of physical changes in the measurement location. The operation and maintenance of these stations in the field can result in significant alteration of the data. Therefore, hydrological data are provisional and subject to revision.",
+        "p8": "Users should consider the tentative nature of this hydrological data before using it to make decisions related to personal or public safety or in projects involving significant financial or operational consequences.",
+        "p9": "Information on the accuracy and appropriate use of these hydrological data can be obtained by contacting the responsible entity in each country. The data are disclosed under the condition that neither the Member Countries nor the SP/ACTO are liable for any damage resulting from their authorized or unauthorized use."
+      },
+      "button": {
+        "text": "To close"
+      }
+    },
+    "share": {
+      "message": "Follow the monitoring data of the Amazonian networks"
+    },
+    "embed": {
+      "leftBar": "Left bar",
+      "topBar": "Top bar",
+      "rightBar": "Right bar",
+      "embeding": "Incorporation"
+    }
   }
 }

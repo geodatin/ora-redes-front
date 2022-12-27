@@ -1,13 +1,314 @@
 {
-  "helloWorld": "Hola mundo!",
   "general": {
-    "projectName": "Project",
-    "language": "Espanõl"
+    "projectName": "Redes",
+    "language": "Espanõl",
+    "number": "{{value, number}}",
+    "roundNumber": "{{value, roundNumber}}",
+    "date": {
+      "year": "{{date, YYYY}}",
+      "monthYear": "{{date, MM/YYYY}}",
+      "monthNameYear": "{{date, MMMM, YYYY}}",
+      "hour": "{{date, HH:mm}}",
+      "dayMonthYear": "{{date, DD/MM/YYYY}}",
+      "dayMonthYearHour": "{{date, DD/MM/YYYY, HH:mm}}"
+    }
   },
   "header": {
-    "changeTheme": "Cambiar Tema"
+    "changeTheme": "Cambiar tema",
+    "buttons": {
+      "dashboard": "Monitoreo",
+      "dataLibrary": "Archivos",
+      "api": "API"
+    }
   },
   "posts": {
-    "download": "Descargar Archivo"
+    "file": {
+      "download": "descargar"
+    },
+    "api": {
+      "url": "URL",
+      "urlParams": "Parámetros en URL",
+      "bodyParams": "Parámetros del cuerpo",
+      "requisitionExample": "Ejemplo de solicitud",
+      "answer": "Respuesta",
+      "key": "llave",
+      "type": "Tipo",
+      "description": "Descripción",
+      "none": "Ninguno"
+    }
+  },
+  "share": {
+    "headerTitle": "Compartir página",
+    "page1Text1": "Comparte el mapa en las redes sociales usando los siguientes botones:",
+    "page1Text2": "O a través del siguiente enlace:",
+    "copyButton": "Copiar",
+    "copiedButton": "Copiado",
+    "embedButton": "Incrustar el panel en otra página",
+    "linkShareButton": "Volver a compartir enlaces",
+    "page2Text1": "Configurar incrustación:",
+    "page2Text2": "Código:",
+    "embedTitle": "Incrustar página"
+  },
+  "components": {
+    "advancedFilter": {
+      "placeholder": "Añadir filtro"
+    }
+  },
+  "specific": {
+    "filters": {
+      "title": "Filtros",
+      "clearButton": "Borrar",
+      "noSelection": "Ningún filtro seleccionado",
+      "apply": "Aplicar"
+    },
+    "countries": {
+      "8": "Venezuela",
+      "5": "Perú",
+      "4": "Ecuador",
+      "7": "Colombia",
+      "9": "Brasil",
+      "6": "Bolivia"
+    },
+    "autocomplete": {
+      "loadingText": "Buscando...",
+      "noOptionsText": "No se encontraron opciones",
+      "emptyText": "Escriba para buscar"
+    },
+    "layers": {
+      "projectedStations": "Estaciones proyectadas",
+      "allStations": "Todas las temporadas recogidas"
+    },
+    "breadcrumbs": {
+      "monitoring": "Vigilancia",
+      "allNetworks": "Todas las redes"
+    },
+    "mobileNavbar": {
+      "map": "Mapa",
+      "filters": "Filtros",
+      "panel": "Panel",
+      "notifications": "Notificaciones"
+    },
+    "infoPanel": {
+      "title": "Todas las redes",
+      "lastUpdate": "Última actualización el",
+      "loadingLastUpdate": "Cargando última actualización...",
+      "statistics": "Estadísticas",
+      "list": "Lista",
+      "timeGrouping": {
+        "year": "Año",
+        "semester": "Semestre",
+        "quarter": "cuarto",
+        "month": "Mes",
+        "day": "Día",
+        "week": "Semana",
+        "hour": "Hora"
+      }
+    },
+    "statistics": {
+      "charts": {
+        "stationsPerNetwork": {
+          "title": "Estaciones por red",
+          "info": "Este gráfico muestra las estaciones por red"
+        },
+        "stationsPerCountry": {
+          "title": "Emisoras por paises",
+          "info": "Este gráfico muestra las estaciones por país"
+        },
+        "riverRanking": {
+          "title": "Ranking de ríos por número de estaciones",
+          "info": "Este gráfico presenta una clasificación de los ríos por número de estación."
+        },
+        "timeSeries": {
+          "rain": {
+            "title": "Historial de precipitaciones",
+            "info": "Este gráfico muestra un historial de precipitaciones",
+            "yAxisLabel": "milímetros"
+          },
+          "level": {
+            "title": "Historia de nivel medio",
+            "info": "Este gráfico muestra el historial de niveles promedio",
+            "yAxisLabel": "centímetros",
+            "superiorLimit": "inundación",
+            "inferiorLimit": "sequía"
+          },
+          "flowRate": {
+            "title": "Historial de flujo",
+            "info": "Este gráfico presenta el historial de flujo",
+            "yAxisLabel": "m³ por segundo",
+            "superiorLimit": "inundación",
+            "inferiorLimit": "sequía"
+          },
+          "turbidity": {
+            "title": "Historial de turbidez",
+            "info": "Este gráfico muestra el historial de turbidez",
+            "yAxisLabel": "NTU"
+          },
+          "ph": {
+            "title": "Historia de PH",
+            "info": "Este gráfico muestra el historial de pH",
+            "yAxisLabel": "pH"
+          },
+          "OD": {
+            "title": "Historia del oxígeno disuelto",
+            "info": "Este gráfico muestra el historial de oxígeno disuelto",
+            "yAxisLabel": "miligramos por litro"
+          },
+          "electricConductivity": {
+            "title": "Historia de la conductividad eléctrica",
+            "info": "Este gráfico presenta la historia de la conductividad eléctrica",
+            "yAxisLabel": "micro siemens por centímetro"
+          },
+          "sampleTemperature": {
+            "title": "Historial de temperatura",
+            "info": "Este gráfico muestra el historial de temperatura",
+            "yAxisLabel": "grados Celsius"
+          },
+          "totalDissolvedSolid": {
+            "title": "Historial de sólidos disueltos totales",
+            "info": "Este gráfico muestra el historial de sólidos disueltos totales",
+            "yAxisLabel": "miligramos por litro"
+          },
+          "totalNitrogen": {
+            "title": "Historial de nitrógeno total",
+            "info": "Este gráfico muestra el historial de nitrógeno total",
+            "yAxisLabel": "miligramos por litro"
+          },
+          "totalOrtophosphate": {
+            "title": "Historial total de ortofosfatos",
+            "info": "Este gráfico muestra el historial de ortofosfato total",
+            "yAxisLabel": "miligramos por litro"
+          },
+          "totalSuspensionSolid": {
+            "title": "Historial de datos sin procesar",
+            "info": "Este gráfico presenta el historial de datos sin procesar de precipitación, flujo y nivel",
+            "yAxisLabel": "miligramos por litro"
+          },
+          "raw": {
+            "title": "Historial de datos sin procesar",
+            "info": "Este gráfico presenta el historial de datos sin procesar de precipitación, flujo y nivel."
+          }
+        },
+        "stationsPerVariableTreemap": {
+          "title": "Estaciones por variables en cada red",
+          "info": "Este gráfico muestra un conteo de estaciones por variables en cada red"
+        }
+      }
+    },
+    "list": {
+      "seeMoreStatistics": "Ver más estadísticas",
+      "seeMoreStations": "Ver más estaciones",
+      "noMoreResults": "No hay más resultados para mostrar",
+      "noResults": "No hay resultados para el filtro aplicado"
+    },
+    "notifications": {
+      "title": "Notificaciones",
+      "noMoreResults": "No hay más notificaciones para mostrar",
+      "noResults": "No hay notificaciones por el momento",
+      "afterReaching": "después de llegar",
+      "state": "Estado",
+      "of": "de",
+      "situations": {
+        "alert": "alerta",
+        "attention": "Atención",
+        "emergency": "emergencia"
+      }
+    },
+    "dataType": {
+      "name": "Nombre",
+      "network": "Red",
+      "country": "País",
+      "responsible": "Responsable",
+      "river": "Río",
+      "networks": {
+        "RHA": "Red hidrológica amazónica",
+        "RQA": "Red de calidad de agua",
+        "HYBAM": "Red de estaciones HYBAM"
+      },
+      "station": {
+        "singular": "Estación",
+        "plural": "Temporadas"
+      },
+      "variable": {
+        "title": "Variable",
+        "items": {
+          "ph": "pH",
+          "OD": "Oxígeno Disuelto",
+          "electricConductivity": "Conductividad eléctrica",
+          "turbidity": "Turbiedad",
+          "sampleTemperature": "Temperatura",
+          "totalDissolvedSolid": "Total de sólidos disueltos",
+          "totalNitrogen": "Nitrógeno total",
+          "totalOrtophosphate": "Ortofosfato Total",
+          "totalSuspensionSolid": "Total de sólidos en suspensión",
+          "rain": "Lluvia",
+          "flowRate": "Flujo",
+          "level": "Nivel"
+        }
+      },
+      "sufixes": {
+        "ph": "",
+        "OD": "mg/L",
+        "electricConductivity": "µS/cm",
+        "turbidity": "NTU",
+        "sampleTemperature": "°C",
+        "totalDissolvedSolid": "mg/L",
+        "totalNitrogen": "mg/L",
+        "totalOrtophosphate": "mg/L",
+        "totalSuspensionSolid": "mg/L",
+        "rain": "mm",
+        "flowRate": "m³/s",
+        "level": "cm"
+      }
+    },
+    "networks": {
+      "type": {
+        "all": "Todas las redes",
+        "hydrologic": "Red Hidrológica Amazónica",
+        "quality": "Red de Calidad del Agua",
+        "hybam": "Red de estaciones HYBAM",
+        "projected": "Estaciones Proyectadas"
+      }
+    },
+    "popup": {
+      "country": "País",
+      "network": "Red",
+      "river": "Río",
+      "responsible": "Responsable",
+      "viewMoreButton": "Ver Estadísticas",
+      "lastUpdate": "Última actualización",
+      "city": "Ciudad",
+      "state": "Estado"
+    },
+    "legend": {
+      "territoryLine": "Límites de la cuenca del Amazonas",
+      "riverLine": "Líneas de drenaje",
+      "alertStation": "Estación en alerta"
+    },
+    "disclaimer": {
+      "title": "Sobre ORA Redes",
+      "content": {
+        "p1": "El módulo Redes Amazónicas es una herramienta integral del Observatorio Regional Amazónico (ORA), administrado por la Secretaría Permanente de la Organización del Tratado de Cooperación Amazónica (SP/OTCA) y que permite acceder a datos de telemetría y estaciones convencionales recolectados por los países miembros de la OTCA, recopilando datos sobre precipitaciones, niveles y caudales de los ríos, así como información sobre caudales, efluentes, niveles y volúmenes de varios embalses de la cuenca amazónica.",
+        "p2": "Es una herramienta importante para la sociedad y las instituciones públicas y privadas, ya que los datos recopilados por las estaciones hidrometeorológicas son fundamentales para la gestión de los recursos hídricos y en diversas actividades económicas, como la generación de energía, el riego, la navegación y la industria, además del diseño, mantenimiento y operación de pequeñas y grandes infraestructuras hidráulicas, como represas, drenaje pluvial urbano e incluso pozos de visita y techos.",
+        "p3": "A través de esta información, también es posible monitorear la ocurrencia de eventos hidrológicos considerados críticos, inundaciones y sequías, y planificar medidas para mitigar los impactos derivados de estos eventos. Más que monitorear estos fenómenos, el conjunto de datos también permite, en varios casos, la simulación y predicción de eventos hidrológicos y sus impactos en áreas urbanas o rurales en varias cuencas hidrográficas.",
+        "p4": "Los datos disponibles a través del módulo de Redes Amazônicas son recolectados en Plataformas de Recolección de Datos (PCDs) cuya operación y mantenimiento en campo es realizado por técnicos en hidrología e ingenieros hidrológicos de los organismos de recursos hídricos de los países miembros, responsables por la planificación, normalización de procedimientos y equipos, supervisión, organización de datos hidrometeorológicos y su publicación.",
+        "p5": "RENUNCIA DE RESPONSABILIDAD POR DATOS HIDROLÓGICOS SIN PROCESAR",
+        "p6": "Los datos disponibles a través del módulo Amazon Networks son datos sin procesar obtenidos de varias fuentes, desde datos de nivel de río y lluvia recopilados automáticamente a través de plataformas de recopilación de datos (PCD) y transmitidos por satélite hasta datos recopilados por observadores locales y transmitidos a SP/OTCA.",
+        "p7": "Dichos datos se clasifican como brutos, es decir, que aún no han sido objeto de un análisis detallado, cuando son revisados ​​y eventualmente corregidos. Los datos sin procesar pueden ser inexactos debido al mal funcionamiento del equipo (PCD y sensores de medición) o debido a cambios físicos en la ubicación de la medición. La operación y mantenimiento de estas estaciones en el campo puede resultar en una alteración significativa de los datos. Por lo tanto, los datos hidrológicos son provisionales y están sujetos a revisión.",
+        "p8": "Los usuarios deben considerar la naturaleza tentativa de estos datos hidrológicos antes de usarlos para tomar decisiones relacionadas con la seguridad personal o pública o en proyectos que impliquen consecuencias financieras u operativas significativas.",
+        "p9": "La información sobre la exactitud y el uso adecuado de estos datos hidrológicos se puede obtener contactando a la entidad responsable en cada país. Los datos son divulgados bajo la condición de que ni los Países Miembros ni la SP/OTCA sean responsables por cualquier daño resultante de su uso autorizado o no autorizado."
+      },
+      "button": {
+        "text": "Cerrar"
+      }
+    },
+    "share": {
+      "message": " Sigue los datos de monitoreo de las redes amazónicas"
+    },
+    "embed": {
+      "leftBar": "Barra izquierda",
+      "topBar": "Barra superior",
+      "rightBar": "Barra Derecha",
+      "embeding": "Incrustar"
+    }
   }
 }
