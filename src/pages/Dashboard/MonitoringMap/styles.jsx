@@ -93,7 +93,7 @@ const useStyles = createUseStyles((theme) => ({
       transform: 'translate(-50%, -50%) scale(1)',
     },
   },
-  orangePulsatingCircle: {
+  orangePulsatingCircleEmergency: {
     position: 'absolute',
 
     '&::after': {
@@ -124,7 +124,8 @@ const useStyles = createUseStyles((theme) => ({
       pointerEvents: 'none',
     },
   },
-  bluePulsatingCircle: {
+
+  bluePulsatingCircleEmergency: {
     position: 'absolute',
 
     '&::after': {
@@ -155,7 +156,7 @@ const useStyles = createUseStyles((theme) => ({
       pointerEvents: 'none',
     },
   },
-  grayPulsatingCircle: {
+  grayPulsatingCircleEmergency: {
     position: 'absolute',
 
     '&::after': {
@@ -186,7 +187,7 @@ const useStyles = createUseStyles((theme) => ({
       pointerEvents: 'none',
     },
   },
-  greenPulsatingCircle: {
+  greenPulsatingCircleEmergency: {
     position: 'absolute',
 
     '&::after': {
@@ -209,6 +210,131 @@ const useStyles = createUseStyles((theme) => ({
       width: '50px',
       height: '50px',
       backgroundColor: 'red',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseRing infinite 1.25s',
+      pointerEvents: 'none',
+    },
+  },
+  orangePulsatingCircleAlert: {
+    position: 'absolute',
+
+    '&::after': {
+      content: "''",
+      width: '20px',
+      height: '20px',
+      background:
+        theme === darkScheme
+          ? `url(${OrangeStationDark})`
+          : `url(${OrangeStationLight})`,
+      backgroundSize: '20px 20px',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseDot infinite 1.25s',
+    },
+    '&::before': {
+      content: "''",
+      width: '50px',
+      height: '50px',
+      backgroundColor: theme.primary.main,
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseRing infinite 1.25s',
+      pointerEvents: 'none',
+    },
+  },
+
+  bluePulsatingCircleAlert: {
+    position: 'absolute',
+
+    '&::after': {
+      content: "''",
+      width: '20px',
+      height: '20px',
+      background:
+        theme === darkScheme
+          ? `url(${BlueStationDark})`
+          : `url(${BlueStationLight})`,
+      backgroundSize: '20px 20px',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseDot infinite 1.25s',
+    },
+    '&::before': {
+      content: "''",
+      width: '50px',
+      height: '50px',
+      backgroundColor: theme.primary.main,
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseRing infinite 1.25s',
+      pointerEvents: 'none',
+    },
+  },
+  grayPulsatingCircleAlert: {
+    position: 'absolute',
+
+    '&::after': {
+      content: "''",
+      width: '20px',
+      height: '20px',
+      background:
+        theme === darkScheme
+          ? `url(${GrayStationDark})`
+          : `url(${GrayStationLight})`,
+      backgroundSize: '20px 20px',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseDot infinite 1.25s',
+    },
+    '&::before': {
+      content: "''",
+      width: '50px',
+      height: '50px',
+      backgroundColor: theme.primary.main,
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseRing infinite 1.25s',
+      pointerEvents: 'none',
+    },
+  },
+  greenPulsatingCircleAlert: {
+    position: 'absolute',
+
+    '&::after': {
+      content: "''",
+      width: '20px',
+      height: '20px',
+      background:
+        theme === darkScheme
+          ? `url(${GreenStationDark})`
+          : `url(${GreenStationLight})`,
+      backgroundSize: '20px 20px',
+      borderRadius: '50%',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      animation: '$pulseDot infinite 1.25s',
+    },
+    '&::before': {
+      content: "''",
+      width: '50px',
+      height: '50px',
+      backgroundColor: theme.primary.main,
       borderRadius: '50%',
       position: 'absolute',
       top: '50%',

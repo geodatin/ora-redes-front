@@ -8,10 +8,9 @@ import Typography from '../../../../components/Typography';
 import { useMap } from '../../../../hooks/useMap';
 import useStyles from './styles';
 
-function NotificationCardComponent({ circleColor, notification }) {
+function NotificationCardComponent({ notification }) {
   NotificationCardComponent.propTypes = {
     notification: PropTypes.shape().isRequired,
-    circleColor: PropTypes.string.isRequired,
   };
 
   const classes = useStyles();
@@ -32,7 +31,8 @@ function NotificationCardComponent({ circleColor, notification }) {
       <div
         className={classes.circle}
         style={{
-          background: circleColor,
+          background:
+            notification.situation === 'alert' ? theme.primary.main : 'red',
         }}
       >
         <Typography style={{ color: theme.neutral.white }} variant="h3">

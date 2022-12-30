@@ -128,12 +128,22 @@ export default function MonitoringMap() {
     [theme]
   );
 
-  const blueStationPulsing = useMemo(
+  const blueStationPulsingAlert = useMemo(
     () =>
       L.divIcon({
         iconSize: [20, 20],
         iconAnchor: [10, 10],
-        className: classes.bluePulsatingCircle,
+        className: classes.bluePulsatingCircleAlert,
+      }),
+    [theme]
+  );
+
+  const blueStationPulsingEmergency = useMemo(
+    () =>
+      L.divIcon({
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+        className: classes.bluePulsatingCircleEmergency,
       }),
     [theme]
   );
@@ -148,12 +158,22 @@ export default function MonitoringMap() {
     [theme]
   );
 
-  const greenStationPulsing = useMemo(
+  const greenStationPulsingAlert = useMemo(
     () =>
       L.divIcon({
         iconSize: [20, 20],
         iconAnchor: [10, 10],
-        className: classes.greenPulsatingCircle,
+        className: classes.greenPulsatingCircleAlert,
+      }),
+    [theme]
+  );
+
+  const greenStationPulsingEmergency = useMemo(
+    () =>
+      L.divIcon({
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+        className: classes.greenPulsatingCircleEmergency,
       }),
     [theme]
   );
@@ -168,12 +188,22 @@ export default function MonitoringMap() {
     [theme]
   );
 
-  const grayStationPulsing = useMemo(
+  const grayStationPulsingAlert = useMemo(
     () =>
       L.divIcon({
         iconSize: [20, 20],
         iconAnchor: [10, 10],
-        className: classes.grayPulsatingCircle,
+        className: classes.grayPulsatingCircleAlert,
+      }),
+    [theme]
+  );
+
+  const grayStationPulsingEmergency = useMemo(
+    () =>
+      L.divIcon({
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+        className: classes.grayPulsatingCircleEmergency,
       }),
     [theme]
   );
@@ -188,12 +218,22 @@ export default function MonitoringMap() {
     [theme]
   );
 
-  const orangeStationPulsing = useMemo(
+  const orangeStationPulsingAlert = useMemo(
     () =>
       L.divIcon({
         iconSize: [20, 20],
         iconAnchor: [10, 10],
-        className: classes.orangePulsatingCircle,
+        className: classes.orangePulsatingCircleAlert,
+      }),
+    [theme]
+  );
+
+  const orangeStationPulsingEmergency = useMemo(
+    () =>
+      L.divIcon({
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+        className: classes.orangePulsatingCircleEmergency,
       }),
     [theme]
   );
@@ -278,13 +318,23 @@ export default function MonitoringMap() {
 
         if (point.properties.situation === 'alert') {
           if (point.properties.network === networks.RHA.code) {
-            icon = blueStationPulsing;
+            icon = blueStationPulsingAlert;
           } else if (point.properties.network === networks.RQA.code) {
-            icon = orangeStationPulsing;
+            icon = orangeStationPulsingAlert;
           } else if (point.properties.network === networks.HYBAM.code) {
-            icon = greenStationPulsing;
+            icon = greenStationPulsingAlert;
           } else {
-            icon = grayStationPulsing;
+            icon = grayStationPulsingAlert;
+          }
+        } else if (point.properties.situation === 'emergency') {
+          if (point.properties.network === networks.RHA.code) {
+            icon = blueStationPulsingEmergency;
+          } else if (point.properties.network === networks.RQA.code) {
+            icon = orangeStationPulsingEmergency;
+          } else if (point.properties.network === networks.HYBAM.code) {
+            icon = greenStationPulsingEmergency;
+          } else {
+            icon = grayStationPulsingEmergency;
           }
         } else if (point.properties.network === networks.RHA.code) {
           icon = blueStation;
