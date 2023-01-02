@@ -111,7 +111,7 @@
           "info": "Este gráfico muestra las estaciones por red"
         },
         "stationsPerCountry": {
-          "title": "Emisoras por paises",
+          "title": "Estaciones por paises",
           "info": "Este gráfico muestra las estaciones por país"
         },
         "riverRanking": {
@@ -226,7 +226,7 @@
       },
       "station": {
         "singular": "Estación",
-        "plural": "Temporadas"
+        "plural": "Estaciones"
       },
       "variable": {
         "title": "Variable",

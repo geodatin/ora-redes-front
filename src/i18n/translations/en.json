@@ -76,7 +76,7 @@
     },
     "layers": {
       "projectedStations": "Projected stations",
-      "allStations": "All seasons collected"
+      "allStations": "All stations collected"
     },
     "breadcrumbs": {
       "monitoring": "Monitoring",
@@ -226,7 +226,7 @@
       },
       "station": {
         "singular": "Station",
-        "plural": "Seasons"
+        "plural": "Stations"
       },
       "variable": {
         "title": "Variable",
