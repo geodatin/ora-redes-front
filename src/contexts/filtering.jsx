@@ -16,7 +16,7 @@ const FilteringContext = createContext({});
  * The FilteringProvider is a context to provide the dashboard filtering options.
  * */
 export function FilteringProvider({ embed, children }) {
-  const [timeGroupingIndexValue, setTimeGroupingIndexValue] = useState(0);
+  const [timeGroupingIndexValue, setTimeGroupingIndexValue] = useState(4);
 
   const handleOnChangeTimeGrouping = useCallback((event, newTimeGrouping) => {
     if (newTimeGrouping !== null) {

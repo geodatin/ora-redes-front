@@ -282,7 +282,8 @@
     "legend": {
       "territoryLine": "Limites da Bacia Amazônica",
       "riverLine": "Linhas de drenagem",
-      "alertStation": "Estação em alerta"
+      "alertStation": "Estação em estado de seca",
+      "emergencyStation": "Estação em estado de cheia"
     },
     "disclaimer": {
       "title": "Sobre o ORA Redes",

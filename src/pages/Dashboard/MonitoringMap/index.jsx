@@ -747,6 +747,11 @@ export default function MonitoringMap() {
                 <div className={classes.alertStationLegend} />
                 {t('specific.legend.alertStation')}
               </div>
+
+              <div className={classes.legendItem}>
+                <div className={classes.emergencyStationLegend} />
+                {t('specific.legend.emergencyStation')}
+              </div>
             </div>
           }
         >

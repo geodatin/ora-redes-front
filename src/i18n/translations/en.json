@@ -282,7 +282,8 @@
     "legend": {
       "territoryLine": "Limits of the Amazon Basin",
       "riverLine": "Drain lines",
-      "alertStation": "Station on alert"
+      "alertStation": "Station in drought state",
+      "emergencyStation": "Station in flood state"
     },
     "disclaimer": {
       "title": "About ORA Redes",

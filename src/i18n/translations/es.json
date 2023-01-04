@@ -282,7 +282,8 @@
     "legend": {
       "territoryLine": "Límites de la cuenca del Amazonas",
       "riverLine": "Líneas de drenaje",
-      "alertStation": "Estación en alerta"
+      "alertStation": "Estación en estado de sequía",
+      "emergencyStation": "Estación en estado de inundación"
     },
     "disclaimer": {
       "title": "Sobre ORA Redes",
