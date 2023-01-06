@@ -201,17 +201,17 @@
       "noResults": "There are no results for the applied filter"
     },
     "notifications": {
-      "title": "Notificações",
-      "noMoreResults": "Não há mais notificações a serem exibidas",
-      "noResults": "Não existem notificações no momento",
-      "afterReaching": "após atingir",
-      "state": "Estado",
-      "of": "de",
-      "situations": {
-        "alert": "alerta",
-        "attention": "atenção",
-        "emergency": "emergência"
-      }
+      "title": "Notifications",
+       "noMoreResults": "There are no more notifications to display",
+       "noResults": "There are no notifications at the moment",
+       "afterReaching": "after reaching",
+       "state": "State",
+       "of": "of",
+       "situations": {
+         "alert": "alert",
+         "attention": "attention",
+         "emergency": "emergency"
+       }
     },
     "dataType": {
       "name": "Name",
