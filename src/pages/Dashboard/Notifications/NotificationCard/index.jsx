@@ -31,8 +31,7 @@ function NotificationCardComponent({ notification }) {
       <div
         className={classes.circle}
         style={{
-          background:
-            notification.situation === 'alert' ? theme.primary.main : 'red',
+          background: notification.situation === 'alert' ? '#ffd24d' : 'red',
         }}
       >
         <Typography style={{ color: theme.neutral.white }} variant="h3">
