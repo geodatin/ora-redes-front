@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM node:14 AS build
+FROM node:18 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Serve the application
-FROM node:14 AS serve
+FROM node:18 AS serve
 
 # Install serve globally
 RUN npm install -g serve
