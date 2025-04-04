@@ -1,26 +1,26 @@
 # Stage 1: Build the application
-FROM node:18 AS build
+FROM node:16 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package.json ./
+# Copy package.json and yarn.lock to the working directory
+COPY package.json yarn.lock ./
 
-# Install the dependencies
-RUN npm install
+# Install the dependencies using yarn
+RUN yarn install
 
 # Copy the rest of the application code to the working directory
 COPY . .
 
 # Build the application
-RUN npm run build
+RUN yarn build
 
 # Stage 2: Serve the application
-FROM node:18 AS serve
+FROM node:16 AS serve
 
-# Install serve globally
-RUN npm install -g serve
+# Install serve globally using yarn
+RUN yarn global add serve
 
 # Set the working directory inside the container
 WORKDIR /app
